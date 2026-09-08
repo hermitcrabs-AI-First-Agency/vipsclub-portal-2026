@@ -1,0 +1,109 @@
+[ {
+  "id" : "copyright_text",
+  "name" : "copyright_text",
+  "label" : "Copyright Text",
+  "help_text" : "Copyright notice shown in the footer. The year symbol is added automatically.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Copyright VIPS Club. All Rights Reserved"
+}, {
+  "id" : "privacy_label",
+  "name" : "privacy_label",
+  "label" : "Privacy Link Text",
+  "help_text" : "Text for the privacy policy link.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Privacy Policy"
+}, {
+  "id" : "privacy_url",
+  "name" : "privacy_url",
+  "label" : "Privacy Policy URL",
+  "help_text" : "URL for the privacy policy page.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "/privacy-policy"
+}, {
+  "id" : "style_overrides",
+  "name" : "style_overrides",
+  "label" : "Style Overrides",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "style_overrides.background_color",
+    "name" : "background_color",
+    "label" : "Background Color",
+    "help_text" : "Leave empty to use theme default",
+    "required" : false,
+    "locked" : false,
+    "type" : "color",
+    "display_width" : null,
+    "default" : {
+      "color" : null,
+      "opacity" : 100
+    }
+  }, {
+    "id" : "style_overrides.text_color",
+    "name" : "text_color",
+    "label" : "Text Color",
+    "help_text" : "Override the default text color for this module instance. Leave empty for theme default.",
+    "required" : false,
+    "locked" : false,
+    "type" : "color",
+    "display_width" : null,
+    "default" : {
+      "color" : null,
+      "opacity" : 100
+    }
+  }, {
+    "id" : "style_overrides.content_width",
+    "name" : "content_width",
+    "label" : "Content Width",
+    "help_text" : "Control the maximum width of this module's content.",
+    "required" : false,
+    "locked" : false,
+    "display" : "select",
+    "choices" : [ [ "default", "Default" ], [ "narrow", "Narrow" ], [ "wide", "Wide" ], [ "full", "Full Width" ] ],
+    "multiple" : false,
+    "reordering_enabled" : true,
+    "preset" : null,
+    "type" : "choice",
+    "display_width" : null,
+    "default" : "default"
+  }, {
+    "id" : "style_overrides.hide_on_mobile",
+    "name" : "hide_on_mobile",
+    "label" : "Hide on Mobile",
+    "help_text" : "Toggle to hide the footer on mobile devices.",
+    "required" : false,
+    "locked" : false,
+    "display" : "checkbox",
+    "type" : "boolean",
+    "display_width" : null,
+    "default" : false
+  }, {
+    "id" : "style_overrides.hide_on_desktop",
+    "name" : "hide_on_desktop",
+    "label" : "Hide on Desktop",
+    "help_text" : "Toggle to hide this module on desktop viewports.",
+    "required" : false,
+    "locked" : false,
+    "display" : "checkbox",
+    "type" : "boolean",
+    "display_width" : null,
+    "default" : false
+  } ],
+  "tab" : "STYLE",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null
+} ]

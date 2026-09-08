@@ -1,0 +1,32 @@
+{# ============================================================
+   VIPSCLUB Portal 2026 - Referral Submit Form V2
+   Uses a native HubSpot form field; forms are managed in HubSpot.
+   ============================================================ #}
+
+<section class="referral-submit-form-v2{% if module.style_overrides.hide_on_mobile %} referral-submit-form-v2--hide-mobile{% endif %}" aria-labelledby="{{ name }}-heading">
+  {% if module.heading %}
+  <{{ module.heading_level|default("h2") }} id="{{ name }}-heading" class="referral-submit-form-v2__heading">
+    {{ module.heading|escape_html }}
+  </{{ module.heading_level|default("h2") }}>
+  {% endif %}
+
+  <div class="referral-submit-form-v2__card">
+    {% if module.form.form_id %}
+      {% form "referral_form_v2"
+        form_to_use="{{ module.form.form_id }}",
+        response_type="{{ module.form.response_type }}",
+        response_message="{{ module.form.message }}"
+      %}
+    {% elif is_in_editor or module_preview %}
+      <div class="referral-submit-form-v2__placeholder">
+        {{ module.empty_form_message }}
+      </div>
+    {% endif %}
+
+    {% if module.disclaimer %}
+    <div class="referral-submit-form-v2__disclaimer">
+      {{ module.disclaimer }}
+    </div>
+    {% endif %}
+  </div>
+</section>

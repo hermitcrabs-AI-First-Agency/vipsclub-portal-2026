@@ -1,0 +1,352 @@
+{
+  "disclaimer_text.default" : {
+    "message" : "Your details are never shared or sold. Unsubscribe at any time.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "disclaimer_text.help_text" : {
+    "message" : "Small text shown below the submit button.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "disclaimer_text.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "disclaimer_text.label" : {
+    "message" : "Disclaimer Text",
+    "description" : "",
+    "placeholders" : null
+  },
+  "disclaimer_text.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "disclaimer_text.validation_regex" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "form.default" : {
+    "message" : "",
+    "description" : null,
+    "placeholders" : null
+  },
+  "form.default.form_id" : {
+    "message" : "cf5ab7cd-0f3a-42fa-961c-770ab5c3e2a6",
+    "description" : null,
+    "placeholders" : null
+  },
+  "form.default.form_type" : {
+    "message" : "HUBSPOT",
+    "description" : null,
+    "placeholders" : null
+  },
+  "form.default.message" : {
+    "message" : "Thanks for joining! Check your email to confirm your account.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "form.default.response_type" : {
+    "message" : "inline",
+    "description" : null,
+    "placeholders" : null
+  },
+  "form.help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "form.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "form.label" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "form.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "form_heading.default" : {
+    "message" : "Create your free account",
+    "description" : "",
+    "placeholders" : null
+  },
+  "form_heading.help_text" : {
+    "message" : "Heading shown above the form card.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "form_heading.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "form_heading.label" : {
+    "message" : "Form Heading",
+    "description" : "",
+    "placeholders" : null
+  },
+  "form_heading.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "form_heading.validation_regex" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "form_subtext.default" : {
+    "message" : "Takes less than 2 minutes",
+    "description" : "",
+    "placeholders" : null
+  },
+  "form_subtext.help_text" : {
+    "message" : "Small text shown below the heading, above the referred-by block.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "form_subtext.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "form_subtext.label" : {
+    "message" : "Form Sub-text",
+    "description" : "",
+    "placeholders" : null
+  },
+  "form_subtext.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "form_subtext.validation_regex" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "heading_level.choices.h1" : {
+    "message" : "H1 — Page Title",
+    "description" : "",
+    "placeholders" : null
+  },
+  "heading_level.choices.h2" : {
+    "message" : "H2 — Section",
+    "description" : "",
+    "placeholders" : null
+  },
+  "heading_level.choices.h3" : {
+    "message" : "H3 — Subsection",
+    "description" : "",
+    "placeholders" : null
+  },
+  "heading_level.choices.h4" : {
+    "message" : "H4",
+    "description" : "",
+    "placeholders" : null
+  },
+  "heading_level.help_text" : {
+    "message" : "Controls the HTML heading tag. Use H1 only once per page for the main title.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "heading_level.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "heading_level.label" : {
+    "message" : "Heading Level",
+    "description" : "",
+    "placeholders" : null
+  },
+  "heading_level.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "name" : {
+    "message" : "refer-landing-form",
+    "description" : "",
+    "placeholders" : null
+  },
+  "referred_by_label.default" : {
+    "message" : "Referred by",
+    "description" : "",
+    "placeholders" : null
+  },
+  "referred_by_label.help_text" : {
+    "message" : "Label shown above the referrer's name in the form card. Referrer details come from URL parameters.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "referred_by_label.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "referred_by_label.label" : {
+    "message" : "Referred By Label",
+    "description" : "",
+    "placeholders" : null
+  },
+  "referred_by_label.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "referred_by_label.validation_regex" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.background_color.help_text" : {
+    "message" : "Leave empty to use theme default",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.background_color.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.background_color.label" : {
+    "message" : "Background Color",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.background_color.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.content_width.choices.default" : {
+    "message" : "Default",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.content_width.choices.full" : {
+    "message" : "Full Width",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.content_width.choices.narrow" : {
+    "message" : "Narrow",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.content_width.choices.wide" : {
+    "message" : "Wide",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.content_width.help_text" : {
+    "message" : "Control the maximum width of this module's content.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.content_width.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.content_width.label" : {
+    "message" : "Content Width",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.content_width.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.hide_on_desktop.help_text" : {
+    "message" : "Toggle to hide this module on desktop viewports.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.hide_on_desktop.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.hide_on_desktop.label" : {
+    "message" : "Hide on Desktop",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.hide_on_desktop.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.hide_on_mobile.help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.hide_on_mobile.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.hide_on_mobile.label" : {
+    "message" : "Hide on Mobile",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.hide_on_mobile.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.label" : {
+    "message" : "Style Overrides",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.text_color.help_text" : {
+    "message" : "Override the default text color for this module instance. Leave empty for theme default.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.text_color.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.text_color.label" : {
+    "message" : "Text Color",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.text_color.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  }
+}

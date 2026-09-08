@@ -1,0 +1,135 @@
+{# ============================================================
+   VIPSCLUB Portal 2026 — Refer Landing Form Module
+   Right column: "Create your free account" form card
+   Referrer info read from URL query params: ?refname= &reftier= &refid=
+   The hidden referral ID is stamped into the form via JS
+   Figma: Desktop 374:283 | Mobile 380:4314
+   ============================================================ #}
+
+{# ── Read referrer info from the Courses/Referral CRM object dynamic page ── #}
+{# dynamic_page_crm_object is the Courses record whose hs_course_id matches the URL slug.   #}
+{# URL param fallback lets this module work on static pages too (e.g. manual referral flow). #}
+{% set _dyn      = dynamic_page_crm_object %}
+{% set ref_name  = _dyn.hs_course_name  | default(request.query_dict.refname)  | default("") %}
+{% set ref_tier  = _dyn.membership_tier | default(request.query_dict.reftier)  | default("") %}
+{% set ref_hash  = _dyn.hs_course_id    | default(request.query_dict.refid)    | default("") %}
+{# Referrer's email — read from the Courses record so the form's "Referral
+   source email" field can be auto-filled. Property assumed to be `email` on
+   the Courses object; change `_dyn.email` here if your CRM uses a different
+   property name (e.g. `member_email`). URL param `?refemail=` is the fallback. #}
+{% set ref_email = _dyn.email           | default(request.query_dict.refemail) | default("") %}
+
+{# ── Service-context lookup (SD4) ──
+   When the referring member copied their link from a service detail page,
+   the shareable URL carries ?service=<hubdb_row_id>. We fetch that row so
+   the landing page can show the referee "You were recommended <service>"
+   below the referred-by block, and pass the info to module.js so the
+   registration form's `referred_service` field prefills. Non-service
+   referrals skip this — behaviour unchanged. ── #}
+{% set _svc_id = request.query_dict.service | default("") %}
+{% set _svc    = none %}
+{% if _svc_id %}
+  {% set _rows = hubdb_table_rows(1680589250, "hs_id__eq=" ~ _svc_id ~ "&limit=1") %}
+  {% if _rows and (_rows | length) > 0 %}{% set _svc = _rows[0] %}{% endif %}
+{% endif %}
+{% set _is_service_context = _svc and _svc.name %}
+
+<div class="refer-landing-form{% if module.style_overrides.hide_on_mobile %} refer-landing-form--hide-mobile{% endif %}">
+
+  {# ── Heading (above card) ── #}
+  {% if module.form_heading %}
+  <{{ module.heading_level | default("h2") }} class="refer-landing-form__heading">
+    {{ module.form_heading | escape_html }}
+  </{{ module.heading_level | default("h2") }}>
+  {% endif %}
+
+  {# ── Form Card ── #}
+  <div class="refer-landing-form__card">
+
+    {# Sub-text ── #}
+    {% if module.form_subtext %}
+    <p class="refer-landing-form__subtext">{{ module.form_subtext | escape_html }}</p>
+    {% endif %}
+
+    {# ── Referred-By Block — shown when dynamic CRM page or URL params provide referrer info ── #}
+    {% if ref_name %}
+    <div class="refer-landing-form__referred-by">
+      <div class="refer-landing-form__referrer-info">
+        {% if module.referred_by_label %}
+        <span class="refer-landing-form__referred-label">{{ module.referred_by_label | escape_html }}</span>
+        {% endif %}
+        <div class="refer-landing-form__referrer-row">
+          <span class="refer-landing-form__referrer-name">{{ ref_name | escape_html }}</span>
+          {% if ref_tier %}
+          <span class="refer-landing-form__referrer-tier">{{ ref_tier | capitalize | escape_html }} member</span>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+    {# ── Service meta block (SD4) — shown BELOW the referred-by block when
+         the shareable URL carried ?service=<hubdb_row_id>. Tells the referee
+         which service the referrer wanted them to see. ── #}
+    {% if _is_service_context %}
+    <div class="refer-landing-form__service-meta">
+      {% set _ind = _svc.industry[0] if (_svc.industry and (_svc.industry | length) > 0) else none %}
+      {% if _ind and _ind.icon and _ind.icon.url %}
+      <img class="refer-landing-form__service-icon"
+           src="{{ _ind.icon.url | escape_attr }}"
+           alt=""
+           width="20"
+           height="20"
+           loading="lazy">
+      {% endif %}
+      <div class="refer-landing-form__service-text">
+        <span class="refer-landing-form__service-label">{{ module.service_meta_label | default("Recommended service:") | escape_html }}</span>
+        <span class="refer-landing-form__service-value">{{ _svc.name | escape_html }}</span>
+      </div>
+    </div>
+
+    {# Data island for module.js — same shape as the referral-submit-form
+       module's SD4 config, so the prefill logic can be identical. ── #}
+    <script type="application/json" id="referral-service-config" data-referral-service-config>
+    {
+      "name": {{ _svc.name | tojson }},
+      "id":   "{{ _svc.hs_id }}"
+    }
+    </script>
+    {% endif %}
+
+    {# ── HubSpot Form ──
+       The `form` field's `supported_form_types` in fields.json enables both
+       "Forms" (V4) and "Legacy forms" (V3), so the editor can pick either
+       from the dropdown. `{% form %}` auto-detects the form's version and
+       emits the correct embed — V4 forms get the <div class="hs-form-html">
+       wrapper + auto-loaded developer script. JS listens for
+       `hs-form-event:on-ready` either way. #}
+    <div class="refer-landing-form__form-wrap"
+         data-refhash="{{ ref_hash | escape_attr }}"
+         data-refname="{{ ref_name | escape_attr }}"
+         data-refemail="{{ ref_email | escape_attr }}">
+
+      {% if module.form.form_id %}
+        {% form "form"
+          form_to_use="{{ module.form.form_id }}",
+          response_type="{{ module.form.response_type }}",
+          response_message="{{ module.form.message }}"
+        %}
+      {% elif is_in_editor %}
+      <div class="refer-landing-form__placeholder">
+        <p>Select the referral form in the <strong>Form</strong> field on the module settings.</p>
+      </div>
+      {% endif %}
+
+    </div>
+
+    {# ── Disclaimer ── #}
+    {% if module.disclaimer_text %}
+    <p class="refer-landing-form__disclaimer">{{ module.disclaimer_text | escape_html }}</p>
+    {% endif %}
+
+  </div>
+
+</div>
+

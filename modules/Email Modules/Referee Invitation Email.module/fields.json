@@ -1,0 +1,165 @@
+[
+  {
+    "id": "greeting_prefix",
+    "name": "greeting_prefix",
+    "label": "Greeting",
+    "help_text": "Word before the referee's first name, e.g. \"Hi\" → \"Hi Jane,\".",
+    "required": false,
+    "locked": false,
+    "allow_new_line": false,
+    "type": "text",
+    "default": "Hi"
+  },
+  {
+    "id": "firstname_fallback",
+    "name": "firstname_fallback",
+    "label": "First Name Fallback",
+    "help_text": "Shown when the referred contact has no first name on file.",
+    "required": false,
+    "locked": false,
+    "allow_new_line": false,
+    "type": "text",
+    "default": "there"
+  },
+  {
+    "id": "referrer_fallback",
+    "name": "referrer_fallback",
+    "label": "Referrer Name Fallback",
+    "help_text": "Used in place of {referrer} when the referrer_name property is empty.",
+    "required": false,
+    "locked": false,
+    "allow_new_line": false,
+    "type": "text",
+    "default": "A VIPSCLUB member"
+  },
+  {
+    "id": "intro_line",
+    "name": "intro_line",
+    "label": "Intro Line",
+    "help_text": "Opening sentence. Use {referrer} where the referrer's name should appear — it's filled from the referrer_name property (falls back to the value above).",
+    "required": false,
+    "locked": false,
+    "allow_new_line": false,
+    "type": "text",
+    "default": "{referrer} has decided to pass on the benefits and wants to share VIPSCLUB with you."
+  },
+  {
+    "id": "recommended_label",
+    "name": "recommended_label",
+    "label": "Recommended Service Label",
+    "help_text": "Small heading above the recommended service. Only shown when a service was referred.",
+    "required": false,
+    "locked": false,
+    "allow_new_line": false,
+    "type": "text",
+    "default": "They recommended"
+  },
+  {
+    "id": "message_label",
+    "name": "message_label",
+    "label": "Message Label",
+    "help_text": "Small heading above the referrer's message. Only shown when a message was included.",
+    "required": false,
+    "locked": false,
+    "allow_new_line": false,
+    "type": "text",
+    "default": "A message for you"
+  },
+  {
+    "id": "invite_line",
+    "name": "invite_line",
+    "label": "Invitation Line",
+    "help_text": "Sentence above the button prompting them to sign up.",
+    "required": false,
+    "locked": false,
+    "allow_new_line": false,
+    "type": "text",
+    "default": "Use the invitation below to create your account and learn more."
+  },
+  {
+    "id": "button_text",
+    "name": "button_text",
+    "label": "Button Text",
+    "help_text": "Call-to-action button label. Leave empty to hide the button.",
+    "required": false,
+    "locked": false,
+    "allow_new_line": false,
+    "type": "text",
+    "default": "Accept invitation"
+  },
+  {
+    "id": "button_url",
+    "name": "button_url",
+    "label": "Button Link",
+    "help_text": "Where the referee goes to create their account — usually the create-account page.",
+    "required": false,
+    "locked": false,
+    "supported_types": ["EXTERNAL", "CONTENT", "EMAIL_ADDRESS"],
+    "type": "link",
+    "default": {
+      "url": {
+        "href": "https://www.vipsclub.com.au/create-account",
+        "type": "EXTERNAL"
+      },
+      "open_in_new_tab": false,
+      "no_follow": false
+    }
+  },
+  {
+    "id": "points_line",
+    "name": "points_line",
+    "label": "Sign-up Points Line",
+    "help_text": "Line about the points they get on joining. Edit the number here.",
+    "required": false,
+    "locked": false,
+    "allow_new_line": false,
+    "type": "text",
+    "default": "When you join using this invitation, you will receive 250 points to get started."
+  },
+  {
+    "id": "disclaimer_text",
+    "name": "disclaimer_text",
+    "label": "Disclaimer",
+    "help_text": "Small print explaining why they received the email. {referrer} is replaced with the referrer's name.",
+    "required": false,
+    "locked": false,
+    "allow_new_line": false,
+    "type": "text",
+    "default": "This invitation was sent because {referrer} provided your details through the VIPSCLUB referral program. If you were not expecting this email, you may disregard it."
+  },
+  {
+    "id": "signoff",
+    "name": "signoff",
+    "label": "Sign-off",
+    "help_text": "Closing line, e.g. \"Kind regards,\".",
+    "required": false,
+    "locked": false,
+    "allow_new_line": false,
+    "type": "text",
+    "default": "Kind regards,"
+  },
+  {
+    "id": "team_name",
+    "name": "team_name",
+    "label": "Team Name",
+    "help_text": "Sender name shown under the sign-off.",
+    "required": false,
+    "locked": false,
+    "allow_new_line": false,
+    "type": "text",
+    "default": "The VIPSCLUB Team"
+  },
+  {
+    "id": "accent_color",
+    "name": "accent_color",
+    "label": "Accent Color",
+    "help_text": "Brand colour for the service link, message bar, and button. Defaults to VIPSCLUB red.",
+    "required": false,
+    "locked": false,
+    "type": "color",
+    "default": {
+      "color": "#a22c35",
+      "opacity": 100
+    }
+  }
+]

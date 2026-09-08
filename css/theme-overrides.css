@@ -1,0 +1,68 @@
+/* ============================================================
+   VIPSCLUB Portal 2026 — Theme Field → CSS Variable Bridge
+   Every CSS custom property below is driven by a field in
+   fields.json and editable from the HubSpot Theme Editor.
+   ============================================================ */
+
+:root {
+  /* ── Brand Colors ── */
+  --vips-red:          {{ theme.colors.primary.color }};
+  --vips-red-dark:     {{ theme.colors.primary_dark.color }};
+  --vips-red-gradient: linear-gradient(169.47deg, #000000 36.19%, {{ theme.colors.primary.color }} 66.10%);
+
+  /* ── Neutrals / Dark ── */
+  --vips-black:        #000000;
+  --vips-dark:         {{ theme.colors.dark.color }};
+  --vips-dark-overlay: {{ theme.colors.dark.color }};
+  --vips-dark-subtle:  #424242;
+
+  /* ── Text ── */
+  --vips-text-primary:   {{ theme.colors.text_primary.color }};
+  --vips-text-secondary: {{ theme.colors.text_secondary.color }};
+  --vips-text-muted:     {{ theme.colors.text_muted.color }};
+  --vips-text-light:     {{ theme.colors.text_secondary.color }};
+  --vips-text-white:     {{ theme.colors.text_white.color }};
+
+  /* ── Backgrounds ── */
+  --vips-bg-page:  {{ theme.colors.page_bg.color }};
+  --vips-bg-card:  {{ theme.colors.card_bg.color }};
+  --vips-bg-input: {{ theme.colors.input_bg.color }};
+  --vips-bg-icon:  {{ theme.colors.icon_bg.color }};
+
+  /* ── Borders ── */
+  --vips-border-light: {{ theme.colors.border.color }};
+  --vips-border:       {{ theme.colors.border_dark.color }};
+  --vips-border-input: {{ theme.colors.border_dark.color }};
+
+  /* ── Status ── */
+  --vips-success: {{ theme.colors.success.color }};
+  --vips-pending: {{ theme.colors.pending.color }};
+  --vips-error:   {{ theme.colors.error.color }};
+
+  /* ── Sidebar ── */
+  --vips-sidebar-bg:          {{ theme.colors.primary.color }};
+  --vips-sidebar-active-from: {{ theme.colors.primary_dark.color }};
+  --vips-sidebar-active-to:   {{ theme.colors.primary.color }};
+  --vips-sidebar-shadow:      0px 4px 0px 0px {{ theme.colors.primary_dark.color }};
+  --vips-sidebar-width:       {{ theme.layout.sidebar_width }}px;
+
+  /* ── Typography ── */
+  --font-heading: '{{ theme.typography.heading_font.font }}', sans-serif;
+  --font-body:    '{{ theme.typography.body_font.font }}', sans-serif;
+
+  /* ── Layout ── */
+  --container-max:  {{ theme.layout.max_content_width }}px;
+  --header-height:  270px;
+  --content-offset: calc({{ theme.layout.sidebar_width }}px + 98px);
+
+  /* ── Spacing (theme-editable) ── */
+  --space-section: {{ theme.spacing.section_padding }}px;
+  --space-card:    {{ theme.spacing.card_padding }}px;
+
+  /* ── Border Radius ── */
+  --radius-sm:   {{ theme.radius.button }}px;
+  --radius-md:   {{ theme.radius.button }}px;
+  --radius-lg:   {{ theme.radius.card }}px;
+  --radius-xl:   16px;
+  --radius-full: {{ theme.radius.pill }}px;
+}

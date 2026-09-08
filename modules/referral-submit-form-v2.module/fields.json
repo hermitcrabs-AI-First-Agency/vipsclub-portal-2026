@@ -1,0 +1,117 @@
+[ {
+  "id" : "heading",
+  "name" : "heading",
+  "label" : "Form Heading",
+  "help_text" : "Heading shown above the form card.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Submit a manual referral"
+}, {
+  "id" : "heading_level",
+  "name" : "heading_level",
+  "label" : "Heading Level",
+  "required" : false,
+  "locked" : false,
+  "display" : "select",
+  "choices" : [ [ "h1", "H1" ], [ "h2", "H2" ], [ "h3", "H3" ], [ "h4", "H4" ] ],
+  "multiple" : false,
+  "reordering_enabled" : true,
+  "preset" : null,
+  "type" : "choice",
+  "display_width" : null,
+  "default" : "h2"
+}, {
+  "id" : "form",
+  "name" : "form",
+  "label" : "HubSpot Referral Form",
+  "help_text" : "Select the native HubSpot form for manual referrals. Create/manage fields in HubSpot Forms.",
+  "required" : false,
+  "locked" : false,
+  "embed_versions" : [ "v2", "v4" ],
+  "type" : "form",
+  "display_width" : null,
+  "default" : {
+    "form_id" : "cf5ab7cd-0f3a-42fa-961c-770ab5c3e2a6",
+    "response_type" : "inline",
+    "message" : "Thank you! Your referral has been submitted.",
+    "form_type" : "HUBSPOT"
+  }
+}, {
+  "id" : "empty_form_message",
+  "name" : "empty_form_message",
+  "label" : "Editor Empty Form Message",
+  "required" : false,
+  "locked" : false,
+  "type" : "richtext",
+  "display_width" : null,
+  "default" : "<p>Select the manual referral form in this module's settings.</p>"
+}, {
+  "id" : "disclaimer",
+  "name" : "disclaimer",
+  "label" : "Disclaimer",
+  "required" : false,
+  "locked" : false,
+  "type" : "richtext",
+  "display_width" : null,
+  "default" : "<p>Submitting this enquiry starts a deal in your account. A completed deal earns you points toward your next tier and reward.</p>"
+}, {
+  "id" : "style_overrides",
+  "name" : "style_overrides",
+  "label" : "Style Overrides",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "style_overrides.card_background",
+    "name" : "card_background",
+    "label" : "Card Background",
+    "required" : false,
+    "locked" : false,
+    "type" : "color",
+    "display_width" : null,
+    "default" : {
+      "color" : null,
+      "opacity" : 100
+    }
+  }, {
+    "id" : "style_overrides.button_background",
+    "name" : "button_background",
+    "label" : "Button Background",
+    "required" : false,
+    "locked" : false,
+    "type" : "color",
+    "display_width" : null,
+    "default" : {
+      "color" : null,
+      "opacity" : 100
+    }
+  }, {
+    "id" : "style_overrides.hide_on_mobile",
+    "name" : "hide_on_mobile",
+    "label" : "Hide on Mobile",
+    "required" : false,
+    "locked" : false,
+    "display" : "checkbox",
+    "type" : "boolean",
+    "display_width" : null,
+    "default" : false
+  } ],
+  "tab" : "STYLE",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "card_background" : {
+      "color" : null,
+      "opacity" : 100
+    },
+    "button_background" : {
+      "color" : null,
+      "opacity" : 100
+    },
+    "hide_on_mobile" : false
+  }
+} ]

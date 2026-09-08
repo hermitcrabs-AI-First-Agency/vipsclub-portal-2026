@@ -1,0 +1,200 @@
+[ {
+  "id" : "logo",
+  "name" : "logo",
+  "label" : "Logo (White Version)",
+  "help_text" : "Upload the white logo SVG/PNG. Displayed in the top-left of the header.",
+  "required" : false,
+  "locked" : true,
+  "responsive" : false,
+  "resizable" : true,
+  "show_loading" : false,
+  "type" : "image",
+  "display_width" : null,
+  "default" : {
+    "src" : "",
+    "alt" : "VIPS Club",
+    "width" : 161,
+    "height" : 59
+  }
+}, {
+  "id" : "logo_url",
+  "name" : "logo_url",
+  "label" : "Logo Link",
+  "help_text" : "Optional. Where the logo links to when clicked (typically the dashboard or homepage).",
+  "required" : false,
+  "locked" : true,
+  "supported_types" : [ "EXTERNAL", "CONTENT" ],
+  "show_advanced_rel_options" : false,
+  "type" : "link",
+  "display_width" : null,
+  "default" : {
+    "url" : {
+      "href" : "",
+      "type" : "EXTERNAL"
+    },
+    "open_in_new_tab" : false,
+    "no_follow" : false
+  }
+}, {
+  "id" : "greeting_prefix",
+  "name" : "greeting_prefix",
+  "label" : "Greeting Prefix",
+  "help_text" : "Word shown before the time of day. Default: \"Good\" → renders as \"Good Morning, [Member]\"",
+  "required" : false,
+  "locked" : true,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Good"
+}, {
+  "id" : "subtitle",
+  "name" : "subtitle",
+  "label" : "Subtitle Text",
+  "help_text" : "Line shown beneath the greeting in the header.",
+  "required" : false,
+  "locked" : true,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Here's an overview of your membership activity"
+}, {
+  "id" : "hamburger_icon",
+  "name" : "hamburger_icon",
+  "label" : "Hamburger Menu Icon (Mobile)",
+  "help_text" : "Icon shown on mobile to open the navigation sidebar. Upload SVG/PNG OR paste SVG code.",
+  "required" : false,
+  "locked" : true,
+  "children" : [ {
+    "id" : "hamburger_icon.image",
+    "name" : "image",
+    "label" : "Upload Icon (SVG or PNG)",
+    "help_text" : "Upload from Files Manager. Recommended: 24×24px SVG.",
+    "required" : false,
+    "locked" : false,
+    "responsive" : false,
+    "resizable" : false,
+    "show_loading" : false,
+    "type" : "image",
+    "display_width" : null,
+    "default" : {
+      "src" : "",
+      "alt" : "",
+      "width" : 24,
+      "height" : 24
+    }
+  }, {
+    "id" : "hamburger_icon.svg_code",
+    "name" : "svg_code",
+    "label" : "Or: Paste SVG Code",
+    "help_text" : "Paste the raw <svg>...</svg> code for the hamburger/menu icon.",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : ""
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null
+}, {
+  "id" : "style_overrides",
+  "name" : "style_overrides",
+  "label" : "Style Overrides",
+  "required" : false,
+  "locked" : true,
+  "children" : [ {
+    "id" : "style_overrides.gradient_start",
+    "name" : "gradient_start",
+    "label" : "Gradient Start Color",
+    "help_text" : "Top-left color of the header gradient. Default: black.",
+    "required" : false,
+    "locked" : false,
+    "type" : "color",
+    "display_width" : null,
+    "default" : {
+      "color" : "#000000",
+      "opacity" : 100
+    }
+  }, {
+    "id" : "style_overrides.gradient_end",
+    "name" : "gradient_end",
+    "label" : "Gradient End Color",
+    "help_text" : "Bottom-right color of the header gradient. Default: VIPS red.",
+    "required" : false,
+    "locked" : false,
+    "type" : "color",
+    "display_width" : null,
+    "default" : {
+      "color" : "#a22b34",
+      "opacity" : 100
+    }
+  }, {
+    "id" : "style_overrides.header_height",
+    "name" : "header_height",
+    "label" : "Header Height (px)",
+    "help_text" : "Leave empty to use default (270px).",
+    "required" : false,
+    "locked" : false,
+    "display" : "text",
+    "step" : 1,
+    "type" : "number",
+    "display_width" : null
+  }, {
+    "id" : "style_overrides.text_color",
+    "name" : "text_color",
+    "label" : "Text Color",
+    "help_text" : "Override the default text color for this module instance. Leave empty for theme default.",
+    "required" : false,
+    "locked" : false,
+    "type" : "color",
+    "display_width" : null,
+    "default" : {
+      "color" : null,
+      "opacity" : 100
+    }
+  }, {
+    "id" : "style_overrides.content_width",
+    "name" : "content_width",
+    "label" : "Content Width",
+    "help_text" : "Control the maximum width of this module's content.",
+    "required" : false,
+    "locked" : false,
+    "display" : "select",
+    "choices" : [ [ "default", "Default" ], [ "narrow", "Narrow" ], [ "wide", "Wide" ], [ "full", "Full Width" ] ],
+    "multiple" : false,
+    "reordering_enabled" : true,
+    "preset" : null,
+    "type" : "choice",
+    "display_width" : null,
+    "default" : "default"
+  }, {
+    "id" : "style_overrides.hide_on_mobile",
+    "name" : "hide_on_mobile",
+    "label" : "Hide on Mobile",
+    "required" : false,
+    "locked" : false,
+    "display" : "checkbox",
+    "type" : "boolean",
+    "display_width" : null,
+    "default" : false
+  }, {
+    "id" : "style_overrides.hide_on_desktop",
+    "name" : "hide_on_desktop",
+    "label" : "Hide on Desktop",
+    "help_text" : "Toggle to hide this module on desktop viewports.",
+    "required" : false,
+    "locked" : false,
+    "display" : "checkbox",
+    "type" : "boolean",
+    "display_width" : null,
+    "default" : false
+  } ],
+  "tab" : "STYLE",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null
+} ]

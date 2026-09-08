@@ -1,0 +1,397 @@
+{
+  "email_label.default" : {
+    "message" : "Email (Required)",
+    "description" : "",
+    "placeholders" : null
+  },
+  "email_label.help_text" : {
+    "message" : "Label for the email input on the reset request form.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "email_label.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "email_label.label" : {
+    "message" : "Email Field Label",
+    "description" : "",
+    "placeholders" : null
+  },
+  "email_label.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "email_label.validation_regex" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "footer_copyright.default" : {
+    "message" : "© Copyright VIPS Club. All Rights Reserved",
+    "description" : "",
+    "placeholders" : null
+  },
+  "footer_copyright.help_text" : {
+    "message" : "Copyright line shown at the bottom of the page.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "footer_copyright.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "footer_copyright.label" : {
+    "message" : "Footer Copyright",
+    "description" : "",
+    "placeholders" : null
+  },
+  "footer_copyright.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "footer_copyright.validation_regex" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "footer_privacy.help_text" : {
+    "message" : "Privacy Policy link shown in the page footer.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "footer_privacy.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "footer_privacy.label" : {
+    "message" : "Privacy Policy Link",
+    "description" : "",
+    "placeholders" : null
+  },
+  "footer_privacy.link_text.default" : {
+    "message" : "Privacy Policy",
+    "description" : "",
+    "placeholders" : null
+  },
+  "footer_privacy.link_text.help_text" : {
+    "message" : "Visible text for the privacy policy link.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "footer_privacy.link_text.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "footer_privacy.link_text.label" : {
+    "message" : "Link Text",
+    "description" : "",
+    "placeholders" : null
+  },
+  "footer_privacy.link_text.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "footer_privacy.link_text.validation_regex" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "footer_privacy.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "footer_privacy.url.help_text" : {
+    "message" : "URL to the privacy policy page.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "footer_privacy.url.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "footer_privacy.url.label" : {
+    "message" : "URL",
+    "description" : "",
+    "placeholders" : null
+  },
+  "footer_privacy.url.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "heading.default" : {
+    "message" : "Reset Your Password",
+    "description" : "",
+    "placeholders" : null
+  },
+  "heading.help_text" : {
+    "message" : "Main heading inside the reset password card.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "heading.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "heading.label" : {
+    "message" : "Form Heading",
+    "description" : "",
+    "placeholders" : null
+  },
+  "heading.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "heading.validation_regex" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "heading_level.choices.h1" : {
+    "message" : "H1 — Page Title",
+    "description" : "",
+    "placeholders" : null
+  },
+  "heading_level.choices.h2" : {
+    "message" : "H2 — Section",
+    "description" : "",
+    "placeholders" : null
+  },
+  "heading_level.choices.h3" : {
+    "message" : "H3 — Subsection",
+    "description" : "",
+    "placeholders" : null
+  },
+  "heading_level.help_text" : {
+    "message" : "Controls the HTML heading tag. Use H1 only once per page for the main title.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "heading_level.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "heading_level.label" : {
+    "message" : "Heading Level",
+    "description" : "",
+    "placeholders" : null
+  },
+  "heading_level.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "logo.default.alt" : {
+    "message" : "VIPSCLUB",
+    "description" : "",
+    "placeholders" : null
+  },
+  "logo.default.src" : {
+    "message" : "https://442066989.fs1.hubspotusercontent-ap1.net/hubfs/442066989/Final%20-%20white%201-1.png",
+    "description" : null,
+    "placeholders" : null
+  },
+  "logo.help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "logo.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "logo.label" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "logo.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "name" : {
+    "message" : "auth-reset-request",
+    "description" : "",
+    "placeholders" : null
+  },
+  "photo.default.alt" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "photo.help_text" : {
+    "message" : "Architectural / lifestyle photo on the left side of the card. Upload from Files Manager. Hidden on mobile.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "photo.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "photo.label" : {
+    "message" : "Left Photo",
+    "description" : "",
+    "placeholders" : null
+  },
+  "photo.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.gradient_end.help_text" : {
+    "message" : "Bottom-right gradient colour for the header banner.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.gradient_end.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.gradient_end.label" : {
+    "message" : "Header Gradient End",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.gradient_end.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.gradient_start.help_text" : {
+    "message" : "Top-left gradient colour for the header banner.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.gradient_start.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.gradient_start.label" : {
+    "message" : "Header Gradient Start",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.gradient_start.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.hide_on_mobile.help_text" : {
+    "message" : "Hide this entire module on mobile devices.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.hide_on_mobile.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.hide_on_mobile.label" : {
+    "message" : "Hide on Mobile",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.hide_on_mobile.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.label" : {
+    "message" : "Style Overrides",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "submit_button_text.default" : {
+    "message" : "Send Password Reset Email",
+    "description" : "",
+    "placeholders" : null
+  },
+  "submit_button_text.help_text" : {
+    "message" : "Text shown on the submit button.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "submit_button_text.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "submit_button_text.label" : {
+    "message" : "Submit Button Text",
+    "description" : "",
+    "placeholders" : null
+  },
+  "submit_button_text.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "submit_button_text.validation_regex" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "subtitle.default" : {
+    "message" : "Enter the email address you used to register and we'll send you a link to reset your password.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "subtitle.help_text" : {
+    "message" : "Descriptive text shown below the heading.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "subtitle.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "subtitle.label" : {
+    "message" : "Form Subtitle",
+    "description" : "",
+    "placeholders" : null
+  },
+  "subtitle.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "subtitle.validation_regex" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  }
+}

@@ -1,0 +1,16 @@
+{# ============================================================
+   VIPSCLUB Portal 2026 — Portal Footer Module
+   Editable copyright text + privacy policy link
+   ============================================================ #}
+
+<footer class="portal-footer{% if module.style_overrides.hide_on_mobile %} portal-footer--hide-mobile{% endif %}"
+        role="contentinfo">
+  {% if module.copyright_text %}
+  <p class="portal-footer__text">&copy; {{ module.copyright_text | escape_html }}</p>
+  {% endif %}
+  {% if module.privacy_label and module.privacy_url %}
+  <a href="{{ module.privacy_url | escape_attr }}" class="portal-footer__link">
+    {{ module.privacy_label | escape_html }}
+  </a>
+  {% endif %}
+</footer>

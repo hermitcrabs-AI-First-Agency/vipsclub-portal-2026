@@ -1,0 +1,25 @@
+{% set referral_url = contact.vipsclub_referral_url|default(module.referral_url) %}
+
+<section class="rfv2-referral-banner" data-referral-url="{{ referral_url|escape_attr }}" aria-label="{{ module.link_label|escape_attr }}">
+  <div class="rfv2-referral-banner__top">
+    {% if module.icon_svg %}
+    <span class="rfv2-referral-banner__icon" aria-hidden="true">{{ module.icon_svg }}</span>
+    {% endif %}
+
+    <div class="rfv2-referral-banner__content">
+      <p class="rfv2-referral-banner__label">{{ module.link_label|escape_html }}</p>
+      <div class="rfv2-referral-banner__row">
+        <input class="rfv2-referral-banner__input" type="text" readonly value="{{ referral_url|escape_attr }}" aria-label="{{ module.link_label|escape_attr }}">
+        <button class="rfv2-referral-banner__copy" type="button" data-default-text="{{ module.copy_button_text|escape_attr }}" data-success-text="{{ module.copy_success_text|escape_attr }}">
+          <span class="rfv2-referral-banner__copy-icon" aria-hidden="true"></span>
+          <span class="rfv2-referral-banner__copy-text">{{ module.copy_button_text|escape_html }}</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="rfv2-referral-banner__mobile-cta">
+    <span>{{ module.mobile_prompt|escape_html }}</span>
+    <a href="{{ module.mobile_button_anchor|default('#main-content')|escape_attr }}">{{ module.mobile_button_text|escape_html }}</a>
+  </div>
+</section>

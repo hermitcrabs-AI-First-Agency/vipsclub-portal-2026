@@ -1,0 +1,139 @@
+/* ============================================================
+   VIPSCLUB Portal 2026 — Referral Submit Form Module
+   Figma: Desktop 339:7856 | Mobile 380:3960
+   ============================================================ */
+
+/* ── Outer wrapper ── */
+.referral-submit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ── Heading (above card) ── */
+.referral-submit-form__heading {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 1.25;
+  color: var(--vips-dark);
+  margin: 0;
+}
+
+/* ── Card container ── */
+.referral-submit-form__card {
+  background: var(--vips-bg-card);
+  border: 1px solid var(--vips-border-light);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+}
+
+/* ── Optional description ── */
+.referral-submit-form__description {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 22px;
+  color: var(--vips-text-secondary);
+  margin-bottom: 20px;
+}
+
+.referral-submit-form__description p {
+  margin: 0;
+}
+
+/* ── Editor placeholder ── */
+.referral-submit-form__placeholder {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 22px;
+  color: var(--vips-text-secondary);
+  background: var(--vips-bg-input);
+  border-radius: var(--radius-sm);
+  padding: 24px;
+  text-align: center;
+}
+
+.referral-submit-form__placeholder p {
+  margin: 0;
+}
+
+.referral-submit-form__card form .legal-consent-container .hs-form-booleancheckbox-display>span {
+    margin: 0;
+}
+
+/* ── Mobile (≤768px) ── */
+@media (max-width: 768px) {
+
+  .referral-submit-form--hide-mobile {
+    display: none;
+  }
+
+  .referral-submit-form__card {
+    border-radius: 10px;
+    padding: 20px;
+  }
+
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {}
+
+/* ── Per-instance style overrides ── */
+{% if module.style_overrides.background_color.color %}
+.referral-submit-form {
+  background-color: {{ module.style_overrides.background_color.color }};
+}
+{% endif %}
+
+{% if module.style_overrides.padding_top %}
+.referral-submit-form {
+  padding-top: {{ module.style_overrides.padding_top }}px;
+}
+{% endif %}
+
+{% if module.style_overrides.padding_bottom %}
+.referral-submit-form {
+  padding-bottom: {{ module.style_overrides.padding_bottom }}px;
+}
+{% endif %}
+
+/* ── Service meta block (SD4) ──
+   Sits at the top of the form card when the member arrived via a service
+   detail page. Mirrors the visual language of the enquiry form meta block
+   on service-detail-hero.module. */
+.referral-submit-form__service-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  margin: 0 0 16px;
+  background: var(--vips-bg-icon, #f5f5f5);
+  border-radius: var(--radius-sm, 8px);
+}
+.referral-submit-form__service-icon {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+.referral-submit-form__service-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+.referral-submit-form__service-label {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--vips-text-secondary, #6b6b6b);
+}
+.referral-submit-form__service-value {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--vips-text-primary, #212121);
+  word-break: break-word;
+}

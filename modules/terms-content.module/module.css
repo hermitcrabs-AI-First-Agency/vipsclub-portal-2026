@@ -1,0 +1,239 @@
+/* ============================================================
+   Terms — Body (Auto-TOC)
+   Two-column layout: sticky TOC (left) + stacked content cards (right)
+   Matches Figma node 1472:5469
+   ============================================================ */
+
+.terms-content {
+  background-color: var(--vips-page-bg, #f7f7f7);
+  color: var(--vips-text-dark, #212121);
+  /* Hard safety net — clip any rogue horizontal overflow from rich-text content
+     (long URLs, embedded tables, etc.) so the page never gains a horizontal scroll. */
+  overflow-x: clip;
+}
+
+/* ===== Width variants (matches choice field) ===== */
+.terms-content__inner {
+  margin: 0 auto;
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: 292px 1fr;
+  gap: 32px;
+  align-items: start;
+}
+.terms-content--width-default .terms-content__inner { max-width: 1240px; }
+.terms-content--width-narrow  .terms-content__inner { max-width: 1100px; }
+.terms-content--width-wide    .terms-content__inner { max-width: 1320px; }
+.terms-content--width-full    .terms-content__inner { max-width: none; }
+
+/* ============================================================
+   LEFT — sticky TOC sidebar
+   ============================================================ */
+.terms-content__toc {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 32px;
+  align-self: start;
+  padding: 8px;
+  border-radius: 8px;
+  box-shadow: 0 4px 0 0 #5c151a, 0 8px 24px rgba(0, 0, 0, 0.12);
+  max-height: calc(100vh - 64px);
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.4) transparent;
+}
+
+.terms-content__toc::-webkit-scrollbar { width: 6px; }
+.terms-content__toc::-webkit-scrollbar-track { background: transparent; }
+.terms-content__toc::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+}
+
+.terms-content__toc-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.terms-content__toc-item,
+.terms-content__toc-item:link,
+.terms-content__toc-item:visited,
+.terms-content__toc-item:hover,
+.terms-content__toc-item:focus,
+.terms-content__toc-item:focus-visible,
+.terms-content__toc-item:active,
+.terms-content__toc-item.is-active,
+.terms-content__toc-item.is-active:link,
+.terms-content__toc-item.is-active:visited,
+.terms-content__toc-item.is-active:hover,
+.terms-content__toc-item.is-active:focus,
+.terms-content__toc-item.is-active:focus-visible {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.terms-content__toc-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 6px;
+  border-radius: 6px;
+  font-family: var(--font-body, "Inter", sans-serif);
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  opacity: 0.8;
+  transition: opacity 0.15s ease, background-color 0.15s ease, font-weight 0.15s ease;
+}
+
+/* Inactive item hover — subtle white tint background */
+.terms-content__toc-item:hover {
+  opacity: 1;
+  background-color: rgba(255, 255, 255, 0.12);
+}
+.terms-content__toc-item:focus-visible {
+  opacity: 1;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.6);
+}
+
+/* Active state — red gradient pill (matches figma "Accuracy" highlight) */
+.terms-content__toc-item.is-active {
+  opacity: 1;
+  background: linear-gradient(to right, #541318 48.558%, #a22b34);
+  border-radius: 8px;
+  font-weight: 700;
+}
+
+/* Active + hover/focus — KEEP the gradient (don't let the inactive-hover white tint override) */
+.terms-content__toc-item.is-active:hover,
+.terms-content__toc-item.is-active:focus-visible {
+  background: linear-gradient(to right, #541318 48.558%, #a22b34);
+}
+
+.terms-content__toc-label {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.terms-content__toc-arrow {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: currentColor;
+  opacity: 0.7;
+}
+.terms-content__toc-arrow svg { width: 100%; height: 100%; display: block; }
+.terms-content__toc-item.is-active .terms-content__toc-arrow { opacity: 1; }
+
+/* ============================================================
+   RIGHT — section cards
+   ============================================================ */
+.terms-content__sections {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+}
+
+.terms-content__section {
+  background: #ffffff;
+  border: 1px solid #efefef;
+  border-radius: 8px;
+  padding: 32px;
+  scroll-margin-top: 24px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  /* Prevent the section from refusing to shrink below its content's intrinsic
+     width — long unbreakable strings (URLs, emails) would otherwise force
+     horizontal overflow on narrow viewports. */
+  min-width: 0;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.terms-content__section-heading {
+  font-family: var(--font-heading, "Montserrat", sans-serif);
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 24px;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--vips-text-dark, #212121);
+  margin: 0 0 16px;
+}
+
+.terms-content__section-body {
+  font-family: var(--font-body, "Inter", sans-serif);
+  font-size: 14px;
+  line-height: 24px;
+  color: var(--vips-text-dark, #212121);
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+.terms-content__section-body p { margin: 0 0 12px; }
+.terms-content__section-body p:last-child { margin: 0; }
+.terms-content__section-body a {
+  color: var(--vips-red, #a22c35);
+  text-decoration: underline;
+  word-break: break-word;
+}
+.terms-content__section-body a:hover,
+.terms-content__section-body a:focus-visible { text-decoration: none; }
+.terms-content__section-body ul,
+.terms-content__section-body ol { margin: 0 0 12px 20px; padding: 0; }
+.terms-content__section-body li { margin-bottom: 6px; }
+
+/* ============================================================
+   Responsive — collapse to single column ≤1080
+   Hide the TOC entirely (21 items in a horizontal pill bar is too messy
+   on narrow viewports). Only the section cards render below the header.
+   ============================================================ */
+@media (max-width: 1080px) {
+  .terms-content__toc {
+    display: none;
+  }
+  .terms-content__inner {
+    grid-template-columns: 1fr;
+    gap: 0;
+    padding: 0 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .terms-content__inner {
+    padding: 0 16px;
+  }
+  .terms-content__section {
+    padding: 24px 20px;
+  }
+  .terms-content__section-heading {
+    font-size: 16px;
+    line-height: 22px;
+  }
+}
+
+/* ===== Print: ditch the TOC + cards, just flow the content ===== */
+@media print {
+  .terms-content__toc { display: none; }
+  .terms-content__inner { display: block; max-width: none; padding: 0; }
+  .terms-content__section { box-shadow: none; border: none; padding: 0 0 24px; page-break-inside: avoid; }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .terms-content__toc-item { transition: none; }
+  html { scroll-behavior: auto; }
+}
+
+.terms-content--hide-mobile { display: block; }
+@media (max-width: 768px) {
+  .terms-content--hide-mobile { display: none; }
+}

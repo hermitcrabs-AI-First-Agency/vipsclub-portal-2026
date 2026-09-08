@@ -1,0 +1,92 @@
+<!--
+  templateType: page
+  isAvailableForNewContent: true
+  label: Portal — My Account & Wealth Hub
+-->
+{% extends "./layouts/base.html" %}
+
+{# ============================================================
+   VIPSCLUB Portal 2026 — My Account & Wealth Hub Template
+   Figma: Desktop 339:8314 | Mobile 380:3276
+   Layout: standard portal layout — header + sidebar + main
+   ============================================================ #}
+
+{% block head_extra %}
+{% require_css %}
+<link rel="stylesheet" href="{{ get_asset_url('../css/portal/my-account.css') }}">
+{% end_require_css %}
+{% endblock %}
+
+{% block body %}
+<div class="portal-layout">
+
+  {# ── Full-Width Header ── #}
+  <div class="portal-header-area">
+    {% dnd_area "portal_header"
+      label="Portal Header",
+      class="portal-header-dnd"
+    %}
+      {% dnd_section %}
+        {% dnd_column %}
+          {% dnd_row %}
+            {% dnd_module path="../modules/portal-header" %}{% end_dnd_module %}
+          {% end_dnd_row %}
+        {% end_dnd_column %}
+      {% end_dnd_section %}
+    {% end_dnd_area %}
+  </div>
+
+  {# ── Referral Banner — direct flex child of portal-layout, overlaps bottom of header ── #}
+  <div class="portal-referral-wrapper">
+    {% dnd_area "referral_banner"
+      label="Referral Banner",
+      class="referral-banner-area"
+    %}
+      {% dnd_section %}
+        {% dnd_column %}
+          {% dnd_row %}
+            {% dnd_module path="../modules/referral-banner" %}{% end_dnd_module %}
+          {% end_dnd_row %}
+        {% end_dnd_column %}
+      {% end_dnd_section %}
+    {% end_dnd_area %}
+  </div>
+
+  <div class="portal-content-outer">
+
+    {# ── Two-Column Body: Sidebar + Main ── #}
+    <div class="portal-body">
+
+      {# Sidebar — "My Account" nav item is active #}
+      {% module "portal_sidebar" path="../modules/portal-sidebar" label="Portal Sidebar" %}
+
+      {# ── Main Content ── #}
+      <main class="portal-main" id="main-content">
+
+        {% dnd_area "my_account_content"
+          label="My Account Content",
+          class="my-account-area"
+        %}
+          {% dnd_section %}
+            {% dnd_column %}
+              {% dnd_row %}
+                {% dnd_module path="../modules/account-profile-form"
+                  label="Account Profile & Wealth Hub"
+                %}
+                {% end_dnd_module %}
+              {% end_dnd_row %}
+            {% end_dnd_column %}
+          {% end_dnd_section %}
+        {% end_dnd_area %}
+
+      </main>{# end portal-main #}
+
+    </div>{# end portal-body #}
+
+    {# ── Footer ── #}
+    {% module "portal_footer" path="../modules/portal-footer" label="Portal Footer" %}
+
+  </div>{# end portal-content-outer #}
+
+</div>{# end portal-layout #}
+{% endblock %}

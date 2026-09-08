@@ -1,0 +1,729 @@
+/* ============================================================
+   VIPSCLUB Portal 2026 — Portal Layout
+   Full-width header → referral banner (overlaps header) →
+   two-column body (sidebar 292px + main content)
+   Matches Figma node 419:3040
+   ============================================================ */
+
+/* ── Portal Shell: flex column ── */
+.portal-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: var(--vips-bg-page);
+}
+
+/* ── Header area: full-width, handled by portal-header module ── */
+.portal-header-area {
+  position: relative;
+  flex-shrink: 0;
+  z-index: 1;
+}
+
+/* ── Content outer wrapper ── */
+.portal-content-outer {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+/* ── Referral banner: direct flex child of portal-layout, overlaps header by 74px ──
+   Sits between portal-header-area (z-index:1) and portal-content-outer as a flex
+   sibling — z-index:10 unambiguously wins over the header on all browsers.       */
+.portal-referral-wrapper {
+  max-width: var(--container-max, 1240px);
+  width: calc(100% - 204px); /* 102px each side */
+  margin: -74px auto 0;
+  position: relative;
+  z-index: 10;
+  flex-shrink: 0;
+  overflow: visible;
+}
+
+/* When the referral-banner module conditionally outputs nothing
+   (member has referral_page_visible = false), the wrapper still
+   renders as an empty box — but its `margin-top: -74px` keeps
+   pulling .portal-content-outer up into the header. Every portal
+   page uses this same wrapper, so if we don't collapse it the body
+   content slides under the header on ALL of them. `:not(:has(...))`
+   removes the empty wrapper from layout so content flows normally
+   below the header. */
+.portal-referral-wrapper:not(:has(.referral-banner)) {
+  display: none;
+}
+
+/* ── DnD wrapper resets for portal layout areas ──
+   HubSpot dnd_section adds its own max-width / padding that breaks
+   the full-width header and the referral banner negative-margin overlap.
+   These resets force the wrappers to stay out of the way.             */
+.portal-header-dnd,
+.portal-header-dnd .dnd-section,
+.portal-header-dnd .dnd-section-content,
+.portal-header-dnd .dnd-column,
+.portal-header-dnd .dnd-row,
+.portal-header-dnd [class*="hs_cos_wrapper"] {
+  max-width: 100% !important;
+  width: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* Under construction page — full-width DnD resets */
+.under-construction-content-area,
+.under-construction-content-area .dnd-section,
+.under-construction-content-area .dnd-section-content,
+.under-construction-content-area .dnd-column,
+.under-construction-content-area .dnd-row,
+.under-construction-content-area .dnd-module,
+.under-construction-content-area [class*="hs_cos_wrapper"] {
+  max-width: 100% !important;
+  width: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* All portal DnD content areas — strip HubSpot's default dnd-section constraints */
+.referral-banner-area,
+.referral-banner-area .dnd-section,
+.referral-banner-area .dnd-section-content,
+.referral-banner-area .dnd-column,
+.referral-banner-area .dnd-row,
+.referral-banner-area .dnd-module,
+.referral-banner-area [class*="hs_cos_wrapper"],
+.dashboard-services-area .dnd-section,
+.dashboard-services-area .dnd-section-content,
+.dashboard-services-area .dnd-column,
+.dashboard-services-area .dnd-row,
+.dashboard-rewards-area .dnd-section,
+.dashboard-rewards-area .dnd-section-content,
+.dashboard-rewards-area .dnd-column,
+.dashboard-rewards-area .dnd-row,
+.dashboard-rm-area .dnd-section,
+.dashboard-rm-area .dnd-section-content,
+.dashboard-rm-area .dnd-column,
+.dashboard-rm-area .dnd-row,
+.services-catalogue-area .dnd-section,
+.services-catalogue-area .dnd-section-content,
+.services-catalogue-area .dnd-column,
+.services-catalogue-area .dnd-row,
+.service-detail-left-area .dnd-section,
+.service-detail-left-area .dnd-section-content,
+.service-detail-left-area .dnd-column,
+.service-detail-left-area .dnd-row,
+.service-detail-right-area .dnd-section,
+.service-detail-right-area .dnd-section-content,
+.service-detail-right-area .dnd-column,
+.service-detail-right-area .dnd-row,
+.offers-rewards-area .dnd-section,
+.offers-rewards-area .dnd-section-content,
+.offers-rewards-area .dnd-column,
+.offers-rewards-area .dnd-row,
+.my-referrals-area .dnd-section,
+.my-referrals-area .dnd-section-content,
+.my-referrals-area .dnd-column,
+.my-referrals-area .dnd-row,
+.my-account-area .dnd-section,
+.my-account-area .dnd-section-content,
+.my-account-area .dnd-column,
+.my-account-area .dnd-row,
+.my-deals-area .dnd-section,
+.my-deals-area .dnd-section-content,
+.my-deals-area .dnd-column,
+.my-deals-area .dnd-row,
+.refer-friend-form-area .dnd-section,
+.refer-friend-form-area .dnd-section-content,
+.refer-friend-form-area .dnd-column,
+.refer-friend-form-area .dnd-row,
+.refer-friend-info-area .dnd-section,
+.refer-friend-info-area .dnd-section-content,
+.refer-friend-info-area .dnd-column,
+.refer-friend-info-area .dnd-row {
+  max-width: 100% !important;
+  width: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* ── Force referral banner visible on live page ──
+   HubSpot adds *-hidden suffix classes to DnD elements hidden via the page editor.
+   Its system CSS sets display:none on those classes. Since this banner must ALWAYS
+   be visible, we override the hidden state here.                                  */
+.referral-banner-area [class$="-hidden"],
+.referral-banner-area [class*="-hidden "] {
+  display: block !important;
+}
+
+/* ── Two-column body: sidebar + main ── */
+/* max-width 1440px + 100px padding each side = 1240px usable content */
+/* flex: 1 pushes the footer to the bottom when content is short */
+.portal-body {
+  max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+  display: flex;
+  align-items: flex-start;
+  padding: 32px 100px 60px;
+  gap: 40px;
+  flex: 1;
+}
+
+/* ── Sidebar ── */
+.portal-sidebar {
+  width: var(--vips-sidebar-width, 292px);
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  position: sticky;
+  top: 24px; /* sticks when scrolling, stays within viewport */
+}
+
+/* ── Sidebar Nav ── */
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  background: var(--vips-red);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--vips-sidebar-shadow);
+  padding: var(--space-2);
+}
+
+.sidebar-nav__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md);
+  color: #ffffff;
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: 500;
+  text-decoration: none;
+  transition: background-color var(--transition-fast), opacity var(--transition-fast);
+  opacity: 0.8;
+}
+
+.sidebar-nav__item:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  opacity: 1;
+}
+
+.sidebar-nav__item--active {
+  background: linear-gradient(90deg, var(--vips-red-dark) 48.56%, var(--vips-red) 100%);
+  font-weight: 700;
+  opacity: 1;
+}
+
+.sidebar-nav__item-inner {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.sidebar-nav__icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.sidebar-nav__divider {
+  width: 100%;
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.15);
+  margin: 2px 0;
+}
+
+/* ── Sidebar Tier Card ── */
+.sidebar-tier-card {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background-color: #1a1a1a;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  /* Height follows content — 270px is the Figma minimum (untiered/short card),
+     but tiered cards (Silver+ add a points/referrals row) grow instead of
+     clipping against a locked height. */
+  min-height: 270px;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* Constant 20px inner padding at any width — matches the desktop sidebar
+     (292px card − 252px content = 20px each side). Vertical 20px gives grown
+     content breathing room instead of touching the card edges. */
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Gradient overlay — transparent right → black left (Figma: 270deg) */
+.sidebar-tier-card__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(270deg, rgba(0, 0, 0, 0) 0%, #000000 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Content — fills the card width minus the constant padding, vertically centered.
+   (Was a fixed 252px centered, which left growing side gaps as the card widened.) */
+.sidebar-tier-card__content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.sidebar-tier-card__label {
+  font-family: var(--font-heading);
+  font-size: var(--text-md);
+  font-weight: 700;
+  text-transform: capitalize;
+  color: #fff;
+}
+
+.sidebar-tier-card__tier-name {
+  font-family: var(--font-heading);
+  font-size: var(--text-xl);
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  color: #fff;
+}
+
+.sidebar-tier-card__next {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  color: #fff;
+}
+
+.sidebar-tier-card__progress {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.sidebar-tier-card__progress-labels {
+  display: flex;
+  justify-content: space-between;
+}
+
+.sidebar-tier-card__points-current,
+.sidebar-tier-card__points-target {
+  font-family: var(--font-heading);
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.sidebar-tier-card__points-sub {
+  font-family: var(--font-body);
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.sidebar-tier-card__cta {
+  font-family: var(--font-heading);
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.sidebar-tier-card__cta-sub {
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* ── Sidebar User Row ── */
+.sidebar-user {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  background: var(--vips-bg-card);
+  border: 1px solid var(--vips-border-light);
+  border-radius: var(--radius-lg);
+  padding: var(--space-2) var(--space-5) var(--space-2) var(--space-2);
+  box-shadow: var(--shadow-card-light);
+}
+
+.sidebar-user__avatar {
+  width: 33px;
+  height: 33px;
+  border-radius: var(--radius-full);
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.sidebar-user__avatar--initials {
+  background: #e0e0e0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 700;
+  color: #212121;
+  line-height: 1;
+  user-select: none;
+}
+
+.sidebar-user__name {
+  flex: 1;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--vips-text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sidebar-user__logout {
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--vips-red);
+  text-transform: uppercase;
+  letter-spacing: 0.15px;
+  white-space: nowrap;
+}
+
+/* ── Main Content Area ── */
+.portal-main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+/* ── Page Content (legacy support for portal-content inside portal-main) ── */
+.portal-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+/* ── Container ── */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ── Page Footer ── */
+.portal-footer {
+  background-color: var(--vips-dark);
+  padding: var(--space-4) var(--space-10);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  text-align: center;
+  gap: var(--space-2);
+}
+
+@media (max-width: 768px) {
+  .portal-footer {
+    padding: var(--space-4) var(--space-4);
+  }
+}
+
+.portal-footer__text {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  color: #757575;
+}
+
+.portal-footer__link {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  color: #757575;
+  text-decoration: underline;
+}
+
+/* ── Responsive: Tablet + Mobile (≤1080px) ──
+   Below 1080px the sidebar collapses into a slide-down hamburger menu and the
+   body becomes a single full-width column. This frees the 292px sidebar width
+   for content on EVERY portal page (fixes the referral/cards/RM squeeze that
+   happened when the sidebar still claimed space at tablet widths). */
+@media (max-width: 1080px) {
+  .portal-body {
+    flex-direction: column;
+    padding: 32px 0 48px;   /* top gap below the overlapping referral banner; side gutters move to .portal-main */
+    gap: 24px;
+    max-width: 100%;
+  }
+
+  .portal-referral-wrapper {
+    width: calc(100% - 80px);
+    margin-top: -60px;
+  }
+
+  /* ── Sidebar → content-height panel that slides DOWN from the top ── */
+  .portal-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    max-width: none;
+    height: auto;             /* content height when it fits */
+    max-height: 100vh;        /* fallback for older browsers */
+    max-height: 100dvh;       /* dynamic viewport — accounts for browser chrome + landscape */
+    z-index: 200;
+    overflow-y: auto;         /* menu scrolls internally when taller than the screen */
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;  /* stop scroll from chaining to the page behind */
+    transform: translateY(-100%);
+    transition: transform 0.28s ease;
+    flex-shrink: 0;
+    box-sizing: border-box;
+    padding: 16px;
+    /* extra bottom padding so the last card clears the browser chrome / is fully scrollable */
+    padding-bottom: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    background: var(--vips-bg-page, #f7f7f7);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  }
+
+  .portal-sidebar--open {
+    transform: translateY(0);
+  }
+
+  /* Stop the menu cards from being compressed by the flex column when the menu
+     overflows (e.g. landscape). Each keeps its natural/fixed height and the
+     menu scrolls instead of squishing the tier card. */
+  .portal-sidebar > * {
+    flex-shrink: 0;
+  }
+
+  /* ── Menu card sizing — match the Mobile Menu design (12px radii, 16px nav labels) ── */
+  .sidebar-nav {
+    border-radius: 12px;
+  }
+  .sidebar-nav__item {
+    font-size: 16px;
+  }
+  .sidebar-tier-card {
+    border-radius: 12px;
+  }
+
+  /* ── Menu header: "Menu" title + close (X) ── */
+  .portal-sidebar__mobile-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 4px;
+  }
+
+  .portal-sidebar__mobile-title {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 22px;
+    color: var(--vips-dark);
+  }
+
+  .portal-sidebar__mobile-close {
+    background: none;
+    border: none;
+    padding: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--vips-dark);
+    border-radius: 4px;
+  }
+
+  .portal-sidebar__mobile-close:focus-visible {
+    outline: 2px solid var(--vips-dark);
+    outline-offset: 2px;
+  }
+
+  /* Overlay backdrop injected by portal-header module.js — sits BELOW the menu (z-index 199 < 200) */
+  .portal-nav-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 199;
+  }
+
+  .portal-nav-overlay--visible {
+    display: block;
+  }
+
+  /* Lock scroll when nav is open */
+  body.portal-nav-open {
+    overflow: hidden;
+  }
+
+  /* Main content fills full width when the sidebar is an overlay (40px gutters) */
+  .portal-main {
+    padding: 0 40px;
+    width: 100%;
+  }
+}
+
+/* ── Responsive: Mobile (≤768px) — tighter gutters + smaller overlap ── */
+@media (max-width: 768px) {
+  .portal-body {
+    padding: 0 0 60px;
+    gap: 16px;
+  }
+
+  .portal-referral-wrapper {
+    width: calc(100% - 32px);
+    margin: -40px auto 0;
+  }
+
+  .portal-main {
+    padding: 0 16px;
+  }
+}
+
+/* Menu header (Menu title + close X) is hidden on desktop only — sidebar is inline ≥1081px */
+@media (min-width: 1081px) {
+  .portal-sidebar__mobile-header {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sidebar-nav__item,
+  .portal-sidebar * {
+    transition-duration: 0.01ms !important;
+  }
+}
+
+
+/* ============================================================
+   Portal Access Denied — inline state for partner-gated pages
+   (my-deals + any future partner-only template). Renders inside
+   <main class="portal-main"> so the surrounding portal chrome
+   (header, referral banner, sidebar, footer) stays intact.
+   ============================================================ */
+
+.portal-access-denied {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 24px 0;
+}
+
+.portal-access-denied__card {
+  width: 100%;
+  max-width: 560px;
+  background: var(--vips-bg-card, #fff);
+  border: 1px solid var(--vips-border-light, #f2f2f2);
+  border-radius: var(--radius-lg, 12px);
+  box-shadow: var(--shadow-card-subtle, 0 1px 0.5px #f6f6f6);
+  padding: 40px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 16px;
+}
+
+.portal-access-denied__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #fdecee;
+  margin-bottom: 4px;
+}
+
+.portal-access-denied__title {
+  font-family: var(--font-heading, "Montserrat", sans-serif);
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 30px;
+  color: var(--vips-dark, #212121);
+  margin: 0;
+}
+
+.portal-access-denied__body {
+  font-family: var(--font-body, "Inter", sans-serif);
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 24px;
+  color: var(--vips-text-secondary, #616161);
+  margin: 0;
+  max-width: 440px;
+}
+
+.portal-access-denied__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 8px;
+  justify-content: center;
+}
+
+.portal-access-denied__actions .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 20px;
+  border-radius: 6px;
+  font-family: var(--font-body, "Inter", sans-serif);
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+  text-decoration: none;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.portal-access-denied__actions .btn--primary {
+  background: var(--vips-dark, #212121);
+  color: #fff;
+  border: 1px solid var(--vips-dark, #212121);
+}
+
+.portal-access-denied__actions .btn--primary:hover {
+  background: var(--vips-red, #a22c35);
+  border-color: var(--vips-red, #a22c35);
+  color: #fff;
+}
+
+.portal-access-denied__actions .btn--outline {
+  background: transparent;
+  color: var(--vips-dark, #212121);
+  border: 1px solid var(--vips-border-strong, #d4d4d4);
+}
+
+.portal-access-denied__actions .btn--outline:hover {
+  border-color: var(--vips-dark, #212121);
+}
+
+@media (max-width: 768px) {
+  .portal-access-denied {
+    padding: 16px 0;
+  }
+  .portal-access-denied__card {
+    padding: 32px 20px;
+  }
+  .portal-access-denied__title {
+    font-size: 20px;
+    line-height: 26px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .portal-access-denied__actions .btn {
+    transition: none;
+  }
+}

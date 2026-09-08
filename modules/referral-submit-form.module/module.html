@@ -1,0 +1,97 @@
+{# ============================================================
+   VIPSCLUB Portal 2026 — Referral Submit Form Module
+   Uses native HubSpot form field.
+   Create the form first in HubSpot Marketing > Forms.
+
+   SD4 — When the page URL carries ?service=<hubdb_row_id>, the module
+   pulls that row from the services HubDB, renders a "Service: <name>"
+   meta block above the form, swaps the description to the client-provided
+   service-specific copy, and (via module.js) prefills the form's
+   `referred_service` field with "Name - ID - Link" so the referral record
+   ties back to the specific service the member came from.
+   ============================================================ #}
+
+{# ── Service-context lookup (SD4) — server-side via request.query_dict ── #}
+{% set _svc_id  = request.query_dict.service | default("") %}
+{% set _svc     = none %}
+{% if _svc_id %}
+  {% set _rows = hubdb_table_rows(1680589250, "hs_id__eq=" ~ _svc_id ~ "&limit=1") %}
+  {% if _rows and (_rows | length) > 0 %}{% set _svc = _rows[0] %}{% endif %}
+{% endif %}
+{% set _is_service_context = _svc and _svc.name %}
+
+<div class="referral-submit-form{% if module.style_overrides.hide_on_mobile %} referral-submit-form--hide-mobile{% endif %}"
+     data-refemail="{{ contact.email | default('') | escape_attr }}">
+
+  {# ── Heading (above card) ── #}
+  {% if module.heading %}
+  <{{ module.heading_level | default("h2") }} class="referral-submit-form__heading">
+    {{ module.heading | escape_html }}
+  </{{ module.heading_level | default("h2") }}>
+  {% endif %}
+
+  {# ── Form Card ── #}
+  <div class="referral-submit-form__card">
+
+    {# ── Service meta block (SD4) — top of card when arrived via
+         referral-banner CTA on a service detail page. Mirrors the visual
+         language of the enquiry form's meta block on service detail. ── #}
+    {% if _is_service_context %}
+    <div class="referral-submit-form__service-meta">
+      {% set _ind = _svc.industry[0] if (_svc.industry and (_svc.industry | length) > 0) else none %}
+      {% if _ind and _ind.icon and _ind.icon.url %}
+      <img class="referral-submit-form__service-icon"
+           src="{{ _ind.icon.url | escape_attr }}"
+           alt=""
+           width="20"
+           height="20"
+           loading="lazy">
+      {% endif %}
+      <div class="referral-submit-form__service-text">
+        <span class="referral-submit-form__service-label">{{ module.service_meta_label | default("Service:") | escape_html }}</span>
+        <span class="referral-submit-form__service-value">{{ _svc.name | escape_html }}</span>
+      </div>
+    </div>
+    {% endif %}
+
+    {# ── Description ── swaps to the service-context copy when arrived
+         from a service detail page. Both texts editable in module fields. #}
+    {% if _is_service_context and module.service_context_description %}
+    <div class="referral-submit-form__description">
+      {{ module.service_context_description }}
+    </div>
+    {% elif module.description %}
+    <div class="referral-submit-form__description">
+      {{ module.description }}
+    </div>
+    {% endif %}
+
+    {# ── Data island for module.js to prefill the HubSpot form's hidden-ish
+         `referred_service` field with "Name - HubDB ID - Full URL". Same
+         pattern the service_enquiry prefill uses on service detail. ── #}
+    {% if _is_service_context %}
+    <script type="application/json" id="referral-service-config" data-referral-service-config>
+    {
+      "name": {{ _svc.name | tojson }},
+      "id":   "{{ _svc.hs_id }}"
+    }
+    </script>
+    {% endif %}
+
+    {# ── HubSpot Form ── #}
+    {% if module.form.form_id %}
+      {% form "form"
+        form_to_use="{{ module.form.form_id }}",
+        response_type="{{ module.form.response_type }}",
+        response_message="{{ module.form.message }}"
+      %}
+    {% elif is_in_editor %}
+    <div class="referral-submit-form__placeholder">
+      <p>Please select a HubSpot form in the module settings.<br>
+      Create the form first in <strong>Marketing &gt; Forms</strong>.</p>
+    </div>
+    {% endif %}
+
+  </div>
+
+</div>

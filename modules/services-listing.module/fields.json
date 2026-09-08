@@ -1,0 +1,239 @@
+[ {
+  "id" : "section_heading",
+  "name" : "section_heading",
+  "label" : "Section Heading",
+  "help_text" : "Heading displayed at the top of the services section",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Our services"
+}, {
+  "id" : "heading_level",
+  "name" : "heading_level",
+  "label" : "Heading Level",
+  "help_text" : "Controls the HTML heading tag. Use H1 only once per page for the main title.",
+  "required" : false,
+  "locked" : false,
+  "display" : "select",
+  "choices" : [ [ "h1", "H1 — Page Title" ], [ "h2", "H2 — Section" ], [ "h3", "H3 — Subsection" ], [ "h4", "H4" ] ],
+  "multiple" : false,
+  "reordering_enabled" : true,
+  "preset" : null,
+  "type" : "choice",
+  "display_width" : null,
+  "default" : "h2"
+}, {
+  "id" : "section_description",
+  "name" : "section_description",
+  "label" : "Section Description",
+  "help_text" : "Description text shown below the section heading",
+  "required" : false,
+  "locked" : false,
+  "type" : "richtext",
+  "display_width" : null,
+  "default" : "<p>Explore everything available to you as a member. Services marked Gold are unlocked when you reach Gold tier.</p>"
+}, {
+  "id" : "category_filter_label",
+  "name" : "category_filter_label",
+  "label" : "Category Filter Label",
+  "help_text" : "Label above the Category dropdown",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Category"
+}, {
+  "id" : "category_filter_placeholder",
+  "name" : "category_filter_placeholder",
+  "label" : "Category Placeholder Text",
+  "help_text" : "Default option shown in Category dropdown",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Select a Category"
+}, {
+  "id" : "services_table",
+  "name" : "services_table",
+  "label" : "Services HubDB Table",
+  "help_text" : "Select the HubDB table that contains service data. This is display-only — the module is wired to table ID 1680589250 in code.",
+  "required" : false,
+  "locked" : false,
+  "type" : "hubdbtable",
+  "display_width" : null,
+  "default" : { }
+}, {
+  "id" : "locked_button_text",
+  "name" : "locked_button_text",
+  "label" : "Locked Card Button Text",
+  "help_text" : "Text shown on the CTA button of locked service cards",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Locked"
+}, {
+  "id" : "cta_button_text",
+  "name" : "cta_button_text",
+  "label" : "Default CTA Button Text",
+  "help_text" : "Button text shown on unlocked service cards when the member has NOT yet enquired about the service.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Get a quote"
+}, {
+  "id" : "cta_button_text_after",
+  "name" : "cta_button_text_after",
+  "label" : "CTA Button Text (After First Enquiry)",
+  "help_text" : "Shown once the member has submitted the service form at least once. The 'Enquired · N' pill appears above the button in that same state.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Get another quote"
+}, {
+  "id" : "services_base_path",
+  "name" : "services_base_path",
+  "label" : "Services Base URL",
+  "help_text" : "Base URL for service detail pages — pick the parent CMS page (e.g. /services). Links are built as this URL + the HubDB hs_path slug. Leave empty to use the default fallback (\"/services/\").",
+  "required" : false,
+  "locked" : false,
+  "supported_types" : [ "EXTERNAL", "CONTENT" ],
+  "show_advanced_rel_options" : false,
+  "type" : "link",
+  "display_width" : null,
+  "default" : {
+    "url" : {
+      "href" : "",
+      "type" : "EXTERNAL"
+    },
+    "open_in_new_tab" : false
+  }
+}, {
+  "id" : "empty_state_text",
+  "name" : "empty_state_text",
+  "label" : "Empty State Text",
+  "help_text" : "Message shown when no services are found in HubDB.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "No services available at this time."
+}, {
+  "id" : "load_more_text",
+  "name" : "load_more_text",
+  "label" : "Load More Button Text",
+  "help_text" : "Text on the Load More button that appears below the service cards.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Load More Services"
+}, {
+  "id" : "style_overrides",
+  "name" : "style_overrides",
+  "label" : "Style Overrides",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "style_overrides.background_color",
+    "name" : "background_color",
+    "label" : "Background Color",
+    "help_text" : "Leave empty to use theme default (#f7f7f7)",
+    "required" : false,
+    "locked" : false,
+    "type" : "color",
+    "display_width" : null,
+    "default" : {
+      "color" : null,
+      "opacity" : 100
+    }
+  }, {
+    "id" : "style_overrides.padding_top",
+    "name" : "padding_top",
+    "label" : "Padding Top (px)",
+    "help_text" : "Leave empty to use default spacing",
+    "required" : false,
+    "locked" : false,
+    "display" : "text",
+    "step" : 1,
+    "type" : "number",
+    "display_width" : null
+  }, {
+    "id" : "style_overrides.padding_bottom",
+    "name" : "padding_bottom",
+    "label" : "Padding Bottom (px)",
+    "help_text" : "Leave empty to use default spacing",
+    "required" : false,
+    "locked" : false,
+    "display" : "text",
+    "step" : 1,
+    "type" : "number",
+    "display_width" : null
+  }, {
+    "id" : "style_overrides.hide_on_mobile",
+    "name" : "hide_on_mobile",
+    "label" : "Hide on Mobile",
+    "help_text" : "Toggle to hide this module on mobile devices",
+    "required" : false,
+    "locked" : false,
+    "display" : "checkbox",
+    "type" : "boolean",
+    "display_width" : null,
+    "default" : false
+  }, {
+    "id" : "style_overrides.text_color",
+    "name" : "text_color",
+    "label" : "Text Color",
+    "help_text" : "Override the default text color for this module instance. Leave empty for theme default.",
+    "required" : false,
+    "locked" : false,
+    "type" : "color",
+    "display_width" : null,
+    "default" : {
+      "color" : null,
+      "opacity" : 100
+    }
+  }, {
+    "id" : "style_overrides.content_width",
+    "name" : "content_width",
+    "label" : "Content Width",
+    "help_text" : "Control the maximum width of this module's content.",
+    "required" : false,
+    "locked" : false,
+    "display" : "select",
+    "choices" : [ [ "default", "Default" ], [ "narrow", "Narrow" ], [ "wide", "Wide" ], [ "full", "Full Width" ] ],
+    "multiple" : false,
+    "reordering_enabled" : true,
+    "preset" : null,
+    "type" : "choice",
+    "display_width" : null,
+    "default" : "default"
+  }, {
+    "id" : "style_overrides.hide_on_desktop",
+    "name" : "hide_on_desktop",
+    "label" : "Hide on Desktop",
+    "help_text" : "Toggle to hide this module on desktop viewports.",
+    "required" : false,
+    "locked" : false,
+    "display" : "checkbox",
+    "type" : "boolean",
+    "display_width" : null,
+    "default" : false
+  } ],
+  "tab" : "STYLE",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null
+} ]

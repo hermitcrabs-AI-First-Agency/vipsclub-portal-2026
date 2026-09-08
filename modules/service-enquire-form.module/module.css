@@ -1,0 +1,243 @@
+/* ============================================================
+   VIPSCLUB Portal 2026 — Service Enquire Form Module
+   Figma: Desktop 339:7562 | Mobile 339:9002
+   ============================================================ */
+
+/* ── Card container ── */
+.service-enquire__card {
+  background: var(--vips-bg-card);
+  border: 1px solid var(--vips-border-light);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card-subtle);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ── Card Heading ── */
+.service-enquire__heading {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 27.5px;
+  color: var(--vips-dark);
+  margin: 0;
+}
+
+/* ── Service Meta Block ── */
+.service-enquire__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--vips-border-light);
+}
+
+.service-enquire__meta-row {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 8px;
+  align-items: baseline;
+}
+
+.service-enquire__meta-label {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 12px;
+  color: var(--vips-text-secondary);
+}
+
+.service-enquire__meta-value {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 12px;
+  color: var(--vips-text-secondary);
+}
+
+/* ── HubSpot Form Overrides ── */
+
+/* These override HubSpot's default form styles to match Figma */
+
+.service-enquire__card .hs-form fieldset {
+  max-width: 100%;
+}
+
+/* Two-column row for first/last name — flexbox, NOT floats. The old float layout
+   (calc(50% - 8px) + margin-right) was never cleared, so the fields escaped the
+   card and overflowed on narrow widths. Flex keeps them contained at any width. */
+.service-enquire__card .hs-form fieldset.form-columns-2 {
+  display: flex;
+  gap: 16px;
+}
+
+.service-enquire__card .hs-form fieldset.form-columns-2 .hs-form-field {
+  flex: 1;
+  min-width: 0;
+  width: auto;
+  float: none;
+  margin-right: 0;
+}
+
+/* Labels */
+.service-enquire__card .hs-form label {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 12px;
+  color: var(--vips-dark);
+  margin-bottom: 6px;
+  display: block;
+}
+
+/* Inputs */
+.service-enquire__card .hs-form input[type="text"],
+.service-enquire__card .hs-form input[type="email"],
+.service-enquire__card .hs-form input[type="tel"],
+.service-enquire__card .hs-form select,
+.service-enquire__card .hs-form textarea {
+  width: 100%;
+  box-sizing: border-box;
+  background: var(--vips-bg-card);
+  border: 1px solid var(--vips-border-input);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 14px;
+  color: var(--vips-dark);
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+
+.service-enquire__card .hs-form input:focus,
+.service-enquire__card .hs-form select:focus,
+.service-enquire__card .hs-form textarea:focus {
+  border-color: var(--vips-dark);
+}
+
+.service-enquire__card .hs-form input:focus-visible,
+.service-enquire__card .hs-form select:focus-visible,
+.service-enquire__card .hs-form textarea:focus-visible {
+  outline: 3px solid var(--vips-red);
+  outline-offset: 2px;
+}
+
+.service-enquire__card .hs-form textarea {
+  min-height: 106px;
+  resize: vertical;
+}
+
+.service-enquire__card .hs-form select {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23616161' stroke-width='1.4' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 40px;
+  cursor: pointer;
+}
+
+/* Form field wrapper */
+.service-enquire__card .hs-form .hs-form-field {
+  margin-bottom: 14px;
+}
+
+/* Submit button */
+.service-enquire__card .hs-form input[type="submit"],
+.service-enquire__card .hs-form .hs-button {
+  width: 100%;
+  height: 47px;
+  background: var(--vips-dark);
+  color: var(--vips-bg-card);
+  border: none;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.service-enquire__card .hs-form input[type="submit"]:hover,
+.service-enquire__card .hs-form .hs-button:hover {
+  background: var(--vips-dark-subtle);
+}
+
+.service-enquire__card .hs-form input[type="submit"]:focus-visible,
+.service-enquire__card .hs-form .hs-button:focus-visible {
+  outline: 2px solid var(--vips-dark);
+  outline-offset: 2px;
+}
+
+/* Error messages */
+.service-enquire__card .hs-form .hs-error-msgs label {
+  font-size: 11px;
+  color: var(--vips-error);
+  margin-top: 4px;
+  font-weight: 400;
+}
+
+/* ── Editor placeholder ── */
+.service-enquire__editor-placeholder {
+  background: var(--vips-bg-input);
+  border: 2px dashed var(--vips-border);
+  border-radius: var(--radius-sm);
+  padding: 32px 16px;
+  text-align: center;
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--vips-text-secondary);
+}
+
+/* ── Form Disclaimer ── */
+.service-enquire__disclaimer {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  color: var(--vips-text-light);
+  margin-top: -4px;
+}
+
+.service-enquire__disclaimer p {
+  margin: 0;
+}
+
+/* ── Mobile (≤768px) ── */
+@media (max-width: 768px) {
+
+  .service-enquire--hide-mobile {
+    display: none;
+  }
+
+  .service-enquire__card {
+    border-radius: 10px;
+    border-width: 0.698px;
+    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+  }
+
+  .service-enquire__meta-row {
+    grid-template-columns: 100px 1fr;
+  }
+
+  /* Stack the two-column name row to a single column on mobile */
+  .service-enquire__card .hs-form fieldset.form-columns-2 {
+    flex-direction: column;
+    gap: 0;
+  }
+
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .service-enquire__card .hs-form input[type="text"],
+  .service-enquire__card .hs-form input[type="email"],
+  .service-enquire__card .hs-form input[type="tel"],
+  .service-enquire__card .hs-form select,
+  .service-enquire__card .hs-form textarea,
+  .service-enquire__card .hs-form input[type="submit"],
+  .service-enquire__card .hs-form .hs-button {
+    transition: none;
+  }
+}

@@ -1,0 +1,119 @@
+<!--
+  templateType: page
+  isAvailableForNewContent: true
+  label: Refer Landing (Public)
+-->
+{% extends "./layouts/base.html" %}
+
+{# ============================================================
+   VIPSCLUB Portal 2026 — Refer Landing Template
+   Figma: Desktop 374:283 | Mobile 380:4314
+   PUBLIC PAGE — no sidebar, no membership required
+   Referrer info from URL params: ?refname= &reftier= &refid=
+   Layout:
+     - Custom hero (refer-landing-hero module)
+     - 2-column content:
+         Left (713px):  refer-landing-content (benefits + steps + testimonials)
+         Right (503px): refer-landing-form (sticky registration form)
+   ============================================================ #}
+
+{% block head_extra %}
+{% require_css %}
+<link rel="stylesheet" href="{{ get_asset_url('../css/refer-landing.css') }}">
+{% end_require_css %}
+{% endblock %}
+
+{% block body %}
+<div class="refer-landing-page">
+
+  {# ── Custom Hero (invited-by header — no portal-header module) ── #}
+  {% dnd_area "refer_hero"
+    label="Refer Landing Hero",
+    class="refer-landing-hero-area"
+  %}
+    {% dnd_section %}
+      {% dnd_column %}
+        {% dnd_row %}
+          {% dnd_module path="../modules/refer-landing-hero"
+            label="Refer Landing Hero"
+          %}
+          {% end_dnd_module %}
+        {% end_dnd_row %}
+      {% end_dnd_column %}
+    {% end_dnd_section %}
+  {% end_dnd_area %}
+
+  {# ── Main Content: 2-column layout ── #}
+  <main class="refer-landing-page__main" id="main-content">
+    <div class="refer-landing-page__inner">
+
+      {# ── Two-column layout: Benefits+Steps (left) | Form (right) ── #}
+      <div class="refer-landing-layout">
+
+        {# ── Left Column: Benefits + Steps only ── #}
+        <div class="refer-landing-layout__left">
+          {% dnd_area "refer_landing_content"
+            label="Refer Landing Content (Benefits + Steps)",
+            class="refer-landing-content-area"
+          %}
+            {% dnd_section %}
+              {% dnd_column %}
+                {% dnd_row %}
+                  {% dnd_module path="../modules/refer-landing-content"
+                    label="Refer Landing Content",
+                    display_mode="content_only"
+                  %}
+                  {% end_dnd_module %}
+                {% end_dnd_row %}
+              {% end_dnd_column %}
+            {% end_dnd_section %}
+          {% end_dnd_area %}
+        </div>
+
+        {# ── Right Column: Registration Form (sticky) ── #}
+        <div class="refer-landing-layout__right">
+          {% dnd_area "refer_landing_form"
+            label="Refer Landing Form",
+            class="refer-landing-form-area"
+          %}
+            {% dnd_section %}
+              {% dnd_column %}
+                {% dnd_row %}
+                  {% dnd_module path="../modules/refer-landing-form"
+                    label="Refer Landing Form"
+                  %}
+                  {% end_dnd_module %}
+                {% end_dnd_row %}
+              {% end_dnd_column %}
+            {% end_dnd_section %}
+          {% end_dnd_area %}
+        </div>
+
+      </div>{# end refer-landing-layout #}
+
+      {# ── Full-width Testimonials row — spans both columns per Figma 374:502 ── #}
+      {% dnd_area "refer_testimonials"
+        label="Testimonials (Full Width)",
+        class="refer-landing-testimonials-area"
+      %}
+        {% dnd_section %}
+          {% dnd_column %}
+            {% dnd_row %}
+              {% dnd_module path="../modules/refer-landing-content"
+                label="Testimonials",
+                display_mode="testimonials_only"
+              %}
+              {% end_dnd_module %}
+            {% end_dnd_row %}
+          {% end_dnd_column %}
+        {% end_dnd_section %}
+      {% end_dnd_area %}
+
+    </div>{# end inner #}
+  </main>
+
+  {# ── Footer ── #}
+  {% module "portal_footer" path="../modules/portal-footer" label="Portal Footer" %}
+
+</div>{# end refer-landing-page #}
+{% endblock %}

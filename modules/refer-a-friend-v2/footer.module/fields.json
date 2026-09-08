@@ -1,0 +1,31 @@
+[ {
+  "id" : "copyright_text",
+  "name" : "copyright_text",
+  "label" : "Copyright Text",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Copyright VIPS Club. All Rights Reserved"
+}, {
+  "id" : "privacy_label",
+  "name" : "privacy_label",
+  "label" : "Privacy Link Label",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Privacy Policy"
+}, {
+  "id" : "privacy_url",
+  "name" : "privacy_url",
+  "label" : "Privacy URL",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "#"
+} ]

@@ -1,0 +1,123 @@
+{# ============================================================
+   VIPSCLUB Portal 2026 — Auth Create Account (Public) Module
+   Template type: page (public)
+   Uses {% form %} — a HubSpot custom form selected in module settings.
+   This is the PUBLIC create-account page, separate from the
+   membership register module which uses {% member_register %}.
+   Design: identical to auth-register-page (shared CSS).
+   Figma: Desktop 190:1692 | Mobile 337:3415
+   ============================================================ #}
+
+{% require_css %}
+<link rel="stylesheet" href="{{ get_asset_url('../../css/auth/auth-pages.css') }}">
+{% end_require_css %}
+
+{# ── Style override values ── #}
+{% set grad_start = module.style_overrides.gradient_start.color | default('#000000') %}
+{% set grad_end   = module.style_overrides.gradient_end.color   | default('#a22b34') %}
+
+<main class="auth-page auth-page--register{% if module.style_overrides.hide_on_mobile %} auth-page--hide-mobile{% endif %}{% if module.style_overrides.hide_on_desktop %} auth-page--hide-desktop{% endif %}">
+
+  {# ── Header: full-width gradient + centred logo ── #}
+  <header class="auth-page__header"
+          style="background: linear-gradient(163.37deg, {{ grad_start }} 36.19%, {{ grad_end }} 66.10%);">
+
+    {% if module.logo.src %}
+    <img class="auth-page__logo"
+         src="{{ module.logo.src | escape_attr }}"
+         alt="{{ module.logo.alt | default('VIPS Club') | escape_attr }}"
+         width="{{ module.logo.width | default(161) }}"
+         height="{{ module.logo.height | default(59) }}"
+         fetchpriority="high">
+    {% endif %}
+
+  </header>
+
+  {# ── Body: split card (photo left + form right) ── #}
+  <div class="auth-page__body">
+
+    <div class="auth-page__card" role="region" aria-label="Create account">
+
+      {# ── Left: architectural photo (desktop only) ── #}
+      {% if module.photo.src %}
+      <img class="auth-page__card-photo"
+           src="{{ module.photo.src | escape_attr }}"
+           alt="{{ module.photo.alt | default('') | escape_attr }}"
+           width="420"
+           height="672"
+           loading="lazy"
+           aria-hidden="true">
+      {% endif %}
+
+      {# ── Right: white form panel ── #}
+      <div class="auth-page__card-form">
+
+        {# ── Heading + subtitle ── #}
+        <div class="auth-form__header">
+          {% if module.heading %}
+          <{{ module.heading_level | default("h1") }} class="auth-form__heading">{{ module.heading | escape_html }}</{{ module.heading_level | default("h1") }}>
+            {% endif %}
+            {% if module.subtitle %}
+            <p class="auth-form__subtitle">{{ module.subtitle | escape_html }}</p>
+        {% endif %}
+      </div>
+
+      {# ── HubSpot Custom Registration Form ──
+           Select the form in module settings. Create custom forms
+           in Marketing > Forms. The form's own labels and fields
+           are configured in the HubSpot form builder.
+        #}
+      {% if module.register_form.form_id %}
+      {% form "register_form"
+            form_to_use="{{ module.register_form.form_id }}",
+            response_type="{{ module.register_form.response_type }}",
+            response_message="{{ module.register_form.message }}"
+          %}
+      {% elif is_in_editor %}
+      <div class="auth-form__placeholder">
+        <p>Select a <strong>Registration Form</strong> in module settings.</p>
+        <p>Create the form first in <strong>Marketing &gt; Forms</strong>.</p>
+      </div>
+      {% endif %}
+
+      {# ── Sign In Link ── #}
+      {% if module.already_account_text or module.signin_link_text %}
+      <p class="auth-form__footer-link">
+        {% if module.already_account_text %}
+        {{ module.already_account_text | escape_html }}
+        {% endif %}
+        {% if module.signin_link_text %}
+        {% if module.signin_link_url.url.href %}
+        <a href="{{ module.signin_link_url.url.href | escape_attr }}"
+           {% if module.signin_link_url.open_in_new_tab %}target="_blank" rel="noopener noreferrer"{% endif %}>{{ module.signin_link_text | escape_html }}</a>
+        {% else %}
+        <span>{{ module.signin_link_text | escape_html }}</span>
+        {% endif %}
+        {% endif %}
+      </p>
+      {% endif %}
+
+    </div>{# end card-form #}
+
+  </div>{# end card #}
+
+  </div>{# end body #}
+
+{# ── Page Footer: copyright + privacy ── #}
+<footer class="auth-page__footer">
+  {% if module.footer_copyright or module.footer_privacy.link_text %}
+  <p>
+    {% if module.footer_copyright %}{{ module.footer_copyright | escape_html }}{% endif %}
+    {% if module.footer_privacy.link_text %}
+    {% if module.footer_privacy.url.url.href %}
+    <a href="{{ module.footer_privacy.url.url.href | escape_attr }}"
+       {% if module.footer_privacy.url.open_in_new_tab %}target="_blank" rel="noopener noreferrer"{% endif %}>&nbsp;{{ module.footer_privacy.link_text | escape_html }}</a>
+    {% else %}
+    &nbsp;{{ module.footer_privacy.link_text | escape_html }}
+    {% endif %}
+    {% endif %}
+  </p>
+  {% endif %}
+</footer>
+
+</main>{# end auth-page auth-page--register #}

@@ -1,0 +1,96 @@
+{# ============================================================
+   VIPSCLUB Portal 2026 — Auth Reset Request Module
+   Template type: membership_reset_request_page
+   Uses {% password_reset_request %} — HubSpot's native tag.
+   Renders email input + submit button only.
+   Figma: Desktop 960:16790 | Mobile 960:17061
+   ============================================================ #}
+
+{% require_css %}
+<link rel="stylesheet" href="{{ get_asset_url('../../css/auth/auth-pages.css') }}">
+{% end_require_css %}
+
+{# ── Style override values ── #}
+{% set grad_start = module.style_overrides.gradient_start.color | default('#000000') %}
+{% set grad_end   = module.style_overrides.gradient_end.color   | default('#a22b34') %}
+
+<main class="auth-page auth-page--reset-request{% if module.style_overrides.hide_on_mobile %} auth-page--hide-mobile{% endif %}">
+
+  {# ── Header: full-width gradient + centred logo ── #}
+  <header class="auth-page__header"
+          style="background: linear-gradient(158.58deg, {{ grad_start }} 36.19%, {{ grad_end }} 66.10%);">
+
+    {% if module.logo.src %}
+    <img class="auth-page__logo"
+         src="{{ module.logo.src | escape_attr }}"
+         alt="{{ module.logo.alt | default('VIPS Club') | escape_attr }}"
+         width="{{ module.logo.width | default(161) }}"
+         height="{{ module.logo.height | default(59) }}"
+         fetchpriority="high">
+    {% endif %}
+
+  </header>
+
+  {# ── Body: split card (photo left + form right) ── #}
+  <div class="auth-page__body">
+
+    <div class="auth-page__card" role="region" aria-label="Reset password">
+
+      {# ── Left: architectural photo (desktop only) ── #}
+      {% if module.photo.src %}
+      <img class="auth-page__card-photo"
+           src="{{ module.photo.src | escape_attr }}"
+           alt="{{ module.photo.alt | default('') | escape_attr }}"
+           width="{{ module.photo.width | default(406) }}"
+           height="{{ module.photo.height | default(356) }}"
+           loading="lazy"
+           aria-hidden="true">
+      {% endif %}
+
+      {# ── Right: white form panel ── #}
+      <div class="auth-page__card-form" id="main-content">
+
+        {# ── Heading + subtitle ── #}
+        <div class="auth-form__header">
+          {% if module.heading %}
+          <{{ module.heading_level | default("h1") }} class="auth-form__heading">{{ module.heading | escape_html }}</{{ module.heading_level | default("h1") }}>
+          {% endif %}
+          {% if module.subtitle %}
+          <p class="auth-form__subtitle">{{ module.subtitle | escape_html }}</p>
+          {% endif %}
+        </div>
+
+        {# ── HubSpot Native Password Reset Request Form ──
+           Renders: email field + submit button.
+           Only works inside membership_reset_request_page templates.
+        #}
+        {% password_reset_request "vips_reset_request"
+          email_label="{{ module.email_label | default('Email (Required)') }}",
+          submit_button_text="{{ module.submit_button_text | default('Send Password Reset Email') }}"
+        %}
+
+      </div>{# end card-form #}
+
+    </div>{# end card #}
+
+  </div>{# end body #}
+
+  {# ── Page Footer: copyright + privacy ── #}
+ <footer class="auth-page__footer">
+  {% if module.footer_copyright or module.footer_privacy.link_text %}
+  <p>
+    {% if module.footer_copyright %}{{ module.footer_copyright | escape_html }}{% endif %}
+    {% if module.footer_privacy.link_text %}
+    {% if module.footer_privacy.url.url.href %}
+    <a href="{{ module.footer_privacy.url.url.href | escape_attr }}"
+       {% if module.footer_privacy.url.open_in_new_tab %}target="_blank" rel="noopener noreferrer"{% endif %}>&nbsp;{{ module.footer_privacy.link_text | escape_html }}</a>
+    {% else %}
+    &nbsp;{{ module.footer_privacy.link_text | escape_html }}
+    {% endif %}
+    {% endif %}
+  </p>
+    {% endif %}
+
+  </footer>
+
+</main>{# end auth-page auth-page--reset-request #}

@@ -1,0 +1,88 @@
+{# ============================================================
+   VIPSCLUB Portal 2026 — Auth Sign Out Module
+   Template type: membership_logout_page
+   Figma: Desktop 960:16946
+   ============================================================ #}
+
+{% require_css %}
+<link rel="stylesheet" href="{{ get_asset_url('../../css/auth/auth-pages.css') }}">
+{% end_require_css %}
+
+{# ── Style override values ── #}
+{% set grad_start = module.style_overrides.gradient_start.color | default('#000000') %}
+{% set grad_end   = module.style_overrides.gradient_end.color   | default('#a22b34') %}
+
+<main class="auth-page auth-page--signout{% if module.style_overrides.hide_on_mobile %} auth-page--hide-mobile{% endif %}">
+
+  {# ── Header: full-width gradient + centred logo ── #}
+  <header class="auth-page__header"
+          style="background: linear-gradient(158.58deg, {{ grad_start }} 36.19%, {{ grad_end }} 66.10%);">
+
+    {% if module.logo.src %}
+    <img class="auth-page__logo"
+         src="{{ module.logo.src | escape_attr }}"
+         alt="{{ module.logo.alt | default('VIPS Club') | escape_attr }}"
+         width="{{ module.logo.width | default(161) }}"
+         height="{{ module.logo.height | default(59) }}"
+         fetchpriority="high">
+    {% endif %}
+
+  </header>
+
+  {# ── Body: centred white card ── #}
+  <div class="auth-page__body">
+
+    <div class="auth-page__card auth-page__card--centered"
+         role="region"
+         aria-label="Signed out">
+
+      <div class="auth-page__card-content" id="main-content">
+
+        {# ── Heading ── #}
+        {% if module.heading %}
+        <{{ module.heading_level | default("h1") }} class="auth-page__card-heading">{{ module.heading | escape_html }}</{{ module.heading_level | default("h1") }}>
+        {% endif %}
+
+        {# ── Sign back in button ── #}
+        {% if module.button_text %}
+        <a href="{{ module.button_url.url.href | default('https://www.vipsclub.com.au/dashboard') | escape_attr }}"
+           class="auth-page__card-btn"
+           {% if module.button_url.open_in_new_tab %}target="_blank" rel="noopener noreferrer"{% endif %}>
+          {{ module.button_text | escape_html }}
+        </a>
+        {% endif %}
+
+        {# ── Home link ── #}
+        {% if module.home_link_text %}
+        <a href="{{ module.home_link_url.url.href | default('https://www.vipsclub.com.au/dashboard') | escape_attr }}"
+           class="auth-page__card-link"
+           {% if module.home_link_url.open_in_new_tab %}target="_blank" rel="noopener noreferrer"{% endif %}>
+          {{ module.home_link_text | escape_html }}
+        </a>
+        {% endif %}
+
+      </div>
+
+    </div>{# end card #}
+
+  </div>{# end body #}
+
+  {# ── Page Footer: copyright + privacy ── #}
+<footer class="auth-page__footer">
+  {% if module.footer_copyright or module.footer_privacy.link_text %}
+  <p>
+    {% if module.footer_copyright %}{{ module.footer_copyright | escape_html }}{% endif %}
+    {% if module.footer_privacy.link_text %}
+    {% if module.footer_privacy.url.url.href %}
+    <a href="{{ module.footer_privacy.url.url.href | escape_attr }}"
+       {% if module.footer_privacy.url.open_in_new_tab %}target="_blank" rel="noopener noreferrer"{% endif %}>&nbsp;{{ module.footer_privacy.link_text | escape_html }}</a>
+    {% else %}
+    &nbsp;{{ module.footer_privacy.link_text | escape_html }}
+    {% endif %}
+    {% endif %}
+  </p>
+    {% endif %}
+
+  </footer>
+
+</main>{# end auth-page auth-page--signout #}

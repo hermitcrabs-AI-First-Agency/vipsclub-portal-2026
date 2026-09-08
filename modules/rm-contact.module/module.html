@@ -1,0 +1,234 @@
+{# ============================================================
+   VIPSCLUB Portal 2026 — RM Contact Card (Horizontal Layout)
+   "Your dedicated RM" section — section heading + horizontal card
+   LEFT: photo + info | MIDDLE: divider | RIGHT: contact rows
+   Figma: Dashboard section — max-width 503px card
+
+   Data source: contact-to-contact CRM association (USER_DEFINED id=35, label "contact owner")
+   Entire section hidden if no associated contact is found.
+   ============================================================ #}
+
+{# ── Look up associated RM contact via CRM association ── #}
+{% set _rm_obj = null %}
+{% set _assoc_id = module.association_type_id | default(34) %}
+{% if _assoc_id and contact.hs_object_id %}
+  {% set _rm_results = crm_associations(
+    contact.hs_object_id,
+    "USER_DEFINED",
+    _assoc_id,
+    "limit=1",
+    "firstname,lastname,email,phone,city,profile_image,jobtitle",
+    false
+  ) %}
+  {% if _rm_results.results and (_rm_results.results | length) > 0 %}
+    {% set _rm_obj = _rm_results.results[0] %}
+  {% endif %}
+{% endif %}
+
+{# ── Render the section unconditionally. When no RM contact is associated
+   (or a particular property is empty on the associated contact), each field
+   gracefully falls back to its corresponding manually-set module field:
+   rm_name, rm_title, rm_photo, rm_phone, rm_email, rm_location, rm_booking_link. ── #}
+
+{% set _section_style = "" %}
+{% if module.style_overrides.padding_top %}
+  {% set _section_style = _section_style ~ "padding-top:" ~ module.style_overrides.padding_top ~ "px;" %}
+{% endif %}
+{% if module.style_overrides.padding_bottom %}
+  {% set _section_style = _section_style ~ "padding-bottom:" ~ module.style_overrides.padding_bottom ~ "px;" %}
+{% endif %}
+
+<section class="rm-section{% if module.style_overrides.hide_on_mobile %} rm-section--hide-mobile{% endif %}{% if module.style_overrides.hide_on_desktop %} rm-section--hide-desktop{% endif %}"
+  {% if _section_style %}style="{{ _section_style }}"{% endif %}
+  aria-label="{{ module.section_heading | default('Your dedicated RM') | escape_attr }}">
+
+  {# ── Resolve display values.
+       Priority order per field:
+         1. Associated RM contact (from crm_associations above)
+         2. The `fallback_rm_contact` CRM object picker (default = Client
+            Success Team contact) — editors can override the picker to
+            point at a different contact.
+       Edit the fallback contact record in HubSpot to update the display. ── #}
+  {% set _crm_name     = "" %}
+  {% set _crm_title    = "" %}
+  {% set _crm_photo    = "" %}
+  {% set _crm_phone    = "" %}
+  {% set _crm_email    = "" %}
+  {% set _crm_location = "" %}
+  {% if _rm_obj %}
+    {% set _crm_name     = (_rm_obj.firstname | default("") ~ " " ~ _rm_obj.lastname | default("")) | trim %}
+    {% set _crm_title    = _rm_obj.jobtitle      | default("") %}
+    {% set _crm_photo    = _rm_obj.profile_image | default("") %}
+    {% set _crm_phone    = _rm_obj.phone         | default("") %}
+    {% set _crm_email    = _rm_obj.email         | default("") %}
+    {% set _crm_location = _rm_obj.city          | default("") %}
+  {% endif %}
+
+  {# Fallback contact — extract picked contact's ID from the crmobject field
+     and re-fetch via `crm_object()` for predictable HubL access. ── #}
+  {% set _fb_id = module.fallback_rm_contact.id | default(0) | int %}
+  {% set _fb = crm_object("contact", _fb_id, "firstname,lastname,email,phone,city,jobtitle,booking_link,profile_image") if _fb_id else none %}
+  {% set _fb_name     = ((_fb.firstname | default("")) ~ " " ~ (_fb.lastname | default(""))) | trim if _fb else "" %}
+  {% set _fb_title    = (_fb.jobtitle      | default("")) if _fb else "" %}
+  {% set _fb_photo    = (_fb.profile_image | default("")) if _fb else "" %}
+  {% set _fb_phone    = (_fb.phone         | default("")) if _fb else "" %}
+  {% set _fb_email    = (_fb.email         | default("")) if _fb else "" %}
+  {% set _fb_location = (_fb.city          | default("")) if _fb else "" %}
+
+  {% set _rm_name      = _crm_name     if _crm_name     else _fb_name %}
+  {% set _rm_title     = _crm_title    if _crm_title    else _fb_title %}
+  {% set _rm_photo_url = _crm_photo    if _crm_photo    else _fb_photo %}
+  {% set _rm_phone     = _crm_phone    if _crm_phone    else _fb_phone %}
+  {% set _rm_email     = _crm_email    if _crm_email    else _fb_email %}
+  {% set _rm_location  = _crm_location if _crm_location else _fb_location %}
+
+  {% set _rm_initial   = _rm_name | default("R") | truncate(1, false, "") | upper %}
+
+  {# ── Section Heading ── #}
+  {% if module.section_heading %}
+  <div class="dashboard-section-header">
+    <{{ module.heading_level | default("h2") }} class="dashboard-section-header__title">
+      {{ module.section_heading | escape_html }}
+    </{{ module.heading_level | default("h2") }}>
+  </div>
+  {% endif %}
+
+  {# ── Section Subtitle ── #}
+  {% if module.section_subtitle %}
+  <p class="dashboard-section-subtitle">{{ module.section_subtitle | escape_html }}</p>
+  {% endif %}
+
+  {# ── RM Card (horizontal flex: left | divider | contact) ── #}
+  <div class="rm-card"
+    {% if module.style_overrides.background_color.color %}
+      style="background-color: {{ module.style_overrides.background_color.color }};"
+    {% endif %}
+  >
+
+    {# ── LEFT: Photo + Info ── #}
+    <div class="rm-card__left">
+
+      {# profile_image URL → fallback to initials circle #}
+      {% if _rm_photo_url %}
+        <img class="rm-card__photo"
+             src="{{ _rm_photo_url | escape_attr }}"
+             alt="{{ _rm_name | escape_attr }}"
+             width="84"
+             height="84"
+             loading="lazy">
+      {% else %}
+        <div class="rm-card__photo-placeholder" aria-hidden="true">
+          {{ _rm_initial }}
+        </div>
+      {% endif %}
+
+      {# Name / Title / Booking link #}
+      <div class="rm-card__info">
+        {% if _rm_name %}
+          <p class="rm-card__name">{{ _rm_name | escape_html }}</p>
+        {% endif %}
+        {% if _rm_title %}
+          <p class="rm-card__title">{{ _rm_title | escape_html }}</p>
+        {% endif %}
+        {% if module.rm_booking_link.url.href %}
+          <a class="rm-card__booking-link"
+             href="{{ module.rm_booking_link.url.href | escape_attr }}"
+             {% if module.rm_booking_link.open_in_new_tab %}target="_blank" rel="noopener noreferrer"{% endif %}
+             {% if module.rm_booking_link.no_follow %}rel="nofollow"{% endif %}>
+            {{ module.rm_booking_link_text | default("Booking Link") | escape_html }}
+          </a>
+        {% endif %}
+      </div>
+
+    </div>
+
+    {# ── MIDDLE: Vertical Divider ── #}
+    <div class="rm-card__divider" role="separator" aria-hidden="true"></div>
+
+    {# ── RIGHT: Contact Rows ── #}
+    <div class="rm-card__contact">
+
+      {# Phone row — splits on " or " so each number is its own clickable
+         tel: link (stacked vertically inside the row). #}
+      {% if _rm_phone %}
+      {% set _phone_list = _rm_phone | split(" or ") %}
+      <div class="rm-card__contact-row">
+        <span class="rm-card__contact-icon" aria-hidden="true">
+          {% if module.phone_icon.svg_code %}
+            {{ module.phone_icon.svg_code }}
+          {% elif module.phone_icon.image.src %}
+            <img src="{{ module.phone_icon.image.src | escape_attr }}"
+                 alt=""
+                 width="{{ module.phone_icon.image.width | default(20) }}"
+                 height="{{ module.phone_icon.image.height | default(20) }}"
+                 aria-hidden="true">
+          {% else %}
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true" focusable="false">
+              <path d="M6.5 2H4a2 2 0 00-2 2c0 7.732 6.268 14 14 14a2 2 0 002-2v-2.5l-4-1.5-1.5 1.5a10.08 10.08 0 01-4-4L10 8l-1.5-4H6.5z" stroke="#616161" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          {% endif %}
+        </span>
+        <span class="rm-card__contact-text rm-card__contact-text--stack">
+          {% for _ph in _phone_list %}
+            {% set _ph_trim = _ph | trim %}
+            {% if _ph_trim %}
+            <a class="rm-card__contact-link" href="tel:{{ _ph_trim | escape_attr }}">{{ _ph_trim | escape_html }}</a>
+            {% endif %}
+          {% endfor %}
+        </span>
+      </div>
+      {% endif %}
+
+      {# Email row #}
+      {% if _rm_email %}
+      <div class="rm-card__contact-row">
+        <span class="rm-card__contact-icon" aria-hidden="true">
+          {% if module.email_icon.svg_code %}
+            {{ module.email_icon.svg_code }}
+          {% elif module.email_icon.image.src %}
+            <img src="{{ module.email_icon.image.src | escape_attr }}"
+                 alt=""
+                 width="{{ module.email_icon.image.width | default(20) }}"
+                 height="{{ module.email_icon.image.height | default(20) }}"
+                 aria-hidden="true">
+          {% else %}
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true" focusable="false">
+              <path d="M2 5a2 2 0 012-2h12a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V5z" stroke="#616161" stroke-width="1.4"/>
+              <path d="M2 5l8 6 8-6" stroke="#616161" stroke-width="1.4" stroke-linecap="round"/>
+            </svg>
+          {% endif %}
+        </span>
+        <a class="rm-card__contact-text" href="mailto:{{ _rm_email | escape_attr }}">
+          {{ _rm_email | escape_html }}
+        </a>
+      </div>
+      {% endif %}
+
+      {# Location row #}
+      {% if _rm_location %}
+      <div class="rm-card__contact-row">
+        <span class="rm-card__contact-icon" aria-hidden="true">
+          {% if module.location_icon.svg_code %}
+            {{ module.location_icon.svg_code }}
+          {% elif module.location_icon.image.src %}
+            <img src="{{ module.location_icon.image.src | escape_attr }}"
+                 alt=""
+                 width="{{ module.location_icon.image.width | default(20) }}"
+                 height="{{ module.location_icon.image.height | default(20) }}"
+                 aria-hidden="true">
+          {% else %}
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true" focusable="false">
+              <path d="M10 2a6 6 0 016 6c0 4-6 10-6 10S4 12 4 8a6 6 0 016-6z" stroke="#616161" stroke-width="1.4"/>
+              <circle cx="10" cy="8" r="2" stroke="#616161" stroke-width="1.4"/>
+            </svg>
+          {% endif %}
+        </span>
+        <span class="rm-card__contact-text">{{ _rm_location | escape_html }}</span>
+      </div>
+      {% endif %}
+
+    </div>
+
+  </div>
+
+</section>

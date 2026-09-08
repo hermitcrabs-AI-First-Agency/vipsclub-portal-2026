@@ -1,0 +1,35 @@
+.rfv2-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  min-height: 50px;
+  padding: 14px 40px;
+  box-sizing: border-box;
+  background: var(--vips-dark);
+  text-align: center;
+}
+
+.rfv2-footer__text,
+.rfv2-footer__link {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 21px;
+  color: #757575;
+}
+
+.rfv2-footer__link {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .rfv2-footer {
+    flex-direction: column;
+    gap: 0;
+    min-height: 80px;
+    padding: 16px;
+  }
+}

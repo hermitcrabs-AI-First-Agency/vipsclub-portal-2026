@@ -1,0 +1,45 @@
+<!--
+  templateType: membership_reset_request_page
+  isAvailableForNewContent: true
+  label: Membership — Reset Password Request
+-->
+{% extends "../layouts/base.html" %}
+
+{# ============================================================
+   VIPSCLUB Portal 2026 — Membership Reset Password Request Template
+   Figma: Desktop 960:16790 | Mobile 960:17061
+   NOTE: membership_reset_request_page templates cannot use dnd_area.
+         Content is editable via the module's fields.
+   ============================================================ #}
+
+{% block head_extra %}
+{% require_css %}
+<link rel="stylesheet" href="{{ get_asset_url('../../css/auth/auth-pages.css') }}">
+{% end_require_css %}
+{% endblock %}
+
+{% block body %}
+<div id="main-content">
+  {% module "auth_reset_request"
+    path="../../modules/auth-reset-request",
+    label="Reset Password Request"
+  %}
+</div>
+
+<script>
+  window.Userback = window.Userback || {};
+  Userback.access_token = "P-9ZwYraweOSFazwyWMBYDroJbo";
+  // identify your logged-in users (optional)
+  Userback.user_data = {
+    id: "123456", // example data
+    info: {
+      name: "someone", // example data
+      email: "someone@example.com" // example data
+    }
+  };
+  (function(d) {
+    var s = d.createElement('script');s.async = true;s.src = 'https://static.userback.io/widget/v1.js';(d.head || d.body).appendChild(s);
+  })(document);
+</script>
+
+{% endblock %}

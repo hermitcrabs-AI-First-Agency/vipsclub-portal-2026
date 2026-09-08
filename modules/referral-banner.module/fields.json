@@ -1,0 +1,346 @@
+[ {
+  "id" : "icon",
+  "name" : "icon",
+  "label" : "Gift Icon",
+  "help_text" : "97×97 gift icon shown to the left of the heading. Upload an SVG/PNG OR paste raw SVG code.",
+  "required" : false,
+  "locked" : true,
+  "children" : [ {
+    "id" : "icon.image",
+    "name" : "image",
+    "label" : "Upload Icon (SVG or PNG)",
+    "help_text" : "Upload from Files Manager. SVG preferred. Recommended: 97×97px.",
+    "required" : false,
+    "locked" : false,
+    "responsive" : false,
+    "resizable" : false,
+    "show_loading" : false,
+    "type" : "image",
+    "display_width" : null,
+    "default" : {
+      "src" : "https://www.vipsclub.com.au/hubfs/gift%201%20%5BVectorized%5D.svg",
+      "alt" : "Gift",
+      "width" : 97,
+      "height" : 97
+    }
+  }, {
+    "id" : "icon.svg_code",
+    "name" : "svg_code",
+    "label" : "Or: Paste SVG Code",
+    "help_text" : "Paste the raw <svg>...</svg> code here. Leave empty if using the upload field above.",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : ""
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "image" : {
+      "src" : "https://www.vipsclub.com.au/hubfs/gift%201%20%5BVectorized%5D.svg",
+      "alt" : "Gift",
+      "width" : 97,
+      "height" : 97
+    },
+    "svg_code" : ""
+  }
+}, {
+  "id" : "copy_button_text",
+  "name" : "copy_button_text",
+  "label" : "Copy Button Text",
+  "help_text" : "Label on the copy-to-clipboard button (the top button on the right).",
+  "required" : false,
+  "locked" : true,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Copy referral link"
+}, {
+  "id" : "copy_button_icon",
+  "name" : "copy_button_icon",
+  "label" : "Copy Button Icon",
+  "help_text" : "Small icon shown inside the Copy Link button. Upload SVG/PNG OR paste SVG code.",
+  "required" : false,
+  "locked" : true,
+  "children" : [ {
+    "id" : "copy_button_icon.image",
+    "name" : "image",
+    "label" : "Upload Icon (SVG or PNG)",
+    "help_text" : "Upload from Files Manager. Recommended: 16×16px SVG.",
+    "required" : false,
+    "locked" : false,
+    "responsive" : false,
+    "resizable" : false,
+    "show_loading" : false,
+    "type" : "image",
+    "display_width" : null,
+    "default" : {
+      "src" : "",
+      "alt" : "",
+      "width" : 16,
+      "height" : 16
+    }
+  }, {
+    "id" : "copy_button_icon.svg_code",
+    "name" : "svg_code",
+    "label" : "Or: Paste SVG Code",
+    "help_text" : "Paste the raw <svg>...</svg> code. Leave empty if using the upload field above.",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : ""
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "image" : {
+      "src" : "",
+      "alt" : "",
+      "width" : 16,
+      "height" : 16
+    },
+    "svg_code" : ""
+  }
+}, {
+  "id" : "copy_success_text",
+  "name" : "copy_success_text",
+  "label" : "Copy Success Text",
+  "help_text" : "Text shown briefly on the button after the link is copied",
+  "required" : false,
+  "locked" : true,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Copied!"
+}, {
+  "id" : "referral_page_url",
+  "name" : "referral_page_url",
+  "label" : "Referral Page Base URL",
+  "help_text" : "Select the referral landing page. Do NOT include a trailing slash — a slash is inserted automatically before the member's unique ID. e.g. base: /referral-page → final: /referral-page/x0f0b6",
+  "required" : false,
+  "locked" : true,
+  "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "EMAIL_ADDRESS", "BLOG" ],
+  "show_advanced_rel_options" : false,
+  "type" : "link",
+  "display_width" : null,
+  "default" : {
+    "url" : {
+      "content_id" : 328020392406,
+      "href" : null,
+      "type" : "CONTENT"
+    },
+    "open_in_new_tab" : false
+  }
+}, {
+  "id" : "cta_heading",
+  "name" : "cta_heading",
+  "label" : "Banner Heading",
+  "help_text" : "Main heading shown to the right of the gift icon.",
+  "required" : false,
+  "locked" : true,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Refer a Friend"
+}, {
+  "id" : "cta_subtitle",
+  "name" : "cta_subtitle",
+  "label" : "Banner Subtitle",
+  "help_text" : "Smaller body text shown below the heading.",
+  "required" : false,
+  "locked" : true,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Help friends discover VIPSCLUB. Earn rewards together when they join and engage with services."
+}, {
+  "id" : "cta_button",
+  "name" : "cta_button",
+  "label" : "CTA Button",
+  "help_text" : "The 'Refer a Friend' action button on the right side",
+  "required" : false,
+  "locked" : true,
+  "children" : [ {
+    "id" : "cta_button.show",
+    "name" : "show",
+    "label" : "Show Button",
+    "help_text" : "Toggle to show or hide the CTA button",
+    "required" : false,
+    "locked" : false,
+    "display" : "checkbox",
+    "type" : "boolean",
+    "display_width" : null,
+    "default" : true
+  }, {
+    "id" : "cta_button.text",
+    "name" : "text",
+    "label" : "Button Text",
+    "help_text" : "Text displayed on the CTA button (the bottom button on the right).",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Enter friend details"
+  }, {
+    "id" : "cta_button.link_url",
+    "name" : "link_url",
+    "label" : "Button Link",
+    "help_text" : "Where the button links — typically the Refer a Friend page",
+    "required" : false,
+    "locked" : false,
+    "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "EMAIL_ADDRESS", "BLOG" ],
+    "show_advanced_rel_options" : false,
+    "type" : "link",
+    "display_width" : null,
+    "default" : {
+      "url" : {
+        "content_id" : 328020392388,
+        "href" : null,
+        "type" : "CONTENT"
+      },
+      "open_in_new_tab" : false
+    }
+  }, {
+    "id" : "cta_button.style",
+    "name" : "style",
+    "label" : "Button Style",
+    "help_text" : "Visual style of the CTA button",
+    "required" : false,
+    "locked" : false,
+    "display" : "select",
+    "choices" : [ [ "primary", "Primary (Red)" ], [ "dark", "Dark" ], [ "outline", "Outline" ] ],
+    "multiple" : false,
+    "reordering_enabled" : true,
+    "preset" : null,
+    "type" : "choice",
+    "display_width" : null,
+    "default" : "primary"
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "show" : true,
+    "text" : "Enter friend details",
+    "link_url" : {
+      "url" : {
+        "content_id" : 328020392388,
+        "href" : null,
+        "type" : "CONTENT"
+      },
+      "open_in_new_tab" : false
+    },
+    "style" : "primary"
+  }
+}, {
+  "id" : "style_overrides",
+  "name" : "style_overrides",
+  "label" : "Style Overrides",
+  "required" : false,
+  "locked" : true,
+  "children" : [ {
+    "id" : "style_overrides.background_color",
+    "name" : "background_color",
+    "label" : "Background Color",
+    "help_text" : "Leave empty to use theme default (white card)",
+    "required" : false,
+    "locked" : false,
+    "type" : "color",
+    "display_width" : null,
+    "default" : {
+      "color" : null,
+      "opacity" : 100
+    }
+  }, {
+    "id" : "style_overrides.padding_top",
+    "name" : "padding_top",
+    "label" : "Padding Top (px)",
+    "help_text" : "Leave empty to use default spacing",
+    "required" : false,
+    "locked" : false,
+    "display" : "text",
+    "step" : 1,
+    "type" : "number",
+    "display_width" : null
+  }, {
+    "id" : "style_overrides.padding_bottom",
+    "name" : "padding_bottom",
+    "label" : "Padding Bottom (px)",
+    "help_text" : "Leave empty to use default spacing",
+    "required" : false,
+    "locked" : false,
+    "display" : "text",
+    "step" : 1,
+    "type" : "number",
+    "display_width" : null
+  }, {
+    "id" : "style_overrides.hide_on_mobile",
+    "name" : "hide_on_mobile",
+    "label" : "Hide on Mobile",
+    "help_text" : "Toggle to hide this module on mobile devices",
+    "required" : false,
+    "locked" : false,
+    "display" : "checkbox",
+    "type" : "boolean",
+    "display_width" : null,
+    "default" : false
+  }, {
+    "id" : "style_overrides.text_color",
+    "name" : "text_color",
+    "label" : "Text Color",
+    "help_text" : "Override the default text colour for this module instance. Leave empty for theme default.",
+    "required" : false,
+    "locked" : false,
+    "type" : "color",
+    "display_width" : null,
+    "default" : {
+      "color" : null,
+      "opacity" : 100
+    }
+  }, {
+    "id" : "style_overrides.content_width",
+    "name" : "content_width",
+    "label" : "Content Width",
+    "help_text" : "Control the maximum width of this module's content.",
+    "required" : false,
+    "locked" : false,
+    "display" : "select",
+    "choices" : [ [ "default", "Default" ], [ "narrow", "Narrow" ], [ "wide", "Wide" ], [ "full", "Full Width" ] ],
+    "multiple" : false,
+    "reordering_enabled" : true,
+    "preset" : null,
+    "type" : "choice",
+    "display_width" : null,
+    "default" : "default"
+  } ],
+  "tab" : "STYLE",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "background_color" : {
+      "color" : null,
+      "opacity" : 100
+    },
+    "hide_on_mobile" : false,
+    "text_color" : {
+      "color" : null,
+      "opacity" : 100
+    },
+    "content_width" : "default"
+  }
+} ]

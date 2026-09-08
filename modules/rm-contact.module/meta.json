@@ -1,0 +1,8 @@
+{
+  "global" : false,
+  "content_types" : [ "MEMBERSHIP", "LANDING_PAGE", "SITE_PAGE" ],
+  "host_template_types" : [ "PAGE", "MEMBERSHIP" ],
+  "module_id" : 327821239783,
+  "label" : "RM Contact Card",
+  "is_available_for_new_content" : true
+}

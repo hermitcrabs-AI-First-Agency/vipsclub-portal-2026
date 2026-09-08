@@ -1,0 +1,304 @@
+{# ============================================================
+   VIPSCLUB Portal 2026 — Services Listing Module
+   Services Catalogue: HubDB-powered cards + filter dropdowns
+   Figma: Desktop 339:7273 | Mobile 339:8772
+   ============================================================ #}
+
+{# module.css is auto-loaded by HubSpot — do NOT use require_css for it (MISTAKE 25) #}
+
+{# ── Query services from HubDB table 1680589250 ──
+   • orderBy=displayIndex → match the manual row order in the HubDB UI
+     (the drag-to-reorder order in HubSpot). `hs_id` would sort by row
+     creation order, which drifts once rows are reordered.
+   • show_on_portal__eq=true → only surface services the content team has
+     ticked "Show on Portal". Rows with the flag unchecked are hidden. #}
+{% set services = hubdb_table_rows(1680589250, "orderBy=displayIndex&show_on_portal__eq=true&limit=1000") %}
+
+{# ── Industries lookup (table 2431597037 — Portal Industries).
+     Each service row's `industry` column is a FOREIGN_ID array referencing
+     this table, so `service.industry[0].name` is the linked row's
+     `industry_label`. We fetch all industry rows once and do linear-search
+     by name per card. Also drives the filter dropdown options below. #}
+{% set _industry_rows = hubdb_table_rows(2431597037) %}
+
+{# ── Logged-in user's tier level. Same scheme as offers-rewards-hub:
+     bronze=1, silver=2, gold=3, platinum=4. Per-card we compute the min
+     tier from the service's tier_badge MULTISELECT and lock the card when
+     the user sits below it. Members without member_tier set default to
+     bronze. Platinum is the top tier — never locked out of anything. #}
+{# Tier source of truth = contact.membership_tier (one value per member).
+   NOT the Referral/Courses record — a contact can be linked to many referral
+   records, each carrying its own membership_tier, so that lookup is
+   non-deterministic. `member_tier` (the old name here) never existed, which
+   silently forced every member to Bronze. #}
+{% set raw_tier = contact.membership_tier | default("bronze") | lower | trim %}
+{% if raw_tier == "platinum" %}
+  {% set user_tier_level = 4 %}
+{% elif raw_tier == "gold" %}
+  {% set user_tier_level = 3 %}
+{% elif raw_tier == "silver" %}
+  {% set user_tier_level = 2 %}
+{% else %}
+  {% set user_tier_level = 1 %}
+{% endif %}
+
+{# ── Claim counts per service for THIS logged-in contact.
+     Fetches every ticket associated to the member, filters to the Service
+     Requests pipeline (`1960152509`), and buckets by the HubDB row ID
+     embedded in the ticket's `content` (description) field.
+     Content format written by the enquiry form:
+       "<service name> - <hubdb id> - <full url>"
+     Downstream, per-card lookup: `_enquiry_counts[service.hs_id | string]`
+     returns N (0 if the member has never claimed that service). #}
+{% set _enquiry_counts = {} %}
+{% if contact.hs_object_id %}
+  {# HubSpot's contact→ticket "primary contact" association is typeId 15,
+     not 16. All 9 tickets associated to a test contact came back under 15
+     when queried via /crm/v4/objects/contacts/{id}/associations/tickets. #}
+  {% set _my_tickets = crm_associations(
+    contact.hs_object_id,
+    "HUBSPOT_DEFINED",
+    15,
+    "limit=100",
+    "content,hs_pipeline",
+    false
+  ) %}
+  {# Store a plain LIST of HubDB row IDs (not a map). Jinja/HubL dict
+     literals like `{_sid: N}` don't evaluate variable keys — they store
+     the string "_sid" literally, which broke the old map approach.
+     Per-card render loop counts occurrences via `| select | list | length`. #}
+  {% set _ids_ns = namespace(list=[]) %}
+  {% if _my_tickets and _my_tickets.results %}
+    {% for _t in _my_tickets.results %}
+      {% if (_t.hs_pipeline | string) == "1960152509" %}
+        {% set _raw = _t.content | default("") %}
+        {% if _raw %}
+          {# Parse "Name - <id> - <url>" — the id is the middle segment. #}
+          {% set _parts = _raw | split(" - ") %}
+          {% if (_parts | length) >= 2 %}
+            {% set _sid = _parts[1] | trim %}
+            {% if _sid %}
+              {% do _ids_ns.list.append(_sid) %}
+            {% endif %}
+          {% endif %}
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+  {% set _claimed_ids = _ids_ns.list %}
+
+{% endif %}
+
+{% set _sl_style = "" %}
+{% if module.style_overrides.padding_top %}{% set _sl_style = _sl_style ~ "padding-top:" ~ module.style_overrides.padding_top ~ "px;" %}{% endif %}
+{% if module.style_overrides.padding_bottom %}{% set _sl_style = _sl_style ~ "padding-bottom:" ~ module.style_overrides.padding_bottom ~ "px;" %}{% endif %}
+<section class="services-listing{% if module.style_overrides.hide_on_mobile %} services-listing--hide-mobile{% endif %}"
+         aria-labelledby="services-listing-heading"
+         {% if _sl_style %}style="{{ _sl_style }}"{% endif %}>
+
+  {# ── Section Header Card ── #}
+  <div class="services-listing__header-card">
+    {% if module.section_heading %}
+    <{{ module.heading_level | default("h2") }} class="services-listing__heading" id="services-listing-heading">
+      {{ module.section_heading | escape_html }}
+    </{{ module.heading_level | default("h2") }}>
+    {% endif %}
+    {% if module.section_description %}
+    <div class="services-listing__description">
+      {{ module.section_description }}
+    </div>
+    {% endif %}
+  </div>
+
+  {# ── Filter Row — options pre-populated from Portal Industries HubDB
+       (all industries, not just those used by current services). ── #}
+  {% if services %}
+  <div class="services-listing__filters" role="search" aria-label="Filter services">
+
+    <div class="services-listing__filter-group">
+      <label class="services-listing__filter-label" for="services-category-filter">
+        {{ module.category_filter_label | escape_html }}
+      </label>
+      <div class="services-listing__filter-pill-wrap">
+        <select class="services-listing__filter-select"
+                id="services-category-filter"
+                aria-label="{{ module.category_filter_label | escape_attr }}">
+          <option value="">{{ module.category_filter_placeholder | escape_html }}</option>
+          {% for ind in _industry_rows %}
+            {% if ind.industry_label %}
+            <option value="{{ ind.industry_label | escape_attr }}">{{ ind.industry_label | escape_html }}</option>
+            {% endif %}
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+
+  </div>
+  {% endif %}
+
+  {# ── Service Cards Grid ── #}
+  {% if services %}
+  <div class="services-listing__grid" id="services-grid" role="list" aria-label="Available services">
+
+    {% for service in services %}
+
+    {# ── Compute MIN tier level required for this card from the tier_badge
+         MULTISELECT (e.g. [Silver, Gold] → min 2 → bronze member locked).
+         If no tier badge is set, default to bronze (open to all). ── #}
+    {% set _min_tier_ns = namespace(level=1, name="bronze") %}
+    {% if service.tier_badge and (service.tier_badge | length) > 0 %}
+      {% set _min_tier_ns.level = 99 %}
+      {% for opt in service.tier_badge %}
+        {% set _opt_name = opt.name | lower %}
+        {% if _opt_name == "platinum" %}
+          {% set _lvl = 4 %}
+        {% elif _opt_name == "gold" %}
+          {% set _lvl = 3 %}
+        {% elif _opt_name == "silver" %}
+          {% set _lvl = 2 %}
+        {% else %}
+          {% set _lvl = 1 %}
+        {% endif %}
+        {% if _lvl < _min_tier_ns.level %}
+          {% set _min_tier_ns.level = _lvl %}
+          {% set _min_tier_ns.name = _opt_name %}
+        {% endif %}
+      {% endfor %}
+      {% if _min_tier_ns.level == 99 %}
+        {% set _min_tier_ns.level = 1 %}
+        {% set _min_tier_ns.name = "bronze" %}
+      {% endif %}
+    {% endif %}
+    {% set _is_locked = user_tier_level < _min_tier_ns.level %}
+
+    <article class="services-listing__card{% if _is_locked %} services-listing__card--locked{% endif %}"
+             role="listitem"
+             data-category="{% for opt in service.industry %}{{ opt.industry_label | escape_attr }}{% if not loop.last %},{% endif %}{% endfor %}"
+             data-tier="{{ _min_tier_ns.name | escape_attr }}">
+
+      {# ── Top: Icon + Industry + Name ── #}
+      <div class="services-listing__card-top">
+
+        <div class="services-listing__icon-wrap" aria-hidden="true">
+          {# Icon — `service.industry` is a FOREIGN_ID array where each entry
+             exposes the linked Portal Industries row's columns directly
+             (`.industry_label`, `.icon`). No lookup needed. #}
+          {%- set _ind = service.industry[0] if (service.industry and (service.industry | length) > 0) else none -%}
+          {% if _ind and _ind.icon and _ind.icon.url %}
+          <img class="services-listing__icon"
+               src="{{ _ind.icon.url | escape_attr }}"
+               alt=""
+               width="18"
+               height="18"
+               loading="lazy">
+          {% else %}
+          <svg class="services-listing__icon" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true" focusable="false">
+            <rect x="2" y="2" width="14" height="14" rx="3" fill="#9e9e9e"/>
+          </svg>
+          {% endif %}
+        </div>
+
+        {% if service.industry %}
+        <p class="services-listing__category">{% for opt in service.industry %}{{ opt.industry_label | escape_html }}{% if not loop.last %}, {% endif %}{% endfor %}</p>
+        {% endif %}
+
+        {% if service.name %}
+        <h3 class="services-listing__title">{{ service.name | escape_html }}</h3>
+        {% endif %}
+
+      </div>
+
+      {# ── Body: Short Description + Tier + Enquiry pill ── #}
+      <div class="services-listing__card-body">
+        {% if service.short_description %}
+        <p class="services-listing__desc">{{ service.short_description | escape_html }}</p>
+        {% endif %}
+        {# ── Tier pills.
+             When the service has tier_badge values set → render each one.
+             When no tier is picked → service is open to all, so render the
+             three regular tiers (Bronze / Silver / Gold) — Platinum omitted
+             because Platinum is the top tier and already has access to
+             everything, so listing them on every open service adds noise. #}
+        <div class="services-listing__tier">
+          {% if service.tier_badge and (service.tier_badge | length) > 0 %}
+            {% for opt in service.tier_badge %}
+            <span class="services-listing__tier-pill services-listing__tier-pill--{{ opt.name | lower | escape_attr }}">{{ opt.label | escape_html }}</span>
+            {% endfor %}
+          {% else %}
+            <span class="services-listing__tier-pill services-listing__tier-pill--bronze">Bronze</span>
+            <span class="services-listing__tier-pill services-listing__tier-pill--silver">Silver</span>
+            <span class="services-listing__tier-pill services-listing__tier-pill--gold">Gold</span>
+          {% endif %}
+        </div>
+
+        {# Claim count = how many entries in _claimed_ids match THIS card's
+           HubDB row id. `select("equalto", ...) | list | length` avoids the
+           HubL/Jinja dict-literal variable-key quirk. #}
+        {% set _enq_count = _claimed_ids | select("equalto", (service.hs_id | string)) | list | length %}
+      </div>
+
+      {# ── Tier-required notice (locked state only) — sits above the CTA so
+           members instantly see why the service is unavailable. ── #}
+      {% if _is_locked %}
+      <p class="services-listing__tier-required">
+        {{ _min_tier_ns.name | capitalize }} tier required
+      </p>
+      {% endif %}
+
+      {# ── Claim count — shown just above the CTA, only when the member
+           has claimed this service at least once. Hidden entirely on
+           zero-claim cards and on locked cards (locked already surfaces
+           the tier-required line, no need to compete for attention). ── #}
+      {% if _enq_count > 0 and not _is_locked %}
+      <p class="services-listing__claim-count">
+        {{ _enq_count }} claim{% if _enq_count != 1 %}s{% endif %}
+      </p>
+      {% endif %}
+
+      {# ── CTA Button — disabled <button> when locked, link otherwise.
+           Label switches to "Claim again" once the member has claimed
+           this service at least once. ── #}
+      {% if _is_locked %}
+      <button class="services-listing__btn services-listing__btn--locked"
+              type="button"
+              disabled
+              aria-disabled="true"
+              aria-label="{{ module.locked_button_text | default('Locked') | escape_attr }} — {{ service.name | escape_attr }}">
+        {{ module.locked_button_text | default("Locked") | escape_html }}
+      </button>
+      {% else %}
+      {# Strip any trailing slash from the base URL then always add one before
+         appending hs_path. Prevents /servicescgt-analysis when the editor
+         picks a CMS page (which returns the path without a trailing slash). #}
+      {% set _svc_href = (module.services_base_path.url.href or "/services") | regex_replace("/$", "") ~ "/" ~ service.hs_path %}
+      {% set _btn_label = "Claim again" if _enq_count > 0 else module.cta_button_text %}
+      <a href="{{ _svc_href | escape_attr }}"
+         class="services-listing__btn"
+         aria-label="{{ _btn_label | escape_attr }} — {{ service.name | escape_attr }}">
+        {{ _btn_label | escape_html }}
+      </a>
+      {% endif %}
+
+    </article>
+    {% endfor %}
+
+  </div>
+
+  {# ── Load More / Count row ── #}
+  <div class="services-listing__load-more-wrap">
+    <p class="services-listing__count" id="services-count" aria-live="polite" aria-atomic="true"></p>
+    <button class="services-listing__load-more" id="services-load-more" type="button" hidden>
+      {{ module.load_more_text | default("Load More Services") | escape_html }}
+    </button>
+  </div>
+
+  {% else %}
+  <p class="services-listing__empty">{{ module.empty_state_text | default("No services available at this time.") | escape_html }}</p>
+  {% endif %}
+
+</section>
+
+{# Pass filter placeholder config to JS via inline data #}
+<script type="application/json" id="services-filter-config">
+{"categoryPlaceholder":"{{ module.category_filter_placeholder | escape_js }}"}
+</script>

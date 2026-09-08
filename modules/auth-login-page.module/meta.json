@@ -1,0 +1,8 @@
+{
+  "global" : false,
+  "content_types" : [ "MEMBERSHIP" ],
+  "host_template_types" : [ "MEMBERSHIP" ],
+  "module_id" : 323414033851,
+  "label" : "Auth — Login Page",
+  "is_available_for_new_content" : false
+}

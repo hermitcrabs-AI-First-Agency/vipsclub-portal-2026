@@ -1,0 +1,74 @@
+/* ============================================================
+   VIPSCLUB Portal 2026 — Terms & Conditions Template CSS
+   Page-level wrapper + module-wrapper grid fixes
+   Figma reference: node 1472:5469
+   ============================================================ */
+
+.terms-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: var(--vips-page-bg, #f7f7f7);
+}
+
+/* The body region between header banner and footer.
+   Pulls UP slightly to overlap the bottom edge of the gradient banner,
+   matching how the figma shows the TOC starting just before the banner ends. */
+.terms-page__body {
+  position: relative;
+  margin-top: -24px;
+  z-index: 1;
+  flex: 1 0 auto;
+}
+
+/* The footer sits at the bottom — auto pushes it down on short pages */
+.terms-page__footer-area {
+  margin-top: auto;
+}
+
+/* ============================================================
+   HubSpot module wrapper fix
+   ------------------------------------------------------------
+   Without `display: contents`, HubSpot wraps each dnd_module in a
+   <div class="hs_cos_wrapper"> which breaks any grid/flex we'd want
+   on the page-level layout (see hubspot-expert "Gotchas" #1).
+   ============================================================ */
+.terms-page > .hs_cos_wrapper,
+.terms-page__body > .hs_cos_wrapper,
+.terms-page__header-area > .hs_cos_wrapper,
+.terms-page__footer-area > .hs_cos_wrapper {
+  display: contents;
+}
+
+/* The auto-generated dnd_area wrapper divs from HubSpot — pass them through */
+.terms-page .terms-header-dnd,
+.terms-page .terms-body-dnd,
+.terms-page .terms-footer-dnd {
+  display: contents;
+}
+
+/* ============================================================
+   Sticky TOC — clear overflow from every HubSpot wrapper.
+   position: sticky breaks if ANY ancestor has overflow:hidden/auto/scroll.
+   HubSpot's auto-generated dnd_area wrappers sometimes do. Force them visible
+   so the sticky aside can stick to the viewport, not to a wrapper's scroll
+   context. See hubspot-expert "Gotchas" — sticky-inside-dnd_area pattern.
+   ============================================================ */
+.terms-page,
+.terms-page__body,
+.terms-page__header-area,
+.terms-page__footer-area,
+.terms-page .terms-header-dnd,
+.terms-page .terms-body-dnd,
+.terms-page .terms-footer-dnd,
+.terms-page .dnd-section,
+.terms-page .dnd-column,
+.terms-page .dnd-row,
+.terms-page .row-fluid-wrapper,
+.terms-page .row-fluid,
+.terms-page [class*="span"]:not(.terms-content__toc-arrow span),
+.terms-page .hs_cos_wrapper,
+.terms-page .widget-span,
+.terms-page .widget-type-cell {
+  overflow: visible !important;
+}

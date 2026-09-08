@@ -1,0 +1,49 @@
+{# ============================================================
+   VIPSCLUB Portal 2026 — Refer Landing Hero Module
+   Public page hero — shows "You've been invited by [Name]"
+   Referrer name read from URL query param: ?refname=John+Smith
+   Figma: Desktop 374:283 | Mobile 380:4314
+   ============================================================ #}
+
+{# ── Read referrer info — CRM dynamic page first, URL params as fallback ── #}
+{# On the CRM Object dynamic page (/refer/[hash]), data comes from the member's record.     #}
+{# On a static page with ?refname=&reftier= params, the fallback values are used instead.  #}
+{% set _dyn = dynamic_page_crm_object %}
+{% set ref_name = _dyn.member_name | default(request.query_dict.refname) | default("") %}
+{% set ref_tier = _dyn.member_tier | default(request.query_dict.reftier) | default("") %}
+
+<header class="refer-landing-hero{% if module.style_overrides.hide_on_mobile %} refer-landing-hero--hide-mobile{% endif %}"
+        role="banner">
+  <div class="refer-landing-hero__inner">
+
+    {# ── Logo ── #}
+    {% if module.logo.src %}
+    <div class="refer-landing-hero__logo-wrap">
+      <img src="{{ module.logo.src | escape_attr }}"
+           alt="{{ module.logo.alt | escape_attr }}"
+           width="{{ module.logo.width | default(161) }}"
+           height="{{ module.logo.height | default(59) }}"
+           fetchpriority="high">
+      <div class="refer-landing-hero__divider" aria-hidden="true"></div>
+    </div>
+    {% endif %}
+
+    {# ── Invited-By Heading ── #}
+    <div class="refer-landing-hero__text">
+      <{{ module.heading_level | default("h1") }} class="refer-landing-hero__heading">
+        {% if ref_name %}
+          {{ module.invited_by_prefix | escape_html }}
+          <span class="refer-landing-hero__name" id="referrer-name">{{ ref_name | escape_html }}.</span>
+        {% else %}
+          <span id="referrer-name-wrap">
+            {{ module.invited_by_fallback | escape_html }}
+          </span>
+        {% endif %}
+      </{{ module.heading_level | default("h1") }}>
+      {% if module.subtitle %}
+      <p class="refer-landing-hero__subtitle">{{ module.subtitle | escape_html }}</p>
+      {% endif %}
+    </div>
+
+  </div>
+</header>

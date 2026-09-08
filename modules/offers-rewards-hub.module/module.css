@@ -1,0 +1,446 @@
+/* ============================================================
+   VIPSCLUB Portal 2026 — Offers & Rewards Hub Module
+   Figma: Desktop 339:8516 | Mobile 339:9363
+   ============================================================ */
+
+/* ── Outer section ── */
+.offers-rewards-hub {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* ── Section Header Card ── */
+.offers-rewards-hub__header-card {
+  background: var(--vips-bg-card);
+  border: 1px solid var(--vips-border-light);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card-light);
+  padding: 20px 24px;
+}
+
+.offers-rewards-hub__heading {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 46px;
+  color: var(--vips-text-primary);
+  margin: 0 0 4px;
+}
+
+.offers-rewards-hub__description {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 22px;
+  color: var(--vips-text-secondary);
+}
+
+.offers-rewards-hub__description p {
+  margin: 0;
+}
+
+/* ── Tab Bar ── */
+.offers-rewards-hub__tabs {
+  display: flex;
+  border-bottom: 1px solid var(--vips-border);
+  gap: 0;
+}
+
+.offers-rewards-hub__tab {
+  padding: 12px 24px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  color: var(--vips-text-secondary);
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color var(--transition-fast), border-color var(--transition-fast);
+  margin-bottom: -1px; /* overlap container border */
+}
+
+.offers-rewards-hub__tab:hover {
+  color: var(--vips-text-primary);
+}
+
+.offers-rewards-hub__tab.is-active {
+  color: var(--vips-text-primary);
+  border-bottom-color: var(--vips-text-primary);
+  font-weight: 600;
+}
+
+.offers-rewards-hub__tab:focus-visible {
+  outline: 2px solid var(--vips-text-primary);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* ── Filter Chips ── */
+.offers-rewards-hub__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.offers-rewards-hub__chip {
+  display: inline-flex;
+  align-items: center;
+  border-radius: var(--radius-full);
+  padding: 8px 16px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1;
+  cursor: pointer;
+  border: 1px solid var(--vips-border);
+  background: var(--vips-bg-input);
+  color: var(--vips-text-secondary);
+  white-space: nowrap;
+  transition: background-color var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.offers-rewards-hub__chip:hover {
+  background: var(--vips-border);
+  color: var(--vips-text-primary);
+}
+
+.offers-rewards-hub__chip.is-active {
+  background: var(--vips-dark);
+  color: var(--vips-bg-card);
+  border-color: var(--vips-dark);
+}
+
+.offers-rewards-hub__chip:focus-visible {
+  outline: 2px solid var(--vips-text-primary);
+  outline-offset: 2px;
+}
+
+/* ── Cards Grid ── */
+.offers-rewards-hub__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+/* ── Card ── */
+.offers-rewards-hub__card {
+  background: var(--vips-bg-card);
+  border: 1px solid var(--vips-border-light);
+  border-radius: var(--radius-lg);
+  box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.06);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  transition: border-color var(--transition-fast);
+}
+
+.offers-rewards-hub__card--locked {
+  opacity: 0.6;
+}
+
+/* Hidden via JS tab/chip filter */
+.offers-rewards-hub__card[hidden] {
+  display: none;
+}
+
+/* ── Icon ── */
+.offers-rewards-hub__icon-wrap {
+  width: 36px;
+  height: 36px;
+  background: var(--vips-bg-icon);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-bottom: 12px;
+  color: var(--vips-dark, #212121);
+}
+
+.offers-rewards-hub__icon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+/* Inline industry SVGs render at 20×20 inside the icon wrap */
+.offers-rewards-hub__icon-wrap > svg {
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+
+/* ── Expires-in line ──
+   Server-rendered as plain text by HubL (no JS). Sits between description
+   and the CTA button per figma node 419:4181. Format:
+       "Expires in 03 days"   ← regular weight + brand red on the day count
+*/
+.offers-rewards-hub__expires-line {
+  margin: 0;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--vips-text-dark, #212121);
+}
+.offers-rewards-hub__expires-days {
+  color: var(--vips-red, #a22c35);
+}
+
+/* ── Tier meta label ── */
+.offers-rewards-hub__meta {
+  margin: 0 0 8px;
+  font-family: var(--font-body);
+}
+
+/* Tier pill — matches services-listing palette so Bronze / Silver / Gold
+   render consistently across the portal. */
+.offers-rewards-hub__tier-pill {
+  display: inline-flex;
+  align-items: center;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 18px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  color: var(--vips-dark);
+  background: var(--vips-bg-icon, #f5f5f5);
+  letter-spacing: 0.2px;
+  white-space: nowrap;
+}
+.offers-rewards-hub__tier-pill--bronze   { background: #f5dfc4; color: #7a3e00; }
+.offers-rewards-hub__tier-pill--silver   { background: #e6e8ed; color: #4a5568; }
+.offers-rewards-hub__tier-pill--gold     { background: #fde68a; color: #7c4a02; }
+.offers-rewards-hub__tier-pill--platinum { background: #d9dce4; color: #37425a; }
+
+/* Expired card — dim + non-interactive. Same visual weight as --locked so
+   both disabled states feel consistent. Tier pills stay on the card (they
+   describe *who this was for*, still useful info). Button gets not-allowed
+   cursor + "Expired" label from HubL. */
+.offers-rewards-hub__card--expired {
+  opacity: 0.6;
+}
+.offers-rewards-hub__btn--expired {
+  cursor: not-allowed;
+}
+
+/* Max-reached card — same disabled treatment as expired. Reached after
+   claim_count >= max_claims. */
+.offers-rewards-hub__card--max-reached,
+.offers-rewards-hub__card--not-enough {
+  opacity: 0.6;
+}
+.offers-rewards-hub__btn--max-reached,
+.offers-rewards-hub__btn--not-enough {
+  cursor: not-allowed;
+}
+
+/* Claimed state — the button is STILL clickable (the member can claim again
+   until max_claims is hit); we just distinguish it visually so they know the
+   click already went through. Subtle tick prefix works well without shifting
+   layout. Colour stays the dark CTA to signal "still actionable". */
+.offers-rewards-hub__btn--claimed::before {
+  content: "✓ ";
+  font-weight: 600;
+  margin-right: 2px;
+}
+
+/* ── Card Title ── */
+.offers-rewards-hub__card-title {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  color: var(--vips-text-primary);
+  text-transform: capitalize;
+  letter-spacing: -0.15px;
+  margin: 0 0 6px;
+}
+
+/* ── Card Description ── */
+.offers-rewards-hub__card-desc {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  color: var(--vips-text-secondary);
+  margin: 0 0 12px;
+  flex: 1;
+}
+
+/* ── Points Cost ── */
+.offers-rewards-hub__points {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--vips-text-primary);
+  margin: 0 0 4px;
+}
+
+.offers-rewards-hub__points--locked {
+  color: var(--vips-text-secondary);
+}
+
+/* ── Tier required label (locked state) ── */
+.offers-rewards-hub__tier-required {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 16px;
+  color: var(--vips-text-secondary);
+  margin: 0 0 12px;
+}
+
+/* ── CTA Button ── */
+.offers-rewards-hub__btn {
+  display: block;
+  width: 100%;
+  background: var(--vips-dark);
+  color: var(--vips-bg-card);
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1;
+  text-align: center;
+  padding: 12px 9px;
+  border: none;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  cursor: pointer;
+  margin-top: auto;
+  transition: background-color var(--transition-fast);
+  box-sizing: border-box;
+}
+
+.offers-rewards-hub__btn:hover {
+  background: var(--vips-dark-subtle);
+  color: var(--vips-bg-card);
+  text-decoration: none;
+}
+
+.offers-rewards-hub__btn:focus-visible {
+  outline: 2px solid var(--vips-text-primary);
+  outline-offset: 2px;
+}
+
+/* Locked + Expired buttons — mirror the services-listing pattern:
+   the parent card's opacity: 0.6 handles the visual dim, so the button
+   itself only needs cursor: not-allowed. pointer-events: none stays to
+   guarantee no clicks even if a script tries to trigger one. Hover
+   collapses to defaults since the disabled feel comes from the card
+   opacity, not a custom hover state. */
+.offers-rewards-hub__btn--locked,
+.offers-rewards-hub__btn--expired,
+.offers-rewards-hub__btn--not-enough {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ── Empty State ── */
+.offers-rewards-hub__empty {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--vips-text-secondary);
+  text-align: center;
+  padding: 40px 0;
+}
+
+/* ── Mobile (≤768px) ── */
+@media (max-width: 768px) {
+
+  .offers-rewards-hub--hide-mobile {
+    display: none;
+  }
+
+  .offers-rewards-hub__header-card {
+    border-radius: 10px;
+    border-width: 0.698px;
+    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+  }
+
+  .offers-rewards-hub__heading {
+    font-size: 22px;
+    line-height: 27.5px;
+  }
+
+  /* Filter chips: horizontal scroll on mobile */
+  .offers-rewards-hub__chips {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 4px;
+  }
+
+  .offers-rewards-hub__chips::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Cards: single column */
+  .offers-rewards-hub__grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .offers-rewards-hub__card {
+    border-radius: 10px;
+    border-width: 0.698px;
+    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Mobile locked + expired — mirror services-listing pattern:
+     reset the card opacity so mobile can render at full colour, dim
+     the border, and colour the button explicitly (grey). Applies to
+     both locked and expired states so they read identically. */
+  .offers-rewards-hub__card--locked,
+  .offers-rewards-hub__card--expired {
+    opacity: 1;
+    border-color: var(--vips-border);
+  }
+
+  .offers-rewards-hub__card--locked .offers-rewards-hub__btn--locked,
+  .offers-rewards-hub__card--expired .offers-rewards-hub__btn--expired {
+    background: var(--vips-border);
+    color: var(--vips-text-muted);
+  }
+
+  .offers-rewards-hub__card--locked .offers-rewards-hub__tier-required {
+    color: var(--vips-text-muted);
+  }
+
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .offers-rewards-hub__tab,
+  .offers-rewards-hub__chip,
+  .offers-rewards-hub__card,
+  .offers-rewards-hub__btn {
+    transition: none;
+  }
+}
+
+/* ── Per-instance style overrides ── */
+{% if module.style_overrides.background_color.color %}
+.offers-rewards-hub {
+  background-color: {{ module.style_overrides.background_color.color }};
+}
+{% endif %}
+
+{% if module.style_overrides.padding_top %}
+.offers-rewards-hub {
+  padding-top: {{ module.style_overrides.padding_top }}px;
+}
+{% endif %}
+
+{% if module.style_overrides.padding_bottom %}
+.offers-rewards-hub {
+  padding-bottom: {{ module.style_overrides.padding_bottom }}px;
+}
+{% endif %}

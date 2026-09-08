@@ -1,0 +1,695 @@
+/* ============================================================
+   VIPSCLUB Portal 2026 — Auth Pages (Login & Register)
+   Shared layout: gradient header, split card (photo + form)
+   Figma: Login 183:1393 / Login Mobile 337:3457
+          Sign Up 190:1692 / Sign Up Mobile 337:3415
+   ============================================================ */
+
+/* ── DnD wrapper reset — neutralise HubSpot section constraints on auth pages ── */
+.auth-page-area,
+.auth-page-area .dnd-section,
+.auth-page-area .dnd-section-content,
+.auth-page-area .dnd-column,
+.auth-page-area .dnd-row,
+.auth-page-area [class*="hs_cos_wrapper"] {
+  max-width: 100% !important;
+  width: 100% !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+/* ── Page wrapper ── */
+.auth-page {
+  min-height: 100vh;
+  background-color: var(--vips-bg-page);
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Gradient header banner ── */
+.auth-page__header {
+  position: relative;
+  height: 434px; /* login default */
+  background: var(--vips-red-gradient);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 110px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+/* Register variant: taller header, slightly different gradient angle */
+.auth-page--register .auth-page__header {
+  height: 570px;
+  background: linear-gradient(158.58deg, var(--vips-black) 36.19%, var(--vips-red) 66.10%);
+}
+
+/* Logo centred in header */
+.auth-page__logo {
+  width: 161px;
+  height: 59px;
+  display: block;
+  flex-shrink: 0;
+  object-fit: contain;
+}
+
+/* ── Body: contains the split card ──
+   Negative margin pulls it up into the header (card starts at 216px from page top)
+   Login:   header 434px − card top 216px = 218px overlap
+   Register: header 570px − card top 216px = 354px overlap            */
+.auth-page__body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: -218px;
+  padding-bottom: 40px;
+  position: relative;
+  z-index: 2;
+}
+
+.auth-page--register .auth-page__body {
+  margin-top: -354px;
+}
+
+/* ── The dual-panel card: photo (left) + form (right) ── */
+.auth-page__card {
+  display: flex;
+  width: 815px;
+  max-width: calc(100% - 48px);
+}
+
+/* Left: architectural photo */
+.auth-page__card-photo {
+  width: 420px;
+  flex-shrink: 0;
+  object-fit: cover;
+  border-radius: 12px 0 0 12px; /* auth card specific */
+  display: block;
+}
+
+/* Right: white form panel */
+.auth-page__card-form {
+  width: 395px;
+  flex-shrink: 0;
+  background: var(--vips-bg-card);
+  border-radius: 0 12px 12px 0; /* auth card specific */
+  box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.15);
+  padding: 32px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Form heading area ── */
+.auth-form__header {
+  margin-bottom: 28px;
+}
+
+.auth-form__heading {
+  font-family: var(--font-heading);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--vips-text-primary);
+  line-height: 36px;
+  margin: 0 0 8px;
+}
+
+/* Register: heading is SemiBold 32px, slightly darker */
+.auth-page--register .auth-form__heading {
+  font-size: 32px;
+  font-weight: 600;
+  color: var(--vips-dark-overlay);
+  line-height: 40px;
+}
+
+.auth-form__subtitle {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--vips-text-secondary);
+  line-height: 21px;
+  margin: 0;
+}
+
+.auth-page--register .auth-form__subtitle {
+  color: var(--vips-text-light);
+  line-height: 20px;
+}
+
+/* ── OR divider between login sections ── */
+.auth-form__or-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 16px 0 8px;
+}
+
+.auth-form__or-text {
+  font-family: var(--font-heading);
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--vips-text-primary);
+}
+
+/* ── Magic link description text ── */
+.auth-form__magic-desc {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--vips-text-secondary);
+  line-height: 21px;
+  text-align: center;
+  margin: 0 0 16px;
+}
+
+/* ── Sign up / Sign in footer link ── */
+.auth-form__footer-link {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--vips-text-secondary);
+  text-align: center;
+  margin-top: 20px;
+}
+
+.auth-form__footer-link a {
+  font-weight: 700;
+  color: var(--vips-red);
+  text-decoration: none;
+}
+
+.auth-form__footer-link a:hover {
+  text-decoration: underline;
+}
+
+/* ── Page footer: copyright + privacy ── */
+.auth-page__footer {
+  text-align: center;
+  padding: 32px 24px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--vips-text-light);
+  line-height: 21px;
+}
+
+.auth-page__footer a {
+  color: var(--vips-text-light);
+  text-decoration: underline;
+}
+
+.auth-page__footer a:hover {
+  color: var(--vips-dark);
+}
+
+/* ── HubSpot form: reset <ul>/<li> bullet points ──
+   HubSpot renders .hs-form-field wrappers and .hs-error-msgs
+   inside <ul>/<li> in some portal configurations.            */
+.auth-page__card-form ul,
+.auth-page__card-form li {
+  list-style: none;
+  padding-left: 0;
+  margin-left: 0;
+}
+
+/* ── Fieldset: remove browser default border/padding ── */
+.auth-page__card-form fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+}
+
+/* ── .input wrapper: ensure inputs fill their column ── */
+.auth-page__card-form .input {
+  display: block;
+  width: 100%;
+}
+
+.auth-page__card-form .hs-input {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* ── HubSpot {% member_login %} form overrides ──
+   HubSpot renders: .membership-login-form > form
+   with .hs-form-field, input[type], .hs-button etc.         */
+
+/* Input fields — login form */
+.auth-page__card-form input[type="email"],
+.auth-page__card-form input[type="password"],
+.auth-page__card-form input[type="text"],
+.auth-page__card-form input[type="tel"],
+.auth-page__card-form input[type="date"] {
+  width: 100%;
+  height: 47px;
+  border: 1px solid var(--vips-border-input);
+  border-radius: var(--radius-lg);
+  padding: 12px 16px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--vips-text-primary);
+  background: var(--vips-bg-card);
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color var(--transition-fast);
+  display: block;
+}
+
+.auth-page__card-form input:focus {
+  border-color: var(--vips-red);
+}
+
+.auth-page__card-form input::placeholder {
+  color: rgba(33, 33, 33, 0.5);
+}
+
+/* Field labels */
+.auth-page__card-form label,
+.auth-page__card-form .hs-form-field > label {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--vips-text-primary);
+  display: block;
+  margin-bottom: 8px;
+  line-height: 21px;
+}
+
+/* Field wrapper spacing */
+.auth-page__card-form .hs-form-field {
+  margin-bottom: 20px;
+}
+
+/* Submit button — login */
+.auth-page__card-form .hs-button,
+.auth-page__card-form .hs-button.primary,
+.auth-page__card-form input[type="submit"] {
+  width: 100%;
+  height: 48px;
+  background-color: var(--vips-red);
+  color: var(--vips-bg-card);
+  border: none;
+  border-radius: var(--radius-lg);
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity var(--transition-fast);
+  display: block;
+  text-align: center;
+}
+
+.auth-page__card-form .hs-button:hover,
+.auth-page__card-form input[type="submit"]:hover {
+  opacity: 0.9;
+  color: var(--vips-bg-card);
+}
+
+/* Remember Me + Forgot Password row */
+.auth-page__card-form .hs_remember_me,
+.auth-page__card-form .membership-login-remember {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.auth-page__card-form .hs-forgot-password,
+.auth-page__card-form a.hs-forgot-password {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--vips-red);
+  text-decoration: none;
+}
+
+/* Error messages.
+   NOTE: do NOT style .hs-main-font-element here — HubSpot puts that same class
+   on the success/thank-you message, which made the confirmation render red. */
+.auth-page__card-form .hs-error-msgs {
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: #d32f2f;
+  margin-top: 4px;
+}
+
+/* Success / thank-you response message — normal color, not red */
+.auth-page__card-form .submitted-message,
+.auth-page__card-form .hs-form__response,
+.auth-page__card-form .submitted-message.hs-main-font-element {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--vips-dark);
+}
+
+/* ── HubSpot {% form %} overrides — Register form ── */
+/* Register form inputs are slightly smaller per Figma */
+.auth-page--register .auth-page__card-form input[type="email"],
+.auth-page--register .auth-page__card-form input[type="text"],
+.auth-page--register .auth-page__card-form input[type="tel"],
+.auth-page--register .auth-page__card-form input[type="date"] {
+  height: 43px;
+  border-color: var(--vips-border);
+  border-radius: var(--radius-md);
+  padding: 10px 16px;
+}
+
+/* Register submit button */
+.auth-page--register .auth-page__card-form .hs-button.primary,
+.auth-page--register .auth-page__card-form input[type="submit"] {
+  height: 46.5px;
+  border-radius: var(--radius-md);
+  font-size: 15px;
+  font-weight: 600;
+}
+
+/* Register label font — Montserrat Medium */
+.auth-page--register .auth-page__card-form label,
+.auth-page--register .auth-page__card-form .hs-form-field > label {
+  font-family: var(--font-heading);
+  font-weight: 500;
+}
+
+/* ── HubSpot fieldset column wrappers ──
+   HubSpot injects float-based layout on fieldset.form-columns-N.
+   Override with flexbox so columns stay within the card width.  */
+.auth-page__card-form fieldset.form-columns-1,
+.auth-page__card-form fieldset.form-columns-2 {
+  width: 100% !important;
+  max-width: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: none !important;
+  float: none !important;
+  clear: both !important;
+  box-sizing: border-box !important;
+}
+
+/* Single-column rows: field fills full width */
+.auth-page__card-form fieldset.form-columns-1 .hs-form-field {
+  width: 100% !important;
+  float: none !important;
+  margin-right: 0 !important;
+}
+
+/* Two-column rows: flex so both halves equal and stay inside card */
+.auth-page__card-form fieldset.form-columns-2 {
+  display: flex !important;
+  gap: 16px !important;
+}
+
+.auth-page__card-form fieldset.form-columns-2 .hs-form-field {
+  flex: 1 1 0 !important;
+  width: auto !important;
+  float: none !important;
+  min-width: 0 !important;
+  margin-right: 0 !important;
+}
+
+/* Fallback: if HubSpot renders without fieldsets, use class-based selectors */
+.auth-page--register .auth-page__card-form .hs_firstname,
+.auth-page--register .auth-page__card-form .hs_lastname {
+  display: block;
+}
+
+/* ── Custom Checkbox ──
+   HubSpot renders: <label class="hs-form-booleancheckbox-display">
+                      <input type="checkbox"> <span>I agree...</span>
+                    </label>
+   We hide the native checkbox and draw a custom one via appearance:none.  */
+
+/* Checkbox label: flex so the box and text sit side by side */
+.auth-page__card-form .hs-form-booleancheckbox-display,
+.auth-page__card-form .legal-consent-container label,
+.auth-page__card-form .inputs-list label {
+  display: flex !important;
+  align-items: flex-start !important;
+  gap: 10px !important;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--vips-text-secondary);
+  line-height: 1.5;
+}
+
+/* Hide the legal consent heading label (the one above the checkbox) */
+.auth-page__card-form .hs-form-field.hs_LEGAL_CONSENT > label {
+  display: none !important;
+}
+
+/* Custom checkbox — replace native with styled box */
+.auth-page__card-form input[type="checkbox"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  min-width: 18px;
+  border: 1.5px solid var(--vips-border);
+  border-radius: 4px;
+  background: #ffffff;
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  margin: 2px 0 0;
+  flex-shrink: 0;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.auth-page__card-form input[type="checkbox"]:checked {
+  background-color: var(--vips-red);
+  border-color: var(--vips-red);
+}
+
+/* White checkmark via ::after */
+.auth-page__card-form input[type="checkbox"]::after {
+  content: '';
+  position: absolute;
+  display: none;
+  left: 5px;
+  top: 2px;
+  width: 5px;
+  height: 9px;
+  border: 2px solid #ffffff;
+  border-top: none;
+  border-left: none;
+  transform: rotate(45deg);
+}
+
+.auth-page__card-form input[type="checkbox"]:checked::after {
+  display: block;
+}
+
+.auth-page__card-form input[type="checkbox"]:focus-visible {
+  outline: 3px solid var(--vips-red);
+  outline-offset: 2px;
+}
+
+.auth-page__card-form .legal-consent-container a,
+.auth-page__card-form .hs-form .legal-consent-container a {
+  color: var(--vips-red);
+  text-decoration: underline;
+}
+
+/* ============================================================
+   MOBILE — max-width 768px
+   Header shrinks to 112px, card sits BELOW header (no overlap)
+   Photo panel hidden, card has full border-radius
+   ============================================================ */
+@media (max-width: 768px) {
+  .auth-page__header,
+  .auth-page--register .auth-page__header {
+    height: 112px;
+    padding-top: 32px;
+    background: linear-gradient(164.13deg, var(--vips-black) 0%, var(--vips-red) 50%);
+  }
+
+  .auth-page__logo {
+    width: 131px;
+    height: 48px;
+  }
+
+  /* Remove negative margin — card sits 32px below header */
+  .auth-page__body,
+  .auth-page--register .auth-page__body {
+    margin-top: 0;
+    padding-top: 32px;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-bottom: 40px;
+  }
+
+  .auth-page__card {
+    flex-direction: column;
+    width: 100%;
+    max-width: 362px;
+  }
+
+  /* Photo hidden on mobile */
+  .auth-page__card-photo {
+    display: none;
+  }
+
+  /* Form card: full border-radius, deeper shadow on mobile */
+  .auth-page__card-form {
+    width: 100%;
+    border-radius: 14px; /* auth card specific */
+    padding: 24px;
+    box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.1), 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Mobile heading sizes */
+  .auth-form__heading {
+    font-size: 28px;
+  }
+
+  .auth-page--register .auth-form__heading {
+    font-size: 24px;
+    line-height: 32px;
+  }
+
+  /* Register: inputs and button use radius-8 on mobile */
+  .auth-page--register .auth-page__card-form input[type="email"],
+  .auth-page--register .auth-page__card-form input[type="text"],
+  .auth-page--register .auth-page__card-form input[type="tel"],
+  .auth-page--register .auth-page__card-form input[type="date"] {
+    height: 41.4px;
+    border-radius: var(--radius-lg);
+  }
+
+  .auth-page--register .auth-page__card-form .hs-button.primary,
+  .auth-page--register .auth-page__card-form input[type="submit"] {
+    border-radius: var(--radius-lg);
+  }
+
+  /* Stack 2-col fieldset vertically on mobile */
+  .auth-page__card-form fieldset.form-columns-2 {
+    flex-direction: column !important;
+    gap: 0 !important;
+  }
+
+  .auth-page__card-form fieldset.form-columns-2 .hs-form-field {
+    width: 100% !important;
+  }
+
+  .auth-page__footer {
+    font-size: 12px;
+    padding: 24px 16px;
+    line-height: 16px;
+  }
+}
+
+/* ── Centered-card variant (no photo) — Sign Out, Access Denied ──
+   Card is a single white panel, no photo split.                    */
+.auth-page__card--centered {
+  flex-direction: column;
+  width: 800px;
+  background: var(--vips-bg-card);
+  border-radius: 12px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+  padding: 32px;
+  box-sizing: border-box;
+}
+
+.auth-page__card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  width: 100%;
+}
+
+.auth-page__card-text-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+  width: 100%;
+}
+
+.auth-page__card-heading {
+  font-family: var(--font-heading);
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 40px;
+  color: #1a1a1a;
+  text-align: center;
+  margin: 0;
+}
+
+.auth-page__card-subtitle {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 24px;
+  color: #757575;
+  text-align: center;
+  margin: 0;
+}
+
+.auth-page__card-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 331px;
+  height: 46.5px;
+  background-color: var(--vips-red);
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 22.5px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: opacity var(--transition-fast);
+  text-align: center;
+  white-space: nowrap;
+}
+
+.auth-page__card-btn:hover {
+  opacity: 0.9;
+  color: #ffffff;
+}
+
+.auth-page__card-link {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 21px;
+  color: #757575;
+  text-align: center;
+  text-decoration: none;
+}
+
+.auth-page__card-link:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .auth-page__card--centered {
+    width: 100%;
+    max-width: 362px;
+    padding: 24px;
+  }
+
+  .auth-page__card-btn {
+    width: 100%;
+    max-width: 331px;
+  }
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .auth-page *,
+  .auth-page *::before,
+  .auth-page *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

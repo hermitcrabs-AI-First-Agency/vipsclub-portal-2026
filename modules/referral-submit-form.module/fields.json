@@ -1,0 +1,169 @@
+[ {
+  "id" : "service_meta_label",
+  "name" : "service_meta_label",
+  "label" : "Service Meta Label (SD4)",
+  "help_text" : "Label prefix for the service meta block shown ABOVE the form when the member arrives via a service detail page (URL has ?service=<hubdb_row_id>). Blank on all other referrals.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Service:"
+}, {
+  "id" : "service_context_description",
+  "name" : "service_context_description",
+  "label" : "Service-Context Description (SD4)",
+  "help_text" : "Alternate description shown IN PLACE of the default description when the member arrived from a service detail page. Client-provided copy — leave as default or edit anytime.",
+  "required" : false,
+  "locked" : false,
+  "type" : "richtext",
+  "display_width" : null,
+  "default" : "<p>Refer them directly to this service and we'll help them get started. You'll be able to track the referral in My Referrals and may earn points or discounts for this service for both yourself and your referee if they proceed.</p>"
+}, {
+  "id" : "heading",
+  "name" : "heading",
+  "label" : "Form Heading",
+  "help_text" : "Heading shown above the form card.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Submit a referral"
+}, {
+  "id" : "heading_level",
+  "name" : "heading_level",
+  "label" : "Heading Level",
+  "help_text" : "Controls the HTML heading tag. Use H1 only once per page for the main title.",
+  "required" : false,
+  "locked" : false,
+  "display" : "select",
+  "choices" : [ [ "h1", "H1 — Page Title" ], [ "h2", "H2 — Section" ], [ "h3", "H3 — Subsection" ], [ "h4", "H4" ] ],
+  "multiple" : false,
+  "reordering_enabled" : true,
+  "preset" : null,
+  "type" : "choice",
+  "display_width" : null,
+  "default" : "h2"
+}, {
+  "id" : "description",
+  "name" : "description",
+  "label" : "Form Description (optional)",
+  "help_text" : "Optional description shown below the heading, inside the card.",
+  "required" : false,
+  "locked" : false,
+  "type" : "richtext",
+  "display_width" : null,
+  "default" : ""
+}, {
+  "id" : "form",
+  "name" : "form",
+  "label" : "Referral Form",
+  "help_text" : "Select the referral submission form. Create it first in HubSpot Marketing > Forms.",
+  "required" : false,
+  "locked" : false,
+  "type" : "form",
+  "display_width" : null,
+  "default" : {
+    "form_id" : "cf5ab7cd-0f3a-42fa-961c-770ab5c3e2a6",
+    "response_type" : "inline",
+    "message" : "Thank you! Your referral has been submitted."
+  }
+}, {
+  "id" : "style_overrides",
+  "name" : "style_overrides",
+  "label" : "Style Overrides",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "style_overrides.background_color",
+    "name" : "background_color",
+    "label" : "Background Color",
+    "help_text" : "Leave empty to use theme default",
+    "required" : false,
+    "locked" : false,
+    "type" : "color",
+    "display_width" : null,
+    "default" : {
+      "color" : null,
+      "opacity" : 100
+    }
+  }, {
+    "id" : "style_overrides.padding_top",
+    "name" : "padding_top",
+    "label" : "Padding Top (px)",
+    "help_text" : "Leave empty to use default spacing",
+    "required" : false,
+    "locked" : false,
+    "display" : "text",
+    "step" : 1,
+    "type" : "number",
+    "display_width" : null
+  }, {
+    "id" : "style_overrides.padding_bottom",
+    "name" : "padding_bottom",
+    "label" : "Padding Bottom (px)",
+    "help_text" : "Leave empty to use default spacing",
+    "required" : false,
+    "locked" : false,
+    "display" : "text",
+    "step" : 1,
+    "type" : "number",
+    "display_width" : null
+  }, {
+    "id" : "style_overrides.hide_on_mobile",
+    "name" : "hide_on_mobile",
+    "label" : "Hide on Mobile",
+    "help_text" : "Toggle to hide this module on mobile devices.",
+    "required" : false,
+    "locked" : false,
+    "display" : "checkbox",
+    "type" : "boolean",
+    "display_width" : null,
+    "default" : false
+  }, {
+    "id" : "style_overrides.text_color",
+    "name" : "text_color",
+    "label" : "Text Color",
+    "help_text" : "Override the default text color for this module instance. Leave empty for theme default.",
+    "required" : false,
+    "locked" : false,
+    "type" : "color",
+    "display_width" : null,
+    "default" : {
+      "color" : null,
+      "opacity" : 100
+    }
+  }, {
+    "id" : "style_overrides.content_width",
+    "name" : "content_width",
+    "label" : "Content Width",
+    "help_text" : "Control the maximum width of this module's content.",
+    "required" : false,
+    "locked" : false,
+    "display" : "select",
+    "choices" : [ [ "default", "Default" ], [ "narrow", "Narrow" ], [ "wide", "Wide" ], [ "full", "Full Width" ] ],
+    "multiple" : false,
+    "reordering_enabled" : true,
+    "preset" : null,
+    "type" : "choice",
+    "display_width" : null,
+    "default" : "default"
+  }, {
+    "id" : "style_overrides.hide_on_desktop",
+    "name" : "hide_on_desktop",
+    "label" : "Hide on Desktop",
+    "help_text" : "Toggle to hide this module on desktop viewports.",
+    "required" : false,
+    "locked" : false,
+    "display" : "checkbox",
+    "type" : "boolean",
+    "display_width" : null,
+    "default" : false
+  } ],
+  "tab" : "STYLE",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null
+} ]

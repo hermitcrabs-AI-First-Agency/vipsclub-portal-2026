@@ -1,0 +1,154 @@
+[
+  {
+    "id": "greeting_prefix",
+    "name": "greeting_prefix",
+    "label": "Greeting",
+    "help_text": "Word before the member's first name, e.g. \"Hi\" → \"Hi Jane,\".",
+    "required": false,
+    "locked": false,
+    "allow_new_line": false,
+    "type": "text",
+    "default": "Hi"
+  },
+  {
+    "id": "firstname_fallback",
+    "name": "firstname_fallback",
+    "label": "First Name Fallback",
+    "help_text": "Shown when the referred member has no first name on file.",
+    "required": false,
+    "locked": false,
+    "allow_new_line": false,
+    "type": "text",
+    "default": "there"
+  },
+  {
+    "id": "referrer_fallback",
+    "name": "referrer_fallback",
+    "label": "Referrer Name Fallback",
+    "help_text": "Used in place of {referrer} when the referrer_name property is empty.",
+    "required": false,
+    "locked": false,
+    "allow_new_line": false,
+    "type": "text",
+    "default": "A VIPSCLUB member"
+  },
+  {
+    "id": "intro_line",
+    "name": "intro_line",
+    "label": "Intro Line",
+    "help_text": "Opening sentence. Use {referrer} where the referrer's name should appear (from referrer_name; falls back to the value above).",
+    "required": false,
+    "locked": false,
+    "allow_new_line": false,
+    "type": "text",
+    "default": "{referrer} thought you might be interested in one of our services and has referred you through VIPSCLUB."
+  },
+  {
+    "id": "recommended_label",
+    "name": "recommended_label",
+    "label": "Recommended Service Label",
+    "help_text": "Small heading above the recommended service. Only shown when a service was referred.",
+    "required": false,
+    "locked": false,
+    "allow_new_line": false,
+    "type": "text",
+    "default": "Recommended service"
+  },
+  {
+    "id": "message_label",
+    "name": "message_label",
+    "label": "Message Label",
+    "help_text": "Optional small heading above the referrer's message. Leave empty to show just the quote.",
+    "required": false,
+    "locked": false,
+    "allow_new_line": false,
+    "type": "text",
+    "default": ""
+  },
+  {
+    "id": "member_line",
+    "name": "member_line",
+    "label": "Already-a-Member Line",
+    "help_text": "Explains they don't need to sign up — just log in to view the service.",
+    "required": false,
+    "locked": false,
+    "allow_new_line": false,
+    "type": "text",
+    "default": "As you're already a VIPSCLUB member, there's nothing you need to sign up for — simply log in to your portal to learn more, or submit an enquiry if you'd like to discuss this service with our team."
+  },
+  {
+    "id": "button_text",
+    "name": "button_text",
+    "label": "Button Text",
+    "help_text": "Call-to-action button label. Leave empty to hide the button.",
+    "required": false,
+    "locked": false,
+    "allow_new_line": false,
+    "type": "text",
+    "default": "View service"
+  },
+  {
+    "id": "button_url_fallback",
+    "name": "button_url_fallback",
+    "label": "Button Fallback Link",
+    "help_text": "Used only when no specific service was referred. Otherwise the button links to the referred service automatically.",
+    "required": false,
+    "locked": false,
+    "supported_types": ["EXTERNAL", "CONTENT", "EMAIL_ADDRESS"],
+    "type": "link",
+    "default": {
+      "url": {
+        "href": "https://www.vipsclub.com.au/services-catalogue",
+        "type": "EXTERNAL"
+      },
+      "open_in_new_tab": false,
+      "no_follow": false
+    }
+  },
+  {
+    "id": "closing_line",
+    "name": "closing_line",
+    "label": "Closing Line",
+    "help_text": "Warm closing sentence above the sign-off.",
+    "required": false,
+    "locked": false,
+    "allow_new_line": false,
+    "type": "text",
+    "default": "Thanks again for being part of VIPSCLUB. We look forward to helping you with your next step."
+  },
+  {
+    "id": "signoff",
+    "name": "signoff",
+    "label": "Sign-off",
+    "help_text": "Closing line, e.g. \"Kind regards,\".",
+    "required": false,
+    "locked": false,
+    "allow_new_line": false,
+    "type": "text",
+    "default": "Kind regards,"
+  },
+  {
+    "id": "team_name",
+    "name": "team_name",
+    "label": "Team Name",
+    "help_text": "Sender name shown under the sign-off.",
+    "required": false,
+    "locked": false,
+    "allow_new_line": false,
+    "type": "text",
+    "default": "The VIPSCLUB Team"
+  },
+  {
+    "id": "accent_color",
+    "name": "accent_color",
+    "label": "Accent Color",
+    "help_text": "Brand colour for the service link, message bar, and button. Defaults to VIPSCLUB red.",
+    "required": false,
+    "locked": false,
+    "type": "color",
+    "default": {
+      "color": "#a22c35",
+      "opacity": 100
+    }
+  }
+]

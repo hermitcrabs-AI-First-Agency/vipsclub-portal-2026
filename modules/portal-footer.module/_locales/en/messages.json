@@ -1,0 +1,237 @@
+{
+  "copyright_text.default" : {
+    "message" : "Copyright VIPS Club. All Rights Reserved",
+    "description" : "",
+    "placeholders" : null
+  },
+  "copyright_text.help_text" : {
+    "message" : "Copyright notice shown in the footer. The year symbol is added automatically.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "copyright_text.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "copyright_text.label" : {
+    "message" : "Copyright Text",
+    "description" : "",
+    "placeholders" : null
+  },
+  "copyright_text.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "copyright_text.validation_regex" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "name" : {
+    "message" : "portal-footer",
+    "description" : "",
+    "placeholders" : null
+  },
+  "privacy_label.default" : {
+    "message" : "Privacy Policy",
+    "description" : "",
+    "placeholders" : null
+  },
+  "privacy_label.help_text" : {
+    "message" : "Text for the privacy policy link.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "privacy_label.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "privacy_label.label" : {
+    "message" : "Privacy Link Text",
+    "description" : "",
+    "placeholders" : null
+  },
+  "privacy_label.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "privacy_label.validation_regex" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "privacy_url.default" : {
+    "message" : "/privacy-policy",
+    "description" : "",
+    "placeholders" : null
+  },
+  "privacy_url.help_text" : {
+    "message" : "URL for the privacy policy page.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "privacy_url.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "privacy_url.label" : {
+    "message" : "Privacy Policy URL",
+    "description" : "",
+    "placeholders" : null
+  },
+  "privacy_url.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "privacy_url.validation_regex" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.background_color.help_text" : {
+    "message" : "Leave empty to use theme default",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.background_color.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.background_color.label" : {
+    "message" : "Background Color",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.background_color.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.content_width.choices.default" : {
+    "message" : "Default",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.content_width.choices.full" : {
+    "message" : "Full Width",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.content_width.choices.narrow" : {
+    "message" : "Narrow",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.content_width.choices.wide" : {
+    "message" : "Wide",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.content_width.help_text" : {
+    "message" : "Control the maximum width of this module's content.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.content_width.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.content_width.label" : {
+    "message" : "Content Width",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.content_width.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.hide_on_desktop.help_text" : {
+    "message" : "Toggle to hide this module on desktop viewports.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.hide_on_desktop.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.hide_on_desktop.label" : {
+    "message" : "Hide on Desktop",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.hide_on_desktop.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.hide_on_mobile.help_text" : {
+    "message" : "Toggle to hide the footer on mobile devices.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.hide_on_mobile.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.hide_on_mobile.label" : {
+    "message" : "Hide on Mobile",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.hide_on_mobile.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.label" : {
+    "message" : "Style Overrides",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.text_color.help_text" : {
+    "message" : "Override the default text color for this module instance. Leave empty for theme default.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.text_color.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.text_color.label" : {
+    "message" : "Text Color",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.text_color.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  }
+}

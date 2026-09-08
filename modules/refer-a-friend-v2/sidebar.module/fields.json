@@ -1,0 +1,219 @@
+[ {
+  "id" : "mobile_menu_title",
+  "name" : "mobile_menu_title",
+  "label" : "Mobile Menu Title",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Menu"
+}, {
+  "id" : "mobile_close_label",
+  "name" : "mobile_close_label",
+  "label" : "Mobile Close Label",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Close menu"
+}, {
+  "id" : "nav_items",
+  "name" : "nav_items",
+  "label" : "Navigation Items",
+  "required" : false,
+  "locked" : false,
+  "occurrence" : {
+    "min" : 1,
+    "max" : 10,
+    "sorting_label_field" : "nav_label",
+    "default" : 5
+  },
+  "children" : [ {
+    "id" : "nav_items.nav_label",
+    "name" : "nav_label",
+    "label" : "Label",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Nav Item"
+  }, {
+    "id" : "nav_items.nav_url",
+    "name" : "nav_url",
+    "label" : "URL",
+    "help_text" : "Use a relative portal path or full URL.",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "#"
+  }, {
+    "id" : "nav_items.icon_svg",
+    "name" : "icon_svg",
+    "label" : "Icon SVG Code",
+    "help_text" : "Optional decorative SVG rendered before the label.",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : ""
+  }, {
+    "id" : "nav_items.chevron_text",
+    "name" : "chevron_text",
+    "label" : "Chevron Text",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : ">"
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : [ {
+    "nav_label" : "Dashboard",
+    "nav_url" : "/dashboard",
+    "chevron_text" : ">"
+  }, {
+    "nav_label" : "Services",
+    "nav_url" : "/services-catalogue",
+    "chevron_text" : ">"
+  }, {
+    "nav_label" : "Offers & Rewards",
+    "nav_url" : "/offers-rewards",
+    "chevron_text" : ">"
+  }, {
+    "nav_label" : "My Account",
+    "nav_url" : "/my-account",
+    "chevron_text" : ">"
+  }, {
+    "nav_label" : "My referrals",
+    "nav_url" : "/refer-a-friend-v2",
+    "chevron_text" : ">"
+  } ]
+}, {
+  "id" : "tier_bg_image",
+  "name" : "tier_bg_image",
+  "label" : "Tier Card Background",
+  "required" : false,
+  "locked" : false,
+  "responsive" : false,
+  "resizable" : true,
+  "show_loading" : false,
+  "type" : "image",
+  "display_width" : null,
+  "default" : {
+    "src" : "",
+    "alt" : "",
+    "width" : 292,
+    "height" : 270
+  }
+}, {
+  "id" : "tier_heading_label",
+  "name" : "tier_heading_label",
+  "label" : "Tier Heading",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Member tier"
+}, {
+  "id" : "next_tier_label",
+  "name" : "next_tier_label",
+  "label" : "Next Tier Label",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Next Tier:"
+}, {
+  "id" : "current_points_label",
+  "name" : "current_points_label",
+  "label" : "Current Points Label",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Current points"
+}, {
+  "id" : "for_tier_label",
+  "name" : "for_tier_label",
+  "label" : "Target Points Label",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "For"
+}, {
+  "id" : "tier_suffix",
+  "name" : "tier_suffix",
+  "label" : "Tier Suffix",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "tier"
+}, {
+  "id" : "more_points_label",
+  "name" : "more_points_label",
+  "label" : "More Points Label",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "more points"
+}, {
+  "id" : "unlock_benefits_label",
+  "name" : "unlock_benefits_label",
+  "label" : "Unlock Label",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "to unlock"
+}, {
+  "id" : "tier_benefits_suffix",
+  "name" : "tier_benefits_suffix",
+  "label" : "Benefits Suffix",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "tier benefits"
+}, {
+  "id" : "logout_label",
+  "name" : "logout_label",
+  "label" : "Logout Label",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "LOGOUT"
+}, {
+  "id" : "logout_url",
+  "name" : "logout_url",
+  "label" : "Logout URL",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "/memberships/logout"
+} ]

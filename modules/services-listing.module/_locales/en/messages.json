@@ -1,0 +1,512 @@
+{
+  "category_filter_label.default" : {
+    "message" : "Category",
+    "description" : "",
+    "placeholders" : null
+  },
+  "category_filter_label.help_text" : {
+    "message" : "Label above the Category dropdown",
+    "description" : "",
+    "placeholders" : null
+  },
+  "category_filter_label.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "category_filter_label.label" : {
+    "message" : "Category Filter Label",
+    "description" : "",
+    "placeholders" : null
+  },
+  "category_filter_label.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "category_filter_label.validation_regex" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "category_filter_placeholder.default" : {
+    "message" : "Select a Category",
+    "description" : "",
+    "placeholders" : null
+  },
+  "category_filter_placeholder.help_text" : {
+    "message" : "Default option shown in Category dropdown",
+    "description" : "",
+    "placeholders" : null
+  },
+  "category_filter_placeholder.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "category_filter_placeholder.label" : {
+    "message" : "Category Placeholder Text",
+    "description" : "",
+    "placeholders" : null
+  },
+  "category_filter_placeholder.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "category_filter_placeholder.validation_regex" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "cta_button_text.default" : {
+    "message" : "Get a quote",
+    "description" : "",
+    "placeholders" : null
+  },
+  "cta_button_text.help_text" : {
+    "message" : "Button text shown on unlocked service cards",
+    "description" : "",
+    "placeholders" : null
+  },
+  "cta_button_text.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "cta_button_text.label" : {
+    "message" : "Default CTA Button Text",
+    "description" : "",
+    "placeholders" : null
+  },
+  "cta_button_text.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "cta_button_text.validation_regex" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "empty_state_text.default" : {
+    "message" : "No services available at this time.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "empty_state_text.help_text" : {
+    "message" : "Message shown when no services are found in HubDB.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "empty_state_text.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "empty_state_text.label" : {
+    "message" : "Empty State Text",
+    "description" : "",
+    "placeholders" : null
+  },
+  "empty_state_text.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "empty_state_text.validation_regex" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "heading_level.choices.h1" : {
+    "message" : "H1 — Page Title",
+    "description" : "",
+    "placeholders" : null
+  },
+  "heading_level.choices.h2" : {
+    "message" : "H2 — Section",
+    "description" : "",
+    "placeholders" : null
+  },
+  "heading_level.choices.h3" : {
+    "message" : "H3 — Subsection",
+    "description" : "",
+    "placeholders" : null
+  },
+  "heading_level.choices.h4" : {
+    "message" : "H4",
+    "description" : "",
+    "placeholders" : null
+  },
+  "heading_level.help_text" : {
+    "message" : "Controls the HTML heading tag. Use H1 only once per page for the main title.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "heading_level.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "heading_level.label" : {
+    "message" : "Heading Level",
+    "description" : "",
+    "placeholders" : null
+  },
+  "heading_level.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "load_more_text.default" : {
+    "message" : "Load More Services",
+    "description" : "",
+    "placeholders" : null
+  },
+  "load_more_text.help_text" : {
+    "message" : "Text on the Load More button that appears below the service cards.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "load_more_text.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "load_more_text.label" : {
+    "message" : "Load More Button Text",
+    "description" : "",
+    "placeholders" : null
+  },
+  "load_more_text.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "load_more_text.validation_regex" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "locked_button_text.default" : {
+    "message" : "Locked",
+    "description" : "",
+    "placeholders" : null
+  },
+  "locked_button_text.help_text" : {
+    "message" : "Text shown on the CTA button of locked service cards",
+    "description" : "",
+    "placeholders" : null
+  },
+  "locked_button_text.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "locked_button_text.label" : {
+    "message" : "Locked Card Button Text",
+    "description" : "",
+    "placeholders" : null
+  },
+  "locked_button_text.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "locked_button_text.validation_regex" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "name" : {
+    "message" : "services-listing",
+    "description" : "",
+    "placeholders" : null
+  },
+  "section_description.default" : {
+    "message" : "<p>Explore everything available to you as a member. Services marked Gold are unlocked when you reach Gold tier.</p>",
+    "description" : "",
+    "placeholders" : null
+  },
+  "section_description.help_text" : {
+    "message" : "Description text shown below the section heading",
+    "description" : "",
+    "placeholders" : null
+  },
+  "section_description.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "section_description.label" : {
+    "message" : "Section Description",
+    "description" : "",
+    "placeholders" : null
+  },
+  "section_description.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "section_heading.default" : {
+    "message" : "Our services",
+    "description" : "",
+    "placeholders" : null
+  },
+  "section_heading.help_text" : {
+    "message" : "Heading displayed at the top of the services section",
+    "description" : "",
+    "placeholders" : null
+  },
+  "section_heading.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "section_heading.label" : {
+    "message" : "Section Heading",
+    "description" : "",
+    "placeholders" : null
+  },
+  "section_heading.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "section_heading.validation_regex" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "services_base_path.default" : {
+    "message" : "/services/",
+    "description" : "",
+    "placeholders" : null
+  },
+  "services_base_path.help_text" : {
+    "message" : "Base URL path for service detail pages. Links are built as this path + the HubDB hs_path slug.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "services_base_path.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "services_base_path.label" : {
+    "message" : "Services Base URL Path",
+    "description" : "",
+    "placeholders" : null
+  },
+  "services_base_path.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "services_base_path.validation_regex" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "services_table.help_text" : {
+    "message" : "Select the HubDB table that contains service data. This is display-only — the module is wired to table ID 1680589250 in code.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "services_table.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "services_table.label" : {
+    "message" : "Services HubDB Table",
+    "description" : "",
+    "placeholders" : null
+  },
+  "services_table.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.background_color.help_text" : {
+    "message" : "Leave empty to use theme default (#f7f7f7)",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.background_color.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.background_color.label" : {
+    "message" : "Background Color",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.background_color.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.content_width.choices.default" : {
+    "message" : "Default",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.content_width.choices.full" : {
+    "message" : "Full Width",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.content_width.choices.narrow" : {
+    "message" : "Narrow",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.content_width.choices.wide" : {
+    "message" : "Wide",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.content_width.help_text" : {
+    "message" : "Control the maximum width of this module's content.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.content_width.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.content_width.label" : {
+    "message" : "Content Width",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.content_width.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.hide_on_desktop.help_text" : {
+    "message" : "Toggle to hide this module on desktop viewports.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.hide_on_desktop.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.hide_on_desktop.label" : {
+    "message" : "Hide on Desktop",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.hide_on_desktop.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.hide_on_mobile.help_text" : {
+    "message" : "Toggle to hide this module on mobile devices",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.hide_on_mobile.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.hide_on_mobile.label" : {
+    "message" : "Hide on Mobile",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.hide_on_mobile.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.label" : {
+    "message" : "Style Overrides",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.padding_bottom.help_text" : {
+    "message" : "Leave empty to use default spacing",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.padding_bottom.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.padding_bottom.label" : {
+    "message" : "Padding Bottom (px)",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.padding_bottom.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.padding_top.help_text" : {
+    "message" : "Leave empty to use default spacing",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.padding_top.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.padding_top.label" : {
+    "message" : "Padding Top (px)",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.padding_top.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.text_color.help_text" : {
+    "message" : "Override the default text color for this module instance. Leave empty for theme default.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.text_color.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.text_color.label" : {
+    "message" : "Text Color",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.text_color.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  }
+}

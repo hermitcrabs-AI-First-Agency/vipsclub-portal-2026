@@ -1,0 +1,465 @@
+/* ============================================================
+   VIPSCLUB Portal 2026 — Dashboard Page
+   ============================================================ */
+
+/* ── Welcome Card ── */
+.welcome-banner {
+  background: var(--vips-bg-card);
+  border: 1px solid var(--vips-border-light);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card-light);
+  padding: var(--space-5) var(--space-5);
+}
+
+.welcome-banner__heading {
+  font-family: var(--font-heading);
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--vips-text-primary);
+  margin-bottom: var(--space-1);
+}
+
+.welcome-banner__body {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  color: var(--vips-text-primary);
+  line-height: 1.7;
+  max-width: 876px;
+}
+
+/* ── Stat Cards ── */
+.stat-cards {
+  display: flex;
+  gap: var(--space-6);
+  align-items: stretch;
+}
+
+.stat-card {
+  flex: 1;
+  background: var(--vips-bg-card);
+  border: 1px solid var(--vips-border-light);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card-subtle);
+  padding: var(--space-6) var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.stat-card__label {
+  font-family: var(--font-heading);
+  font-size: var(--text-md);
+  font-weight: 700;
+  color: var(--vips-text-primary);
+  letter-spacing: -0.15px;
+}
+
+.stat-card__value {
+  font-family: var(--font-heading);
+  font-size: var(--text-xl);
+  font-weight: 600;
+  color: var(--vips-text-primary);
+  letter-spacing: 0.4px;
+  line-height: 1.2;
+}
+
+.stat-card__sub {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-base);
+}
+
+.stat-card__sub-label {
+  font-family: var(--font-body);
+  color: var(--vips-text-secondary);
+  font-style: normal;
+}
+
+.stat-card__sub-value {
+  font-family: var(--font-body);
+  font-weight: 700;
+  color: var(--vips-text-primary);
+}
+
+/* Referral status list (Total References card) */
+.stat-card__status-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.stat-card__status-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: var(--text-md);
+  line-height: 1.5;
+  letter-spacing: -0.3px;
+}
+
+.stat-card__status-item--active   { color: var(--vips-success); }
+.stat-card__status-item--complete { color: var(--vips-dark-subtle); }
+
+/* ── Section Header (Available Rewards, Services) ── */
+.dashboard-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: var(--space-2);
+}
+
+.dashboard-section-header__title {
+  font-family: var(--font-heading);
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--vips-text-primary);
+  letter-spacing: 0.4px;
+  white-space: nowrap;     /* keep "Current Promotions" / "Available Rewards" on one line */
+  margin: 0;
+}
+
+.dashboard-section-header__view-all {
+  flex-shrink: 0;          /* button keeps its size; title no longer wraps to make room */
+  white-space: nowrap;
+  border: 1px solid var(--vips-dark-subtle);
+  border-radius: var(--radius-sm);
+  padding: 3px var(--space-3);
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: 500;
+  color: var(--vips-dark-subtle);
+  text-decoration: none;
+  letter-spacing: 0.14px;
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
+.dashboard-section-header__view-all:hover {
+  background-color: var(--vips-dark);
+  color: var(--vips-bg-card);
+  border-color: var(--vips-dark);
+}
+
+/* ── Section subtitle (e.g. "Level up to access more benefits") ── */
+.dashboard-section-subtitle {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  color: var(--vips-text-primary);
+  line-height: 24px;
+  margin-top: 2px;
+}
+
+/* ── Reward / Service Cards Grid ── */
+.item-cards-grid {
+  display: flex;
+  gap: var(--space-6);
+  align-items: stretch;
+}
+
+.item-card {
+  flex: 1;
+  background: var(--vips-bg-card);
+  border: 1px solid var(--vips-border-light);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card-subtle);
+  padding: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.item-card__icon-wrap {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-xl);
+  background: var(--vips-bg-icon);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* Reward icons are rounded SQUARES in the design, not circles */
+.item-card__icon-wrap--circle {
+  border-radius: 8px;
+  background: var(--vips-bg-input);
+}
+
+.item-card__icon {
+  width: 18px;
+  height: 18px;
+}
+
+.item-card__title {
+  font-family: var(--font-heading);
+  font-size: var(--text-md);
+  font-weight: 700;
+  color: var(--vips-text-primary);
+  letter-spacing: -0.15px;
+  text-transform: capitalize;
+}
+
+.item-card__desc {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--vips-text-secondary);
+  font-style: normal;
+  line-height: 1.5;
+}
+
+.item-card__points {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: 700;
+  color: var(--vips-text-primary);
+}
+
+/* Expires-in line — server-rendered "Expires in NN days" with the days
+   span highlighted in brand red. Same pattern as offers-rewards-hub. */
+.item-card__expires {
+  margin: 0;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: var(--text-sm);
+  line-height: 1.4;
+  color: var(--vips-text-primary);
+}
+.item-card__expires-days {
+  color: var(--vips-red);
+}
+
+.item-card__actions {
+  margin-top: auto;
+  padding-top: var(--space-4);
+}
+
+/* Ensure btn--dark fills the full card width on item cards */
+.item-card .btn--dark {
+  width: 100%;
+  justify-content: center;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-base);
+  font-weight: 500;
+  letter-spacing: 0.14px;
+}
+
+/* ── Expiry row (Current Promotions cards) ── */
+.item-card__expiry {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: 700;
+  color: var(--vips-text-primary);
+  line-height: 20px;
+}
+
+.item-card__expiry-value {
+  color: var(--vips-red);
+}
+
+/* ── Locked / Expired / Max-Reached state (dashboard cards) ──
+   Mirrors the services-listing + offers-rewards-hub pattern so a card
+   greyed out on the hub reads the same on the dashboard. The whole card
+   is dimmed at 60% opacity; the button itself only needs cursor:
+   not-allowed since the parent opacity carries the disabled visual. */
+.item-card--locked,
+.item-card--expired,
+.item-card--max-reached,
+.item-card--not-enough {
+  opacity: 0.6;
+}
+
+.item-card__btn--locked,
+.item-card__btn--expired,
+.item-card__btn--max-reached,
+.item-card__btn--not-enough {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ── Your dedicated RM ── */
+.rm-card {
+  background: var(--vips-bg-card);
+  border: 1px solid var(--vips-border-light);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card-subtle);
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  width: fit-content;
+  max-width: 100%;       /* never overflow the content area — contact text wraps instead */
+  box-sizing: border-box;
+}
+
+.rm-card__photo-wrap {
+  flex-shrink: 0;
+}
+
+.rm-card__photo {
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+}
+
+.rm-card__photo-placeholder {
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  background: var(--vips-bg-icon);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--vips-text-secondary);
+}
+
+.rm-card__info {
+  flex: 1;
+  min-width: 0;
+}
+
+.rm-card__name {
+  font-family: var(--font-body);
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--vips-text-primary);
+  letter-spacing: -0.15px;
+  line-height: 28px;
+}
+
+.rm-card__title {
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--vips-text-secondary);
+  line-height: 24px;
+  margin-bottom: 4px;
+}
+
+.rm-card__booking-link {
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--vips-text-primary);
+  text-decoration: underline;
+  text-decoration-style: solid;
+  line-height: 24px;
+}
+
+.rm-card__divider {
+  width: 1px;
+  height: 120px;
+  background: var(--vips-border-light);
+  flex-shrink: 0;
+}
+
+.rm-card__contact {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex-shrink: 0;
+}
+
+.rm-card__contact-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  height: 24px;
+}
+
+.rm-card__contact-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.rm-card__contact-text {
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--vips-text-primary);
+  line-height: 24px;
+  /* No nowrap: on desktop the card is fit-content so the email still sits on one
+     line; once the card is width-capped (tablet/mobile) the email wraps/breaks
+     (see word-break in rm-contact module.css) instead of overflowing. */
+  min-width: 0;
+}
+
+/* ── Responsive ── */
+@media (max-width: 1080px) {
+  .stat-cards {
+    flex-wrap: wrap;
+  }
+
+  .stat-card {
+    min-width: calc(50% - var(--space-3));
+  }
+
+  /* Cards now have a real flex-basis so flex-wrap actually works — the base
+     `flex: 1` (basis 0) never wrapped, which is why 3 reward cards squished
+     into one row. With a 260px basis they sit in one row when there's room and
+     wrap to a 2-up layout once that gets tight. */
+  .item-cards-grid {
+    flex-wrap: wrap;
+  }
+
+  .item-card {
+    flex: 1 1 260px;
+  }
+
+  /* Section header stays on one row; the title shrinks first (ellipsis) so the
+     View All pill never gets pushed out of bounds. */
+  .dashboard-section-header {
+    flex-wrap: nowrap;
+  }
+
+  .dashboard-section-header__title {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+@media (max-width: 768px) {
+  .stat-cards {
+    flex-direction: column;
+  }
+
+  /* True mobile: every card stacks full-width, one per row */
+  .item-cards-grid {
+    flex-direction: column;
+  }
+
+  .item-card {
+    flex: 0 0 auto;
+  }
+
+  .dashboard-section-header__title {
+    font-size: 20px;
+  }
+
+  /* Mobile locked / expired / max-reached — reset the card opacity so
+     mobile can render at full colour, then colour the button explicitly
+     grey. Same pattern as services-listing + offers-rewards-hub so all
+     three modules stay visually aligned. */
+  .item-card--locked,
+  .item-card--expired,
+  .item-card--max-reached,
+  .item-card--not-enough {
+    opacity: 1;
+    border-color: var(--vips-border);
+  }
+
+  .item-card--locked   .item-card__btn--locked,
+  .item-card--expired  .item-card__btn--expired,
+  .item-card--max-reached .item-card__btn--max-reached,
+  .item-card--not-enough .item-card__btn--not-enough {
+    background: var(--vips-border);
+    color: var(--vips-text-muted);
+  }
+}

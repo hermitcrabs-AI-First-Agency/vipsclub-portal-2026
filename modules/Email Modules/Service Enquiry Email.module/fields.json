@@ -1,0 +1,196 @@
+[
+  {
+    "id": "greeting_prefix",
+    "name": "greeting_prefix",
+    "label": "Greeting",
+    "help_text": "Word before the member's first name, e.g. \"Hi\" → \"Hi Jane,\".",
+    "required": false,
+    "locked": false,
+    "allow_new_line": false,
+    "type": "text",
+    "default": "Hi"
+  },
+  {
+    "id": "firstname_fallback",
+    "name": "firstname_fallback",
+    "label": "First Name Fallback",
+    "help_text": "Shown when the contact has no first name on file.",
+    "required": false,
+    "locked": false,
+    "allow_new_line": false,
+    "type": "text",
+    "default": "there"
+  },
+  {
+    "id": "intro_line",
+    "name": "intro_line",
+    "label": "Intro Line",
+    "help_text": "First sentence. Use {service} where the service name should appear — it is filled in automatically.",
+    "required": false,
+    "locked": false,
+    "allow_new_line": false,
+    "type": "text",
+    "default": "Thank you for your enquiry about {service}."
+  },
+  {
+    "id": "service_fallback",
+    "name": "service_fallback",
+    "label": "Service Name Fallback",
+    "help_text": "Used in the intro line if the service can't be identified.",
+    "required": false,
+    "locked": false,
+    "allow_new_line": false,
+    "type": "text",
+    "default": "your service"
+  },
+  {
+    "id": "body_line",
+    "name": "body_line",
+    "label": "Confirmation Paragraph",
+    "help_text": "Main confirmation message shown under the intro.",
+    "required": false,
+    "locked": false,
+    "type": "richtext",
+    "default": "<p>We have received your request, and a member of our team will review the information you provided and contact you shortly.</p>"
+  },
+  {
+    "id": "summary_heading",
+    "name": "summary_heading",
+    "label": "Summary Card Heading",
+    "help_text": "Heading above the enquiry details card.",
+    "required": false,
+    "locked": false,
+    "allow_new_line": false,
+    "type": "text",
+    "default": "Enquiry summary"
+  },
+  {
+    "id": "label_service",
+    "name": "label_service",
+    "label": "Row Label — Service",
+    "help_text": "Left-hand label for the service name row.",
+    "required": false,
+    "locked": false,
+    "allow_new_line": false,
+    "type": "text",
+    "default": "Service"
+  },
+  {
+    "id": "label_submitted",
+    "name": "label_submitted",
+    "label": "Row Label — Submitted",
+    "help_text": "Left-hand label for the submission date row.",
+    "required": false,
+    "locked": false,
+    "allow_new_line": false,
+    "type": "text",
+    "default": "Submitted"
+  },
+  {
+    "id": "label_reference",
+    "name": "label_reference",
+    "label": "Row Label — Reference",
+    "help_text": "Left-hand label for the reference number row.",
+    "required": false,
+    "locked": false,
+    "allow_new_line": false,
+    "type": "text",
+    "default": "Reference"
+  },
+  {
+    "id": "label_details",
+    "name": "label_details",
+    "label": "Row Label — Details",
+    "help_text": "Left-hand label for the details-provided row (only shows if the enquiry included a message).",
+    "required": false,
+    "locked": false,
+    "allow_new_line": false,
+    "type": "text",
+    "default": "Details provided"
+  },
+  {
+    "id": "continue_line",
+    "name": "continue_line",
+    "label": "Continue-Exploring Paragraph",
+    "help_text": "Paragraph shown below the summary card, above the button.",
+    "required": false,
+    "locked": false,
+    "type": "richtext",
+    "default": "<p>You can continue exploring your available services through the VIPSCLUB portal while your enquiry is being reviewed.</p>"
+  },
+  {
+    "id": "button_text",
+    "name": "button_text",
+    "label": "Button Text",
+    "help_text": "Call-to-action button label. Leave empty to hide the button.",
+    "required": false,
+    "locked": false,
+    "allow_new_line": false,
+    "type": "text",
+    "default": "Return to Services"
+  },
+  {
+    "id": "button_url",
+    "name": "button_url",
+    "label": "Button Link",
+    "help_text": "Where the button sends the member — usually the services catalogue.",
+    "required": false,
+    "locked": false,
+    "supported_types": ["EXTERNAL", "CONTENT", "EMAIL_ADDRESS"],
+    "type": "link",
+    "default": {
+      "url": {
+        "href": "https://www.vipsclub.com.au/services-catalogue",
+        "type": "EXTERNAL"
+      },
+      "open_in_new_tab": false,
+      "no_follow": false
+    }
+  },
+  {
+    "id": "reply_line",
+    "name": "reply_line",
+    "label": "Reply Note",
+    "help_text": "Small note under the button about replying to the email.",
+    "required": false,
+    "locked": false,
+    "allow_new_line": false,
+    "type": "text",
+    "default": "Please reply to this email if you desire to provide additional or corrected information."
+  },
+  {
+    "id": "signoff",
+    "name": "signoff",
+    "label": "Sign-off",
+    "help_text": "Closing line, e.g. \"Kind regards,\".",
+    "required": false,
+    "locked": false,
+    "allow_new_line": false,
+    "type": "text",
+    "default": "Kind regards,"
+  },
+  {
+    "id": "team_name",
+    "name": "team_name",
+    "label": "Team Name",
+    "help_text": "Sender name shown under the sign-off.",
+    "required": false,
+    "locked": false,
+    "allow_new_line": false,
+    "type": "text",
+    "default": "The VIPSCLUB Team"
+  },
+  {
+    "id": "accent_color",
+    "name": "accent_color",
+    "label": "Accent Color",
+    "help_text": "Brand colour for the summary heading and button. Defaults to VIPSCLUB red.",
+    "required": false,
+    "locked": false,
+    "type": "color",
+    "default": {
+      "color": "#a22c35",
+      "opacity": 100
+    }
+  }
+]

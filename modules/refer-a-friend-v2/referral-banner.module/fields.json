@@ -1,0 +1,82 @@
+[ {
+  "id" : "icon_svg",
+  "name" : "icon_svg",
+  "label" : "Icon SVG Code",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "<svg width=\"48\" height=\"48\" viewBox=\"0 0 48 48\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"10\" y=\"18\" width=\"28\" height=\"22\" rx=\"3\" stroke=\"white\" stroke-width=\"3\"/><path d=\"M24 18V40M10 25H38\" stroke=\"white\" stroke-width=\"3\"/><path d=\"M24 18C22 12 18 9 15 11C12 13 14 18 24 18ZM24 18C26 12 30 9 33 11C36 13 34 18 24 18Z\" stroke=\"white\" stroke-width=\"3\" stroke-linejoin=\"round\"/></svg>"
+}, {
+  "id" : "link_label",
+  "name" : "link_label",
+  "label" : "Referral Link Label",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Your Unique Referral Link:"
+}, {
+  "id" : "referral_url",
+  "name" : "referral_url",
+  "label" : "Fallback Referral URL",
+  "help_text" : "Used if the contact property vipsclub_referral_url is empty.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "www.myuniquelink.com"
+}, {
+  "id" : "copy_button_text",
+  "name" : "copy_button_text",
+  "label" : "Copy Button Text",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Copy link"
+}, {
+  "id" : "copy_success_text",
+  "name" : "copy_success_text",
+  "label" : "Copy Success Text",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Copied"
+}, {
+  "id" : "mobile_prompt",
+  "name" : "mobile_prompt",
+  "label" : "Mobile Prompt",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Click Here To Submit The Referral"
+}, {
+  "id" : "mobile_button_text",
+  "name" : "mobile_button_text",
+  "label" : "Mobile Button Text",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Refer a Friend"
+}, {
+  "id" : "mobile_button_anchor",
+  "name" : "mobile_button_anchor",
+  "label" : "Mobile Button Anchor",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "#main-content"
+} ]

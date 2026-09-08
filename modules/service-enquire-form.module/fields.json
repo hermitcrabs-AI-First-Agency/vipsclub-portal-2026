@@ -1,0 +1,213 @@
+[ {
+  "id" : "card_heading",
+  "name" : "card_heading",
+  "label" : "Card Heading",
+  "help_text" : "Heading displayed at the top of the enquiry form card.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Enquire About This Service"
+}, {
+  "id" : "heading_level",
+  "name" : "heading_level",
+  "label" : "Heading Level",
+  "help_text" : "Controls the HTML heading tag. Use H1 only once per page for the main title.",
+  "required" : false,
+  "locked" : false,
+  "display" : "select",
+  "choices" : [ [ "h1", "H1 — Page Title" ], [ "h2", "H2 — Section" ], [ "h3", "H3 — Subsection" ], [ "h4", "H4" ] ],
+  "multiple" : false,
+  "reordering_enabled" : true,
+  "preset" : null,
+  "type" : "choice",
+  "display_width" : null,
+  "default" : "h2"
+}, {
+  "id" : "service_name",
+  "name" : "service_name",
+  "label" : "Service Name (Meta)",
+  "help_text" : "Service name shown in the meta block above the form (e.g. 'Mortgage Broking').",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : ""
+}, {
+  "id" : "service_tier",
+  "name" : "service_tier",
+  "label" : "Tier (Meta)",
+  "help_text" : "Tier shown in the meta block (e.g. 'Bronze+').",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : ""
+}, {
+  "id" : "service_availability",
+  "name" : "service_availability",
+  "label" : "Availability (Meta)",
+  "help_text" : "Availability shown in the meta block (e.g. 'All members').",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : ""
+}, {
+  "id" : "service_meta_label",
+  "name" : "service_meta_label",
+  "label" : "Service Meta Label",
+  "help_text" : "Label text for the service name in the meta block.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Service"
+}, {
+  "id" : "tier_meta_label",
+  "name" : "tier_meta_label",
+  "label" : "Tier Meta Label",
+  "help_text" : "Label text for the tier value in the meta block.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Tier"
+}, {
+  "id" : "availability_meta_label",
+  "name" : "availability_meta_label",
+  "label" : "Availability Meta Label",
+  "help_text" : "Label text for the availability value in the meta block.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Availability"
+}, {
+  "id" : "form",
+  "name" : "form",
+  "label" : "Enquiry Form",
+  "help_text" : "Select the 'Service Enquiry' HubSpot form. Create it in Marketing > Forms first.",
+  "required" : false,
+  "locked" : false,
+  "type" : "form",
+  "display_width" : null,
+  "default" : {
+    "form_id" : "",
+    "response_type" : "inline",
+    "message" : "Thanks for your enquiry. We'll be in touch shortly."
+  }
+}, {
+  "id" : "disclaimer_text",
+  "name" : "disclaimer_text",
+  "label" : "Form Disclaimer Text",
+  "help_text" : "Small disclaimer text shown below the form submit button.",
+  "required" : false,
+  "locked" : false,
+  "type" : "richtext",
+  "display_width" : null,
+  "default" : "<p>By submitting this form you agree to our privacy policy. We will not share your information with third parties.</p>"
+}, {
+  "id" : "style_overrides",
+  "name" : "style_overrides",
+  "label" : "Style Overrides",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "style_overrides.background_color",
+    "name" : "background_color",
+    "label" : "Background Color",
+    "help_text" : "Leave empty to use theme default (#ffffff)",
+    "required" : false,
+    "locked" : false,
+    "type" : "color",
+    "display_width" : null,
+    "default" : {
+      "color" : null,
+      "opacity" : 100
+    }
+  }, {
+    "id" : "style_overrides.padding_top",
+    "name" : "padding_top",
+    "label" : "Padding Top (px)",
+    "help_text" : "Leave empty to use default spacing",
+    "required" : false,
+    "locked" : false,
+    "display" : "text",
+    "step" : 1,
+    "type" : "number",
+    "display_width" : null
+  }, {
+    "id" : "style_overrides.padding_bottom",
+    "name" : "padding_bottom",
+    "label" : "Padding Bottom (px)",
+    "help_text" : "Leave empty to use default spacing",
+    "required" : false,
+    "locked" : false,
+    "display" : "text",
+    "step" : 1,
+    "type" : "number",
+    "display_width" : null
+  }, {
+    "id" : "style_overrides.hide_on_mobile",
+    "name" : "hide_on_mobile",
+    "label" : "Hide on Mobile",
+    "required" : false,
+    "locked" : false,
+    "display" : "checkbox",
+    "type" : "boolean",
+    "display_width" : null,
+    "default" : false
+  }, {
+    "id" : "style_overrides.text_color",
+    "name" : "text_color",
+    "label" : "Text Color",
+    "help_text" : "Override the default text color for this module instance. Leave empty for theme default.",
+    "required" : false,
+    "locked" : false,
+    "type" : "color",
+    "display_width" : null,
+    "default" : {
+      "color" : null,
+      "opacity" : 100
+    }
+  }, {
+    "id" : "style_overrides.content_width",
+    "name" : "content_width",
+    "label" : "Content Width",
+    "help_text" : "Control the maximum width of this module's content.",
+    "required" : false,
+    "locked" : false,
+    "display" : "select",
+    "choices" : [ [ "default", "Default" ], [ "narrow", "Narrow" ], [ "wide", "Wide" ], [ "full", "Full Width" ] ],
+    "multiple" : false,
+    "reordering_enabled" : true,
+    "preset" : null,
+    "type" : "choice",
+    "display_width" : null,
+    "default" : "default"
+  }, {
+    "id" : "style_overrides.hide_on_desktop",
+    "name" : "hide_on_desktop",
+    "label" : "Hide on Desktop",
+    "help_text" : "Toggle to hide this module on desktop viewports.",
+    "required" : false,
+    "locked" : false,
+    "display" : "checkbox",
+    "type" : "boolean",
+    "display_width" : null,
+    "default" : false
+  } ],
+  "tab" : "STYLE",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null
+} ]

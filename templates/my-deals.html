@@ -1,0 +1,125 @@
+<!--
+  templateType: page
+  isAvailableForNewContent: true
+  label: Portal — My Deals
+-->
+{% extends "./layouts/base.html" %}
+
+{# ============================================================
+   VIPSCLUB Portal 2026 — My Deals Template
+   Figma reference: TBD (update node ID once confirmed)
+   Layout: full-width header → referral banner (overlaps) →
+           two-column body (sidebar 292px + main content)
+   Private content — requires member login.
+   ============================================================ #}
+
+{% block body %}
+<div class="portal-layout">
+
+  {# ── Full-Width Header ── #}
+  <div class="portal-header-area">
+    {% dnd_area "portal_header"
+      label="Portal Header",
+      class="portal-header-dnd"
+    %}
+      {% dnd_section %}
+        {% dnd_column %}
+          {% dnd_row %}
+            {% dnd_module path="../modules/portal-header" %}{% end_dnd_module %}
+          {% end_dnd_row %}
+        {% end_dnd_column %}
+      {% end_dnd_section %}
+    {% end_dnd_area %}
+  </div>
+
+  {# ── Referral Banner — direct flex child of portal-layout, overlaps bottom of header ── #}
+  <div class="portal-referral-wrapper">
+    {% dnd_area "referral_banner"
+      label="Referral Banner",
+      class="referral-banner-area"
+    %}
+      {% dnd_section %}
+        {% dnd_column %}
+          {% dnd_row %}
+            {% dnd_module path="../modules/referral-banner" %}{% end_dnd_module %}
+          {% end_dnd_row %}
+        {% end_dnd_column %}
+      {% end_dnd_section %}
+    {% end_dnd_area %}
+  </div>
+
+  <div class="portal-content-outer">
+
+    {# ── Two-Column Body: Sidebar + Main ── #}
+    <div class="portal-body">
+
+      {# ── Sidebar (global module — edit once, applies to all portal pages) ── #}
+      {% module "portal_sidebar" path="../modules/portal-sidebar" label="Portal Sidebar" %}
+
+      {# ── Main Content ── #}
+      <main class="portal-main" id="main-content">
+
+        {# ── Partner Gate ──
+           My Deals is partner-only content. The visiting contact's `partner`
+           boolean CRM property must be true to see the dnd_area. Non-partners
+           (including any visitor who types the URL directly) get an inline
+           Access Denied card inside the normal portal chrome. `is_in_editor`
+           bypass lets content authors configure the my-deals module without
+           flipping their own partner flag. #}
+        {% if contact.partner or is_in_editor %}
+
+          {# My Deals Module — partner-only content #}
+          {% dnd_area "my_deals_content"
+            label="My Deals",
+            class="my-deals-area"
+          %}
+            {% dnd_section %}
+              {% dnd_column %}
+                {% dnd_row %}
+                  {% dnd_module path="../modules/my-deals" %}{% end_dnd_module %}
+                {% end_dnd_row %}
+              {% end_dnd_column %}
+            {% end_dnd_section %}
+          {% end_dnd_area %}
+
+        {% else %}
+
+          {# noindex the denied state so it doesn't show up in search results. #}
+          {% require_head %}
+            <meta name="robots" content="noindex,nofollow">
+          {% end_require_head %}
+
+          <section class="portal-access-denied" role="alert" aria-labelledby="portal-access-denied-title">
+            <div class="portal-access-denied__card">
+              <div class="portal-access-denied__icon" aria-hidden="true">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
+                  <circle cx="12" cy="12" r="10" stroke="#a22c35" stroke-width="2"/>
+                  <path d="M8 12h8" stroke="#a22c35" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <h1 id="portal-access-denied-title" class="portal-access-denied__title">Partners only</h1>
+              <p class="portal-access-denied__body">
+                The Deals area is available to VIPSCLUB partners. Your account doesn&rsquo;t currently
+                have partner access. If you believe this is a mistake, please contact your VIPSCLUB
+                account manager.
+              </p>
+              <div class="portal-access-denied__actions">
+                <a href="/dashboard" class="btn btn--primary">Back to dashboard</a>
+                <a href="mailto:support@ipspartners.com.au" class="btn btn--outline">Request access</a>
+              </div>
+            </div>
+          </section>
+
+        {% endif %}
+
+      </main>{# end portal-main #}
+
+    </div>{# end portal-body #}
+
+    {# ── Footer ── #}
+    {% module "portal_footer" path="../modules/portal-footer" label="Portal Footer" %}
+
+  </div>{# end portal-content-outer #}
+
+</div>{# end portal-layout #}
+{% endblock %}

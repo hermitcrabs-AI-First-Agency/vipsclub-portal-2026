@@ -1,0 +1,41 @@
+{# ============================================================
+   Programmable EMAIL module — Relationship Manager card
+   • RM (live)     : contact→contact association USER_DEFINED id 35
+                     ("contact owner"), limit=1 — mirrors the dashboard RM card
+   • RM fallback   : the contact set in module.fallback_contact_id
+                     (Client Success Team), re-fetched via crm_object
+   REQUIRES: "programmable email beta" enabled on this module (Design Manager
+   inspector toggle) — crm_associations/crm_object only run when it's on.
+   ============================================================ #}
+
+{# ---- Relationship Manager: live association → fallback contact ---- #}
+{% set _rm = null %}
+{% if contact.hs_object_id %}
+  {% set _r = crm_associations(contact.hs_object_id, "USER_DEFINED", 35, "limit=1", "firstname,lastname,email,phone,city,jobtitle", false) %}
+  {% if _r.results and (_r.results | length) > 0 %}{% set _rm = _r.results[0] %}{% endif %}
+{% endif %}
+
+{% set _fb_id = module.fallback_contact_id | default(0) | int %}
+{% set _fb = crm_object("contact", _fb_id, "firstname,lastname,email,phone,city,jobtitle") if _fb_id else none %}
+
+{% set _name  = ((_rm.firstname | default("")) ~ " " ~ (_rm.lastname | default(""))) | trim if _rm else "" %}
+{% set _role  = _rm.jobtitle      | default("") if _rm else "" %}
+{% set _phone = _rm.phone         | default("") if _rm else "" %}
+{% set _email = _rm.email         | default("") if _rm else "" %}
+
+{% if not _name  and _fb %}{% set _name  = ((_fb.firstname | default("")) ~ " " ~ (_fb.lastname | default(""))) | trim %}{% endif %}
+{% if not _role  and _fb %}{% set _role  = _fb.jobtitle      | default("") %}{% endif %}
+{% if not _phone and _fb %}{% set _phone = _fb.phone         | default("") %}{% endif %}
+{% if not _email and _fb %}{% set _email = _fb.email         | default("") %}{% endif %}
+
+{% if _name or _email or _phone %}
+<div style="background:#ffffff;border-radius:10px;padding:20px;margin:8px 0;">
+  <p style="font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#a22c35;margin:0 0 12px;">Your Relationship Manager</p>
+  {% if _name %}<p style="margin:0;font-size:16px;font-weight:700;color:#212121;">{{ _name | escape_html }}</p>{% endif %}
+  {% if _role %}<p style="margin:2px 0 0;font-size:13px;color:#616161;">{{ _role | escape_html }}</p>{% endif %}
+  <p style="margin:12px 0 0;font-size:14px;line-height:1.7;">
+    {% if _phone %}<a href="tel:{{ _phone | escape_attr }}" style="color:#a22c35;text-decoration:none;">{{ _phone | escape_html }}</a><br>{% endif %}
+    {% if _email %}<a href="mailto:{{ _email | escape_attr }}" style="color:#a22c35;text-decoration:none;">{{ _email | escape_html }}</a>{% endif %}
+  </p>
+</div>
+{% endif %}

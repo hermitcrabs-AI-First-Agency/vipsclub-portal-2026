@@ -1,0 +1,102 @@
+{# ============================================================
+   VIPSCLUB Portal 2026 — Auth Reset Password Module
+   Template type: membership_reset_page
+   Uses {% password_reset %} — HubSpot's native new-password form.
+   Renders: new password field + confirm password field + button.
+   Figma: Desktop 960:16823
+   ============================================================ #}
+
+{% require_css %}
+<link rel="stylesheet" href="{{ get_asset_url('../../css/auth/auth-pages.css') }}">
+{% end_require_css %}
+
+{# ── Style override values ── #}
+{% set grad_start = module.style_overrides.gradient_start.color | default('#000000') %}
+{% set grad_end   = module.style_overrides.gradient_end.color   | default('#a22b34') %}
+
+<main class="auth-page auth-page--reset-password{% if module.style_overrides.hide_on_mobile %} auth-page--hide-mobile{% endif %}">
+
+  {# ── Header: full-width gradient + centred logo ── #}
+  <header class="auth-page__header"
+          style="background: linear-gradient(158.58deg, {{ grad_start }} 36.19%, {{ grad_end }} 66.10%);">
+
+    {% if module.logo.src %}
+    <img class="auth-page__logo"
+         src="{{ module.logo.src | escape_attr }}"
+         alt="{{ module.logo.alt | default('VIPS Club') | escape_attr }}"
+         width="{{ module.logo.width | default(161) }}"
+         height="{{ module.logo.height | default(59) }}"
+         fetchpriority="high">
+    {% endif %}
+
+  </header>
+
+  {# ── Body: split card (photo left + form right) ── #}
+  <div class="auth-page__body">
+
+    <div class="auth-page__card" role="region" aria-label="Create new password">
+
+      {# ── Left: architectural photo (desktop only) ── #}
+      {% if module.photo.src %}
+      <img class="auth-page__card-photo"
+           src="{{ module.photo.src | escape_attr }}"
+           alt="{{ module.photo.alt | default('') | escape_attr }}"
+           width="{{ module.photo.width | default(406) }}"
+           height="{{ module.photo.height | default(548) }}"
+           loading="lazy"
+           aria-hidden="true">
+      {% endif %}
+
+      {# ── Right: white form panel ── #}
+      <div class="auth-page__card-form" id="main-content">
+
+        {# ── Heading + subtitle ── #}
+        <div class="auth-form__header">
+          {% if module.heading %}
+          <{{ module.heading_level | default("h1") }} class="auth-form__heading">{{ module.heading | escape_html }}</{{ module.heading_level | default("h1") }}>
+          {% endif %}
+          {% if module.subtitle %}
+          <p class="auth-form__subtitle">{{ module.subtitle | escape_html }}</p>
+          {% endif %}
+        </div>
+
+        {# ── Password requirements hint ── #}
+        {% if module.password_hint %}
+        <p class="auth-form__password-hint">{{ module.password_hint | escape_html }}</p>
+        {% endif %}
+
+        {# ── HubSpot Native Password Reset Form ──
+           Renders: new password field, confirm password field, submit button.
+           Only works inside membership_reset_page templates.
+        #}
+        {% password_reset "vips_password_reset"
+          password_label="{{ module.password_label | default('New Password (Required)') }}",
+          password_confirm_label="{{ module.password_confirm_label | default('Confirm New Password (Required)') }}",
+          submit_button_text="{{ module.submit_button_text | default('Save Password') }}"
+        %}
+
+      </div>{# end card-form #}
+
+    </div>{# end card #}
+
+  </div>{# end body #}
+
+  {# ── Page Footer: copyright + privacy ── #}
+<footer class="auth-page__footer">
+  {% if module.footer_copyright or module.footer_privacy.link_text %}
+  <p>
+    {% if module.footer_copyright %}{{ module.footer_copyright | escape_html }}{% endif %}
+    {% if module.footer_privacy.link_text %}
+    {% if module.footer_privacy.url.url.href %}
+    <a href="{{ module.footer_privacy.url.url.href | escape_attr }}"
+       {% if module.footer_privacy.url.open_in_new_tab %}target="_blank" rel="noopener noreferrer"{% endif %}>&nbsp;{{ module.footer_privacy.link_text | escape_html }}</a>
+    {% else %}
+    &nbsp;{{ module.footer_privacy.link_text | escape_html }}
+    {% endif %}
+    {% endif %}
+  </p>
+    {% endif %}
+
+  </footer>
+
+</main>{# end auth-page auth-page--reset-password #}

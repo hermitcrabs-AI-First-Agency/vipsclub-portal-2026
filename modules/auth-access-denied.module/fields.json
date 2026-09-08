@@ -1,0 +1,213 @@
+[ {
+  "id" : "logo",
+  "name" : "logo",
+  "label" : "Logo",
+  "help_text" : "Upload the white version of the VIPS Club logo (SVG or PNG). Displayed centred in the header.",
+  "required" : false,
+  "locked" : false,
+  "responsive" : false,
+  "resizable" : false,
+  "show_loading" : false,
+  "type" : "image",
+  "display_width" : null,
+  "default" : {
+    "src" : "https://442066989.fs1.hubspotusercontent-ap1.net/hubfs/442066989/Final%20-%20white%201-1.png",
+    "alt" : "VIPSCLUB",
+    "width" : 161,
+    "height" : 59
+  }
+}, {
+  "id" : "heading",
+  "name" : "heading",
+  "label" : "Heading",
+  "help_text" : "Main heading shown in the card.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "You don't have access."
+}, {
+  "id" : "heading_level",
+  "name" : "heading_level",
+  "label" : "Heading Level",
+  "help_text" : "Controls the HTML heading tag. Use H1 only once per page.",
+  "required" : false,
+  "locked" : false,
+  "display" : "select",
+  "choices" : [ [ "h1", "H1 — Page Title" ], [ "h2", "H2 — Section" ], [ "h3", "H3 — Subsection" ] ],
+  "multiple" : false,
+  "reordering_enabled" : true,
+  "preset" : null,
+  "type" : "choice",
+  "display_width" : null,
+  "default" : "h1"
+}, {
+  "id" : "subtitle",
+  "name" : "subtitle",
+  "label" : "Subtitle",
+  "help_text" : "Descriptive text shown below the heading.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "You don't have permission to view this page. If you believe you received this message in error, please contact us at members@vipsclub.com.au"
+}, {
+  "id" : "button_text",
+  "name" : "button_text",
+  "label" : "Button Text",
+  "help_text" : "Text on the primary button.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Return to Home Page"
+}, {
+  "id" : "button_url",
+  "name" : "button_url",
+  "label" : "Button URL",
+  "help_text" : "Where the button links to.",
+  "required" : false,
+  "locked" : false,
+  "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "EMAIL_ADDRESS", "BLOG" ],
+  "show_advanced_rel_options" : false,
+  "type" : "link",
+  "display_width" : null,
+  "default" : {
+    "url" : {
+      "href" : "https://www.vipsclub.com.au/dashboard",
+      "type" : "EXTERNAL"
+    },
+    "open_in_new_tab" : false,
+    "no_follow" : false
+  }
+}, {
+  "id" : "footer_copyright",
+  "name" : "footer_copyright",
+  "label" : "Footer Copyright",
+  "help_text" : "Copyright line shown at the bottom of the page.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "© Copyright VIPS Club. All Rights Reserved"
+}, {
+  "id" : "footer_privacy",
+  "name" : "footer_privacy",
+  "label" : "Privacy Policy Link",
+  "help_text" : "Privacy Policy link shown in the page footer.",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "footer_privacy.link_text",
+    "name" : "link_text",
+    "label" : "Link Text",
+    "help_text" : "Visible text for the privacy policy link.",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Privacy Policy"
+  }, {
+    "id" : "footer_privacy.url",
+    "name" : "url",
+    "label" : "URL",
+    "help_text" : "URL to the privacy policy page.",
+    "required" : false,
+    "locked" : false,
+    "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "EMAIL_ADDRESS", "BLOG" ],
+    "show_advanced_rel_options" : false,
+    "type" : "link",
+    "display_width" : null,
+    "default" : {
+      "url" : {
+        "content_id" : 327713679836,
+        "href" : null,
+        "type" : "CONTENT"
+      },
+      "open_in_new_tab" : false,
+      "no_follow" : false
+    }
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "link_text" : "Privacy Policy",
+    "url" : {
+      "url" : {
+        "content_id" : 327713679836,
+        "href" : null,
+        "type" : "CONTENT"
+      },
+      "open_in_new_tab" : false,
+      "no_follow" : false
+    }
+  }
+}, {
+  "id" : "style_overrides",
+  "name" : "style_overrides",
+  "label" : "Style Overrides",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "style_overrides.gradient_start",
+    "name" : "gradient_start",
+    "label" : "Header Gradient Start",
+    "help_text" : "Top-left gradient colour for the header banner.",
+    "required" : false,
+    "locked" : false,
+    "type" : "color",
+    "display_width" : null,
+    "default" : {
+      "color" : "#000000",
+      "opacity" : 100
+    }
+  }, {
+    "id" : "style_overrides.gradient_end",
+    "name" : "gradient_end",
+    "label" : "Header Gradient End",
+    "help_text" : "Bottom-right gradient colour for the header banner.",
+    "required" : false,
+    "locked" : false,
+    "type" : "color",
+    "display_width" : null,
+    "default" : {
+      "color" : "#a22b34",
+      "opacity" : 100
+    }
+  }, {
+    "id" : "style_overrides.hide_on_mobile",
+    "name" : "hide_on_mobile",
+    "label" : "Hide on Mobile",
+    "help_text" : "Hide this entire module on mobile devices.",
+    "required" : false,
+    "locked" : false,
+    "display" : "checkbox",
+    "type" : "boolean",
+    "display_width" : null,
+    "default" : false
+  } ],
+  "tab" : "STYLE",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "gradient_start" : {
+      "color" : "#000000",
+      "opacity" : 100
+    },
+    "gradient_end" : {
+      "color" : "#a22b34",
+      "opacity" : 100
+    },
+    "hide_on_mobile" : false
+  }
+} ]

@@ -1,0 +1,133 @@
+<!--
+  templateType: page
+  isAvailableForNewContent: true
+  label: Portal — Services Catalogue & Detail
+-->
+{% extends "./layouts/base.html" %}
+
+{# ============================================================
+   VIPSCLUB Portal 2026 — Services Catalogue + Service Detail Template
+   This single template serves both:
+     - /services           → dynamic_page_hubdb_row is null  → listing view
+     - /services/[slug]    → dynamic_page_hubdb_row is set   → detail view
+   Figma: Listing 339:7273 | Detail 339:7562
+   HubDB dynamic page setup:
+     Page Settings → Advanced → Dynamic pages → select table 1680589250
+   ============================================================ #}
+
+{% block head_extra %}
+{% require_css %}
+<link rel="stylesheet" href="{{ get_asset_url('../css/portal/services-catalogue.css') }}">
+{% end_require_css %}
+{# Also load the detail-view CSS in the editor so the editor-preview render of
+   the detail view (see body block below) is correctly styled. #}
+{% if dynamic_page_hubdb_row or is_in_editor %}
+{% require_css %}
+<link rel="stylesheet" href="{{ get_asset_url('../css/portal/service-detail.css') }}">
+{% end_require_css %}
+{% endif %}
+{% endblock %}
+
+{% block body %}
+<div class="portal-layout">
+
+  {# ── Full-Width Header ── #}
+  <div class="portal-header-area">
+    {% dnd_area "portal_header"
+      label="Portal Header",
+      class="portal-header-dnd"
+    %}
+      {% dnd_section %}
+        {% dnd_column %}
+          {% dnd_row %}
+            {% dnd_module path="../modules/portal-header" %}{% end_dnd_module %}
+          {% end_dnd_row %}
+        {% end_dnd_column %}
+      {% end_dnd_section %}
+    {% end_dnd_area %}
+  </div>
+
+  {# ── Referral Banner ── #}
+  <div class="portal-referral-wrapper">
+    {% dnd_area "referral_banner"
+      label="Referral Banner",
+      class="referral-banner-area"
+    %}
+      {% dnd_section %}
+        {% dnd_column %}
+          {% dnd_row %}
+            {% dnd_module path="../modules/referral-banner" %}{% end_dnd_module %}
+          {% end_dnd_row %}
+        {% end_dnd_column %}
+      {% end_dnd_section %}
+    {% end_dnd_area %}
+  </div>
+
+  <div class="portal-content-outer">
+
+    <div class="portal-body">
+
+      {% module "portal_sidebar" path="../modules/portal-sidebar" label="Portal Sidebar" %}
+
+      <main class="portal-main" id="main-content">
+
+        {# ═══════════════════════════════════════════════════════
+           SERVICES LISTING VIEW — /services
+           Rendered live on /services AND in the page editor. Editor
+           preview always shows the listing first; the detail view below
+           is rendered (so its modules show in the page-contents tree)
+           but display:none in the editor.
+           ═══════════════════════════════════════════════════════ #}
+        {% if not dynamic_page_hubdb_row %}
+          {% dnd_area "services_listing"
+            label="Services Listing",
+            class="services-catalogue-area"
+          %}
+            {% dnd_section %}
+              {% dnd_column %}
+                {% dnd_row %}
+                  {% dnd_module path="../modules/services-listing" label="Services Listing" %}
+                  {% end_dnd_module %}
+                {% end_dnd_row %}
+              {% end_dnd_column %}
+            {% end_dnd_section %}
+          {% end_dnd_area %}
+        {% endif %}
+
+        {# ═══════════════════════════════════════════════════════
+           SERVICE DETAIL VIEW — /services/[slug]
+           Renders on the live dynamic URL. In the editor it's also
+           rendered but visually hidden so its modules appear in the
+           page-contents tree for editing.
+
+           The hero module is HubDB-driven AND CRM-driven (RM lookup
+           via USER_DEFINED association id 35) and outputs THREE
+           top-level sections as direct grid items of .service-detail-layout
+           (made direct via display:contents on the HubSpot module wrapper —
+           see css/portal/service-detail.css):
+             .service-detail-hero__main             (top-left, row 1)
+             .service-detail-hero__side             (right, spans rows 1-2 — form + RM, sticky)
+             .service-detail-hero__related-section  (bottom-left, row 2)
+           ═══════════════════════════════════════════════════════ #}
+        {% if dynamic_page_hubdb_row or is_in_editor %}
+          <div class="service-detail-layout"
+               {% if is_in_editor and not dynamic_page_hubdb_row %}style="display:none" aria-hidden="true"{% endif %}>
+
+            {% module "service_detail_hero"
+              path="../modules/service-detail-hero"
+              label="Service Detail (HubDB + CRM driven: hero, form, RM, related)"
+            %}
+
+          </div>{# end service-detail-layout #}
+        {% endif %}
+
+      </main>{# end portal-main #}
+
+    </div>{# end portal-body #}
+
+    {% module "portal_footer" path="../modules/portal-footer" label="Portal Footer" %}
+
+  </div>{# end portal-content-outer #}
+
+</div>{# end portal-layout #}
+{% endblock %}

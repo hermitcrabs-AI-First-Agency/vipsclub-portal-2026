@@ -1,0 +1,923 @@
+{# ============================================================
+   VIPSCLUB Portal 2026 — My Deals Module
+   Single-page module with three JS-toggled states:
+     1. List view  — Earnings Breakdown + deals table (desktop) / cards (mobile)
+     2. Detail view — JS-toggled when a row is clicked
+     3. Register-a-Deal modal — HubSpot custom form
+
+   CRM data: Deals associated with the logged-in contact via TWO
+   USER_DEFINED labels (per client visibility spec). IDs below are the
+   CONTACT → DEAL direction (the inverse of the Deal → Contact IDs 48/50):
+     • Partner       — association label id 49 (registered_deal_partner,
+                       "Registered Deal" from contact's perspective)
+     • Job Manager   — association label id 51 (assigned_deal_job_manager,
+                       "Assigned Deal" from contact's perspective)
+   We fetch both lists separately, merge, dedupe by deal id, then attach
+   the deal's Job Manager contact (one crm_associations call per deal) so
+   downstream render loops can read it for free.
+
+   Properties used (existing + new vc_* group "vipsclub_portal"):
+     dealname, amount, dealstage, pipeline, createdate, closedate
+     referral_name           — Client Name
+     job_manager__jm_        — Job Manager
+     cr_additional_notes     — Deal description
+     re_property_address     — Property address (RE deals)
+     cr_estimated_settlement_date — Settlement date alt
+     vc_industry             — Mortgage / Real Estate / Insurance / Legal / Finance / Other
+     vc_service_type         — Home Loan / Property Sale / ...
+     vc_commission_rate_min  — Min %
+     vc_commission_rate_max  — Max %
+     vc_max_payout           — Maximum payout ($)
+     vc_fee_pending_date     — Date fee marked pending
+     vc_fee_approved_date    — Date fee approved
+     vc_fee_paid_date        — Date fee paid
+     vc_payment_status       — pending / approved / paid
+     vc_included_items       — One feature per line
+     vc_show_in_portal       — Boolean (labelled "Hide in Portal"; INVERTED — true = hide)
+
+   Pipeline stage → portal stage mapping is done in module.js.
+   ============================================================ #}
+
+{# Dates are rendered raw via data attributes; JS formats them client-side
+   so we avoid HubL date filters that behave inconsistently across portals. #}
+
+{# ── View mode split (list vs single-deal detail) ──
+   HubL's crm_associations() has a hard per-page-render call cap around 10.
+   Rendering N deals × (JM + Client) association lookups blows through it
+   for any member with more than ~4 deals. Fix: split into two URLs:
+
+     /my-deals          → LIST mode  (no per-deal association lookups)
+     /my-deals?id=<id>  → DETAIL mode (one deal, full enrichment)
+
+   In list mode the JM cell in the row falls back to the legacy
+   `job_manager__jm_` text property. In detail mode we run the JM +
+   Client lookups for THAT ONE DEAL only (2 calls total), well under
+   the cap, and skip rendering the list entirely. Row click JS
+   navigates to ?id=<id>; the back-link JS clears the query. #}
+{% set _request_id = request.query_dict.id | default("") | string | trim %}
+{% if _request_id %}
+  {% set _view_mode = "detail" %}
+{% else %}
+  {% set _view_mode = "list" %}
+{% endif %}
+
+{# ── Fetch deals associated with logged-in contact ──
+   crm_associations only works on Private Content pages for Deal/Contact objects.
+   On public pages, contact.hs_object_id is empty and we render an empty state.
+
+   Visibility rules (MD-V1 / V2 / V3):
+     • IP Partner (Contact→Deal typeId 61 / Deal→Contact typeId 60)
+         Can VIEW  → fetched here
+         Can't EDIT → the Edit toggle is hidden below; the initial-lead
+                      contact form stays available (client's MD-V1 note)
+     • PP Partner (Contact→Deal typeId 63 / Deal→Contact typeId 62)
+         Can VIEW  → fetched here
+         Can EDIT  → Edit toggle shown as-is
+     • Job Manager (Contact→Deal typeId 51 / Deal→Contact typeId 50)
+         Can't VIEW → NOT fetched here. The JM contact info is still
+                      pulled via typeId 50 (deal → JM contact) further
+                      down and rendered in each deal's Job Manager field
+                      — the JM just doesn't see the deals on their own
+                      My Deals page.
+
+   Legacy: the old "Partner" pair (typeIds 48/49) is deprecated — any
+   pre-existing associations on that pair are ignored by this portal.
+   If a deal ever needs to be reclassified, ops moves the association
+   from typeId 49 → 61 (IP) or 63 (PP) in HubSpot. #}
+{% set contact_id = contact.hs_object_id | default(0) | int %}
+{% set deals = [] %}
+{% if contact_id %}
+  {# Shared property list — same for both fetches #}
+  {# MD-D2: Conditional Exchange date lives on the custom
+     `conditional_exchange_date` Deal property, populated by an ops
+     workflow that fires on stage transition (per-pipeline branch).
+     The module just reads the property — no pipeline branching. #}
+  {% set _deal_props = "dealname,amount,dealstage,pipeline,createdate,closedate,referral_name,job_manager__jm_,job_manager_email__jm_,vc_job_manager_email,cr_additional_notes,re_property_address,cr_estimated_settlement_date,vc_industry,vc_service_type,vc_deal_type,vc_commission_rate_min,vc_commission_rate_max,vc_max_payout,vc_fee_pending_date,vc_fee_approved_date,vc_fee_paid_date,vc_payment_status,vc_included_items,vc_show_in_portal,referral_fee,referral_fee_amount,conditional_exchange_date,deal_progress" %}
+
+  {# Deals where this contact is the PP Partner (view + edit).
+     Fetched FIRST so PP wins over IP on dedup when a contact happens to
+     hold both labels on the same deal — always give them the higher-
+     permission role. limit=500 is HubSpot's per-call max. #}
+  {% set pp_data = crm_associations(
+    contact_id,
+    "USER_DEFINED",
+    63,
+    "limit=500",
+    _deal_props,
+    false
+  ) %}
+
+  {# Deals where this contact is the IP Partner (view only). #}
+  {% set ip_data = crm_associations(
+    contact_id,
+    "USER_DEFINED",
+    61,
+    "limit=500",
+    _deal_props,
+    false
+  ) %}
+
+  {# Merge PP and IP lists, deduping by record id. PP is walked FIRST so
+     when a contact holds both roles on the same deal, PP (higher perms)
+     wins the role tag and IP is skipped for that record.
+
+     IMPORTANT: dedup on `d.id` not `d.hs_object_id`. USER_DEFINED
+     association fetches sometimes strip `hs_object_id` (same gotcha as
+     the createdate strip); `d.id` is more reliably present.
+
+     Each deal gets `_role` = "pp_partner" | "ip_partner". Downstream
+     rendering reads this via `data-role` on the row/card to gate the
+     Edit toggle (MD-V1: IP can't edit; MD-V2: PP can edit).
+
+     MD-K1 kill switch — during merge we also apply `vc_show_in_portal`
+     (labelled "Hide in Portal" in the UI). Semantics INVERTED so HubL's
+     empty→"false" coercion works in our favour:
+       Yes    → "true"  → HIDE (drops from list AND from MD-M1 count)
+       No     → "false" → show
+       Empty  → coerces to "false" → show (default = visible) #}
+  {% set _seen_ids = [] %}
+  {% set _merged = [] %}
+  {% if pp_data and pp_data.results %}
+    {% for d in pp_data.results %}
+      {% set _visible = (d.vc_show_in_portal | string | lower) != "true" %}
+      {% if d.id and (d.id not in _seen_ids) and _visible %}
+        {% do d.update({"_role": "pp_partner"}) %}
+        {% do _seen_ids.append(d.id) %}
+        {% do _merged.append(d) %}
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+  {% if ip_data and ip_data.results %}
+    {% for d in ip_data.results %}
+      {% set _visible = (d.vc_show_in_portal | string | lower) != "true" %}
+      {% if d.id and (d.id not in _seen_ids) and _visible %}
+        {% do d.update({"_role": "ip_partner"}) %}
+        {% do _seen_ids.append(d.id) %}
+        {% do _merged.append(d) %}
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+
+  {# JM + Client contact enrichment.
+     MD-V4: deal can have MULTIPLE JMs. MD-C1: deal can have MULTIPLE Clients.
+     Association typeIds (Deal → Contact side):
+       50 = Job Manager
+       64 = Client   (paired inverse typeId 65 = "Client Deal")
+
+     BEFORE we split into list/detail modes, this loop ran for every deal
+     (N × 2 crm_associations calls) and pushed the page past HubSpot's
+     ~10-call cap on any real deal count. NOW: only run for the ONE deal
+     the URL points at in detail mode. List mode uses legacy
+     `job_manager__jm_` text and skips clients entirely — clients only
+     appear in the detail info card, which is no longer rendered on
+     the list page. #}
+  {% if _view_mode == "detail" %}
+    {% for d in _merged %}
+      {% if (d.id | string) == _request_id %}
+        {% set _ja = crm_associations(d.id, "USER_DEFINED", 50, "limit=10", "firstname,lastname,email", false) %}
+        {% if _ja and _ja.results %}
+          {% do d.update({"_jm_contacts": _ja.results}) %}
+        {% else %}
+          {% do d.update({"_jm_contacts": []}) %}
+        {% endif %}
+        {% set _cl = crm_associations(d.id, "USER_DEFINED", 64, "limit=10", "firstname,lastname,email,phone", false) %}
+        {% if _cl and _cl.results %}
+          {% do d.update({"_client_contacts": _cl.results}) %}
+        {% else %}
+          {% do d.update({"_client_contacts": []}) %}
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+
+  {# Sort newest-first by createdate (epoch ms) so the table feels natural. #}
+  {% set deals = _merged | sort(reverse=True, attribute="createdate") %}
+
+{% endif %}
+
+{# Earnings Breakdown totals are computed in module.js (HubL {% for %} scope issue
+   means accumulating values doesn't work). HubL just renders placeholder zeros and
+   the JS sums the values from the rendered rows on load. #}
+
+{# Build inline style for per-instance overrides — HubL in CSS is no longer parsed #}
+{% set _section_style = "" %}
+{% if module.style_overrides.background_color.color %}{% set _section_style = _section_style ~ "background-color:" ~ module.style_overrides.background_color.color ~ ";" %}{% endif %}
+{% if module.style_overrides.padding_top %}{% set _section_style = _section_style ~ "padding-top:" ~ module.style_overrides.padding_top ~ "px;" %}{% endif %}
+{% if module.style_overrides.padding_bottom %}{% set _section_style = _section_style ~ "padding-bottom:" ~ module.style_overrides.padding_bottom ~ "px;" %}{% endif %}
+
+<section class="my-deals{% if module.style_overrides.hide_on_mobile %} my-deals--hide-mobile{% endif %}{% if module.style_overrides.hide_on_desktop %} my-deals--hide-desktop{% endif %}"
+         {% if _section_style %}style="{{ _section_style }}"{% endif %}
+         aria-label="My Deals"
+         data-contact-id="{{ contact_id }}"
+         data-deals-count="{{ deals | length }}"
+         data-view-mode="{{ _view_mode }}"
+         data-request-id="{{ _request_id | escape_attr }}"
+         data-debug-build="md-c1-2026-07-10-b">
+
+  {# ============================================================
+     LIST VIEW — only rendered when the URL has no `id` param.
+     Detail mode skips this block entirely so all the list-only HTML
+     (earnings breakdown, filter toolbar, table body, mobile cards) is
+     absent — the browser paints just the detail card.
+     ============================================================ #}
+  {% if _view_mode == "list" %}
+  <div class="my-deals__list-view" id="my-deals-list" aria-live="polite">
+
+    {# ── Earnings Breakdown — desktop: intro card + 3 separate stat cards.
+         Mobile: the .my-deals__earnings wrapper becomes ONE card holding the
+         heading/sub + a 3-column stats row (matches the mobile Figma). ── #}
+    <div class="my-deals__earnings">
+      <div class="my-deals__earnings-intro">
+        {% if module.earnings_heading %}
+        <{{ module.heading_level | default("h2") }} class="my-deals__earnings-heading">{{ module.earnings_heading | escape_html }}</{{ module.heading_level | default("h2") }}>
+        {% endif %}
+        {% if module.earnings_subheading %}
+        <p class="my-deals__earnings-sub">{{ module.earnings_subheading | escape_html }}</p>
+        {% endif %}
+      </div>
+
+      {# Hoist the zero-state fallback once so the same string is used in both
+         the Earned and Paid value spans. The matching CSS modifier class
+         (.my-deals__earnings-value--fallback) shrinks the font from 28px → 14px
+         so the longer text fits the card width at both desktop and mobile. #}
+      {% set _zero_fallback = module.stat_zero_fallback | default("WIP (Contact BDM)") %}
+
+      <div class="my-deals__earnings-grid">
+        <div class="my-deals__earnings-stat">
+          <span class="my-deals__earnings-value">{{ deals | length }}</span>
+          <span class="my-deals__earnings-label">{{ module.stat_contributed_label | default("Total No. of Deals") | escape_html }}</span>
+        </div>
+        <div class="my-deals__earnings-stat">
+          <span class="my-deals__earnings-value my-deals__earnings-value--fallback" data-earnings="earned">{{ _zero_fallback | escape_html }}</span>
+          <span class="my-deals__earnings-label">{{ module.stat_earned_label | default("Total Fees Earned") | escape_html }}</span>
+        </div>
+        <div class="my-deals__earnings-stat">
+          <span class="my-deals__earnings-value my-deals__earnings-value--fallback" data-earnings="paid">{{ _zero_fallback | escape_html }}</span>
+          <span class="my-deals__earnings-label">{{ module.stat_paid_label | default("Total Fees Paid") | escape_html }}</span>
+        </div>
+      </div>
+    </div>
+
+    {# ── Available Deals — header + toolbar are NOT in a card; only the table is. ── #}
+    <div class="my-deals__header">
+      {% if module.section_heading %}
+      <{{ module.heading_level | default("h2") }} class="my-deals__heading">{{ module.section_heading | escape_html }}</{{ module.heading_level | default("h2") }}>
+      {% endif %}
+
+      <button class="my-deals__add-btn"
+              type="button"
+              aria-haspopup="dialog"
+              aria-controls="my-deals-modal">
+        {{ module.add_deal_text | default("Register a Deal") | escape_html }}
+      </button>
+    </div>
+
+    {# ── Toolbar: filter tabs + search (no card) ── #}
+    <div class="my-deals__toolbar">
+      <div class="my-deals__filters" role="tablist" aria-label="Filter deals">
+        {# NOTE: visible tab labels (e.g. "Prospecting") are decoupled from internal
+           filter keys ("pending"). Do NOT rename the data-filter values without also
+           updating STAGE_MAP filterCategory literals in module.js. #}
+        <button class="my-deals__filter-tab" type="button" role="tab" aria-selected="false" data-filter="all">{{ module.filter_all_label | default("All") | escape_html }}</button>
+        <button class="my-deals__filter-tab" type="button" role="tab" aria-selected="false" data-filter="pending">{{ module.filter_pending_label | default("Prospecting") | escape_html }}</button>
+        <button class="my-deals__filter-tab is-active" type="button" role="tab" aria-selected="true" data-filter="active">{{ module.filter_active_label | default("Active") | escape_html }}</button>
+        <button class="my-deals__filter-tab" type="button" role="tab" aria-selected="false" data-filter="archived">{{ module.filter_archived_label | default("Archived") | escape_html }}</button>
+      </div>
+
+      {# ── Date Range filter (dropdown) ──
+         Single <select> for cleaner layout. Empty value = "All time" (no date
+         filter applied). JS listens for `change` events and combines this
+         filter with the stage tabs + search via AND logic in applyFilters(). #}
+      <div class="my-deals__date-dropdown">
+        <label class="my-deals__date-dropdown-label" for="my-deals-date-filter">
+          {{ module.date_filter_dropdown_label | default("Date") | escape_html }}
+        </label>
+        <div class="my-deals__date-dropdown-wrap">
+          <select id="my-deals-date-filter"
+                  class="my-deals__date-select"
+                  data-deal-date-filter>
+            <option value="">{{ module.date_filter_all_label | default("All time") | escape_html }}</option>
+            <option value="this_month">{{ module.date_filter_this_month_label | default("This month") | escape_html }}</option>
+            <option value="last_3m">{{ module.date_filter_3m_label | default("Last 3 months") | escape_html }}</option>
+            <option value="last_12m">{{ module.date_filter_12m_label | default("Last 12 months") | escape_html }}</option>
+          </select>
+          <svg class="my-deals__date-dropdown-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </div>
+      <div class="my-deals__search">
+        <svg class="my-deals__search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="2"/>
+          <path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <input type="text" class="my-deals__search-input" placeholder="{{ module.search_placeholder | default('Search deals, clients...') | escape_attr }}" aria-label="Search deals">
+      </div>
+    </div>
+
+    {% if deals and deals | length > 0 %}
+
+    {# ── Table card — wraps desktop table + pagination as a single visual card ── #}
+    <div class="my-deals__table-card">
+
+    <div class="my-deals__table-wrap">
+        <table class="my-deals__table" aria-label="Deals">
+          <thead>
+            <tr>
+              <th scope="col">{{ module.col_industry | default("INDUSTRY") | escape_html }}</th>
+              <th scope="col">{{ module.col_deal_name | default("DEAL NAME") | escape_html }}</th>
+              <th scope="col">{{ module.col_manager | default("JOB MANAGER") | escape_html }}</th>
+              <th scope="col">{{ module.col_date_registered | default("DATE REGISTERED") | escape_html }}</th>
+              <th scope="col">{{ module.col_stage | default("STAGE") | escape_html }}</th>
+              <th scope="col" aria-hidden="true"></th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for deal in deals %}
+            <tr class="my-deals__row"
+                data-deal-id="{{ deal.id }}"
+                data-stage="{{ deal.dealstage | default('') | escape_attr }}"
+                data-deal-progress="{{ deal.deal_progress | default('') | escape_attr }}"
+                data-industry="{{ deal.vc_industry | default('') | escape_attr }}"
+                data-amount="{{ deal.amount | default(0) }}"
+                data-referral-fee-amount="{{ deal.referral_fee_amount | default('') | escape_attr }}"
+                data-referral-fee="{{ deal.referral_fee | default('') | escape_attr }}"
+                data-payment-status="{{ deal.vc_payment_status | default('') | escape_attr }}"
+                data-fee-paid-date="{{ deal.vc_fee_paid_date | default('') | escape_attr }}"
+                data-createdate="{{ deal.createdate | default('') | escape_attr }}"
+                data-role="{{ deal._role | default('') | escape_attr }}"
+                tabindex="0"
+                role="button"
+                aria-label="View details for {{ deal.dealname | default('Deal') | escape_attr }}">
+              <td class="my-deals__td">{{ deal.vc_industry | default("—") | replace("_", " ") | capitalize | escape_html }}</td>
+              <td class="my-deals__td">{{ deal.dealname | default("—") | escape_html }}</td>
+              <td class="my-deals__td">
+                {# Job Manager — shows first JM's name + a "+N" pill when the
+                   deal has multiple JMs. Full list lives in the detail view.
+                   Reads the precomputed deal._jm_contacts (list). #}
+                {%- if deal._jm_contacts and (deal._jm_contacts | length) > 0 -%}
+                  {%- set _first_jm = deal._jm_contacts[0] -%}
+                  {%- set _first_name = ((_first_jm.firstname | default("")) ~ " " ~ (_first_jm.lastname | default(""))) | trim -%}
+                  {{- _first_name | default("—") | escape_html -}}
+                  {%- set _extra = (deal._jm_contacts | length) - 1 -%}
+                  {%- if _extra > 0 -%}
+                    <span class="my-deals__jm-count-pill" aria-label="{{ _extra }} additional job manager(s)">+{{ _extra }}</span>
+                  {%- endif -%}
+                {%- else -%}
+                  {{- deal.job_manager__jm_ | default("—") | escape_html -}}
+                {%- endif -%}
+              </td>
+              <td class="my-deals__td">
+                <span class="my-deals__date-cell">
+                  <svg class="my-deals__date-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/>
+                    <line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <line x1="8" y1="2" x2="8" y2="6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <line x1="3" y1="10" x2="21" y2="10" stroke="currentColor" stroke-width="2"/>
+                  </svg>
+                  <span class="my-deals__date" data-date="{{ deal.createdate | default('') | escape_attr }}">—</span>
+                </span>
+              </td>
+              <td class="my-deals__td my-deals__td--status">
+                <span class="my-deals__stage-badge" data-stage="{{ deal.dealstage | default('') | escape_attr }}"
+                data-deal-progress="{{ deal.deal_progress | default('') | escape_attr }}">{{ deal.dealstage | default("—") | escape_html }}</span>
+              </td>
+              <td class="my-deals__td my-deals__td--chevron" aria-hidden="true">›</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+      {# ── Mobile cards ── #}
+      <div class="my-deals__cards" aria-label="Deals">
+        {% for deal in deals %}
+        <div class="my-deals__card"
+             data-deal-id="{{ deal.id }}"
+             data-stage="{{ deal.dealstage | default('') | escape_attr }}"
+                data-deal-progress="{{ deal.deal_progress | default('') | escape_attr }}"
+             data-industry="{{ deal.vc_industry | default('') | escape_attr }}"
+             data-createdate="{{ deal.createdate | default('') | escape_attr }}"
+             data-role="{{ deal._role | default('') | escape_attr }}"
+             tabindex="0"
+             role="button"
+             aria-label="View details for {{ deal.dealname | default('Deal') | escape_attr }}">
+          <div class="my-deals__card-top">
+            <span class="my-deals__card-name">{{ deal.dealname | default(deal.referral_name) | default("Deal") | escape_html }}</span>
+            <span class="my-deals__stage-badge my-deals__card-status" data-stage="{{ deal.dealstage | default('') | escape_attr }}"
+                data-deal-progress="{{ deal.deal_progress | default('') | escape_attr }}">{{ deal.dealstage | default("—") | escape_html }}</span>
+          </div>
+          <p class="my-deals__card-meta">
+            {{ deal.vc_industry | default("—") | replace("_", " ") | capitalize | escape_html }}
+          </p>
+          <div class="my-deals__card-info">
+            {# Mobile card Job Manager — first JM's name + "+N" pill when
+               there's more than one. Full list is in the detail view. #}
+            {% set _jm_card_name = "" %}
+            {% set _jm_card_extra = 0 %}
+            {% if deal._jm_contacts and (deal._jm_contacts | length) > 0 %}
+              {% set _first_jm = deal._jm_contacts[0] %}
+              {% set _jm_card_name = ((_first_jm.firstname | default("")) ~ " " ~ (_first_jm.lastname | default(""))) | trim %}
+              {% set _jm_card_extra = (deal._jm_contacts | length) - 1 %}
+            {% else %}
+              {% set _jm_card_name = deal.job_manager__jm_ | default("") %}
+            {% endif %}
+            {% if _jm_card_name %}
+            <div class="my-deals__card-info-cell">
+              <span class="my-deals__card-info-label">{{ module.card_manager_label | default("Manager") | escape_html }}</span>
+              <span class="my-deals__card-info-value">
+                {{ _jm_card_name | escape_html }}
+                {% if _jm_card_extra > 0 %}<span class="my-deals__jm-count-pill" aria-label="{{ _jm_card_extra }} additional job manager(s)">+{{ _jm_card_extra }}</span>{% endif %}
+              </span>
+            </div>
+            {% endif %}
+            <div class="my-deals__card-info-cell">
+              <span class="my-deals__card-info-label">{{ module.card_date_label | default("Date") | escape_html }}</span>
+              <span class="my-deals__card-info-value my-deals__date" data-date="{{ deal.createdate | default('') | escape_attr }}">—</span>
+            </div>
+          </div>
+          <div class="my-deals__card-bottom">
+            <span class="my-deals__card-link">{{ module.view_details_text | default("View Details →") | escape_html }}</span>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+
+    {# ── Pagination (visual only, JS-driven) — inside the table card ── #}
+    <div class="my-deals__pagination" aria-label="Pagination">
+      <span class="my-deals__pagination-info">{{ module.pagination_info_text | default("Showing") | escape_html }} 1-{{ deals | length }} {{ module.pagination_of_text | default("of") | escape_html }} {{ deals | length }}</span>
+    </div>
+
+    </div>{# end table-card #}
+
+    {% else %}
+    <div class="my-deals__empty" role="status">
+      <p>{{ module.empty_state_text | default("No deals yet. Register your first referral above.") | escape_html }}</p>
+    </div>
+    {% endif %}
+
+  </div>{# end list-view #}
+  {% endif %}{# end list-mode #}
+
+
+  {# ============================================================
+     DETAIL VIEW — only rendered in detail mode, and only for the
+     ONE deal whose id matches the URL. Permission is enforced
+     implicitly: the deal only appears in `deals` if the logged-in
+     contact is an IP or PP Partner on it (that's what the PP + IP
+     fetches at the top of the file return). If someone types
+     ?id=<someone-elses-deal>, the for-loop below finds nothing and
+     renders the no-match fallback below.
+     ============================================================ #}
+  {% if _view_mode == "detail" %}
+  {# _found_ns is initialised OUTSIDE the deals check so the "not found"
+     fallback at the bottom ALWAYS renders when in detail mode — even if
+     the deals list is empty (contact has no deals) or the id doesn't
+     match any of them. Debug data attributes on the section wrapper
+     help diagnose when the page appears blank. #}
+  {% set _found_ns = namespace(hit=false) %}
+  {% for deal in deals %}
+  {% if (deal.id | string) == _request_id %}
+  {% set _found_ns.hit = true %}
+
+    {# ── MD-T1: Parse the vc_deal_type multiselect into a clean list.
+         crm_associations(formatting=false) returns MULTISELECT as a native
+         list; defensive fallback handles the semicolon-string shape too. #}
+    {% set _dt_ns = namespace(list=[]) %}
+    {% if deal.vc_deal_type %}
+      {% if deal.vc_deal_type is string %}
+        {% for _t in (deal.vc_deal_type | split(";")) %}
+          {% set _clean = _t | trim %}
+          {% if _clean %}{% do _dt_ns.list.append(_clean) %}{% endif %}
+        {% endfor %}
+      {% else %}
+        {% for _t in deal.vc_deal_type %}
+          {% set _clean = _t | string | trim %}
+          {% if _clean %}{% do _dt_ns.list.append(_clean) %}{% endif %}
+        {% endfor %}
+      {% endif %}
+    {% endif %}
+    {% set _dt_list = _dt_ns.list %}
+
+    {# Slug → human-friendly label map for the 8 vc_deal_type options.
+       Keep in sync with the property definition on 0-3. If a stray slug
+       shows up (property added, HubL not updated) we fall back to a
+       best-effort "capitalize the slug" render so nothing breaks. #}
+    {% set _dt_labels = {
+      "re_sales_esa":   "RE-Sales (ESA)",
+      "re_rentals_ema": "RE-Rentals (EMA)",
+      "cr_bf_cf":       "CR-BF/CF",
+      "cr_cbm":         "CR-CBM",
+      "cr_af":          "CR-AF",
+      "cr_resi":        "CR-Resi",
+      "cr_refinance":   "CR-Refinance",
+      "gi_car":         "GI-Car"
+    } %}
+
+  <div class="my-deals__detail-view"
+       id="my-deals-detail-{{ deal.id }}"
+       data-deal-id="{{ deal.id }}"
+       data-role="{{ deal._role | default('') | escape_attr }}"
+       data-debug-clients="{{ deal._client_contacts | length | default(0) }}"
+       data-debug-jms="{{ deal._jm_contacts | length | default(0) }}"
+       data-debug-build="md-c1-2026-07-10"
+       aria-labelledby="my-deals-deal-title-{{ deal.id }}">
+
+    {# ── Detail header — breadcrumb on the left, prominent "Back to
+         Deals" button on the right. Kept as one flex row so both align
+         to the same baseline; the button pushes to the right end via
+         justify-content: space-between in CSS. ── #}
+    <div class="my-deals__detail-header">
+      <nav class="my-deals__breadcrumb" aria-label="Breadcrumb">
+        <a href="{{ request.path | escape_attr }}" class="my-deals__back-link" data-action="back-to-list">{{ module.section_heading | default("Available Deals") | escape_html }}</a>
+        <svg class="my-deals__breadcrumb-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M15 6L9 12L15 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="my-deals__breadcrumb-current">
+          {%- if _dt_list and (_dt_list | length) > 0 -%}
+            {{- (_dt_labels[_dt_list[0]] | default(_dt_list[0] | replace("_", " ") | capitalize)) | escape_html -}} —
+          {%- elif deal.vc_service_type -%}
+            {{- deal.vc_service_type | escape_html -}} —
+        {%- endif -%}
+        {{- deal.dealname | default("Deal") | escape_html -}}
+      </span>
+      </nav>
+      <a href="{{ request.path | escape_attr }}"
+         class="my-deals__back-btn"
+         data-action="back-to-list">
+        <svg class="my-deals__back-btn-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M15 6L9 12L15 18" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        {{ module.back_to_list_text | default("Back") | escape_html }}
+      </a>
+    </div>
+
+    {# ── Deal Info Card — title/submitter/status head, then a body row:
+         info-grid | divider | referral-fee | job-manager (bordered box) ── #}
+    <div class="my-deals__info-card">
+
+      {# Head: title + submitter. Status pill is absolute top-right on desktop;
+         on mobile it drops into flow BELOW the Deal ID (see mobile CSS). #}
+      <div class="my-deals__info-head">
+        <h2 class="my-deals__deal-title" id="my-deals-deal-title-{{ deal.id }}">
+          {{ deal.dealname | default("Deal") | escape_html }}
+        </h2>
+        <p class="my-deals__deal-submitter">
+          {% if contact.firstname %}{{ module.submitted_by_label | default("Submitted by") | escape_html }} {{ contact.firstname | escape_html }}{% endif %}
+          {% if deal.id %} · {{ module.deal_id_label | default("Deal ID") | escape_html }} #VC-{{ deal.id | string | truncate(8, true, '') }}{% endif %}
+        </p>
+        <span class="my-deals__status-dot-pill my-deals__status-dot-pill--stage" data-stage="{{ deal.dealstage | default('') | escape_attr }}"
+                data-deal-progress="{{ deal.deal_progress | default('') | escape_attr }}">
+          <span class="my-deals__status-dot" aria-hidden="true"></span>
+          <span data-stage-pill-label>—</span>
+        </span>
+      </div>
+
+      {# Body row: grid (left) | divider | referral fee | job-manager box #}
+      <div class="my-deals__info-body">
+
+        <div class="my-deals__info-grid">
+          <div class="my-deals__info-cell">
+            <span class="my-deals__info-label">{{ module.label_industry | default("INDUSTRY") | escape_html }}</span>
+            <span class="my-deals__info-value">{{ deal.vc_industry | default("—") | replace("_", " ") | capitalize | escape_html }}</span>
+          </div>
+          <div class="my-deals__info-cell">
+            <span class="my-deals__info-label">{{ module.label_deal_type | default("DEAL TYPE") | escape_html }}</span>
+            <span class="my-deals__info-value">
+              {%- if _dt_list and (_dt_list | length) > 0 -%}
+                {%- for _t in _dt_list -%}
+                  {{- (_dt_labels[_t] | default(_t | replace("_", " ") | capitalize)) | escape_html -}}
+                  {%- if not loop.last -%}, {% endif -%}
+                {%- endfor -%}
+              {%- elif deal.vc_service_type -%}
+                {{- deal.vc_service_type | escape_html -}}
+              {%- else -%}
+                —
+              {%- endif -%}
+            </span>
+          </div>
+          {# MD-C1 — Combined Client cell (name + details together per
+             client, one block per person). Spans both grid columns so
+             the previous alignment issue between two separate cells
+             (name wrapping different from details) is gone. Fallback
+             to `referral_name` / `vc_client_phone` for deals without
+             any Client-labeled contacts. #}
+          <div class="my-deals__info-cell my-deals__info-cell--client">
+            <span class="my-deals__info-label">{{ module.label_client | default("CLIENT DETAILS") | escape_html }}</span>
+            <div class="my-deals__info-value">
+              {% if deal._client_contacts and (deal._client_contacts | length) > 0 %}
+                {% for _c in deal._client_contacts %}
+                  {% set _full = ((_c.firstname | default("")) ~ " " ~ (_c.lastname | default(""))) | trim %}
+                  {% set _em   = _c.email | default("") | trim %}
+                  {% set _ph   = _c.phone | default("") | trim %}
+                  <div class="my-deals__client-entry">
+                    <div class="my-deals__client-name">{{ _full | default("—") | escape_html }}</div>
+                    <div class="my-deals__client-details">{{ (_em or "-") | escape_html }}, {{ (_ph or "-") | escape_html }}</div>
+                  </div>
+                {% endfor %}
+              {% else %}
+                <div class="my-deals__client-entry">
+                  <div class="my-deals__client-name">{{ deal.referral_name | default("—") | escape_html }}</div>
+                  <div class="my-deals__client-details">{{ deal.vc_client_phone | default("—") | escape_html }}</div>
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+
+        <div class="my-deals__info-divider" aria-hidden="true"></div>
+
+        <div class="my-deals__fee-block">
+          {# Referral-fee display, priority:
+             1. `referral_fee_amount` (number, AUD) — formatted as $N,NNN
+             2. `referral_fee` (Referral Fee Override, free text) — shown verbatim
+             3. Fallback — the module's estimated-payout string (was previously
+                deal.amount, but per client the deal amount ≠ the referral fee).
+             Only path 1 feeds into the Total Fees Earned / Paid metrics. #}
+          <span class="my-deals__info-label">{{ module.label_fee | default("REFERRAL FEE") | escape_html }}</span>
+          {% if deal.referral_fee_amount %}
+            <span class="my-deals__info-fee-value">${{ deal.referral_fee_amount | int | format_number('en-AU') }}</span>
+          {% elif deal.referral_fee %}
+            <span class="my-deals__info-fee-value">{{ deal.referral_fee | escape_html }}</span>
+          {% else %}
+            <span class="my-deals__info-fee-value">—</span>
+          {% endif %}
+        </div>
+
+        <div class="my-deals__jm-block">
+          <span class="my-deals__info-label">{{ module.label_job_manager | default("YOUR JOB MANAGER") | escape_html }}</span>
+
+          {# Job Manager list — one .__jm-entry per JM (name + email pair).
+             The label ("YOUR JOB MANAGER") stays singular by design — the
+             detail view is per-deal, and pluralising the label for edge-
+             case multi-JM decks makes the common single-JM case read
+             oddly. Falls back to the deal's `job_manager__jm_` text
+             property when no contact-associated JMs exist. #}
+          {% if deal._jm_contacts and (deal._jm_contacts | length) > 0 %}
+            {% for _jm in deal._jm_contacts %}
+              {% set _jm_name = ((_jm.firstname | default("")) ~ " " ~ (_jm.lastname | default(""))) | trim %}
+              <div class="my-deals__jm-entry">
+                <strong class="my-deals__jm-name">{{ _jm_name | default("—") | escape_html }}</strong>
+                {% if _jm.email %}
+                <a class="my-deals__jm-email" href="mailto:{{ _jm.email | escape_attr }}">{{ _jm.email | escape_html }}</a>
+                {% else %}
+                <span class="my-deals__jm-email my-deals__jm-email--empty">—</span>
+                {% endif %}
+              </div>
+            {% endfor %}
+          {% else %}
+            <div class="my-deals__jm-entry">
+              <strong class="my-deals__jm-name">{{ deal.job_manager__jm_ | default("—") | escape_html }}</strong>
+              <span class="my-deals__jm-email my-deals__jm-email--empty">—</span>
+            </div>
+          {% endif %}
+        </div>
+
+      </div>
+    </div>
+
+    {# ── Key Deal Dates — heading outside card; 3 separate cards below ── #}
+    <h3 class="my-deals__section-heading">{{ module.heading_key_dates | default("Key Deal Dates") | escape_html }}</h3>
+    <div class="my-deals__dates-grid">
+      <div class="my-deals__dates-cell">
+        <span class="my-deals__info-label">{{ module.label_registration_date | default("REGISTRATION DATE") | escape_html }}</span>
+        <span class="my-deals__dates-value my-deals__date my-deals__date--long" data-date="{{ deal.createdate | default('') | escape_attr }}">—</span>
+      </div>
+      {# MD-D2: Conditional Exchange = the custom
+         `conditional_exchange_date` Deal property. An ops workflow
+         stamps it when the deal enters its pipeline-specific
+         conditional-exchange stage (RE3 → 3.4 Post Unconditional,
+         CR → 4. Conditional/Completed, etc.). Empty until stamped. #}
+      <div class="my-deals__dates-cell">
+        <span class="my-deals__info-label">{{ module.label_exchange_date | default("CONDITIONAL EXCHANGE") | escape_html }}</span>
+        <span class="my-deals__dates-value my-deals__date my-deals__date--long" data-date="{{ deal.conditional_exchange_date | default('') | escape_attr }}">—</span>
+      </div>
+      {# MD-D3: Settlement Date = deal close date. Legacy
+         cr_estimated_settlement_date is kept as a fallback for CR-era
+         deals where the close hadn't been recorded on `closedate`. #}
+      <div class="my-deals__dates-cell">
+        <span class="my-deals__info-label">{{ module.label_settlement_date | default("SETTLEMENT DATE") | escape_html }}</span>
+        <span class="my-deals__dates-value my-deals__date my-deals__date--long" data-date="{{ (deal.closedate | default('') or deal.cr_estimated_settlement_date | default('')) | escape_attr }}">—</span>
+      </div>
+    </div>
+
+    {# ── Referral Fee Status — heading outside card; 3 separate cards below ── #}
+    <h3 class="my-deals__section-heading">{{ module.heading_fee_status | default("Referral Fee Status") | escape_html }}</h3>
+    <div class="my-deals__dates-grid">
+      <div class="my-deals__dates-cell">
+        <span class="my-deals__info-label">{{ module.label_pending | default("PENDING") | escape_html }}</span>
+        {# MD-S1 — Fee is Pending from the moment the deal is created
+           (the referrer's fee enters the review queue at t=0). Auto
+           reads `createdate` unless ops explicitly set a manual
+           `vc_fee_pending_date` — that override still wins. #}
+        <span class="my-deals__dates-value my-deals__date my-deals__date--long" data-date="{{ (deal.vc_fee_pending_date | default('') or deal.createdate | default('')) | escape_attr }}">—</span>
+      </div>
+      <div class="my-deals__dates-cell">
+        <span class="my-deals__info-label">{{ module.label_approved | default("APPROVED") | escape_html }}</span>
+        <span class="my-deals__dates-value my-deals__date my-deals__date--long" data-date="{{ deal.vc_fee_approved_date | default('') | escape_attr }}">—</span>
+      </div>
+      <div class="my-deals__dates-cell">
+        <span class="my-deals__info-label">{{ module.label_paid | default("PAID") | escape_html }}</span>
+        <span class="my-deals__dates-value my-deals__date my-deals__date--long" data-date="{{ deal.vc_fee_paid_date | default('') | escape_attr }}">—</span>
+      </div>
+    </div>
+
+    {# ── Deal Progress — FAQ-style accordion using native <details> elements.
+         Each step row shows: stage label · status pill · +/- icon. Clicking
+         a row toggles the description body. The current stage opens by
+         default so the user sees its description at first glance. ── #}
+    <h3 class="my-deals__section-heading">{{ module.heading_progress | default("Deal Progress") | escape_html }}</h3>
+    <div class="my-deals__progress-card">
+      <div class="my-deals__progress" data-stage="{{ deal.dealstage | default('') | escape_attr }}"
+                data-deal-progress="{{ deal.deal_progress | default('') | escape_attr }}">
+        <details class="my-deals__progress-step" data-step="prospect">
+          <summary class="my-deals__progress-summary">
+            <span class="my-deals__progress-label">{{ module.stage_1_label | default("Prospect") | escape_html }}</span>
+            <span class="my-deals__progress-state">—</span>
+            <span class="my-deals__progress-icon" aria-hidden="true"></span>
+          </summary>
+          <div class="my-deals__progress-body">
+            <p class="my-deals__progress-desc">{{ module.stage_1_desc | default("Your referral is in the prospect stage, where we are evaluating the initial information and potential of the transaction.") | escape_html }}</p>
+          </div>
+        </details>
+        <details class="my-deals__progress-step" data-step="engagement">
+          <summary class="my-deals__progress-summary">
+            <span class="my-deals__progress-label">{{ module.stage_2_label | default("Engagement") | escape_html }}</span>
+            <span class="my-deals__progress-state">—</span>
+            <span class="my-deals__progress-icon" aria-hidden="true"></span>
+          </summary>
+          <div class="my-deals__progress-body">
+            <p class="my-deals__progress-desc">{{ module.stage_2_desc | default("Great news! Your referral has been successfully onboarded and we are now preparing for the conveyancing process to begin.") | escape_html }}</p>
+          </div>
+        </details>
+        <details class="my-deals__progress-step" data-step="conditional">
+          <summary class="my-deals__progress-summary">
+            <span class="my-deals__progress-label">{{ module.stage_3_label | default("Conditional Exchange") | escape_html }}</span>
+            <span class="my-deals__progress-state">—</span>
+            <span class="my-deals__progress-icon" aria-hidden="true"></span>
+          </summary>
+          <div class="my-deals__progress-body">
+            <p class="my-deals__progress-desc">{{ module.stage_3_desc | default("Your referral has exchanged contracts and is either in cool-off or preparing to fulfil their obligations to progress the contract.") | escape_html }}</p>
+          </div>
+        </details>
+        <details class="my-deals__progress-step" data-step="post_exchange">
+          <summary class="my-deals__progress-summary">
+            <span class="my-deals__progress-label">{{ module.stage_4_label | default("Unconditional Exchange") | escape_html }}</span>
+            <span class="my-deals__progress-state">—</span>
+            <span class="my-deals__progress-icon" aria-hidden="true"></span>
+          </summary>
+          <div class="my-deals__progress-body">
+            <p class="my-deals__progress-desc">{{ module.stage_4_desc | default("Your referral has reached the post-exchange stage, meaning the cool-off period has passed or the contracts have become unconditional, and we're progressing toward settlement.") | escape_html }}</p>
+          </div>
+        </details>
+        <details class="my-deals__progress-step" data-step="settled">
+          <summary class="my-deals__progress-summary">
+            <span class="my-deals__progress-label">{{ module.stage_5_label | default("Settled") | escape_html }}</span>
+            <span class="my-deals__progress-state">—</span>
+            <span class="my-deals__progress-icon" aria-hidden="true"></span>
+          </summary>
+          <div class="my-deals__progress-body">
+            <p class="my-deals__progress-desc">{{ module.stage_5_desc | default("Congratulations! Your referral has completed the conveyancing process and is now in the post-settlement stage where final details are being wrapped up.") | escape_html }}</p>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    {# ── Key Metrics — heading + Edit Details button + HubSpot form.
+         The form is rendered inline (visible by default) but locked: all
+         inputs are read-only and the submit button is hidden. Clicking
+         "Edit Details" removes the .is-locked class — inputs become
+         editable and the form's own Create Deal / submit button appears.
+         Click again ("Cancel") to re-lock.
+
+         MD-V1: IP Partner CAN'T EDIT existing deals — so the Edit
+         toggle is skipped entirely for them. The locked form still
+         renders as read-only view. Registering NEW deals (the modal
+         at the bottom of this file) stays open to all roles. #}
+    <div class="my-deals__metrics-header">
+      <h3 class="my-deals__section-heading my-deals__section-heading--inline">{{ module.heading_metrics | default("Key Metrics") | escape_html }}</h3>
+    </div>
+    <div class="my-deals__metrics-card">
+      {# MD-KM1-3: Key Metrics form is per-deal-type. HubDB table
+         `key_metrics_forms` (id 2756569537) has:
+           - deal_type (SELECT: option name = vc_deal_type value)
+           - form_link (TEXT: full HubSpot form URL — client pastes it,
+             we extract the GUID here so ops doesn't have to strip it)
+           - form_name (TEXT)
+         The form_link URL extraction: split by "?" (drop query), then
+         by "/", pick the segment that's a 36-char UUID. Works for
+         editor URLs, embed URLs, or any URL that contains the GUID.
+         JS in module.js prefills 0-5/deal_id so the ticket→deal
+         update workflow knows which deal to write back to. #}
+      {% set _dt = deal.vc_deal_type | default("") | string %}
+      {% set _km_rows = [] %}
+      {% if _dt %}
+        {% set _km_rows = hubdb_table_rows(2756569537, "deal_type=" ~ _dt ~ "&limit=1") %}
+      {% endif %}
+      {% set _km_row = _km_rows[0] if (_km_rows and (_km_rows | length) > 0) else none %}
+
+      {# Extract the form GUID from the client-pasted URL. #}
+      {% set _form_id = "" %}
+      {% if _km_row and _km_row.form_link %}
+        {% set _url_clean = (_km_row.form_link | split("?"))[0] %}
+        {% set _fid_ns = namespace(value="") %}
+        {% for _p in (_url_clean | split("/")) %}
+          {% if (_p | length) == 36 and "-" in _p %}
+            {% set _fid_ns.value = _p %}
+          {% endif %}
+        {% endfor %}
+        {% set _form_id = _fid_ns.value %}
+      {% endif %}
+
+      {% if _form_id %}
+        {# my-deals__modal-form class reuses the Register-a-Deal form's
+           layout/spacing/email-hide/hidden-field-collapse rules so
+           this inline form looks identical to the modal one.
+           MD-V1: IP partners can see the form but can't edit — the
+           JS reads `data-role` and disables inputs + hides submit
+           when it's `ip_partner`. A short read-only notice renders
+           above the form so it's obvious why they can't submit. #}
+        {% if deal._role == "ip_partner" %}
+        <div class="my-deals__key-metrics-readonly-notice">
+          {{ module.km_readonly_notice | default("You have view-only access to this deal. Ask your Job Manager to update these details.") | escape_html }}
+        </div>
+        {% endif %}
+        <div class="my-deals__edit-form my-deals__modal-form my-deals__key-metrics-form"
+             data-role="{{ deal._role | default('') | escape_attr }}"
+             data-deal-id="{{ deal.id }}"
+             data-deal-name="{{ deal.dealname | default('') | escape_attr }}"
+             data-contact-email="{{ contact.email | default('') | escape_attr }}">
+          {% form "key_metrics_form"
+            form_to_use="{{ _form_id }}"
+          %}
+        </div>
+      {% elif _dt %}
+        <div class="my-deals__key-metrics-empty">
+          {{ module.km_empty_message | default("No Key Metrics form is configured for this deal type yet.") | escape_html }}
+        </div>
+      {% else %}
+        <div class="my-deals__key-metrics-empty">
+          {{ module.km_no_type_message | default("Set a Deal Type on this deal to see the Key Metrics form.") | escape_html }}
+        </div>
+      {% endif %}
+    </div>
+
+    {# About / What's Included sections removed per design — not in the current Figma. #}
+
+  </div>{# end detail-view #}
+  {% endif %}{# end target-deal match #}
+  {% endfor %}
+  {# No-match fallback: URL has an id but the logged-in contact isn't
+     an IP/PP Partner on that deal (or the id is bogus). Show a small
+     "not found" panel with a back link — no CRM lookups. #}
+  {% if not _found_ns.hit %}
+  <div class="my-deals__detail-not-found">
+    <p class="my-deals__detail-not-found-message">{{ module.deal_not_found_text | default("This deal isn't available on your portal.") | escape_html }}</p>
+    <a href="{{ request.path }}" class="my-deals__detail-not-found-back">{{ module.back_to_list_text | default("← Back to deals") | escape_html }}</a>
+  </div>
+  {% endif %}
+  {% endif %}{# end detail-mode #}
+
+
+  {# ============================================================
+     MODAL — Register a Deal (HubSpot custom form)
+     ============================================================ #}
+  <div class="my-deals__modal-overlay"
+       id="my-deals-modal"
+       role="dialog"
+       aria-modal="true"
+       aria-labelledby="my-deals-modal-title"
+       data-prefill-email="{{ contact.email | default('') | escape_attr }}"
+       hidden>
+    <div class="my-deals__modal">
+      <button class="my-deals__modal-close" type="button" aria-label="Close modal">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M18 6L6 18M6 6L18 18" stroke="#212121" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+
+      {% if module.modal_title %}
+      <h3 class="my-deals__modal-title" id="my-deals-modal-title">{{ module.modal_title | escape_html }}</h3>
+      {% endif %}
+
+      <div class="my-deals__modal-form">
+        {% if module.add_deal_form.form_id %}
+          {% form "add_deal_form"
+            form_to_use="{{ module.add_deal_form.form_id }}",
+            response_type="{{ module.add_deal_form.response_type }}",
+            response_message="{{ module.add_deal_form.message }}"
+          %}
+        {% elif is_in_editor %}
+          <div class="my-deals__form-placeholder">
+            Select the <strong>Register a Deal</strong> form in module settings. Create it first in <strong>Marketing &gt; Forms</strong>.
+          </div>
+        {% endif %}
+      </div>
+
+      {% if module.modal_terms_text %}
+      <p class="my-deals__modal-terms">{{ module.modal_terms_text | escape_html }}</p>
+      {% endif %}
+    </div>
+  </div>
+
+</section>

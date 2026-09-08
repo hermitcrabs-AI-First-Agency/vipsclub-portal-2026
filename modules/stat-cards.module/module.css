@@ -1,0 +1,46 @@
+{# ============================================================
+   stat-cards — Per-instance style overrides
+   Base component styles live in css/portal/dashboard.css
+   ============================================================ #}
+
+{% if module.style_overrides.background_color.color %}
+.stat-card {
+  background-color: {{ module.style_overrides.background_color.color }};
+}
+{% endif %}
+
+{% if module.style_overrides.padding_top %}
+.stat-cards {
+  padding-top: {{ module.style_overrides.padding_top }}px;
+}
+{% endif %}
+
+{% if module.style_overrides.padding_bottom %}
+.stat-cards {
+  padding-bottom: {{ module.style_overrides.padding_bottom }}px;
+}
+{% endif %}
+
+{% if module.style_overrides.hide_on_mobile %}
+@media (max-width: 480px) {
+  .stat-cards--hide-mobile {
+    display: none;
+  }
+}
+{% endif %}
+
+{% if module.style_overrides.text_color.color %}
+.stat-card__label,
+.stat-card__value,
+.stat-card__sub {
+  color: {{ module.style_overrides.text_color.color }};
+}
+{% endif %}
+
+{% if module.style_overrides.hide_on_desktop %}
+@media (min-width: 769px) {
+  .stat-cards {
+    display: none;
+  }
+}
+{% endif %}

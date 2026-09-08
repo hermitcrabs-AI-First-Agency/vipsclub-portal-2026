@@ -1,0 +1,28 @@
+<!--
+  templateType: error_page
+  isAvailableForNewContent: true
+  label: 404 — Page Not Found
+-->
+{% extends "./layouts/base.html" %}
+
+{# ============================================================
+   VIPSCLUB Portal 2026 — 404 Error Page Template
+   Figma: Desktop 1040:1596
+   After building: go to HubSpot Settings > Website > Pages
+   and set this as the custom 404 error page.
+   ============================================================ #}
+
+{% block head_extra %}
+{% require_css %}
+<link rel="stylesheet" href="{{ get_asset_url('../css/auth/auth-pages.css') }}">
+{% end_require_css %}
+{% endblock %}
+
+{% block body %}
+<div id="main-content">
+  {% module "error_404"
+    path="../modules/error-404",
+    label="404 Error"
+  %}
+</div>
+{% endblock %}

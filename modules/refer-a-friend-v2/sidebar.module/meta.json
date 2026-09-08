@@ -1,0 +1,9 @@
+{
+  "global" : false,
+  "content_types" : [ "SITE_PAGE" ],
+  "master_language" : "en",
+  "host_template_types" : [ "PAGE" ],
+  "module_id" : 336542655993,
+  "label" : "Refer a Friend V2 Sidebar",
+  "is_available_for_new_content" : true
+}

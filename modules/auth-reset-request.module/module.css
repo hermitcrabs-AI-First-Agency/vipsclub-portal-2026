@@ -1,0 +1,87 @@
+/* =============================================================
+   Auth Reset Request Module — overrides specific to this page
+   Base styles from css/auth/auth-pages.css
+   Figma: Desktop 960:16790 | Mobile 960:17061
+   ============================================================= */
+
+/* ── Header: 570px gradient (same angle as register) ── */
+.auth-page--reset-request .auth-page__header {
+  height: 570px;
+  background: linear-gradient(158.58deg, #000000 36.19%, #a22b34 66.10%);
+}
+
+/* ── Body: card sits at 386px from page top (570 − 184 = 386) ── */
+.auth-page--reset-request .auth-page__body {
+  margin-top: -184px;
+}
+
+/* ── Card: narrower total width to match shorter photo ── */
+.auth-page--reset-request .auth-page__card {
+  width: 740px;
+}
+
+/* ── Photo: shorter height (356px) to match Figma ── */
+.auth-page--reset-request .auth-page__card-photo {
+  width: 406px;
+  height: 356px;
+}
+
+/* ── Form panel fills remaining width ── */
+.auth-page--reset-request .auth-page__card-form {
+  flex: 1;
+  min-width: 0;
+}
+
+/* ── Heading: SemiBold 32px — matches Figma spec ── */
+.auth-page--reset-request .auth-form__heading {
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 40px;
+  color: #1a1a1a;
+}
+
+/* ── Subtitle: line-height 24px (2 lines as shown in Figma) ── */
+.auth-page--reset-request .auth-form__subtitle {
+  line-height: 24px;
+  margin-top: 4px;
+}
+
+/* ── Form spacing ── */
+.auth-page--reset-request .auth-form__header {
+  margin-bottom: 24px;
+}
+
+/* ── Mobile — max-width 768px ── */
+@media (max-width: 768px) {
+  /* Override desktop header height back to 112px */
+  .auth-page--reset-request .auth-page__header {
+    height: 112px;
+    padding-top: 32px;
+    background: linear-gradient(164.13deg, #000000 0%, #a22b34 50%);
+  }
+
+  /* Remove card pull-up — sits below header with padding */
+  .auth-page--reset-request .auth-page__body {
+    margin-top: 0;
+    padding-top: 32px;
+  }
+
+  /* Card full-width, all-corner radius */
+  .auth-page--reset-request .auth-page__card {
+    width: 100%;
+    max-width: 362px;
+  }
+
+  /* Mobile heading size matches Figma mobile frame */
+  .auth-page--reset-request .auth-form__heading {
+    font-size: 28px;
+    line-height: 35px;
+  }
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .auth-page--reset-request * {
+    transition-duration: 0.01ms !important;
+  }
+}

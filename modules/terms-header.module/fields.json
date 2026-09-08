@@ -1,0 +1,149 @@
+[ {
+  "id" : "logo",
+  "name" : "logo",
+  "label" : "Logo (White Version)",
+  "help_text" : "Upload the white logo SVG/PNG. Displayed in the top-left of the header.",
+  "required" : false,
+  "locked" : false,
+  "responsive" : false,
+  "resizable" : true,
+  "show_loading" : false,
+  "type" : "image",
+  "display_width" : null,
+  "default" : {
+    "src" : "https://442066989.fs1.hubspotusercontent-ap1.net/hubfs/442066989/Photo/White_logo.png",
+    "alt" : "White_logo",
+    "width" : 105,
+    "height" : 39
+  }
+}, {
+  "id" : "logo_url",
+  "name" : "logo_url",
+  "label" : "Logo Link",
+  "help_text" : "Optional. Where the logo links to when clicked (typically the homepage).",
+  "required" : false,
+  "locked" : false,
+  "supported_types" : [ "EXTERNAL", "CONTENT" ],
+  "show_advanced_rel_options" : false,
+  "type" : "link",
+  "display_width" : null,
+  "default" : {
+    "url" : {
+      "href" : "",
+      "type" : "EXTERNAL"
+    },
+    "open_in_new_tab" : false,
+    "no_follow" : false
+  }
+}, {
+  "id" : "page_title",
+  "name" : "page_title",
+  "label" : "Page Title",
+  "help_text" : "The large heading shown in the header banner. Becomes the page's H1.",
+  "required" : true,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Terms and Conditions"
+}, {
+  "id" : "style_overrides",
+  "name" : "style_overrides",
+  "label" : "Style Overrides",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "style_overrides.gradient_start",
+    "name" : "gradient_start",
+    "label" : "Gradient Start Color",
+    "help_text" : "Top-left color of the header gradient. Default: black.",
+    "required" : false,
+    "locked" : false,
+    "type" : "color",
+    "display_width" : null,
+    "default" : {
+      "color" : "#000000",
+      "opacity" : 100
+    }
+  }, {
+    "id" : "style_overrides.gradient_end",
+    "name" : "gradient_end",
+    "label" : "Gradient End Color",
+    "help_text" : "Bottom-right color of the header gradient. Default: VIPS red.",
+    "required" : false,
+    "locked" : false,
+    "type" : "color",
+    "display_width" : null,
+    "default" : {
+      "color" : "#a22b34",
+      "opacity" : 100
+    }
+  }, {
+    "id" : "style_overrides.header_height",
+    "name" : "header_height",
+    "label" : "Header Height (px)",
+    "help_text" : "Default 336 (matches Terms & Conditions figma frame).",
+    "required" : false,
+    "locked" : false,
+    "display" : "text",
+    "step" : 1,
+    "type" : "number",
+    "display_width" : null,
+    "default" : 336
+  }, {
+    "id" : "style_overrides.content_width",
+    "name" : "content_width",
+    "label" : "Content Width",
+    "help_text" : "Control the maximum width of this module's content.",
+    "required" : false,
+    "locked" : false,
+    "display" : "select",
+    "choices" : [ [ "default", "Default" ], [ "narrow", "Narrow" ], [ "wide", "Wide" ], [ "full", "Full Width" ] ],
+    "multiple" : false,
+    "reordering_enabled" : true,
+    "preset" : null,
+    "type" : "choice",
+    "display_width" : null,
+    "default" : "default"
+  }, {
+    "id" : "style_overrides.hide_on_mobile",
+    "name" : "hide_on_mobile",
+    "label" : "Hide on Mobile",
+    "required" : false,
+    "locked" : false,
+    "display" : "checkbox",
+    "type" : "boolean",
+    "display_width" : null,
+    "default" : false
+  }, {
+    "id" : "style_overrides.hide_on_desktop",
+    "name" : "hide_on_desktop",
+    "label" : "Hide on Desktop",
+    "help_text" : "Toggle to hide this module on desktop viewports.",
+    "required" : false,
+    "locked" : false,
+    "display" : "checkbox",
+    "type" : "boolean",
+    "display_width" : null,
+    "default" : false
+  } ],
+  "tab" : "STYLE",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "gradient_start" : {
+      "color" : "#000000",
+      "opacity" : 100
+    },
+    "gradient_end" : {
+      "color" : "#a22b34",
+      "opacity" : 100
+    },
+    "header_height" : 336,
+    "content_width" : "default",
+    "hide_on_mobile" : false,
+    "hide_on_desktop" : false
+  }
+} ]

@@ -1,0 +1,55 @@
+<!--
+  templateType: "none"
+  isAvailableForNewContent: false
+-->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ content.html_title }}</title>
+  <meta name="description" content="{{ content.meta_description | escape_attr }}">
+
+  {# Canonical URL — HubSpot handles this automatically #}
+  <link rel="canonical" href="{{ content.absolute_url }}">
+
+  {# Open Graph #}
+  <meta property="og:title" content="{{ content.html_title | escape_attr }}">
+  <meta property="og:description" content="{{ content.meta_description | escape_attr }}">
+  <meta property="og:url" content="{{ content.absolute_url }}">
+  <meta property="og:image" content="{{ content.featured_image | escape_attr }}">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+
+  {# Theme CSS — variables first, then base, then overrides, then global forms.
+     forms.css styles every HubSpot {% form %} site-wide so individual modules
+     don't have to restyle inputs/buttons/labels themselves. #}
+  {% require_css %}
+  <link rel="stylesheet" href="{{ get_asset_url('../../css/variables.css') }}">
+  <link rel="stylesheet" href="{{ get_asset_url('../../css/base.css') }}">
+  <link rel="stylesheet" href="{{ get_asset_url('../../css/layout.css') }}">
+  <link rel="stylesheet" href="{{ get_asset_url('../../css/theme-overrides.css') }}">
+  <link rel="stylesheet" href="{{ get_asset_url('../../css/forms.css') }}">
+  {% end_require_css %}
+
+  {# Google Fonts — loaded via theme font fields in fields.json + theme-overrides.css
+     If fonts are not loading, add font fields in theme fields.json or re-enable manual <link> tags here.
+     Manual <link> tags were removed to avoid double-loading with HubSpot's font field pipeline. #}
+
+  {% block head_extra %}{% endblock %}
+
+  {{ standard_header_includes }}
+</head>
+<body class="{{ body_classes }}">
+
+  {# Skip navigation — accessibility #}
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  {% block body %}{% endblock %}
+
+  {{ standard_footer_includes }}
+
+  {% block scripts_footer %}{% endblock %}
+
+</body>
+</html>

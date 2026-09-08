@@ -1,0 +1,31 @@
+<!--
+  templateType: page
+  isAvailableForNewContent: true
+  label: VIPSCLUB — Create Account (Public)
+-->
+{% extends "./layouts/base.html" %}
+
+{# ============================================================
+   VIPSCLUB Portal 2026 — Create Account (Public) Template
+   Figma: Desktop 190:1692  |  Mobile 337:3415
+   Public page — no membership restriction.
+   Uses auth-create-account-page module which renders a HubSpot
+   custom form (selected in module settings). NOT to be confused
+   with templates/membership/register.html which is the gated
+   membership_register_page template using {% member_register %}.
+   ============================================================ #}
+
+{% block body %}
+  {% dnd_area "main_content"
+    label="Main Content",
+    class="auth-page-area"
+  %}
+    {% dnd_section %}
+      {% dnd_column %}
+        {% dnd_row %}
+          {% dnd_module path="../modules/auth-create-account-page" %}{% end_dnd_module %}
+        {% end_dnd_row %}
+      {% end_dnd_column %}
+    {% end_dnd_section %}
+  {% end_dnd_area %}
+{% endblock %}

@@ -1,0 +1,122 @@
+<!--
+  templateType: page
+  isAvailableForNewContent: true
+  label: Portal — Member Dashboard
+-->
+{% extends "./layouts/base.html" %}
+
+{# ============================================================
+   VIPSCLUB Portal 2026 — Member Dashboard Template
+   Figma reference: node 419:3040
+   Layout: full-width header → referral banner (overlaps) →
+           two-column body (sidebar 292px + main content)
+   ============================================================ #}
+
+{% block head_extra %}
+{% require_css %}
+<link rel="stylesheet" href="{{ get_asset_url('../css/portal/dashboard.css') }}">
+{% end_require_css %}
+{% endblock %}
+
+{% block body %}
+<div class="portal-layout">
+
+  {# ── Full-Width Header (editable module) ── #}
+  <div class="portal-header-area">
+    {% dnd_area "portal_header"
+      label="Portal Header",
+      class="portal-header-dnd"
+    %}
+      {% dnd_section %}
+        {% dnd_column %}
+          {% dnd_row %}
+            {% dnd_module path="../modules/portal-header" %}{% end_dnd_module %}
+          {% end_dnd_row %}
+        {% end_dnd_column %}
+      {% end_dnd_section %}
+    {% end_dnd_area %}
+  </div>
+
+  {# ── Referral Banner — direct flex child of portal-layout, overlaps bottom of header ── #}
+  <div class="portal-referral-wrapper">
+    {% dnd_area "referral_banner"
+      label="Referral Banner",
+      class="referral-banner-area"
+    %}
+      {% dnd_section %}
+        {% dnd_column %}
+          {% dnd_row %}
+            {% dnd_module path="../modules/referral-banner" %}{% end_dnd_module %}
+          {% end_dnd_row %}
+        {% end_dnd_column %}
+      {% end_dnd_section %}
+    {% end_dnd_area %}
+  </div>
+
+  <div class="portal-content-outer">
+
+    {# ── Two-Column Body: Sidebar + Main ── #}
+    <div class="portal-body">
+
+      {# ── Sidebar (global module — edit once, applies to all portal pages) ── #}
+      {% module "portal_sidebar" path="../modules/portal-sidebar" label="Portal Sidebar" %}
+
+      {# ── Main Content ── #}
+      <main class="portal-main" id="main-content">
+
+        {# Current Promotions — services cards with expiry + claim button
+           Figma: 419:4175 — "Current Promotions" section                #}
+        {% dnd_area "services_preview"
+          label="Current Promotions",
+          class="dashboard-services-area"
+        %}
+          {% dnd_section %}
+            {% dnd_column %}
+              {% dnd_row %}
+                {% dnd_module path="../modules/services-preview" %}{% end_dnd_module %}
+              {% end_dnd_row %}
+            {% end_dnd_column %}
+          {% end_dnd_section %}
+        {% end_dnd_area %}
+
+        {# Available Rewards — reward cards with points + redeem button
+           Figma: 419:4204 — "Available Rewards" section                 #}
+        {% dnd_area "available_rewards"
+          label="Available Rewards",
+          class="dashboard-rewards-area"
+        %}
+          {% dnd_section %}
+            {% dnd_column %}
+              {% dnd_row %}
+                {% dnd_module path="../modules/rewards-preview" %}{% end_dnd_module %}
+              {% end_dnd_row %}
+            {% end_dnd_column %}
+          {% end_dnd_section %}
+        {% end_dnd_area %}
+
+        {# Your dedicated RM — relationship manager contact card
+           Figma: 419:4267 — "Your dedicated RM" section                 #}
+        {% dnd_area "dedicated_rm"
+          label="Your Dedicated RM",
+          class="dashboard-rm-area"
+        %}
+          {% dnd_section %}
+            {% dnd_column %}
+              {% dnd_row %}
+                {% dnd_module path="../modules/rm-contact" %}{% end_dnd_module %}
+              {% end_dnd_row %}
+            {% end_dnd_column %}
+          {% end_dnd_section %}
+        {% end_dnd_area %}
+
+      </main>{# end portal-main #}
+
+    </div>{# end portal-body #}
+
+    {# ── Footer ── #}
+    {% module "portal_footer" path="../modules/portal-footer" label="Portal Footer" %}
+
+  </div>{# end portal-content-outer #}
+
+</div>{# end portal-layout #}
+{% endblock %}

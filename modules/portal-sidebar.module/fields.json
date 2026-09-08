@@ -1,0 +1,544 @@
+[ {
+  "id" : "mobile_menu_title",
+  "name" : "mobile_menu_title",
+  "label" : "Mobile Menu Title",
+  "help_text" : "Heading shown at the top of the mobile slide-down menu.",
+  "required" : false,
+  "locked" : true,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Menu"
+}, {
+  "id" : "mobile_close_label",
+  "name" : "mobile_close_label",
+  "label" : "Mobile Close Button Label",
+  "help_text" : "Accessible label for the mobile menu close (X) button.",
+  "required" : false,
+  "locked" : true,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Close menu"
+}, {
+  "id" : "mobile_close_icon",
+  "name" : "mobile_close_icon",
+  "label" : "Mobile Close Icon",
+  "help_text" : "Upload SVG/PNG OR paste raw SVG for the close (X) button. Leave empty to use the default X icon.",
+  "required" : false,
+  "locked" : true,
+  "children" : [ {
+    "id" : "mobile_close_icon.image",
+    "name" : "image",
+    "label" : "Upload Icon (SVG or PNG)",
+    "help_text" : "Upload from Files Manager. SVG preferred.",
+    "required" : false,
+    "locked" : false,
+    "responsive" : false,
+    "resizable" : false,
+    "show_loading" : false,
+    "type" : "image",
+    "display_width" : null,
+    "default" : {
+      "src" : "",
+      "alt" : "",
+      "width" : 24,
+      "height" : 24
+    }
+  }, {
+    "id" : "mobile_close_icon.svg_code",
+    "name" : "svg_code",
+    "label" : "Or: Paste SVG Code",
+    "help_text" : "Paste raw <svg>...</svg> code. Leave empty to use the default X icon.",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : ""
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null
+}, {
+  "id" : "nav_items",
+  "name" : "nav_items",
+  "label" : "Navigation Items",
+  "help_text" : "Add or reorder the sidebar navigation links. Each item needs a label, URL, and icon.",
+  "required" : false,
+  "locked" : true,
+  "occurrence" : {
+    "min" : 1,
+    "max" : 10,
+    "sorting_label_field" : "nav_label",
+    "default" : 6
+  },
+  "children" : [ {
+    "id" : "nav_items.nav_label",
+    "name" : "nav_label",
+    "label" : "Label",
+    "help_text" : "Text shown in the navigation (e.g. Dashboard, Services)",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Nav Item"
+  }, {
+    "id" : "nav_items.requires_partner",
+    "name" : "requires_partner",
+    "label" : "Requires Partner",
+    "help_text" : "Toggle ON to hide this item from contacts whose `partner` CRM property is not true. Use for the My Deals nav item (and any other partner-only links).",
+    "required" : false,
+    "locked" : false,
+    "display" : "checkbox",
+    "type" : "boolean",
+    "display_width" : null,
+    "default" : false
+  }, {
+    "id" : "nav_items.url",
+    "name" : "url",
+    "label" : "Page URL",
+    "help_text" : "The page this nav item links to",
+    "required" : false,
+    "locked" : false,
+    "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "EMAIL_ADDRESS", "BLOG" ],
+    "show_advanced_rel_options" : false,
+    "type" : "link",
+    "display_width" : null,
+    "default" : {
+      "url" : {
+        "href" : "",
+        "type" : "EXTERNAL"
+      },
+      "open_in_new_tab" : false
+    }
+  }, {
+    "id" : "nav_items.icon",
+    "name" : "icon",
+    "label" : "Icon",
+    "help_text" : "Icon displayed next to the label. Upload SVG/PNG from Files Manager OR paste raw SVG code.",
+    "required" : false,
+    "locked" : false,
+    "children" : [ {
+      "id" : "nav_items.icon.image",
+      "name" : "image",
+      "label" : "Upload Icon (SVG or PNG)",
+      "help_text" : "Upload from Files Manager. Recommended: 20×20px SVG.",
+      "required" : false,
+      "locked" : false,
+      "responsive" : false,
+      "resizable" : false,
+      "show_loading" : false,
+      "type" : "image",
+      "display_width" : null,
+      "default" : {
+        "src" : "",
+        "alt" : "",
+        "width" : 20,
+        "height" : 20
+      }
+    }, {
+      "id" : "nav_items.icon.svg_code",
+      "name" : "svg_code",
+      "label" : "Or: Paste SVG Code",
+      "help_text" : "Paste the raw <svg>...</svg> code. Leave empty if using the upload field above.",
+      "required" : false,
+      "locked" : false,
+      "allow_new_line" : false,
+      "type" : "text",
+      "display_width" : null,
+      "default" : ""
+    } ],
+    "tab" : "CONTENT",
+    "expanded" : false,
+    "group_occurrence_meta" : null,
+    "type" : "group",
+    "display_width" : null
+  }, {
+    "id" : "nav_items.chevron",
+    "name" : "chevron",
+    "label" : "Chevron / Arrow Icon",
+    "help_text" : "Arrow icon on the right side of the nav item. Upload SVG/PNG OR paste SVG code.",
+    "required" : false,
+    "locked" : false,
+    "children" : [ {
+      "id" : "nav_items.chevron.image",
+      "name" : "image",
+      "label" : "Upload Chevron (SVG or PNG)",
+      "help_text" : "Upload from Files Manager. Recommended: 24×24px SVG.",
+      "required" : false,
+      "locked" : false,
+      "responsive" : false,
+      "resizable" : false,
+      "show_loading" : false,
+      "type" : "image",
+      "display_width" : null,
+      "default" : {
+        "src" : "",
+        "alt" : "",
+        "width" : 24,
+        "height" : 24
+      }
+    }, {
+      "id" : "nav_items.chevron.svg_code",
+      "name" : "svg_code",
+      "label" : "Or: Paste SVG Code",
+      "help_text" : "Paste the raw <svg>...</svg> code for the chevron/arrow.",
+      "required" : false,
+      "locked" : false,
+      "allow_new_line" : false,
+      "type" : "text",
+      "display_width" : null,
+      "default" : ""
+    } ],
+    "tab" : "CONTENT",
+    "expanded" : false,
+    "group_occurrence_meta" : null,
+    "type" : "group",
+    "display_width" : null
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null
+}, {
+  "id" : "tier_card_backgrounds",
+  "name" : "tier_card_backgrounds",
+  "label" : "Member Tier Card — Tier Backgrounds",
+  "help_text" : "Upload one background image per tier (JPG or PNG). The right image is shown on the Member Tier card based on the logged-in member's tier value on their associated Referral record.",
+  "required" : false,
+  "locked" : true,
+  "children" : [ {
+    "id" : "tier_card_backgrounds.bronze",
+    "name" : "bronze",
+    "label" : "Bronze tier background",
+    "help_text" : "Shown when the member's tier is Bronze.",
+    "required" : false,
+    "locked" : false,
+    "responsive" : false,
+    "resizable" : false,
+    "show_loading" : false,
+    "type" : "image",
+    "display_width" : null,
+    "default" : {
+      "src" : "",
+      "alt" : "",
+      "width" : 358,
+      "height" : 270
+    }
+  }, {
+    "id" : "tier_card_backgrounds.silver",
+    "name" : "silver",
+    "label" : "Silver tier background",
+    "help_text" : "Shown when the member's tier is Silver.",
+    "required" : false,
+    "locked" : false,
+    "responsive" : false,
+    "resizable" : false,
+    "show_loading" : false,
+    "type" : "image",
+    "display_width" : null,
+    "default" : {
+      "src" : "",
+      "alt" : "",
+      "width" : 358,
+      "height" : 270
+    }
+  }, {
+    "id" : "tier_card_backgrounds.gold",
+    "name" : "gold",
+    "label" : "Gold tier background",
+    "help_text" : "Shown when the member's tier is Gold.",
+    "required" : false,
+    "locked" : false,
+    "responsive" : false,
+    "resizable" : false,
+    "show_loading" : false,
+    "type" : "image",
+    "display_width" : null,
+    "default" : {
+      "src" : "",
+      "alt" : "",
+      "width" : 358,
+      "height" : 270
+    }
+  }, {
+    "id" : "tier_card_backgrounds.platinum",
+    "name" : "platinum",
+    "label" : "Platinum tier background",
+    "help_text" : "Shown when the member's tier is Platinum.",
+    "required" : false,
+    "locked" : false,
+    "responsive" : false,
+    "resizable" : false,
+    "show_loading" : false,
+    "type" : "image",
+    "display_width" : null,
+    "default" : {
+      "src" : "",
+      "alt" : "",
+      "width" : 358,
+      "height" : 270
+    }
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : true,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null
+}, {
+  "id" : "logout_label",
+  "name" : "logout_label",
+  "label" : "Logout Button Text",
+  "help_text" : "Text shown on the logout link at the bottom of the sidebar.",
+  "required" : false,
+  "locked" : true,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "LOGOUT"
+}, {
+  "id" : "logout_url",
+  "name" : "logout_url",
+  "label" : "Logout URL",
+  "help_text" : "URL for the logout action. Default is the HubSpot membership logout path.",
+  "required" : false,
+  "locked" : true,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "/memberships/logout"
+}, {
+  "id" : "tier_heading_label",
+  "name" : "tier_heading_label",
+  "label" : "Tier Card Heading",
+  "help_text" : "Label above the tier name on the membership card.",
+  "required" : false,
+  "locked" : true,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Member tier"
+}, {
+  "id" : "next_tier_label",
+  "name" : "next_tier_label",
+  "label" : "Next Tier Label",
+  "help_text" : "Text before the next tier name (e.g. 'Next Tier:').",
+  "required" : false,
+  "locked" : true,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Next Tier:"
+}, {
+  "id" : "current_points_label",
+  "name" : "current_points_label",
+  "label" : "Current Points Label",
+  "help_text" : "Label under the current points value.",
+  "required" : false,
+  "locked" : true,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Current points"
+}, {
+  "id" : "for_tier_label",
+  "name" : "for_tier_label",
+  "label" : "For Tier Label",
+  "help_text" : "Text before the target tier name in the progress section (e.g. 'For Silver tier').",
+  "required" : false,
+  "locked" : true,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "For"
+}, {
+  "id" : "tier_suffix",
+  "name" : "tier_suffix",
+  "label" : "Tier Suffix",
+  "help_text" : "Word shown after the tier name (e.g. 'Silver tier').",
+  "required" : false,
+  "locked" : true,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "tier"
+}, {
+  "id" : "more_points_label",
+  "name" : "more_points_label",
+  "label" : "More Points Label",
+  "help_text" : "Text after the remaining points count (e.g. '500 more points').",
+  "required" : false,
+  "locked" : true,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "more points"
+}, {
+  "id" : "unlock_benefits_label",
+  "name" : "unlock_benefits_label",
+  "label" : "Unlock Benefits Label",
+  "help_text" : "Text before the tier benefits message (e.g. 'to unlock Silver tier benefits').",
+  "required" : false,
+  "locked" : true,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "to unlock"
+}, {
+  "id" : "tier_benefits_suffix",
+  "name" : "tier_benefits_suffix",
+  "label" : "Tier Benefits Suffix",
+  "help_text" : "Text after the tier name in the benefits message.",
+  "required" : false,
+  "locked" : true,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "tier benefits"
+}, {
+  "id" : "top_tier_message",
+  "name" : "top_tier_message",
+  "label" : "Top Tier Message",
+  "help_text" : "Shown on the tier card when the member has reached the highest tier (Platinum). Replaces the Next Tier line and hides the progress bar.",
+  "required" : false,
+  "locked" : true,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "You've reached the top tier!"
+}, {
+  "id" : "untiered_display",
+  "name" : "untiered_display",
+  "label" : "Untiered (New Member) Name",
+  "help_text" : "Tier name shown when a member has no tier set yet. Bronze is earned once they complete their first qualifying service.",
+  "required" : false,
+  "locked" : true,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "New Member"
+}, {
+  "id" : "untiered_message",
+  "name" : "untiered_message",
+  "label" : "Untiered Message",
+  "help_text" : "Shown on the tier card for members with no tier yet, in place of the Next Tier line and progress bar.",
+  "required" : false,
+  "locked" : true,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Complete your first qualifying service to unlock Bronze."
+}, {
+  "id" : "points_suffix",
+  "name" : "points_suffix",
+  "label" : "Points Suffix",
+  "help_text" : "Abbreviation shown after point values (e.g. '1,000 pts').",
+  "required" : false,
+  "locked" : true,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "pts"
+}, {
+  "id" : "style_overrides",
+  "name" : "style_overrides",
+  "label" : "Style Overrides",
+  "required" : false,
+  "locked" : true,
+  "children" : [ {
+    "id" : "style_overrides.background_color",
+    "name" : "background_color",
+    "label" : "Background Color",
+    "help_text" : "Leave empty to use theme default",
+    "required" : false,
+    "locked" : false,
+    "type" : "color",
+    "display_width" : null,
+    "default" : {
+      "color" : null,
+      "opacity" : 100
+    }
+  }, {
+    "id" : "style_overrides.padding_top",
+    "name" : "padding_top",
+    "label" : "Padding Top (px)",
+    "help_text" : "Leave empty to use default spacing",
+    "required" : false,
+    "locked" : false,
+    "display" : "text",
+    "step" : 1,
+    "type" : "number",
+    "display_width" : null
+  }, {
+    "id" : "style_overrides.padding_bottom",
+    "name" : "padding_bottom",
+    "label" : "Padding Bottom (px)",
+    "help_text" : "Leave empty to use default spacing",
+    "required" : false,
+    "locked" : false,
+    "display" : "text",
+    "step" : 1,
+    "type" : "number",
+    "display_width" : null
+  }, {
+    "id" : "style_overrides.text_color",
+    "name" : "text_color",
+    "label" : "Text Color",
+    "help_text" : "Override the default text color for this module instance. Leave empty for theme default.",
+    "required" : false,
+    "locked" : false,
+    "type" : "color",
+    "display_width" : null,
+    "default" : {
+      "color" : null,
+      "opacity" : 100
+    }
+  }, {
+    "id" : "style_overrides.content_width",
+    "name" : "content_width",
+    "label" : "Content Width",
+    "help_text" : "Control the maximum width of this module's content.",
+    "required" : false,
+    "locked" : false,
+    "display" : "select",
+    "choices" : [ [ "default", "Default" ], [ "narrow", "Narrow" ], [ "wide", "Wide" ], [ "full", "Full Width" ] ],
+    "multiple" : false,
+    "reordering_enabled" : true,
+    "preset" : null,
+    "type" : "choice",
+    "display_width" : null,
+    "default" : "default"
+  }, {
+    "id" : "style_overrides.hide_on_mobile",
+    "name" : "hide_on_mobile",
+    "label" : "Hide on Mobile",
+    "help_text" : "Sidebar is always hidden on mobile (hamburger overlay used instead). This toggle is for edge cases.",
+    "required" : false,
+    "locked" : false,
+    "display" : "checkbox",
+    "type" : "boolean",
+    "display_width" : null,
+    "default" : false
+  }, {
+    "id" : "style_overrides.hide_on_desktop",
+    "name" : "hide_on_desktop",
+    "label" : "Hide on Desktop",
+    "help_text" : "Toggle to hide this module on desktop viewports.",
+    "required" : false,
+    "locked" : false,
+    "display" : "checkbox",
+    "type" : "boolean",
+    "display_width" : null,
+    "default" : false
+  } ],
+  "tab" : "STYLE",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null
+} ]

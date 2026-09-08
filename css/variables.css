@@ -1,0 +1,92 @@
+/* ============================================================
+   VIPSCLUB Portal 2026 — Design Tokens
+   Extracted from Figma: node 419:3040 (Dashboard)
+   ============================================================ */
+
+:root {
+  /* ── Brand Colors ── */
+  --vips-red:          #a22c35;
+  --vips-red-dark:     #541318;
+  --vips-red-gradient: linear-gradient(169.47deg, #000000 36.19%, #a22b34 66.10%);
+
+  /* ── Neutrals ── */
+  --vips-black:        #000000;
+  --vips-dark:         #212121;
+  --vips-dark-overlay: #1a1a1a;
+  --vips-dark-subtle:  #424242;
+
+  /* ── Text ── */
+  --vips-text-primary:   #212121;
+  --vips-text-secondary: #616161;
+  --vips-text-muted:     #9e9e9e;
+  --vips-text-light:     #757575;
+  --vips-text-white:     #fafafa;
+
+  /* ── Backgrounds ── */
+  --vips-bg-page:  #f7f7f7;
+  --vips-bg-card:  #ffffff;
+  --vips-bg-input: #f5f5f5;
+  --vips-bg-icon:  #eeeeee;
+
+  /* ── Borders ── */
+  --vips-border-light:  #f2f2f2;
+  --vips-border:        #e0e0e0;
+  --vips-border-input:  #e0e0e0;
+
+  /* ── Status ── */
+  --vips-success: #00c950;
+  --vips-pending: #9e9e9e;
+
+  /* ── Sidebar ── */
+  --vips-sidebar-bg:         #a22c35;
+  --vips-sidebar-active-from: #541318;
+  --vips-sidebar-active-to:   #a22b34;
+  --vips-sidebar-shadow:      0px 4px 0px 0px #5c151a;
+  --vips-sidebar-width:       292px;
+
+  /* ── Typography ── */
+  --font-heading: 'Montserrat', sans-serif;
+  --font-body:    'Inter', sans-serif;
+
+  /* ── Type Scale ── */
+  --text-xs:   0.6875rem;  /* 11px */
+  --text-sm:   0.75rem;    /* 12px */
+  --text-base: 0.875rem;   /* 14px */
+  --text-md:   1rem;       /* 16px */
+  --text-lg:   1.375rem;   /* 22px */
+  --text-xl:   1.875rem;   /* 30px */
+  --text-2xl:  2.25rem;    /* 36px */
+
+  /* ── Spacing ── */
+  --space-1:  0.25rem;   /* 4px */
+  --space-2:  0.5rem;    /* 8px */
+  --space-3:  0.75rem;   /* 12px */
+  --space-4:  1rem;      /* 16px */
+  --space-5:  1.25rem;   /* 20px */
+  --space-6:  1.5rem;    /* 24px */
+  --space-8:  2rem;      /* 32px */
+  --space-10: 2.5rem;    /* 40px */
+  --space-12: 3rem;      /* 48px */
+  --space-15: 3.75rem;   /* 60px */
+
+  /* ── Border Radius ── */
+  --radius-sm:   4px;
+  --radius-md:   6px;
+  --radius-lg:   8px;
+  --radius-xl:   16px;
+  --radius-full: 9999px;
+
+  /* ── Shadows ── */
+  --shadow-card:        0px 1px 1px 0px #dedede;
+  --shadow-card-light:  0px 1px 1px 0px #f7f7f7;
+  --shadow-card-subtle: 0px 1px 1px 0px #f6f6f6;
+
+  /* ── Layout ── */
+  --container-max:    1240px;
+  --header-height:    270px;
+  --content-offset:   calc(var(--vips-sidebar-width) + 98px);
+
+  /* ── Transitions ── */
+  --transition-fast: 0.15s ease;
+  --transition:      0.2s ease;
+}

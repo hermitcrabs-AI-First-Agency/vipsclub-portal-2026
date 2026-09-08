@@ -1,0 +1,227 @@
+/* ============================================================
+   Portal Header Module
+   Full-width dark gradient banner with logo + personalised greeting
+   ============================================================ */
+
+.portal-header {
+  height: var(--header-height, 270px);
+  background-image: var(--vips-red-gradient);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  padding: 0;
+  flex-shrink: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Subtle texture overlay */
+.portal-header__bg-texture {
+  position: absolute;
+  inset: 0;
+  opacity: 0.03;
+  pointer-events: none;
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgba(255,255,255,0.05) 0px,
+    rgba(255,255,255,0.05) 1px,
+    transparent 1px,
+    transparent 8px
+  );
+}
+
+.portal-header__inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 44px;
+  max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 100px;
+  box-sizing: border-box;
+}
+
+.portal-header__logo {
+  flex-shrink: 0;
+  height: 59px;
+  width: auto;
+}
+
+.portal-header__logo-link {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  flex-shrink: 0;
+  border-radius: 4px;
+}
+
+.portal-header__logo-link:focus-visible {
+  outline: 3px solid #fafafa;
+  outline-offset: 4px;
+}
+
+/* Vertical divider between logo and greeting.
+   Kept in the flex flow so spacing is preserved, but visually hidden. */
+.portal-header__divider {
+  width: 1px;
+  height: 196px;
+  background-color: transparent;
+  flex-shrink: 0;
+}
+
+.portal-header__greeting {
+  flex: 1;
+}
+
+.portal-header__greeting h1 {
+  font-family: var(--font-heading, 'Montserrat', sans-serif);
+  font-size: var(--text-2xl, 2.25rem);
+  font-weight: 600;
+  color: var(--vips-bg-card);
+  line-height: 46px;
+  margin: 0;
+}
+
+.portal-header__greeting p {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: var(--text-md, 1rem);
+  color: var(--vips-bg-card);
+  line-height: 30px;
+  margin: 0;
+}
+
+/* ── Mobile header ── (hidden on desktop) */
+.portal-header__mobile {
+  display: none;
+}
+
+/* ── Hamburger toggle — header-level, positioned top-right.
+   Hidden on desktop (≥1081); revealed at ≤1080 so the sidebar can collapse
+   into the slide-down menu on tablet as well as mobile. ── */
+.portal-header__hamburger {
+  position: absolute;
+  top: 24px;
+  right: 40px;
+  z-index: 3;
+  display: none;
+  width: 40px;
+  height: 40px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  color: var(--vips-bg-card);
+}
+
+.portal-header__hamburger svg,
+.portal-header__hamburger img {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+
+/* CSS fallback hamburger lines (when no icon uploaded) */
+.portal-header__hamburger-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.portal-header__hamburger-lines span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background-color: var(--vips-bg-card);
+  border-radius: 2px;
+}
+
+/* Mobile hide option */
+@media (max-width: 768px) {
+  .portal-header--hide-mobile {
+    display: none;
+  }
+}
+
+/* ── Responsive ── */
+@media (max-width: 1080px) {
+  .portal-header__inner {
+    padding: 0 40px;
+  }
+
+  /* Reveal the hamburger — sidebar is now the slide-down menu at tablet too */
+  .portal-header__hamburger {
+    display: flex;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Hide desktop inner, show mobile inner */
+  .portal-header__inner {
+    display: none;
+  }
+
+  .portal-header__mobile {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+  }
+
+  .portal-header {
+    height: 330px;
+    background-image: inherit;
+    padding: 24px 24px 112px;
+    align-items: flex-start;
+  }
+
+  /* Mobile top row: logo LEFT (hamburger is header-level, top-right) */
+  .portal-header__mobile-top {
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+
+  .portal-header__logo--mobile {
+    height: 40px;
+    width: 110px;
+    object-fit: contain;
+  }
+
+  /* Hamburger sits closer to the edge on mobile (24px gutter vs 40px) */
+  .portal-header__hamburger {
+    right: 24px;
+  }
+
+  /* Mobile greeting */
+  .portal-header__mobile-greeting-name {
+    font-family: var(--font-heading, 'Montserrat', sans-serif);
+    font-size: 32px;
+    font-weight: 600;
+    color: var(--vips-text-white);
+    line-height: 38.4px;
+    margin: 0;
+  }
+
+  .portal-header__mobile-greeting-sub {
+    font-family: var(--font-body, 'Inter', sans-serif);
+    font-size: 15px;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 24.375px;
+    margin: 8px 0 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .portal-header,
+  .portal-header * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

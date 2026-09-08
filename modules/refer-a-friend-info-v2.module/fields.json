@@ -1,0 +1,333 @@
+[ {
+  "id" : "section_heading",
+  "name" : "section_heading",
+  "label" : "Section Heading",
+  "help_text" : "Heading shown above the referral program card.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Refer a friend, earn rewards"
+}, {
+  "id" : "heading_level",
+  "name" : "heading_level",
+  "label" : "Heading Level",
+  "required" : false,
+  "locked" : false,
+  "display" : "select",
+  "choices" : [ [ "h1", "H1" ], [ "h2", "H2" ], [ "h3", "H3" ], [ "h4", "H4" ] ],
+  "multiple" : false,
+  "reordering_enabled" : true,
+  "preset" : null,
+  "type" : "choice",
+  "display_width" : null,
+  "default" : "h2"
+}, {
+  "id" : "program_description",
+  "name" : "program_description",
+  "label" : "Program Description",
+  "required" : false,
+  "locked" : false,
+  "type" : "richtext",
+  "display_width" : null,
+  "default" : "<p>Every successful referral earns you 10 points. Both you and your referred contact receive a reward once their deal is completed.</p>"
+}, {
+  "id" : "step_one",
+  "name" : "step_one",
+  "label" : "Step 1",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "step_one.number",
+    "name" : "number",
+    "label" : "Number",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "1"
+  }, {
+    "id" : "step_one.step_label",
+    "name" : "step_label",
+    "label" : "Label",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Send referral"
+  }, {
+    "id" : "step_one.highlight",
+    "name" : "highlight",
+    "label" : "Highlight Number",
+    "required" : false,
+    "locked" : false,
+    "display" : "checkbox",
+    "type" : "boolean",
+    "display_width" : null,
+    "default" : false
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null
+}, {
+  "id" : "step_two",
+  "name" : "step_two",
+  "label" : "Step 2",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "step_two.number",
+    "name" : "number",
+    "label" : "Number",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "2"
+  }, {
+    "id" : "step_two.step_label",
+    "name" : "step_label",
+    "label" : "Label",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "They sign up"
+  }, {
+    "id" : "step_two.highlight",
+    "name" : "highlight",
+    "label" : "Highlight Number",
+    "required" : false,
+    "locked" : false,
+    "display" : "checkbox",
+    "type" : "boolean",
+    "display_width" : null,
+    "default" : false
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null
+}, {
+  "id" : "step_three",
+  "name" : "step_three",
+  "label" : "Step 3",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "step_three.number",
+    "name" : "number",
+    "label" : "Number",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "3"
+  }, {
+    "id" : "step_three.step_label",
+    "name" : "step_label",
+    "label" : "Label",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Deal closes"
+  }, {
+    "id" : "step_three.highlight",
+    "name" : "highlight",
+    "label" : "Highlight Number",
+    "required" : false,
+    "locked" : false,
+    "display" : "checkbox",
+    "type" : "boolean",
+    "display_width" : null,
+    "default" : true
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null
+}, {
+  "id" : "step_four",
+  "name" : "step_four",
+  "label" : "Step 4",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "step_four.number",
+    "name" : "number",
+    "label" : "Number",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "4"
+  }, {
+    "id" : "step_four.step_label",
+    "name" : "step_label",
+    "label" : "Label",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Earn pts"
+  }, {
+    "id" : "step_four.highlight",
+    "name" : "highlight",
+    "label" : "Highlight Number",
+    "required" : false,
+    "locked" : false,
+    "display" : "checkbox",
+    "type" : "boolean",
+    "display_width" : null,
+    "default" : false
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null
+}, {
+  "id" : "reward_one",
+  "name" : "reward_one",
+  "label" : "Reward Box 1",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "reward_one.prefix",
+    "name" : "prefix",
+    "label" : "Text Before Points",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "You earn"
+  }, {
+    "id" : "reward_one.points",
+    "name" : "points",
+    "label" : "Points",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "+10"
+  }, {
+    "id" : "reward_one.suffix",
+    "name" : "suffix",
+    "label" : "Text After Points",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "pts per referral"
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null
+}, {
+  "id" : "reward_two",
+  "name" : "reward_two",
+  "label" : "Reward Box 2",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "reward_two.prefix",
+    "name" : "prefix",
+    "label" : "Text Before Points",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Referee earns"
+  }, {
+    "id" : "reward_two.points",
+    "name" : "points",
+    "label" : "Points",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "+5"
+  }, {
+    "id" : "reward_two.suffix",
+    "name" : "suffix",
+    "label" : "Text After Points",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "pts on sign-up"
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null
+}, {
+  "id" : "style_overrides",
+  "name" : "style_overrides",
+  "label" : "Style Overrides",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "style_overrides.card_background",
+    "name" : "card_background",
+    "label" : "Card Background",
+    "required" : false,
+    "locked" : false,
+    "type" : "color",
+    "display_width" : null,
+    "default" : {
+      "color" : null,
+      "opacity" : 100
+    }
+  }, {
+    "id" : "style_overrides.accent_color",
+    "name" : "accent_color",
+    "label" : "Accent Color",
+    "required" : false,
+    "locked" : false,
+    "type" : "color",
+    "display_width" : null,
+    "default" : {
+      "color" : null,
+      "opacity" : 100
+    }
+  }, {
+    "id" : "style_overrides.hide_on_mobile",
+    "name" : "hide_on_mobile",
+    "label" : "Hide on Mobile",
+    "required" : false,
+    "locked" : false,
+    "display" : "checkbox",
+    "type" : "boolean",
+    "display_width" : null,
+    "default" : false
+  } ],
+  "tab" : "STYLE",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null
+} ]

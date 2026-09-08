@@ -1,0 +1,295 @@
+[ {
+  "id" : "section_heading",
+  "name" : "section_heading",
+  "label" : "Section Heading",
+  "help_text" : "Heading shown above the profile card.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "My Account"
+}, {
+  "id" : "heading_level",
+  "name" : "heading_level",
+  "label" : "Heading Level",
+  "help_text" : "Controls the HTML heading tag. Use H1 only once per page for the main title.",
+  "required" : false,
+  "locked" : false,
+  "display" : "select",
+  "choices" : [ [ "h1", "H1 — Page Title" ], [ "h2", "H2 — Section" ], [ "h3", "H3 — Subsection" ], [ "h4", "H4" ] ],
+  "multiple" : false,
+  "reordering_enabled" : true,
+  "preset" : null,
+  "type" : "choice",
+  "display_width" : null,
+  "default" : "h2"
+}, {
+  "id" : "member_since_label",
+  "name" : "member_since_label",
+  "label" : "Member Since Label",
+  "help_text" : "Label shown before the member's join date.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Member since"
+}, {
+  "id" : "logout_text",
+  "name" : "logout_text",
+  "label" : "Logout Link Text",
+  "help_text" : "Text of the logout link shown below the member's email.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "LOGOUT"
+}, {
+  "id" : "logout_url",
+  "name" : "logout_url",
+  "label" : "Logout URL",
+  "help_text" : "HubSpot membership logout URL. Default: /memberships/logout",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "/memberships/logout"
+}, {
+  "id" : "stat_1_label",
+  "name" : "stat_1_label",
+  "label" : "Stat 1 Label",
+  "help_text" : "Label for the first stat card. Value is pulled from CRM contact property 'membership_points'.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Points Earned"
+}, {
+  "id" : "stat_2_label",
+  "name" : "stat_2_label",
+  "label" : "Stat 2 Label",
+  "help_text" : "Label for the second stat card. Value is pulled from CRM contact property 'total_referrals'.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Total Referrals"
+}, {
+  "id" : "stat_3_label",
+  "name" : "stat_3_label",
+  "label" : "Stat 3 Label",
+  "help_text" : "Label for the third stat card. Value is pulled from CRM contact property 'total_redemptions'.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Redemptions"
+}, {
+  "id" : "stat_3_sublabel",
+  "name" : "stat_3_sublabel",
+  "label" : "Stat 3 Sub-label",
+  "help_text" : "Second line of the third stat card label (wraps below main label).",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Offers and Rewards"
+}, {
+  "id" : "tab_personal_label",
+  "name" : "tab_personal_label",
+  "label" : "Tab: Personal Details",
+  "help_text" : "Label for the Personal Details tab.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Personal details"
+}, {
+  "id" : "tab_wealth_label",
+  "name" : "tab_wealth_label",
+  "label" : "Tab: Wealth Hub",
+  "help_text" : "Label for the Wealth Hub tab.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Wealth Hub"
+}, {
+  "id" : "edit_profile_text",
+  "name" : "edit_profile_text",
+  "label" : "Edit Profile Button Text",
+  "help_text" : "Text of the button that enables editing of the personal details form.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Edit Profile"
+}, {
+  "id" : "cancel_text",
+  "name" : "cancel_text",
+  "label" : "Cancel Button Text",
+  "help_text" : "Text shown on the Edit Profile button when in editing mode (to cancel changes).",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Cancel"
+}, {
+  "id" : "save_changes_text",
+  "name" : "save_changes_text",
+  "label" : "Save Changes Button Text",
+  "help_text" : "Text of the form submit button on the personal details form.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Save changes"
+}, {
+  "id" : "personal_form",
+  "name" : "personal_form",
+  "label" : "Personal Details Form",
+  "help_text" : "Select the 'Update Profile' form. Create it first in HubSpot Marketing > Forms.",
+  "required" : false,
+  "locked" : false,
+  "type" : "form",
+  "display_width" : null,
+  "default" : {
+    "form_id" : "",
+    "response_type" : "inline",
+    "message" : "Your profile has been updated."
+  }
+}, {
+  "id" : "edit_wealth_text",
+  "name" : "edit_wealth_text",
+  "label" : "Wealth Hub Edit Button Text",
+  "help_text" : "Text of the Edit button on the Wealth Hub panel.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Edit"
+}, {
+  "id" : "wealth_form",
+  "name" : "wealth_form",
+  "label" : "Wealth Hub Form",
+  "help_text" : "Select the HubSpot form for the Wealth Hub tab. Create a single form in Marketing > Forms with all wealth fields (assets, properties, liabilities, etc.).",
+  "required" : false,
+  "locked" : false,
+  "embed_versions" : [ "v2", "v4" ],
+  "type" : "form",
+  "display_width" : null,
+  "default" : {
+    "form_id" : "",
+    "response_type" : "inline",
+    "message" : "Wealth profile updated."
+  }
+}, {
+  "id" : "style_overrides",
+  "name" : "style_overrides",
+  "label" : "Style Overrides",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "style_overrides.background_color",
+    "name" : "background_color",
+    "label" : "Background Color",
+    "help_text" : "Leave empty to use theme default",
+    "required" : false,
+    "locked" : false,
+    "type" : "color",
+    "display_width" : null,
+    "default" : {
+      "color" : null,
+      "opacity" : 100
+    }
+  }, {
+    "id" : "style_overrides.padding_top",
+    "name" : "padding_top",
+    "label" : "Padding Top (px)",
+    "help_text" : "Leave empty to use default spacing",
+    "required" : false,
+    "locked" : false,
+    "display" : "text",
+    "step" : 1,
+    "type" : "number",
+    "display_width" : null
+  }, {
+    "id" : "style_overrides.padding_bottom",
+    "name" : "padding_bottom",
+    "label" : "Padding Bottom (px)",
+    "help_text" : "Leave empty to use default spacing",
+    "required" : false,
+    "locked" : false,
+    "display" : "text",
+    "step" : 1,
+    "type" : "number",
+    "display_width" : null
+  }, {
+    "id" : "style_overrides.hide_on_mobile",
+    "name" : "hide_on_mobile",
+    "label" : "Hide on Mobile",
+    "required" : false,
+    "locked" : false,
+    "display" : "checkbox",
+    "type" : "boolean",
+    "display_width" : null,
+    "default" : false
+  }, {
+    "id" : "style_overrides.text_color",
+    "name" : "text_color",
+    "label" : "Text Color",
+    "help_text" : "Override the default text color for this module instance. Leave empty for theme default.",
+    "required" : false,
+    "locked" : false,
+    "type" : "color",
+    "display_width" : null,
+    "default" : {
+      "color" : null,
+      "opacity" : 100
+    }
+  }, {
+    "id" : "style_overrides.content_width",
+    "name" : "content_width",
+    "label" : "Content Width",
+    "help_text" : "Control the maximum width of this module's content.",
+    "required" : false,
+    "locked" : false,
+    "display" : "select",
+    "choices" : [ [ "default", "Default" ], [ "narrow", "Narrow" ], [ "wide", "Wide" ], [ "full", "Full Width" ] ],
+    "multiple" : false,
+    "reordering_enabled" : true,
+    "preset" : null,
+    "type" : "choice",
+    "display_width" : null,
+    "default" : "default"
+  }, {
+    "id" : "style_overrides.hide_on_desktop",
+    "name" : "hide_on_desktop",
+    "label" : "Hide on Desktop",
+    "help_text" : "Toggle to hide this module on desktop viewports.",
+    "required" : false,
+    "locked" : false,
+    "display" : "checkbox",
+    "type" : "boolean",
+    "display_width" : null,
+    "default" : false
+  } ],
+  "tab" : "STYLE",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null
+} ]

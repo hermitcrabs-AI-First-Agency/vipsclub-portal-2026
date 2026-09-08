@@ -1,0 +1,9 @@
+{
+  "global" : false,
+  "content_types" : [ "LANDING_PAGE", "SITE_PAGE" ],
+  "master_language" : "en",
+  "host_template_types" : [ "PAGE" ],
+  "module_id" : 323994744298,
+  "label" : "Portal Footer",
+  "is_available_for_new_content" : true
+}

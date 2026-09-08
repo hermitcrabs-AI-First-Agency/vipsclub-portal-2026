@@ -1,0 +1,388 @@
+{# ============================================================
+   VIPSCLUB Portal 2026 — Account Profile Form Module
+   Profile summary card + Personal Details / Wealth Hub tabs
+   Figma: Desktop 339:8314 | Mobile 380:3276
+
+   CRM contact properties used (create these in HubSpot):
+     membership_points   (number) — Points Earned stat
+     total_referrals     (number) — Total Referrals stat
+     total_redemptions   (number) — Redemptions stat
+   Standard properties used: firstname, lastname, email, createdate
+   ============================================================ #}
+
+{# ── Read contact properties ── #}
+{% set member_name = (contact.firstname | default("") ~ " " ~ contact.lastname | default("")) | trim %}
+{% set member_email = contact.email | default("") %}
+{% set member_since = contact.createdate | datetimeformat("%B %Y") if contact.createdate else "" %}
+{# Points + referrals from the Self-Contact referral record (assoc 33). #}
+{% set _self_ref = {} %}
+{% set stat_referrals = 0 %}
+{% set _profile_id = 0 %}
+{% if contact.hs_object_id %}
+  {% set _sr_assoc = crm_associations(contact.hs_object_id, "USER_DEFINED", 33, "limit=1", "hs_object_id,total_points_earned,points_redeemable", false) %}
+  {% if _sr_assoc.results and (_sr_assoc.results | length) > 0 %}
+    {% set _self_ref = _sr_assoc.results[0] %}
+    {% set _profile_id = _self_ref.hs_object_id | default(0) | int %}
+  {% endif %}
+{% endif %}
+{# Count only SUCCESSFUL, PRIMARY referrals — hang off the profile record via
+   Course↔Course typeId 58 (pair 58/59 "Primary Referrer"), stage = Approved /
+   Completed New / Completed Existing. Subsequent referrals (typeId 40) excluded.
+   Same source as the sidebar count and the My Referrals board. #}
+{% if _profile_id %}
+  {% set _made_refs = crm_associations(_profile_id, "USER_DEFINED", 58, "limit=100", "hs_pipeline_stage", false) %}
+  {% set _succ_ns = namespace(count=0) %}
+  {% for _r in _made_refs.results %}
+    {% if _r.hs_pipeline_stage in ["3025372619", "3363157467", "3363105230"] %}
+      {% set _succ_ns.count = _succ_ns.count + 1 %}
+    {% endif %}
+  {% endfor %}
+  {% set stat_referrals = _succ_ns.count %}
+{% endif %}
+{% set stat_points     = _self_ref.total_points_earned | default(0) | int %}
+{% set stat_redeemable = _self_ref.points_redeemable   | default(0) | int %}
+
+<div class="account-profile-form{% if module.style_overrides.hide_on_mobile %} account-profile-form--hide-mobile{% endif %}"
+     data-pf-firstname="{{ contact.firstname   | default('') | escape_attr }}"
+     data-pf-lastname="{{ contact.lastname     | default('') | escape_attr }}"
+     data-pf-email="{{ member_email            | escape_attr }}"
+     data-pf-phone="{{ contact.phone           | default('') | escape_attr }}"
+     data-pf-mobilephone="{{ contact.mobilephone | default('') | escape_attr }}"
+     data-pf-address="{{ contact.address       | default('') | escape_attr }}"
+     data-pf-city="{{ contact.city             | default('') | escape_attr }}"
+     data-pf-state="{{ contact.state           | default('') | escape_attr }}"
+     data-pf-zip="{{ contact.zip               | default('') | escape_attr }}"
+     data-pf-country="{{ contact.country       | default('') | escape_attr }}"
+     data-pf-jobtitle="{{ contact.jobtitle     | default('') | escape_attr }}"
+     data-pf-company="{{ contact.company       | default('') | escape_attr }}"
+     data-pf-profileimage="{{ contact.profile_image | default('') | escape_attr }}"
+     data-pf-date_of_birth="{{ contact.date_of_birth | escape_attr }}">
+     {# To support a NEW form field that maps to a contact property:
+        add another `data-pf-{property_name}="{{ contact.{property_name} | default('') | escape_attr }}"`
+        attribute above. The JS will pick it up automatically. #}
+
+  {# ── Profile Summary Card ──
+       (No section heading — the design has none; the profile card follows the
+       referral banner directly. The section_heading field is intentionally not
+       rendered.) #}
+  <div class="account-profile-form__profile-card">
+
+    {# ── Left column (desktop): identity stacked above member-since/logout.
+         On mobile .__main becomes display:contents so identity / stats / meta
+         re-order to match the mobile design (identity → stats → meta). ── #}
+    <div class="account-profile-form__main">
+
+      {# Avatar + name + email #}
+      <div class="account-profile-form__identity">
+        <div class="account-profile-form__avatar" aria-hidden="true">
+          {% if contact.profile_image %}
+            <img src="{{ contact.profile_image | escape_attr }}"
+                 alt="{{ member_name | default('Member') | escape_attr }}"
+                 loading="lazy">
+          {% elif member_name %}
+            {{ member_name | truncate(1, false, "") | upper }}
+          {% else %}M{% endif %}
+        </div>
+        {% if member_name %}
+        <p class="account-profile-form__name">{{ member_name | escape_html }}</p>
+        {% endif %}
+        {% if member_email %}
+        <p class="account-profile-form__email">{{ member_email | escape_html }}</p>
+        {% endif %}
+      </div>
+
+      {# Member-since + logout — on mobile these drop BELOW the stats #}
+      <div class="account-profile-form__meta">
+        <p class="account-profile-form__member-since">
+          <span class="account-profile-form__member-since-label">{{ module.member_since_label | escape_html }}</span>
+          {{ member_since }}
+        </p>
+        {% if module.logout_text %}
+        <a href="{{ module.logout_url | escape_attr }}"
+           class="account-profile-form__logout"
+           aria-label="{{ module.logout_text | escape_attr }}">
+          {{ module.logout_text | escape_html }}
+        </a>
+        {% endif %}
+      </div>
+
+    </div>
+
+    {# ── Right: Stat Cards ── #}
+    <div class="account-profile-form__stats" role="list" aria-label="Membership statistics">
+      <div class="account-profile-form__stat" role="listitem">
+        <span class="account-profile-form__stat-number">{{ stat_points }}</span>
+        <span class="account-profile-form__stat-label">{{ module.stat_1_label | escape_html }}</span>
+      </div>
+      <div class="account-profile-form__stat" role="listitem">
+        <span class="account-profile-form__stat-number">{{ stat_referrals }}</span>
+        <span class="account-profile-form__stat-label">{{ module.stat_2_label | escape_html }}</span>
+      </div>
+      <div class="account-profile-form__stat" role="listitem">
+        <span class="account-profile-form__stat-number">{{ stat_redeemable }}</span>
+        <span class="account-profile-form__stat-label">
+          {{ module.stat_3_label | escape_html }}
+          {% if module.stat_3_sublabel %}<br>{{ module.stat_3_sublabel | escape_html }}{% endif %}
+        </span>
+      </div>
+    </div>
+
+  </div>{# end profile-card #}
+
+  {# ── Tab Bar ── #}
+  <div class="account-profile-form__tabs" role="tablist" aria-label="Account sections">
+    <button class="account-profile-form__tab is-active"
+            id="tab-personal"
+            role="tab"
+            aria-selected="true"
+            aria-controls="panel-personal"
+            type="button"
+            data-tab="personal">
+      {{ module.tab_personal_label | escape_html }}
+    </button>
+    <button class="account-profile-form__tab"
+            id="tab-wealth"
+            role="tab"
+            aria-selected="false"
+            aria-controls="panel-wealth"
+            type="button"
+            data-tab="wealth">
+      {{ module.tab_wealth_label | escape_html }}
+    </button>
+  </div>
+
+  {# ── Panel: Personal Details ── #}
+  <div class="account-profile-form__panel is-active"
+       id="panel-personal"
+       role="tabpanel"
+       aria-labelledby="tab-personal">
+
+    {# Edit Profile button — top right #}
+    <div class="account-profile-form__panel-header">
+      <button class="account-profile-form__edit-btn"
+              type="button"
+              id="edit-profile-btn"
+              aria-pressed="false"
+              data-controls="personal-form-wrap"
+              data-edit-text="{{ module.edit_profile_text | escape_attr }}"
+              data-cancel-text="{{ module.cancel_text | default('Cancel') | escape_attr }}">
+        {{ module.edit_profile_text | escape_html }}
+      </button>
+    </div>
+
+    <div class="account-profile-form__form-wrap account-profile-form__form-wrap--locked"
+         id="personal-form-wrap">
+
+      {% if module.personal_form.form_id %}
+        {% form "personal_form"
+          form_to_use="{{ module.personal_form.form_id }}",
+          response_type="{{ module.personal_form.response_type }}",
+          response_message="{{ module.personal_form.message }}"
+        %}
+      {% elif is_in_editor %}
+      <div class="account-profile-form__placeholder">
+        <p>Select the <strong>Personal Details</strong> form in module settings.<br>
+        Create it first in <strong>Marketing &gt; Forms</strong>.</p>
+      </div>
+      {% endif %}
+
+    </div>
+
+  </div>
+
+  {# ── Panel: Wealth Hub ── #}
+  {# Detect if the member has ever submitted the wealth form. Email is
+     excluded because module.js prefills it — its presence alone shouldn't
+     flip us into "summary" mode. Any actual wealth field being non-empty
+     is the real signal. #}
+  {% set _has_p1        = contact.p1_street_name or contact.p1_unit_number or contact.p1_suburb %}
+  {% set _has_p2        = contact.p2_street_name or contact.p2_unit_number or contact.p2_suburb %}
+  {% set _has_p3        = contact.p3_street_name or contact.p3_unit_number or contact.p3_suburb %}
+  {% set _has_home_loan = contact.home_loan_lender or contact.home_loan_current_loan_balance %}
+  {% set _has_other_loan = contact.other_loan_lender or contact.other_loan_current_loan_balance %}
+  {% set _has_business  = contact.business_name or contact.business_industry %}
+  {% set _has_invest    = contact.investment_interests %}
+  {% set has_wealth_data = _has_p1 or _has_p2 or _has_p3 or _has_home_loan or _has_other_loan or _has_business or _has_invest %}
+
+  <div class="account-profile-form__panel"
+       id="panel-wealth"
+       role="tabpanel"
+       aria-labelledby="tab-wealth"
+       hidden>
+
+    {# Edit button — only rendered once wealth data exists. When there's
+       no data yet the form is shown open (no button to toggle). #}
+    {% if has_wealth_data %}
+    <div class="account-profile-form__panel-header">
+      <button class="account-profile-form__edit-btn"
+              type="button"
+              id="edit-wealth-btn"
+              aria-pressed="false"
+              data-edit-text="{{ module.edit_wealth_text | default('Edit') | escape_attr }}"
+              data-cancel-text="{{ module.cancel_text | default('Cancel') | escape_attr }}">
+        {{ module.edit_wealth_text | default('Edit') | escape_html }}
+      </button>
+    </div>
+    {% endif %}
+
+    {# ── Summary — visible when wealth data exists ──
+         Each section renders only if at least one field in that section
+         is set. Empty fields render "—" so members can see the shape. #}
+    {% if has_wealth_data %}
+    <div class="account-profile-form__wealth-summary" id="wealth-summary">
+      {% for _p in [
+        { 'label': 'Property 1', 'has': _has_p1, 'unit': contact.p1_unit_number, 'street': contact.p1_street_name, 'suburb': contact.p1_suburb, 'type': contact.p1_type, 'own': contact.p1_ownership_percentage, 'rent': contact.p1_rental_income, 'plan': contact.p1_future_plan },
+        { 'label': 'Property 2', 'has': _has_p2, 'unit': contact.p2_unit_number, 'street': contact.p2_street_name, 'suburb': contact.p2_suburb, 'type': contact.p2_property_type, 'own': contact.p2_ownership_percentage, 'rent': contact.p2_rental_income, 'plan': contact.p2_future_plan },
+        { 'label': 'Property 3', 'has': _has_p3, 'unit': contact.p3_unit_number, 'street': contact.p3_street_name, 'suburb': contact.p3_suburb, 'type': contact.p3_property_type, 'own': contact.p3_ownership_percentage, 'rent': contact.p3_rental_income, 'plan': contact.p3_future_plan }
+      ] %}
+        {% if _p.has %}
+        <section class="wealth-summary__section">
+          <h4 class="wealth-summary__heading">{{ _p.label }}</h4>
+          <dl class="wealth-summary__grid">
+            <dt>Address</dt>
+            <dd>{{ (_p.unit ~ ' ' ~ (_p.street | default('')) ~ (', ' ~ _p.suburb if _p.suburb else '')) | trim | default('—', true) | escape_html }}</dd>
+            {% if _p.type %}<dt>Type</dt><dd>{{ _p.type | escape_html }}</dd>{% endif %}
+            {% if _p.own  %}<dt>Ownership</dt><dd>{{ _p.own | escape_html }}%</dd>{% endif %}
+            {% if _p.rent %}<dt>Rental income</dt><dd>${{ _p.rent | escape_html }}</dd>{% endif %}
+            {% if _p.plan %}<dt>Future plan</dt><dd>{{ _p.plan | escape_html }}</dd>{% endif %}
+          </dl>
+        </section>
+        {% endif %}
+      {% endfor %}
+
+      {% if _has_home_loan %}
+      <section class="wealth-summary__section">
+        <h4 class="wealth-summary__heading">Home loan</h4>
+        <dl class="wealth-summary__grid">
+          {% if contact.home_loan_lender               %}<dt>Lender</dt><dd>{{ contact.home_loan_lender | escape_html }}</dd>{% endif %}
+          {% if contact.home_loan_current_loan_balance %}<dt>Current balance</dt><dd>${{ contact.home_loan_current_loan_balance | escape_html }}</dd>{% endif %}
+          {% if contact.home_loan_interest_rate        %}<dt>Interest rate</dt><dd>{{ contact.home_loan_interest_rate | escape_html }}%</dd>{% endif %}
+          {% if contact.home_loan_fixed                %}<dt>Fixed?</dt><dd>{{ contact.home_loan_fixed | escape_html }}</dd>{% endif %}
+          {% if contact.home_loan_linked_to            %}<dt>Linked to</dt><dd>{{ contact.home_loan_linked_to | escape_html }}</dd>{% endif %}
+        </dl>
+      </section>
+      {% endif %}
+
+      {% if _has_other_loan %}
+      <section class="wealth-summary__section">
+        <h4 class="wealth-summary__heading">Other loan</h4>
+        <dl class="wealth-summary__grid">
+          {% if contact.other_loan_lender               %}<dt>Lender</dt><dd>{{ contact.other_loan_lender | escape_html }}</dd>{% endif %}
+          {% if contact.other_loan_current_loan_balance %}<dt>Current balance</dt><dd>${{ contact.other_loan_current_loan_balance | escape_html }}</dd>{% endif %}
+          {% if contact.other_loan_interest_rate        %}<dt>Interest rate</dt><dd>{{ contact.other_loan_interest_rate | escape_html }}%</dd>{% endif %}
+          {% if contact.other_loan_purpose_of_loan      %}<dt>Purpose</dt><dd>{{ contact.other_loan_purpose_of_loan | escape_html }}</dd>{% endif %}
+        </dl>
+      </section>
+      {% endif %}
+
+      {% if _has_business %}
+      <section class="wealth-summary__section">
+        <h4 class="wealth-summary__heading">Business</h4>
+        <dl class="wealth-summary__grid">
+          {% if contact.business_name       %}<dt>Name</dt><dd>{{ contact.business_name | escape_html }}</dd>{% endif %}
+          {% if contact.business_industry   %}<dt>Industry</dt><dd>{{ contact.business_industry | escape_html }}</dd>{% endif %}
+          {% if contact.business_ownership  %}<dt>Ownership</dt><dd>{{ contact.business_ownership | escape_html }}%</dd>{% endif %}
+        </dl>
+      </section>
+      {% endif %}
+
+      {% if _has_invest %}
+      <section class="wealth-summary__section">
+        <h4 class="wealth-summary__heading">Investment interests</h4>
+        <p class="wealth-summary__text">{{ contact.investment_interests | replace(';', ', ') | escape_html }}</p>
+      </section>
+      {% endif %}
+    </div>
+    {% endif %}
+
+    {# Form wrapper. Starts hidden when wealth data exists; JS unhides
+       it when the member clicks Edit. #}
+    <div class="account-profile-form__form-wrap account-profile-form__form-wrap--locked{% if has_wealth_data %} is-collapsed{% endif %}"
+         id="wealth-form-wrap">
+
+      {# ── Wealth Hub form — V4 (new editor) — developer embed ──
+           Form ID hardcoded because HubSpot's public API can't create or
+           modify V4 forms (Private App Token allowlist blocks it), so
+           the reference has to live in code. To swap to a different form,
+           edit the data-form-id below.
+
+           PREFILL — two layers:
+             1. HubSpot's built-in "Pre-populate known values" toggle on
+                the form itself. This auto-fills any field where a
+                matching contact property has a value. Handles fields
+                the client adds later without any code change here.
+                MUST BE ENABLED inside the form editor (Options tab).
+             2. The JSON blob below — belt-and-suspenders. module.js
+                reads it and calls setFieldValue for each key on
+                form-ready. Covers the case where HubSpot's built-in
+                prefill misses (unreliable in some browsers/sessions).
+                To prefill a new field the client adds, add its
+                property name here. ── #}
+
+      {# JSON blob of contact properties that we know the form uses.
+         `| tojson` escapes strings and handles nulls. Any key whose
+         value is null/empty gets skipped by module.js. #}
+      <script type="application/json" id="wealth-prefill-data">
+      {
+        "email": {{ contact.email | tojson }},
+
+        "p1_unit_number":            {{ contact.p1_unit_number | tojson }},
+        "p1_street_name":            {{ contact.p1_street_name | tojson }},
+        "p1_suburb":                 {{ contact.p1_suburb | tojson }},
+        "p1_type":                   {{ contact.p1_type | tojson }},
+        "p1_ownership_percentage":   {{ contact.p1_ownership_percentage | tojson }},
+        "p1_rental_income":          {{ contact.p1_rental_income | tojson }},
+        "p1_future_plan":            {{ contact.p1_future_plan | tojson }},
+        "p1_add_another_property":   {{ contact.p1_add_another_property | tojson }},
+
+        "p2_unit_number":            {{ contact.p2_unit_number | tojson }},
+        "p2_street_name":            {{ contact.p2_street_name | tojson }},
+        "p2_suburb":                 {{ contact.p2_suburb | tojson }},
+        "p2_property_type":          {{ contact.p2_property_type | tojson }},
+        "p2_ownership_percentage":   {{ contact.p2_ownership_percentage | tojson }},
+        "p2_rental_income":          {{ contact.p2_rental_income | tojson }},
+        "p2_future_plan":            {{ contact.p2_future_plan | tojson }},
+        "p2_add_another_property":   {{ contact.p2_add_another_property | tojson }},
+
+        "p3_unit_number":            {{ contact.p3_unit_number | tojson }},
+        "p3_street_name":            {{ contact.p3_street_name | tojson }},
+        "p3_suburb":                 {{ contact.p3_suburb | tojson }},
+        "p3_property_type":          {{ contact.p3_property_type | tojson }},
+        "p3_ownership_percentage":   {{ contact.p3_ownership_percentage | tojson }},
+        "p3_rental_income":          {{ contact.p3_rental_income | tojson }},
+        "p3_future_plan":            {{ contact.p3_future_plan | tojson }},
+
+        "home_loan_current_loan_balance": {{ contact.home_loan_current_loan_balance | tojson }},
+        "home_loan_lender":              {{ contact.home_loan_lender | tojson }},
+        "home_loan_interest_rate":       {{ contact.home_loan_interest_rate | tojson }},
+        "home_loan_fixed":               {{ contact.home_loan_fixed | tojson }},
+        "home_loan_linked_to":           {{ contact.home_loan_linked_to | tojson }},
+        "add_another_loan":              {{ contact.add_another_loan | tojson }},
+
+        "other_loan_current_loan_balance": {{ contact.other_loan_current_loan_balance | tojson }},
+        "other_loan_lender":              {{ contact.other_loan_lender | tojson }},
+        "other_loan_interest_rate":       {{ contact.other_loan_interest_rate | tojson }},
+        "other_loan_fixed":               {{ contact.other_loan_fixed | tojson }},
+        "other_loan_purpose_of_loan":     {{ contact.other_loan_purpose_of_loan | tojson }},
+
+        "do_you_own_a_business":  {{ contact.do_you_own_a_business | tojson }},
+        "business_name":          {{ contact.business_name | tojson }},
+        "business_industry":      {{ contact.business_industry | tojson }},
+        "business_ownership":     {{ contact.business_ownership | tojson }},
+
+        "investment_interests":   {{ contact.investment_interests | tojson }}
+      }
+      </script>
+
+      <div class="hs-form-html account-profile-form__wealth-embed"
+           data-region="ap1"
+           data-form-id="ffe43d50-4c2e-4cd4-93f6-7ffaeeedbdb3"
+           data-portal-id="442066989"
+           data-vips-contact-email="{{ contact.email | default('') | escape_attr }}"></div>
+      <script src="https://js-ap1.hsforms.net/forms/embed/developer/442066989.js" defer></script>
+
+    </div>
+
+  </div>{# end panel-wealth #}
+
+</div>

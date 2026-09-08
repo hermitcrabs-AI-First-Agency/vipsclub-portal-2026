@@ -1,0 +1,126 @@
+{# ============================================================
+   VIPSCLUB — Service Enquiry Confirmation (programmable EMAIL module)
+
+   Resolves the member's most recent Service-Requests ticket
+   (pipeline 1960152509 = the enquiry that just triggered this email)
+   and renders the confirmation. All copy is editable in the email editor;
+   the service name / date / reference are injected per-recipient.
+
+   REQUIRES: "programmable email" beta ON for this module
+   (Design Manager → module inspector → allow CRM data access).
+   Without it, crm_associations / crm_object do not run.
+   ============================================================ #}
+
+{% set SERVICE_PIPELINE = "1960152509" %}
+{% set _accent = module.accent_color.color | default("#a22c35") %}
+
+{# ── SINGLE CRM call — this is the ONLY CRM HubL function in the module.
+      Email recipient ceiling scales inversely with CRM-function count
+      (1 fn = 500k recipients, 2 = 250k …), so everything the email needs is
+      pulled in this one crm_associations call, then filtered + reduced in HubL.
+
+      Contact→Ticket = HUBSPOT_DEFINED typeId 15. We keep only Service-pipeline
+      tickets and hold the newest (max id = the enquiry that just triggered
+      this email — ids are monotonic, so no timestamp is needed to sort). All
+      display fields (content/subject/createdate/enquiry_message) are captured
+      from the winning row in the same pass — no second lookup. ── #}
+{% set _win = namespace(id=0, content="", subject="", created="", summary="") %}
+{% if contact.hs_object_id %}
+  {% set _tickets = crm_associations(contact.hs_object_id, "HUBSPOT_DEFINED", 15, "limit=100", "hs_object_id,hs_pipeline,createdate,content,subject,enquiry_message", false) %}
+  {% for _t in _tickets.results %}
+    {% if _t.hs_pipeline == SERVICE_PIPELINE and (_t.hs_object_id | default(0) | int) > _win.id %}
+      {% set _win.id      = _t.hs_object_id | default(0) | int %}
+      {% set _win.content = _t.content | default("") %}
+      {% set _win.subject = _t.subject | default("") %}
+      {% set _win.created = _t.createdate | default("") %}
+      {% set _win.summary = _t.enquiry_message | default("") %}
+    {% endif %}
+  {% endfor %}
+{% endif %}
+
+{# ── Derive display values from the winning row (no extra CRM call).
+      Service name: content is "<name> - <rowId> - <url>"; fall back to the
+      quoted subject "Request for Service: \"<name>\"". ── #}
+{% set _service_name = "" %}
+{% if _win.content %}
+  {% set _service_name = (_win.content | split(" - "))[0] | trim %}
+{% endif %}
+{% if not _service_name and _win.subject %}
+  {% set _service_name = _win.subject | replace('Request for Service: "', "") | replace('"', "") | trim %}
+{% endif %}
+{% set _service_display = _service_name if _service_name else (module.service_fallback | default("your service")) %}
+{% set _submitted = _win.created | datetimeformat("%e %B %Y, %I:%M %p", "Australia/Sydney") if _win.created else "" %}
+{% set _reference = _win.id if _win.id else "" %}
+{% set _enquiry_summary = _win.summary %}
+
+<div style="font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:1.6;color:#212121;">
+
+  <p style="margin:0 0 16px;">{{ module.greeting_prefix | default("Hi") | escape_html }} {{ contact.firstname | default(module.firstname_fallback | default("there")) | escape_html }},</p>
+
+  {% if module.intro_line %}
+  <p style="margin:0 0 16px;">{{ module.intro_line | replace("{service}", _service_display) | escape_html }}</p>
+  {% endif %}
+
+  {% if module.body_line %}
+  <div style="margin:0 0 20px;">{{ module.body_line }}</div>
+  {% endif %}
+
+  {# ── Enquiry summary card (only when a service was resolved) ── #}
+  {% if _service_name %}
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f7f7f7;border-radius:10px;margin:0 0 20px;">
+    <tr><td style="padding:20px;">
+      <p style="margin:0 0 14px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;color:{{ _accent }};">{{ module.summary_heading | default("Enquiry summary") | escape_html }}</p>
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="font-size:14px;color:#212121;">
+        <tr>
+          <td style="padding:5px 0;color:#616161;width:120px;vertical-align:top;">{{ module.label_service | default("Service") | escape_html }}</td>
+          <td style="padding:5px 0;font-weight:700;">{{ _service_name | escape_html }}</td>
+        </tr>
+        {% if _submitted %}
+        <tr>
+          <td style="padding:5px 0;color:#616161;vertical-align:top;">{{ module.label_submitted | default("Submitted") | escape_html }}</td>
+          <td style="padding:5px 0;font-weight:700;">{{ _submitted }}</td>
+        </tr>
+        {% endif %}
+        {% if _reference %}
+        <tr>
+          <td style="padding:5px 0;color:#616161;vertical-align:top;">{{ module.label_reference | default("Reference") | escape_html }}</td>
+          <td style="padding:5px 0;font-weight:700;">#{{ _reference }}</td>
+        </tr>
+        {% endif %}
+        {% if _enquiry_summary %}
+        <tr>
+          <td style="padding:5px 0;color:#616161;vertical-align:top;">{{ module.label_details | default("Details provided") | escape_html }}</td>
+          <td style="padding:5px 0;">{{ _enquiry_summary | escape_html }}</td>
+        </tr>
+        {% endif %}
+      </table>
+    </td></tr>
+  </table>
+  {% endif %}
+
+  {% if module.continue_line %}
+  <div style="margin:0 0 20px;">{{ module.continue_line }}</div>
+  {% endif %}
+
+  {# ── Button (centered — full-width outer table + align="center" cell) ── #}
+  {% if module.button_text and module.button_url.url.href %}
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:0 0 24px;">
+    <tr><td align="center" style="text-align:center;">
+      <table role="presentation" cellpadding="0" cellspacing="0" style="margin:0 auto;">
+        <tr><td style="border-radius:6px;background:{{ _accent }};">
+          <a href="{{ module.button_url.url.href | escape_attr }}"
+             {% if module.button_url.open_in_new_tab %}target="_blank" rel="noopener"{% endif %}
+             style="display:inline-block;padding:12px 26px;font-family:Arial,Helvetica,sans-serif;font-size:15px;font-weight:700;color:#ffffff;text-decoration:none;border-radius:6px;">{{ module.button_text | escape_html }}</a>
+        </td></tr>
+      </table>
+    </td></tr>
+  </table>
+  {% endif %}
+
+  {% if module.reply_line %}
+  <p style="margin:0 0 20px;font-size:13px;color:#616161;">{{ module.reply_line | escape_html }}</p>
+  {% endif %}
+
+  <p style="margin:0;">{{ module.signoff | default("Kind regards,") | escape_html }}<br>{{ module.team_name | default("The VIPSCLUB Team") | escape_html }}</p>
+
+</div>

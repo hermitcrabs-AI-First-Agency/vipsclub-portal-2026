@@ -1,0 +1,30 @@
+/* ============================================================
+   VIPSCLUB Portal 2026 — Refer a Friend Template CSS
+   Two-column layout: 503px info + 397px form
+   ============================================================ */
+
+/* ── Two-column layout inside portal-main ── */
+.refer-friend-layout {
+  display: grid;
+  grid-template-columns: 1fr minmax(0, 397px);
+  gap: 24px;
+  align-items: start;
+}
+
+/* Right column (form) sticks while left column scrolls */
+.refer-friend-layout__right {
+  position: sticky;
+  top: 24px;
+}
+
+/* ── Mobile (≤768px): single column ── */
+@media (max-width: 768px) {
+  .refer-friend-layout {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .refer-friend-layout__right {
+    position: static;
+  }
+}

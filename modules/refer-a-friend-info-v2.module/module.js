@@ -1,0 +1,1 @@
+/* No JavaScript needed for the static referral info module. */

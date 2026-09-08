@@ -1,0 +1,127 @@
+<!--
+  templateType: page
+  isAvailableForNewContent: false
+  label: Portal — Service Detail (retired — use Services Catalogue & Detail)
+-->
+{% extends "./layouts/base.html" %}
+
+{# ============================================================
+   VIPSCLUB Portal 2026 — Service Detail Template
+   Figma: Desktop 339:7562 | Mobile 339:9002
+   Layout: same portal layout as dashboard + two-column main content
+   ============================================================ #}
+
+{% block head_extra %}
+{% require_css %}
+<link rel="stylesheet" href="{{ get_asset_url('../css/portal/service-detail.css') }}">
+{% end_require_css %}
+{% endblock %}
+
+{% block body %}
+<div class="portal-layout">
+
+  {# ── Full-Width Header ── #}
+  <div class="portal-header-area">
+    {% dnd_area "portal_header"
+      label="Portal Header",
+      class="portal-header-dnd"
+    %}
+      {% dnd_section %}
+        {% dnd_column %}
+          {% dnd_row %}
+            {% dnd_module path="../modules/portal-header" %}{% end_dnd_module %}
+          {% end_dnd_row %}
+        {% end_dnd_column %}
+      {% end_dnd_section %}
+    {% end_dnd_area %}
+  </div>
+
+  {# ── Referral Banner — direct flex child of portal-layout, overlaps bottom of header ── #}
+  <div class="portal-referral-wrapper">
+    {% dnd_area "referral_banner"
+      label="Referral Banner",
+      class="referral-banner-area"
+    %}
+      {% dnd_section %}
+        {% dnd_column %}
+          {% dnd_row %}
+            {% dnd_module path="../modules/referral-banner" %}{% end_dnd_module %}
+          {% end_dnd_row %}
+        {% end_dnd_column %}
+      {% end_dnd_section %}
+    {% end_dnd_area %}
+  </div>
+
+  <div class="portal-content-outer">
+
+    {# ── Two-Column Body: Sidebar + Main ── #}
+    <div class="portal-body">
+
+      {# Sidebar — "Services" nav item is active #}
+      {% module "portal_sidebar" path="../modules/portal-sidebar" label="Portal Sidebar" %}
+
+      {# ── Main Content ── #}
+      <main class="portal-main" id="main-content">
+
+        {# ── Service Detail Two-Column Layout ── #}
+        {# On desktop: LEFT (service-detail-hero) | RIGHT (enquire form + RM card) #}
+        {# On mobile: RIGHT column comes first (enquiry form at top) #}
+        <div class="service-detail-layout">
+
+          {# ── Left Column: breadcrumb + hero content ── #}
+          <div class="service-detail-layout__col service-detail-layout__col--left">
+            {% dnd_area "service_detail_left"
+              label="Service Detail — Left Column",
+              class="service-detail-left-area"
+            %}
+              {% dnd_section %}
+                {% dnd_column %}
+                  {% dnd_row %}
+                    {% dnd_module path="../modules/service-detail-hero"
+                      label="Service Detail Hero"
+                    %}
+                    {% end_dnd_module %}
+                  {% end_dnd_row %}
+                {% end_dnd_column %}
+              {% end_dnd_section %}
+            {% end_dnd_area %}
+          </div>
+
+          {# ── Right Column: enquiry form + RM card ── #}
+          <div class="service-detail-layout__col service-detail-layout__col--right">
+            {% dnd_area "service_detail_right"
+              label="Service Detail — Right Column",
+              class="service-detail-right-area"
+            %}
+              {% dnd_section %}
+                {% dnd_column %}
+                  {% dnd_row %}
+                    {% dnd_module path="../modules/service-enquire-form"
+                      label="Service Enquiry Form"
+                    %}
+                    {% end_dnd_module %}
+                  {% end_dnd_row %}
+                  {% dnd_row %}
+                    {% dnd_module path="../modules/rm-card"
+                      label="RM Contact Card"
+                    %}
+                    {% end_dnd_module %}
+                  {% end_dnd_row %}
+                {% end_dnd_column %}
+              {% end_dnd_section %}
+            {% end_dnd_area %}
+          </div>
+
+        </div>{# end service-detail-layout #}
+
+      </main>{# end portal-main #}
+
+    </div>{# end portal-body #}
+
+    {# ── Footer ── #}
+    {% module "portal_footer" path="../modules/portal-footer" label="Portal Footer" %}
+
+  </div>{# end portal-content-outer #}
+
+</div>{# end portal-layout #}
+{% endblock %}

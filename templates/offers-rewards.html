@@ -1,0 +1,92 @@
+<!--
+  templateType: page
+  isAvailableForNewContent: true
+  label: Portal — Offers & Rewards
+-->
+{% extends "./layouts/base.html" %}
+
+{# ============================================================
+   VIPSCLUB Portal 2026 — Offers & Rewards Hub Template
+   Figma: Desktop 339:8516 | Mobile 339:9363
+   Layout: same portal layout as dashboard
+   ============================================================ #}
+
+{% block head_extra %}
+{% require_css %}
+<link rel="stylesheet" href="{{ get_asset_url('../css/portal/offers-rewards.css') }}">
+{% end_require_css %}
+{% endblock %}
+
+{% block body %}
+<div class="portal-layout">
+
+  {# ── Full-Width Header ── #}
+  <div class="portal-header-area">
+    {% dnd_area "portal_header"
+      label="Portal Header",
+      class="portal-header-dnd"
+    %}
+      {% dnd_section %}
+        {% dnd_column %}
+          {% dnd_row %}
+            {% dnd_module path="../modules/portal-header" %}{% end_dnd_module %}
+          {% end_dnd_row %}
+        {% end_dnd_column %}
+      {% end_dnd_section %}
+    {% end_dnd_area %}
+  </div>
+
+  {# ── Referral Banner — direct flex child of portal-layout, overlaps bottom of header ── #}
+  <div class="portal-referral-wrapper">
+    {% dnd_area "referral_banner"
+      label="Referral Banner",
+      class="referral-banner-area"
+    %}
+      {% dnd_section %}
+        {% dnd_column %}
+          {% dnd_row %}
+            {% dnd_module path="../modules/referral-banner" %}{% end_dnd_module %}
+          {% end_dnd_row %}
+        {% end_dnd_column %}
+      {% end_dnd_section %}
+    {% end_dnd_area %}
+  </div>
+
+  <div class="portal-content-outer">
+
+    {# ── Two-Column Body: Sidebar + Main ── #}
+    <div class="portal-body">
+
+      {# Sidebar — "Offers" nav item is active #}
+      {% module "portal_sidebar" path="../modules/portal-sidebar" label="Portal Sidebar" %}
+
+      {# ── Main Content ── #}
+      <main class="portal-main" id="main-content">
+
+        {% dnd_area "offers_rewards_content"
+          label="Offers & Rewards Content",
+          class="offers-rewards-area"
+        %}
+          {% dnd_section %}
+            {% dnd_column %}
+              {% dnd_row %}
+                {% dnd_module path="../modules/offers-rewards-hub"
+                  label="Offers & Rewards Hub"
+                %}
+                {% end_dnd_module %}
+              {% end_dnd_row %}
+            {% end_dnd_column %}
+          {% end_dnd_section %}
+        {% end_dnd_area %}
+
+      </main>{# end portal-main #}
+
+    </div>{# end portal-body #}
+
+    {# ── Footer ── #}
+    {% module "portal_footer" path="../modules/portal-footer" label="Portal Footer" %}
+
+  </div>{# end portal-content-outer #}
+
+</div>{# end portal-layout #}
+{% endblock %}

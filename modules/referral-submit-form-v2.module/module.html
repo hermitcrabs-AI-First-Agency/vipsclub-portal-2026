@@ -1,0 +1,57 @@
+{# ============================================================
+   VIPSCLUB Portal 2026 — Referral Submit Form V2
+   Renders the "Refer a friend Form" (V4 new-editor). Prefills:
+     - referral_source_email  ← logged-in member's email
+     - referred_service       ← ?service=<hubdb_row_id> URL param (SD4)
+   Prefill runs in module.js via the HubSpotFormsV4 events API.
+   ============================================================ #}
+
+{# ── Service-context lookup (SD4) ──
+   When the shareable Refer-a-friend URL carries ?service=<hubdb_row_id>,
+   we look up the row so the referred_service form field can be filled
+   with a debug-friendly "<name> - <id> - <full url>" string that the
+   downstream workflow can split. Non-service referrals skip this block
+   and referred_service stays blank. ── #}
+{% set _svc_id = request.query_dict.service | default("") %}
+{% set _svc    = none %}
+{% if _svc_id %}
+  {% set _rows = hubdb_table_rows(1680589250, "hs_id__eq=" ~ _svc_id ~ "&limit=1") %}
+  {% if _rows and (_rows | length) > 0 %}{% set _svc = _rows[0] %}{% endif %}
+{% endif %}
+
+<section class="referral-submit-form-v2{% if module.style_overrides.hide_on_mobile %} referral-submit-form-v2--hide-mobile{% endif %}" aria-labelledby="{{ name }}-heading">
+  {% if module.heading %}
+  <{{ module.heading_level|default("h2") }} id="{{ name }}-heading" class="referral-submit-form-v2__heading">
+    {{ module.heading|escape_html }}
+  </{{ module.heading_level|default("h2") }}>
+  {% endif %}
+
+  <div class="referral-submit-form-v2__card"
+       data-refemail="{{ contact.email | default('') | escape_attr }}"
+       data-service-id="{{ (_svc.hs_id | default('') if _svc else '') | escape_attr }}"
+       data-service-name="{{ (_svc.name  | default('') if _svc else '') | escape_attr }}">
+    {% if module.form.form_id %}
+      {# HubSpot's {% form %} tag auto-detects V3 vs V4. The form field
+         supports both versions (see supported_form_types in fields.json)
+         so the editor can pick either one from the dropdown. For V4
+         (new-editor) forms this emits an <div class="hs-form-html">
+         wrapper + auto-loads the developer embed script. #}
+      {% form "referral_form_v2"
+        form_to_use="{{ module.form.form_id }}",
+        response_type="{{ module.form.response_type }}",
+        response_message="{{ module.form.message }}"
+      %}
+    {% elif is_in_editor or module_preview %}
+      <div class="referral-submit-form-v2__placeholder">
+        {{ module.empty_form_message }}
+      </div>
+    {% endif %}
+
+    {% if module.disclaimer %}
+    <div class="referral-submit-form-v2__disclaimer">
+      {{ module.disclaimer }}
+    </div>
+    {% endif %}
+  </div>
+</section>
+

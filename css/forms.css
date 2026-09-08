@@ -1,0 +1,926 @@
+/* ============================================================
+   VIPSCLUB Portal 2026 — Global Form Styles
+   Themes EVERY HubSpot {% form %} rendered anywhere on the site.
+   Per-module form CSS overrides this where a module needs a custom look
+   (higher selector specificity wins automatically).
+   ============================================================ */
+
+/* ── Container reset ── */
+.hs-form {
+  width: 100%;
+}
+
+.hs-form fieldset {
+  max-width: 100%;
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Two-column rows — CSS grid with minmax(0, 1fr) so the columns are dead-equal
+   and the row width is EXACTLY 100% of the form (no subpixel overshoot, no
+   float leak, no HubSpot percentage-width quirks). !important because HubSpot's
+   own form CSS (loaded by their CDN, sometimes after theme CSS) reinstates
+   widths/floats/margins at equal specificity — these resets must win. */
+.hs-form fieldset.form-columns-2 {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.hs-form fieldset.form-columns-2 .hs-form-field {
+  width: auto !important;
+  min-width: 0;
+  margin: 0 0 16px !important;
+  padding: 0 !important;
+  float: none !important;
+  box-sizing: border-box;
+}
+
+/* The .input wrapper HubSpot puts around every input has a default
+   margin-right:24px that pushes inputs off the right edge in single-column rows
+   AND adds an invisible gutter in two-column rows. Force zero — and width 100%
+   so the input fills the wrapper exactly. */
+.hs-form fieldset .input {
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box;
+}
+
+/* ── Field wrapper ── */
+.hs-form .hs-form-field {
+  margin-bottom: 16px;
+}
+
+/* ── Labels ── */
+.hs-form label,
+.hs-form .hs-label {
+  display: block;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--vips-dark);
+  margin-bottom: 6px;
+}
+
+.hs-form .hs-form-required {
+  color: var(--vips-red);
+  margin-left: 2px;
+}
+
+/* ── Inputs ── */
+.hs-form input.hs-input,
+.hs-form select.hs-input,
+.hs-form textarea.hs-input {
+  width: 100%;
+  height: 43px;
+  padding: 0 12px;
+  border: 1px solid var(--vips-border);
+  border-radius: var(--radius-sm);
+  background: var(--vips-bg-card);
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--vips-dark);
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color 0.15s ease;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.hs-form textarea.hs-input {
+  height: auto;
+  min-height: 100px;
+  padding: 12px;
+  resize: vertical;
+}
+
+.hs-form input.hs-input::placeholder,
+.hs-form textarea.hs-input::placeholder {
+  color: var(--vips-text-secondary);
+}
+
+.hs-form input.hs-input:focus,
+.hs-form select.hs-input:focus,
+.hs-form textarea.hs-input:focus {
+  border-color: var(--vips-dark);
+}
+
+.hs-form input.hs-input:focus-visible,
+.hs-form select.hs-input:focus-visible,
+.hs-form textarea.hs-input:focus-visible {
+  outline: 2px solid var(--vips-dark);
+  outline-offset: 2px;
+}
+
+/* Native select dropdown chevron */
+.hs-form select.hs-input {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23616161' stroke-width='1.4' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 36px;
+  cursor: pointer;
+}
+
+/* ── Checkbox / radio ── */
+.hs-form .hs-form-booleancheckbox-display,
+.hs-form .hs-form-radio-display {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--vips-dark);
+  margin-bottom: 0;
+}
+
+.hs-form .hs-form-booleancheckbox-display input,
+.hs-form .hs-form-radio-display input {
+  width: auto;
+  height: auto;
+  margin: 2px 0 0;
+  flex-shrink: 0;
+  accent-color: var(--vips-dark);
+}
+
+.hs-form .hs-form-booleancheckbox-display > span,
+.hs-form .hs-form-radio-display > span {
+  flex: 1;
+}
+
+.hs-form ul.inputs-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.hs-form ul.inputs-list > li {
+  margin-bottom: 8px;
+}
+
+.hs-form ul.inputs-list > li:last-child {
+  margin-bottom: 0;
+}
+
+/* ── Submit button ── */
+.hs-form .hs-submit {
+  margin-top: 8px;
+}
+
+.hs-form .hs-submit > .actions {
+  margin: 0;
+  padding: 0;
+}
+
+.hs-form input[type="submit"],
+.hs-form .hs-button {
+  width: 100%;
+  height: 47px;
+  padding: 0 24px;
+  background: var(--vips-dark);
+  color: var(--vips-bg-card);
+  border: none;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.15s ease;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.hs-form input[type="submit"]:hover,
+.hs-form .hs-button:hover {
+  background: var(--vips-dark-subtle);
+  color: var(--vips-bg-card);
+}
+
+.hs-form input[type="submit"]:focus-visible,
+.hs-form .hs-button:focus-visible {
+  outline: 2px solid var(--vips-dark);
+  outline-offset: 2px;
+}
+
+.hs-form input[type="submit"]:disabled,
+.hs-form .hs-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ── Error messages ── */
+.hs-form .hs-error-msgs {
+  list-style: none;
+  margin: 4px 0 0;
+  padding: 0;
+}
+
+.hs-form .hs-error-msgs label,
+.hs-form .hs-error-msg {
+  display: block;
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--vips-red);
+  margin: 0;
+}
+
+.hs-form .hs-form-field.invalid input.hs-input,
+.hs-form .hs-form-field.invalid select.hs-input,
+.hs-form .hs-form-field.invalid textarea.hs-input,
+.hs-form input.hs-input.invalid,
+.hs-form select.hs-input.invalid,
+.hs-form textarea.hs-input.invalid {
+  border-color: var(--vips-red);
+}
+
+/* ── Field description ── */
+.hs-form .hs-field-desc {
+  font-family: var(--font-body);
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--vips-text-secondary);
+  margin: 4px 0 0;
+}
+
+/* ── Legal consent (privacy policy checkbox + text) ── */
+.hs-form .legal-consent-container {
+  font-family: var(--font-body);
+  font-size: 13px;
+  line-height: 20px;
+  color: var(--vips-text-secondary);
+  margin: 8px 0;
+}
+
+.hs-form .legal-consent-container p {
+  margin: 0 0 8px;
+}
+
+.hs-form .legal-consent-container p:last-child {
+  margin-bottom: 0;
+}
+
+.hs-form .legal-consent-container a {
+  color: var(--vips-red);
+  text-decoration: underline;
+}
+
+/* ── Response after submit ── */
+.submitted-message,
+.hs-form__response {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 22px;
+  color: var(--vips-dark);
+  padding: 16px;
+  background: var(--vips-bg-card);
+  border: 1px solid var(--vips-border-light);
+  border-radius: var(--radius-md);
+}
+
+/* (.hs-form fieldset .input wrapper reset is now near the form-columns-2 block
+   above, with !important so it wins against HubSpot's CDN form CSS.) */
+
+/* ── Checkbox + radio ──
+   The generic input.hs-input rule above sets appearance:none + a 100%×43px box,
+   which makes the native checkbox render as a thin invisible line. Restore the
+   real control here. input[type="..."] has the same specificity as input.hs-input
+   so source order (this block is later in the file) wins. */
+.hs-form input[type="checkbox"],
+.hs-form input[type="radio"] {
+  width: auto;
+  height: auto;
+  padding: 0;
+  border: none;
+  background: transparent;
+  border-radius: 0;
+  appearance: auto;
+  -webkit-appearance: auto;
+  margin: 3px 0 0;
+  flex-shrink: 0;
+  accent-color: var(--vips-dark);
+  cursor: pointer;
+}
+
+/* ── Mobile (≤768px) — collapse two-column rows to one ── */
+@media (max-width: 768px) {
+  .hs-form fieldset.form-columns-2 {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+}
+
+
+/* ============================================================
+   V4 (new-editor) HubSpot forms — .hsfc-* class family.
+
+   Mirrors the V3 block above so a form swapped between V3 and V4
+   in the HubSpot editor looks the same either way. This block
+   only affects forms rendered by the new editor; V3 legacy
+   forms continue to use the .hs-* block above.
+
+   Class map (V3 → V4):
+     .hs-form               →  .hsfc-Form
+     .hs-form-field         →  .hsfc-FormField / .hsfc-Field
+     .hs-label / label      →  .hsfc-FieldLabel
+     .hs-form-required      →  .hsfc-FieldLabel__required
+     .hs-input              →  .hsfc-Input (+ variants below)
+     .hs-error-msgs / -msg  →  .hsfc-FieldError / .hsfc-ErrorMessage
+     .hs-field-desc         →  .hsfc-FieldDescription
+     .hs-button / .actions  →  .hsfc-Button / .hsfc-NavigationRow
+
+   Note: V4 forms wrap most inputs in an <div class="hsfc-Input">
+   with the native <input> inside; selectors below target both
+   patterns so the theming works whether HubSpot inlines the
+   input or wraps it. When HubSpot renames a class in a future
+   release, add the new selector alongside the old and the
+   styling survives the migration.
+   ============================================================ */
+
+/* ── Root container ── */
+.hsfc-Form {
+  width: 100%;
+}
+
+/* ── Field wrapper spacing ── */
+.hsfc-Form .hsfc-Field,
+.hsfc-Form .hsfc-FormField,
+.hsfc-Form .hsfc-FieldWrap {
+  margin-bottom: 16px;
+}
+
+/* ── Labels ── */
+.hsfc-Form label,
+.hsfc-Form .hsfc-FieldLabel {
+  display: block;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--vips-dark);
+  margin-bottom: 6px;
+}
+
+.hsfc-Form .hsfc-FieldLabel__required,
+.hsfc-Form .hsfc-FieldLabel--required::after,
+.hsfc-Form .hsfc-Required {
+  color: var(--vips-red);
+  margin-left: 2px;
+}
+
+/* ── Text-like inputs (email, tel, url, single_line_text, phone, date, etc.) ── */
+.hsfc-Form .hsfc-Input input,
+.hsfc-Form input.hsfc-Input,
+.hsfc-Form .hsfc-Input__text,
+.hsfc-Form .hsfc-TextInput,
+.hsfc-Form .hsfc-Textarea,
+.hsfc-Form .hsfc-Select,
+.hsfc-Form input[type="text"],
+.hsfc-Form input[type="email"],
+.hsfc-Form input[type="tel"],
+.hsfc-Form input[type="url"],
+.hsfc-Form input[type="number"],
+.hsfc-Form input[type="date"],
+.hsfc-Form textarea,
+.hsfc-Form select {
+  width: 100%;
+  height: 43px;
+  padding: 0 12px;
+  border: 1px solid var(--vips-border);
+  border-radius: var(--radius-sm);
+  background: var(--vips-bg-card);
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--vips-dark);
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color 0.15s ease;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.hsfc-Form .hsfc-Textarea,
+.hsfc-Form textarea {
+  height: auto;
+  min-height: 100px;
+  padding: 12px;
+  resize: vertical;
+}
+
+.hsfc-Form .hsfc-Input input::placeholder,
+.hsfc-Form input::placeholder,
+.hsfc-Form textarea::placeholder {
+  color: var(--vips-text-secondary);
+}
+
+.hsfc-Form .hsfc-Input input:focus,
+.hsfc-Form input:focus,
+.hsfc-Form textarea:focus,
+.hsfc-Form select:focus {
+  border-color: var(--vips-dark);
+}
+
+.hsfc-Form .hsfc-Input input:focus-visible,
+.hsfc-Form input:focus-visible,
+.hsfc-Form textarea:focus-visible,
+.hsfc-Form select:focus-visible {
+  outline: 2px solid var(--vips-dark);
+  outline-offset: 2px;
+}
+
+/* Select — native chevron */
+.hsfc-Form select,
+.hsfc-Form .hsfc-Select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23616161' stroke-width='1.4' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 36px;
+  cursor: pointer;
+}
+
+/* ── Checkboxes + radios ──
+   V4 wraps each option in .hsfc-CheckboxField (single boolean) or
+   .hsfc-CheckboxFieldGroup (list) with a nested .hsfc-CheckboxInput
+   for the actual control + .hsfc-CheckboxLabel for the text. */
+.hsfc-Form .hsfc-CheckboxField,
+.hsfc-Form .hsfc-RadioField,
+.hsfc-Form .hsfc-CheckboxLabel,
+.hsfc-Form .hsfc-RadioLabel {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--vips-dark);
+  margin-bottom: 0;
+}
+
+.hsfc-Form .hsfc-CheckboxInput,
+.hsfc-Form .hsfc-RadioInput,
+.hsfc-Form input[type="checkbox"],
+.hsfc-Form input[type="radio"] {
+  width: auto;
+  height: auto;
+  padding: 0;
+  border: none;
+  background: transparent;
+  border-radius: 0;
+  appearance: auto;
+  -webkit-appearance: auto;
+  margin: 2px 0 0;
+  flex-shrink: 0;
+  accent-color: var(--vips-dark);
+  cursor: pointer;
+}
+
+.hsfc-Form .hsfc-CheckboxFieldGroup > * + *,
+.hsfc-Form .hsfc-RadioFieldGroup > * + * {
+  margin-top: 8px;
+}
+
+/* ── Submit / navigation buttons ── */
+.hsfc-Form .hsfc-Button,
+.hsfc-Form button[type="submit"],
+.hsfc-Form .hsfc-NavigationRow button {
+  width: 100%;
+  height: 47px;
+  padding: 0 24px;
+  background: var(--vips-dark);
+  color: var(--vips-bg-card);
+  border: none;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.15s ease;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+/* No color change on hover — HubSpot's default V4 button hover fills red
+   from a theme accent variable. Force the same dark bg + white text as
+   the normal state so hover is visually identical. */
+.hsfc-Form .hsfc-Button:hover,
+.hsfc-Form button[type="submit"]:hover,
+.hsfc-Form .hsfc-NavigationRow button:hover {
+  background: var(--vips-dark) !important;
+  color: var(--vips-bg-card) !important;
+}
+
+.hsfc-Form .hsfc-Button:focus-visible,
+.hsfc-Form button[type="submit"]:focus-visible,
+.hsfc-Form .hsfc-NavigationRow button:focus-visible {
+  outline: 2px solid var(--vips-dark);
+  outline-offset: 2px;
+}
+
+.hsfc-Form .hsfc-Button:disabled,
+.hsfc-Form button[type="submit"]:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* If HubSpot ever renders multiple nav buttons on the same row
+   (multi-step forms), stack them naturally. */
+.hsfc-Form .hsfc-NavigationRow {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+/* ── Errors ── */
+.hsfc-Form .hsfc-FieldError,
+.hsfc-Form .hsfc-ErrorMessage,
+.hsfc-Form .hsfc-Field__error {
+  display: block;
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--vips-red);
+  margin: 4px 0 0;
+}
+
+.hsfc-Form .hsfc-Field--invalid .hsfc-Input input,
+.hsfc-Form .hsfc-Field--invalid input,
+.hsfc-Form .hsfc-Field--invalid textarea,
+.hsfc-Form .hsfc-Field--invalid select {
+  border-color: var(--vips-red);
+}
+
+/* ── Field description (help text under the label/input) ── */
+.hsfc-Form .hsfc-FieldDescription,
+.hsfc-Form .hsfc-HelperText {
+  font-family: var(--font-body);
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--vips-text-secondary);
+  margin: 4px 0 0;
+}
+
+/* ── Legal consent block (privacy policy checkbox + copy) ── */
+.hsfc-Form .hsfc-LegalConsent,
+.hsfc-Form .hsfc-Consent {
+  font-family: var(--font-body);
+  font-size: 13px;
+  line-height: 20px;
+  color: var(--vips-text-secondary);
+  margin: 8px 0;
+}
+
+.hsfc-Form .hsfc-LegalConsent p,
+.hsfc-Form .hsfc-Consent p {
+  margin: 0 0 8px;
+}
+
+.hsfc-Form .hsfc-LegalConsent p:last-child,
+.hsfc-Form .hsfc-Consent p:last-child {
+  margin-bottom: 0;
+}
+
+.hsfc-Form .hsfc-LegalConsent a,
+.hsfc-Form .hsfc-Consent a {
+  color: var(--vips-red);
+  text-decoration: underline;
+}
+
+/* ── Response after submit ── */
+.hsfc-Form__response,
+.hsfc-SubmittedMessage {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 22px;
+  color: var(--vips-dark);
+  padding: 16px;
+  background: var(--vips-bg-card);
+  border: 1px solid var(--vips-border-light);
+  border-radius: var(--radius-md);
+}
+
+/* ── Two-column rows (V4 uses .hsfc-Row) ── */
+.hsfc-Form .hsfc-Row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.hsfc-Form .hsfc-Row > * {
+  min-width: 0;
+}
+
+/* Mobile — collapse to one column */
+@media (max-width: 768px) {
+  .hsfc-Form .hsfc-Row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+}
+
+
+/* ============================================================
+   V4 — corrections after inspecting the real DOM
+   HubSpot's actual class names differ from my initial guesses.
+   These blocks target the classes actually rendered and win via
+   higher specificity + source order over HubSpot's CDN CSS.
+
+   Actual class map (real DOM):
+     `<textarea>`          class = .hsfc-TextareaInput
+     `<textarea>` wrapper  class = .hsfc-TextareaField
+     text/email/tel input  class = .hsfc-TextInput
+     text field wrapper    class = .hsfc-TextField / .hsfc-EmailField / .hsfc-PhoneField
+     phone flag button     class = .hsfc-PhoneInput__FlagAndCaret
+     form step content     class = .hsfc-Step__Content  (has 40px padding baked in — reset)
+   ============================================================ */
+
+/* Kill the 40px padding HubSpot bakes into the step container — with our
+   own card padding on top it made the form feel like it sat inside a
+   double-padded box. Zero here, spacing lives on the field wrappers.
+   !important because HubSpot's CDN CSS uses the same 2-class selector
+   and loads AFTER the theme sheet, so it wins at equal specificity. */
+.hsfc-Form .hsfc-Step,
+.hsfc-Form .hsfc-Step__Content {
+  padding: 0 !important;
+}
+
+/* Force zero margin on Rows — HubSpot bakes `margin-bottom: 20px` into
+   .hsfc-Row which stacks with the field-wrapper margin below it and
+   produces bigger gaps than the V3 form. Spacing lives on field
+   wrappers only. */
+.hsfc-Form .hsfc-Row {
+  margin: 0 !important;
+}
+
+/* Field wrapper spacing (fields ARE the .hsfc-*Field classes). !important
+   so this wins over HubSpot's own field CSS which also targets these
+   classes at the same specificity. */
+.hsfc-Form .hsfc-TextField,
+.hsfc-Form .hsfc-EmailField,
+.hsfc-Form .hsfc-PhoneField,
+.hsfc-Form .hsfc-TextareaField,
+.hsfc-Form .hsfc-NumberField,
+.hsfc-Form .hsfc-DateField,
+.hsfc-Form .hsfc-SelectField,
+.hsfc-Form .hsfc-DropdownField {
+  margin-bottom: 16px !important;
+}
+
+/* Label spacing to match V3 (8px). HubSpot's default is 10px which
+   pushes the whole form ~2px per field taller than V3. */
+.hsfc-Form .hsfc-FieldLabel {
+  margin-bottom: 8px !important;
+}
+
+/* ── Custom checkbox ──
+   V4's default checkbox is a small native browser control that looks
+   unfinished. Own the render.
+
+   Why not `background-image` for the ✓? Because a stroke or fill SVG
+   scaled to 14-16px loses contrast against a dark bg — even the crispest
+   path renders washed-out at that size. Instead the checkmark is a
+   Unicode "✓" character injected by module.js as a sibling span
+   overlaid on the input (module.js `wrapCheckbox()` function).
+   Rendered as text, so the browser hint stack and antialiasing keep it
+   sharp at native size. See `.vips-cb-wrap` / `.vips-cb-mark` below. */
+.hsfc-Form .hsfc-CheckboxInput,
+.hsfc-Form input[type="checkbox"] {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  width: 18px !important;
+  height: 18px !important;
+  padding: 0 !important;
+  border: 1.5px solid var(--vips-border) !important;
+  border-radius: 4px !important;
+  background-color: var(--vips-bg-card) !important;
+  background-image: none !important;
+  cursor: pointer;
+  flex-shrink: 0;
+  margin: 1px 0 0 !important;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+.hsfc-Form .hsfc-CheckboxInput:hover,
+.hsfc-Form input[type="checkbox"]:hover {
+  border-color: var(--vips-dark);
+}
+.hsfc-Form .hsfc-CheckboxInput:checked,
+.hsfc-Form input[type="checkbox"]:checked {
+  background-color: var(--vips-dark) !important;
+  border-color: var(--vips-dark) !important;
+}
+.hsfc-Form .hsfc-CheckboxInput:focus-visible,
+.hsfc-Form input[type="checkbox"]:focus-visible {
+  outline: 2px solid var(--vips-dark);
+  outline-offset: 2px;
+}
+
+/* ── JS-injected checkmark overlay ──
+   module.js wraps the checkbox on `hs-form-event:on-ready`:
+     <span class="vips-cb-wrap">
+       <input type="checkbox">
+       <span class="vips-cb-mark" aria-hidden="true">✓</span>
+     </span>
+   The mark is absolutely positioned across the input and revealed
+   only when the input is :checked (adjacent-sibling combinator).
+   Sized 18px to match the input; align-self:flex-start keeps it
+   pinned to the top of the flex row. */
+.vips-cb-wrap {
+  position: relative;
+  display: inline-flex;
+  line-height: 0;
+  flex-shrink: 0;
+  align-self: flex-start;
+  margin: 1px 0 0;
+}
+.vips-cb-wrap > input {
+  margin: 0 !important;
+}
+.vips-cb-mark {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.1s ease;
+}
+.vips-cb-wrap > input:checked ~ .vips-cb-mark {
+  opacity: 1;
+}
+
+/* ── Error alert placement inside a checkbox row ──
+   .hsfc-CheckboxField is `display: flex; flex-direction: row` which
+   drops the .hsfc-ErrorAlert alongside the checkbox+label. Wrap the
+   row and force the alert onto its own 100%-wide line below the
+   control. Only applies inside a CheckboxField — regular field
+   errors already stack below their input. */
+.hsfc-Form .hsfc-CheckboxField {
+  flex-wrap: wrap;
+}
+.hsfc-Form .hsfc-CheckboxField > .hsfc-ErrorAlert {
+  flex-basis: 100%;
+  width: 100%;
+  margin-top: 6px;
+}
+
+/* Textarea — override HubSpot's light-blue default background + grey
+   border. Real class is .hsfc-TextareaInput (not .hsfc-Textarea).
+   Two-selector chain beats HubSpot's single-class CDN rule. */
+.hsfc-Form .hsfc-TextareaField .hsfc-TextareaInput,
+.hsfc-Form .hsfc-TextareaInput {
+  background: var(--vips-bg-card);
+  border: 1px solid var(--vips-border);
+  border-radius: var(--radius-sm);
+  min-height: 100px;
+  padding: 12px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--vips-dark);
+  resize: vertical;
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+
+.hsfc-Form .hsfc-TextareaField .hsfc-TextareaInput:focus,
+.hsfc-Form .hsfc-TextareaInput:focus {
+  border-color: var(--vips-dark);
+}
+
+.hsfc-Form .hsfc-TextareaField .hsfc-TextareaInput:focus-visible,
+.hsfc-Form .hsfc-TextareaInput:focus-visible {
+  outline: 2px solid var(--vips-dark);
+  outline-offset: 2px;
+}
+
+/* Text-family inputs — the real class is .hsfc-TextInput (used by
+   text, email, tel). Selector chain matches the parent field wrapper
+   so specificity beats the HubSpot CDN default rule. */
+.hsfc-Form .hsfc-TextField .hsfc-TextInput,
+.hsfc-Form .hsfc-EmailField .hsfc-TextInput,
+.hsfc-Form .hsfc-PhoneField .hsfc-TextInput,
+.hsfc-Form .hsfc-NumberField .hsfc-TextInput,
+.hsfc-Form .hsfc-DateField .hsfc-TextInput,
+.hsfc-Form .hsfc-TextInput {
+  background: var(--vips-bg-card);
+  border: 1px solid var(--vips-border);
+  border-radius: var(--radius-sm);
+  height: 43px;
+  padding: 0 12px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--vips-dark);
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+
+.hsfc-Form .hsfc-TextInput:focus {
+  border-color: var(--vips-dark);
+}
+
+/* Phone field — one unified border box around flag+caret + tel input.
+   HubSpot's V4 default gives each piece its own light-blue-grey pill
+   which reads as two boxes side-by-side. Wrap the whole `.hsfc-PhoneInput`
+   in the border and strip the inner borders/backgrounds so the flag
+   button and phone input share a single visual field. */
+.hsfc-Form .hsfc-PhoneInput {
+  display: flex !important;
+  align-items: stretch !important;
+  border: 1px solid var(--vips-border) !important;
+  border-radius: var(--radius-sm) !important;
+  background: var(--vips-bg-card) !important;
+  overflow: hidden;
+}
+.hsfc-Form .hsfc-PhoneInput__FlagAndCaret {
+  background: transparent !important;
+  border: none !important;
+}
+.hsfc-Form .hsfc-PhoneInput__FlagAndCaret:hover,
+.hsfc-Form .hsfc-PhoneInput__FlagAndCaret:focus {
+  background: transparent !important;
+}
+.hsfc-Form .hsfc-PhoneField .hsfc-TextInput,
+.hsfc-Form .hsfc-PhoneInput .hsfc-TextInput {
+  border: none !important;
+  background: transparent !important;
+}
+
+/* Country dropdown panel that opens under the flag button. HubSpot
+   fills the panel + its rows with the same light-blue-grey. Match the
+   rest of the form: white bg, our theme border, dark text.
+   `overflow: visible` on the wrapper's .hsfc-DropdownOptions so the
+   popover isn't clipped by the phone-input's overflow:hidden. */
+.hsfc-Form .hsfc-DropdownOptions {
+  background: var(--vips-bg-card) !important;
+  border: 1px solid var(--vips-border) !important;
+  border-radius: var(--radius-sm) !important;
+  overflow: visible !important;
+}
+.hsfc-Form .hsfc-DropdownOptions__List__ListItem {
+  background: var(--vips-bg-card) !important;
+  color: var(--vips-dark);
+}
+.hsfc-Form .hsfc-DropdownOptions__List__ListItem:hover,
+.hsfc-Form .hsfc-DropdownOptions__List__ListItem--highlighted,
+.hsfc-Form .hsfc-DropdownOptions__List__ListItem--selected {
+  background: var(--vips-bg) !important;
+}
+
+/* Label sits above the wrapper — no extra padding between label and field. */
+.hsfc-Form .hsfc-FieldLabel {
+  margin-bottom: 6px;
+}
+
+/* Required indicator uses a namespaced class in the real DOM. */
+.hsfc-Form .hsfc-FieldLabel__RequiredIndicator {
+  color: var(--vips-red);
+  margin-left: 2px;
+}
+
+/* NavigationRow (submit area) — the real DOM wraps the submit button
+   in `.hsfc-NavigationRow__Buttons`. Keep our button styles but tidy
+   the row so the submit button doesn't get double-margin. */
+.hsfc-Form .hsfc-NavigationRow {
+  margin-top: 8px;
+}
+.hsfc-Form .hsfc-NavigationRow__Alerts:empty {
+  display: none;
+}
+.hsfc-Form .hsfc-NavigationRow__Buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}

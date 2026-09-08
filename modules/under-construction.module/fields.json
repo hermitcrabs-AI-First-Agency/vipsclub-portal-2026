@@ -1,0 +1,274 @@
+[ {
+  "id" : "logo",
+  "name" : "logo",
+  "label" : "Logo",
+  "help_text" : "Upload your logo from Files Manager. Recommended size: 161x59px.",
+  "required" : false,
+  "locked" : false,
+  "responsive" : false,
+  "resizable" : false,
+  "show_loading" : false,
+  "type" : "image",
+  "display_width" : null,
+  "default" : {
+    "src" : "",
+    "alt" : "VIPSCLUB",
+    "width" : 161,
+    "height" : 59
+  }
+}, {
+  "id" : "logo_link",
+  "name" : "logo_link",
+  "label" : "Logo Link",
+  "help_text" : "Where the logo links to.",
+  "required" : false,
+  "locked" : false,
+  "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "EMAIL_ADDRESS", "BLOG" ],
+  "show_advanced_rel_options" : false,
+  "type" : "link",
+  "display_width" : null,
+  "default" : {
+    "url" : {
+      "href" : "",
+      "type" : "EXTERNAL"
+    },
+    "open_in_new_tab" : false,
+    "no_follow" : false
+  }
+}, {
+  "id" : "icon",
+  "name" : "icon",
+  "label" : "Icon",
+  "help_text" : "Construction icon displayed above the heading. Upload SVG/PNG or paste SVG code.",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "icon.image",
+    "name" : "image",
+    "label" : "Upload Icon (SVG or PNG)",
+    "help_text" : "Upload from Files Manager. 80x80px recommended.",
+    "required" : false,
+    "locked" : false,
+    "responsive" : false,
+    "resizable" : false,
+    "show_loading" : false,
+    "type" : "image",
+    "display_width" : null,
+    "default" : {
+      "src" : "",
+      "alt" : "",
+      "width" : 80,
+      "height" : 80
+    }
+  }, {
+    "id" : "icon.svg_code",
+    "name" : "svg_code",
+    "label" : "Or: Paste SVG Code",
+    "help_text" : "Paste raw <svg>...</svg> code as an alternative to uploading.",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : ""
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null
+}, {
+  "id" : "heading",
+  "name" : "heading",
+  "label" : "Heading",
+  "help_text" : "Main heading on the card. Displays with a dark-to-red gradient text effect.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "We're Building Something Amazing"
+}, {
+  "id" : "heading_level",
+  "name" : "heading_level",
+  "label" : "Heading Level",
+  "help_text" : "Use H1 for the main page title. Only one H1 per page.",
+  "required" : false,
+  "locked" : false,
+  "display" : "select",
+  "choices" : [ [ "h1", "H1 - Page Title" ], [ "h2", "H2 - Section" ], [ "h3", "H3 - Subsection" ] ],
+  "multiple" : false,
+  "reordering_enabled" : true,
+  "preset" : null,
+  "type" : "choice",
+  "display_width" : null,
+  "default" : "h1"
+}, {
+  "id" : "subtitle",
+  "name" : "subtitle",
+  "label" : "Subtitle",
+  "help_text" : "Descriptive text shown below the heading.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Our portal is currently under development. We're working hard to bring you an exceptional membership experience."
+}, {
+  "id" : "notify_label",
+  "name" : "notify_label",
+  "label" : "Notify Form Label",
+  "help_text" : "Small label shown above the email notification form.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Get notified when we launch"
+}, {
+  "id" : "form",
+  "name" : "form",
+  "label" : "Notification Form",
+  "help_text" : "Select the launch notification form. Create it in Marketing > Forms with a single Email field and button text 'Notify Me'.",
+  "required" : false,
+  "locked" : false,
+  "type" : "form",
+  "display_width" : null,
+  "default" : {
+    "form_id" : "",
+    "response_type" : "inline",
+    "message" : "Thank you! We'll notify you when we launch."
+  }
+}, {
+  "id" : "launch_prefix",
+  "name" : "launch_prefix",
+  "label" : "Launch Date Label",
+  "help_text" : "Label before the launch date value.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Expected Launch:"
+}, {
+  "id" : "launch_date",
+  "name" : "launch_date",
+  "label" : "Launch Date",
+  "help_text" : "Launch date or status. E.g. Q3 2025 or Coming Soon.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Coming Soon"
+}, {
+  "id" : "copyright_text",
+  "name" : "copyright_text",
+  "label" : "Copyright Text",
+  "help_text" : "Footer copyright text.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "2025 VIPSCLUB. All rights reserved."
+}, {
+  "id" : "privacy_label",
+  "name" : "privacy_label",
+  "label" : "Privacy Policy Link Text",
+  "help_text" : "Text for the privacy policy link in the footer.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Privacy Policy"
+}, {
+  "id" : "privacy_policy_link",
+  "name" : "privacy_policy_link",
+  "label" : "Privacy Policy URL",
+  "help_text" : "Link to your privacy policy page.",
+  "required" : false,
+  "locked" : false,
+  "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "EMAIL_ADDRESS", "BLOG" ],
+  "show_advanced_rel_options" : false,
+  "type" : "link",
+  "display_width" : null,
+  "default" : {
+    "url" : {
+      "href" : "",
+      "type" : "EXTERNAL"
+    },
+    "open_in_new_tab" : false,
+    "no_follow" : false
+  }
+}, {
+  "id" : "style_overrides",
+  "name" : "style_overrides",
+  "label" : "Style Overrides",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "style_overrides.background_color",
+    "name" : "background_color",
+    "label" : "Background Color",
+    "help_text" : "Leave empty to use default (#f7f7f7)",
+    "required" : false,
+    "locked" : false,
+    "type" : "color",
+    "display_width" : null,
+    "default" : {
+      "color" : null,
+      "opacity" : 100
+    }
+  }, {
+    "id" : "style_overrides.padding_top",
+    "name" : "padding_top",
+    "label" : "Padding Top (px)",
+    "help_text" : "Leave empty for default spacing",
+    "required" : false,
+    "locked" : false,
+    "display" : "text",
+    "step" : 1,
+    "type" : "number",
+    "display_width" : null
+  }, {
+    "id" : "style_overrides.padding_bottom",
+    "name" : "padding_bottom",
+    "label" : "Padding Bottom (px)",
+    "help_text" : "Leave empty for default spacing",
+    "required" : false,
+    "locked" : false,
+    "display" : "text",
+    "step" : 1,
+    "type" : "number",
+    "display_width" : null
+  }, {
+    "id" : "style_overrides.hide_on_mobile",
+    "name" : "hide_on_mobile",
+    "label" : "Hide on Mobile",
+    "help_text" : "Toggle to hide on mobile devices.",
+    "required" : false,
+    "locked" : false,
+    "display" : "checkbox",
+    "type" : "boolean",
+    "display_width" : null,
+    "default" : false
+  }, {
+    "id" : "style_overrides.hide_on_desktop",
+    "name" : "hide_on_desktop",
+    "label" : "Hide on Desktop",
+    "help_text" : "Toggle to hide on desktop viewports.",
+    "required" : false,
+    "locked" : false,
+    "display" : "checkbox",
+    "type" : "boolean",
+    "display_width" : null,
+    "default" : false
+  } ],
+  "tab" : "STYLE",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null
+} ]

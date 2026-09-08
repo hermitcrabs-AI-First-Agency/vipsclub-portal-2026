@@ -1,0 +1,378 @@
+[ {
+  "id" : "fallback_rm_contact",
+  "name" : "fallback_rm_contact",
+  "label" : "Fallback RM Contact",
+  "help_text" : "The contact whose details are shown when the logged-in member has no Relationship Manager associated. Defaults to the Client Success Team contact — edit that record in HubSpot to update the fallback display, or pick a different contact here to override per-page.",
+  "required" : false,
+  "locked" : false,
+  "object_type" : "CONTACT",
+  "properties_to_fetch" : [ "firstname", "profile_image", "jobtitle", "phone", "city", "booking_link", "email", "lastname" ],
+  "type" : "crmobject",
+  "display_width" : null,
+  "default" : {
+    "id" : 178583824836
+  }
+}, {
+  "id" : "section_heading",
+  "name" : "section_heading",
+  "label" : "Section Heading",
+  "help_text" : "Heading displayed above the RM contact card.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Feel Free To Contact Us"
+}, {
+  "id" : "section_subtitle",
+  "name" : "section_subtitle",
+  "label" : "Section Subtitle",
+  "help_text" : "Optional intro text shown under the heading (e.g. how to reach the account manager).",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : true,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "If you have any questions, please contact your account manager, or simply send email to info@vipsclub.com.au"
+}, {
+  "id" : "heading_level",
+  "name" : "heading_level",
+  "label" : "Heading Level",
+  "help_text" : "Controls the HTML heading tag. Use H1 only once per page for the main title.",
+  "required" : false,
+  "locked" : false,
+  "display" : "select",
+  "choices" : [ [ "h1", "H1 — Page Title" ], [ "h2", "H2 — Section" ], [ "h3", "H3 — Subsection" ], [ "h4", "H4" ] ],
+  "multiple" : false,
+  "reordering_enabled" : true,
+  "preset" : null,
+  "type" : "choice",
+  "display_width" : null,
+  "default" : "h2"
+}, {
+  "id" : "association_type_id",
+  "name" : "association_type_id",
+  "label" : "Association Type ID",
+  "help_text" : "USER_DEFINED association type ID for the contact-to-contact 'contact owner' relationship. Find it in HubSpot Settings → Objects → Contacts → Associations → view the 'contact owner' label row. When set, the card auto-populates from the associated contact. Leave empty to use the manual fields below.",
+  "required" : false,
+  "locked" : false,
+  "display" : "text",
+  "step" : 1,
+  "type" : "number",
+  "display_width" : null,
+  "default" : 34
+}, {
+  "id" : "booking_link",
+  "name" : "booking_link",
+  "label" : "Booking Link",
+  "help_text" : "Optional link for scheduling a meeting.",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "booking_link.show",
+    "name" : "show",
+    "label" : "Show Booking Link",
+    "help_text" : "Toggle to show or hide the booking link.",
+    "required" : false,
+    "locked" : false,
+    "display" : "checkbox",
+    "type" : "boolean",
+    "display_width" : null,
+    "default" : true
+  }, {
+    "id" : "booking_link.text",
+    "name" : "text",
+    "label" : "Link Text",
+    "help_text" : "Clickable text for the booking link.",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Book a meeting"
+  }, {
+    "id" : "booking_link.booking_url",
+    "name" : "booking_url",
+    "label" : "Booking URL",
+    "help_text" : "URL for the booking page (e.g. Calendly or HubSpot Meetings).",
+    "required" : false,
+    "locked" : false,
+    "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "EMAIL_ADDRESS", "BLOG" ],
+    "show_advanced_rel_options" : false,
+    "type" : "link",
+    "display_width" : null,
+    "default" : {
+      "url" : {
+        "href" : ""
+      },
+      "open_in_new_tab" : true,
+      "no_follow" : false
+    }
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null
+}, {
+  "id" : "phone",
+  "name" : "phone",
+  "label" : "Phone",
+  "help_text" : "Phone contact detail with optional icon.",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "phone.icon",
+    "name" : "icon",
+    "label" : "Phone Icon",
+    "help_text" : "Upload an SVG/PNG OR paste raw SVG code.",
+    "required" : false,
+    "locked" : false,
+    "children" : [ {
+      "id" : "phone.icon.image",
+      "name" : "image",
+      "label" : "Upload Icon (SVG or PNG)",
+      "help_text" : "Upload icon from Files Manager.",
+      "required" : false,
+      "locked" : false,
+      "responsive" : false,
+      "resizable" : false,
+      "show_loading" : false,
+      "type" : "image",
+      "display_width" : null,
+      "default" : {
+        "src" : "",
+        "alt" : "",
+        "width" : 20,
+        "height" : 20
+      }
+    }, {
+      "id" : "phone.icon.svg_code",
+      "name" : "svg_code",
+      "label" : "Or: Paste SVG Code",
+      "help_text" : "Paste the raw <svg>...</svg> code.",
+      "required" : false,
+      "locked" : false,
+      "allow_new_line" : false,
+      "type" : "text",
+      "display_width" : null,
+      "default" : ""
+    } ],
+    "tab" : "CONTENT",
+    "expanded" : false,
+    "group_occurrence_meta" : null,
+    "type" : "group",
+    "display_width" : null
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null
+}, {
+  "id" : "email",
+  "name" : "email",
+  "label" : "Email",
+  "help_text" : "Email contact detail with optional icon.",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "email.icon",
+    "name" : "icon",
+    "label" : "Email Icon",
+    "help_text" : "Upload an SVG/PNG OR paste raw SVG code.",
+    "required" : false,
+    "locked" : false,
+    "children" : [ {
+      "id" : "email.icon.image",
+      "name" : "image",
+      "label" : "Upload Icon (SVG or PNG)",
+      "help_text" : "Upload icon from Files Manager.",
+      "required" : false,
+      "locked" : false,
+      "responsive" : false,
+      "resizable" : false,
+      "show_loading" : false,
+      "type" : "image",
+      "display_width" : null,
+      "default" : {
+        "src" : "",
+        "alt" : "",
+        "width" : 20,
+        "height" : 20
+      }
+    }, {
+      "id" : "email.icon.svg_code",
+      "name" : "svg_code",
+      "label" : "Or: Paste SVG Code",
+      "help_text" : "Paste the raw <svg>...</svg> code.",
+      "required" : false,
+      "locked" : false,
+      "allow_new_line" : false,
+      "type" : "text",
+      "display_width" : null,
+      "default" : ""
+    } ],
+    "tab" : "CONTENT",
+    "expanded" : false,
+    "group_occurrence_meta" : null,
+    "type" : "group",
+    "display_width" : null
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null
+}, {
+  "id" : "location",
+  "name" : "location",
+  "label" : "Location",
+  "help_text" : "Location/address detail with optional icon.",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "location.icon",
+    "name" : "icon",
+    "label" : "Location Icon",
+    "help_text" : "Upload an SVG/PNG OR paste raw SVG code.",
+    "required" : false,
+    "locked" : false,
+    "children" : [ {
+      "id" : "location.icon.image",
+      "name" : "image",
+      "label" : "Upload Icon (SVG or PNG)",
+      "help_text" : "Upload icon from Files Manager.",
+      "required" : false,
+      "locked" : false,
+      "responsive" : false,
+      "resizable" : false,
+      "show_loading" : false,
+      "type" : "image",
+      "display_width" : null,
+      "default" : {
+        "src" : "",
+        "alt" : "",
+        "width" : 20,
+        "height" : 20
+      }
+    }, {
+      "id" : "location.icon.svg_code",
+      "name" : "svg_code",
+      "label" : "Or: Paste SVG Code",
+      "help_text" : "Paste the raw <svg>...</svg> code.",
+      "required" : false,
+      "locked" : false,
+      "allow_new_line" : false,
+      "type" : "text",
+      "display_width" : null,
+      "default" : ""
+    } ],
+    "tab" : "CONTENT",
+    "expanded" : false,
+    "group_occurrence_meta" : null,
+    "type" : "group",
+    "display_width" : null
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null
+}, {
+  "id" : "style_overrides",
+  "name" : "style_overrides",
+  "label" : "Style Overrides",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "style_overrides.background_color",
+    "name" : "background_color",
+    "label" : "Background Color",
+    "help_text" : "Leave empty to use theme default (#ffffff)",
+    "required" : false,
+    "locked" : false,
+    "type" : "color",
+    "display_width" : null,
+    "default" : {
+      "color" : null,
+      "opacity" : 100
+    }
+  }, {
+    "id" : "style_overrides.padding_top",
+    "name" : "padding_top",
+    "label" : "Padding Top (px)",
+    "help_text" : "Leave empty to use default spacing",
+    "required" : false,
+    "locked" : false,
+    "display" : "text",
+    "step" : 1,
+    "type" : "number",
+    "display_width" : null
+  }, {
+    "id" : "style_overrides.padding_bottom",
+    "name" : "padding_bottom",
+    "label" : "Padding Bottom (px)",
+    "help_text" : "Leave empty to use default spacing",
+    "required" : false,
+    "locked" : false,
+    "display" : "text",
+    "step" : 1,
+    "type" : "number",
+    "display_width" : null
+  }, {
+    "id" : "style_overrides.hide_on_mobile",
+    "name" : "hide_on_mobile",
+    "label" : "Hide on Mobile",
+    "required" : false,
+    "locked" : false,
+    "display" : "checkbox",
+    "type" : "boolean",
+    "display_width" : null,
+    "default" : false
+  }, {
+    "id" : "style_overrides.text_color",
+    "name" : "text_color",
+    "label" : "Text Color",
+    "help_text" : "Override the default text color for this module instance. Leave empty for theme default.",
+    "required" : false,
+    "locked" : false,
+    "type" : "color",
+    "display_width" : null,
+    "default" : {
+      "color" : null,
+      "opacity" : 100
+    }
+  }, {
+    "id" : "style_overrides.content_width",
+    "name" : "content_width",
+    "label" : "Content Width",
+    "help_text" : "Control the maximum width of this module's content.",
+    "required" : false,
+    "locked" : false,
+    "display" : "select",
+    "choices" : [ [ "default", "Default" ], [ "narrow", "Narrow" ], [ "wide", "Wide" ], [ "full", "Full Width" ] ],
+    "multiple" : false,
+    "reordering_enabled" : true,
+    "preset" : null,
+    "type" : "choice",
+    "display_width" : null,
+    "default" : "default"
+  }, {
+    "id" : "style_overrides.hide_on_desktop",
+    "name" : "hide_on_desktop",
+    "label" : "Hide on Desktop",
+    "help_text" : "Toggle to hide this module on desktop viewports.",
+    "required" : false,
+    "locked" : false,
+    "display" : "checkbox",
+    "type" : "boolean",
+    "display_width" : null,
+    "default" : false
+  } ],
+  "tab" : "STYLE",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null
+} ]

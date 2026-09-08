@@ -1,0 +1,257 @@
+[ {
+  "id" : "logo",
+  "name" : "logo",
+  "label" : "Logo",
+  "help_text" : "Upload the white version of the VIPS Club logo (SVG or PNG). Displayed centred in the header.",
+  "required" : false,
+  "locked" : false,
+  "responsive" : false,
+  "resizable" : false,
+  "show_loading" : false,
+  "type" : "image",
+  "display_width" : null,
+  "default" : {
+    "src" : "",
+    "alt" : "VIPS Club",
+    "width" : 161,
+    "height" : 59
+  }
+}, {
+  "id" : "photo",
+  "name" : "photo",
+  "label" : "Left Photo",
+  "help_text" : "Architectural / lifestyle photo on the left side of the card. Upload from Files Manager. Hidden on mobile.",
+  "required" : false,
+  "locked" : false,
+  "responsive" : false,
+  "resizable" : true,
+  "show_loading" : false,
+  "type" : "image",
+  "display_width" : null,
+  "default" : {
+    "src" : "https://www.vipsclub.com.au/hs-fs/hubfs/Rectangle%207056%20(1).png",
+    "alt" : "",
+    "width" : 420,
+    "height" : 672
+  }
+}, {
+  "id" : "heading",
+  "name" : "heading",
+  "label" : "Form Heading",
+  "help_text" : "Main heading inside the create-account card.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Create your account"
+}, {
+  "id" : "heading_level",
+  "name" : "heading_level",
+  "label" : "Heading Level",
+  "help_text" : "Controls the HTML heading tag. Use H1 only once per page for the main title.",
+  "required" : false,
+  "locked" : false,
+  "display" : "select",
+  "choices" : [ [ "h1", "H1 — Page Title" ], [ "h2", "H2 — Section" ], [ "h3", "H3 — Subsection" ], [ "h4", "H4" ] ],
+  "multiple" : false,
+  "reordering_enabled" : true,
+  "preset" : null,
+  "type" : "choice",
+  "display_width" : null,
+  "default" : "h1"
+}, {
+  "id" : "subtitle",
+  "name" : "subtitle",
+  "label" : "Form Subtitle",
+  "help_text" : "Subtitle text below the heading.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Join VIPS Club to access exclusive offers and rewards."
+}, {
+  "id" : "register_form",
+  "name" : "register_form",
+  "label" : "Registration Form",
+  "help_text" : "Select the HubSpot custom form for new account registration. Create the form first in Marketing > Forms.",
+  "required" : false,
+  "locked" : false,
+  "embed_versions" : [ "v2", "v4" ],
+  "type" : "form",
+  "display_width" : null,
+  "default" : {
+    "form_id" : "",
+    "response_type" : "inline",
+    "message" : "Thanks! Your account has been created."
+  }
+}, {
+  "id" : "already_account_text",
+  "name" : "already_account_text",
+  "label" : "Already Have Account Prompt",
+  "help_text" : "Text before the sign-in link at the bottom of the form.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Already have an account?"
+}, {
+  "id" : "signin_link_text",
+  "name" : "signin_link_text",
+  "label" : "Sign In Link Text",
+  "help_text" : "Clickable text linking back to the login page.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Sign in"
+}, {
+  "id" : "signin_link_url",
+  "name" : "signin_link_url",
+  "label" : "Sign In Link URL",
+  "help_text" : "Link to the member login page.",
+  "required" : false,
+  "locked" : false,
+  "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "EMAIL_ADDRESS", "BLOG" ],
+  "show_advanced_rel_options" : false,
+  "type" : "link",
+  "display_width" : null,
+  "default" : {
+    "url" : {
+      "href" : "",
+      "type" : "EXTERNAL"
+    },
+    "open_in_new_tab" : false,
+    "no_follow" : false
+  }
+}, {
+  "id" : "footer_copyright",
+  "name" : "footer_copyright",
+  "label" : "Footer Copyright",
+  "help_text" : "Copyright line shown at the bottom of the page.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "© Copyright VIPS Club. All Rights Reserved"
+}, {
+  "id" : "footer_privacy",
+  "name" : "footer_privacy",
+  "label" : "Privacy Policy Link",
+  "help_text" : "Privacy Policy link shown in the page footer.",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "footer_privacy.link_text",
+    "name" : "link_text",
+    "label" : "Link Text",
+    "help_text" : "Visible text for the privacy policy link.",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Privacy Policy"
+  }, {
+    "id" : "footer_privacy.url",
+    "name" : "url",
+    "label" : "URL",
+    "help_text" : "URL to the privacy policy page.",
+    "required" : false,
+    "locked" : false,
+    "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "EMAIL_ADDRESS", "BLOG" ],
+    "show_advanced_rel_options" : false,
+    "type" : "link",
+    "display_width" : null,
+    "default" : {
+      "url" : {
+        "href" : "",
+        "type" : "EXTERNAL"
+      },
+      "open_in_new_tab" : false,
+      "no_follow" : false
+    }
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null
+}, {
+  "id" : "style_overrides",
+  "name" : "style_overrides",
+  "label" : "Style Overrides",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "style_overrides.gradient_start",
+    "name" : "gradient_start",
+    "label" : "Header Gradient Start",
+    "help_text" : "Top-left gradient colour for the header banner.",
+    "required" : false,
+    "locked" : false,
+    "type" : "color",
+    "display_width" : null,
+    "default" : {
+      "color" : "#000000",
+      "opacity" : 100
+    }
+  }, {
+    "id" : "style_overrides.gradient_end",
+    "name" : "gradient_end",
+    "label" : "Header Gradient End",
+    "help_text" : "Bottom-right gradient colour for the header banner.",
+    "required" : false,
+    "locked" : false,
+    "type" : "color",
+    "display_width" : null,
+    "default" : {
+      "color" : "#a22b34",
+      "opacity" : 100
+    }
+  }, {
+    "id" : "style_overrides.text_color",
+    "name" : "text_color",
+    "label" : "Text Color",
+    "help_text" : "Override the default text color. Leave empty for theme default.",
+    "required" : false,
+    "locked" : false,
+    "type" : "color",
+    "display_width" : null,
+    "default" : {
+      "color" : null,
+      "opacity" : 100
+    }
+  }, {
+    "id" : "style_overrides.hide_on_mobile",
+    "name" : "hide_on_mobile",
+    "label" : "Hide on Mobile",
+    "help_text" : "Hide this entire module on mobile devices.",
+    "required" : false,
+    "locked" : false,
+    "display" : "checkbox",
+    "type" : "boolean",
+    "display_width" : null,
+    "default" : false
+  }, {
+    "id" : "style_overrides.hide_on_desktop",
+    "name" : "hide_on_desktop",
+    "label" : "Hide on Desktop",
+    "help_text" : "Toggle to hide this module on desktop viewports.",
+    "required" : false,
+    "locked" : false,
+    "display" : "checkbox",
+    "type" : "boolean",
+    "display_width" : null,
+    "default" : false
+  } ],
+  "tab" : "STYLE",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null
+} ]

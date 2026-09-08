@@ -1,0 +1,2044 @@
+/* ============================================================
+   VIPSCLUB Portal 2026 — My Deals Module
+   All base styles here. Per-instance overrides via HubL blocks below.
+   ============================================================ */
+
+/* ── Outer wrapper ── */
+.my-deals {
+  width: 100%;
+}
+
+/* ── List View Header ── */
+.my-deals__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+/* OLD heading/filter-tab/table/status styles removed — they conflicted with the
+   pixel-perfect design rules in the NEW DESIGN block further down. */
+
+/* ── Mobile Cards (hidden on desktop) ── */
+.my-deals__cards {
+  display: none;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.my-deals__card {
+  background: #ffffff;
+  border: 1px solid #f2f2f2;
+  box-shadow: 0px 1px 0.5px #f6f6f6;
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  cursor: pointer;
+  transition: background 0.12s ease;
+}
+
+.my-deals__card:hover {
+  background: #fafafa;
+}
+
+.my-deals__card:focus-visible {
+  outline: 2px solid var(--vips-dark);
+  outline-offset: 2px;
+}
+
+.my-deals__card.is-hidden {
+  display: none;
+}
+
+/* Row 1: Name | Price */
+.my-deals__card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.my-deals__card-name {
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--vips-dark);
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.my-deals__card-price {
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--vips-success);
+  flex-shrink: 0;
+}
+
+/* Row 2: Expiry | Status */
+.my-deals__card-mid {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.my-deals__card-expiry {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--vips-text-secondary);
+}
+
+.my-deals__card-status {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+.my-deals__card-status--active   { color: #00c950; }
+.my-deals__card-status--upcoming { color: var(--vips-pending); }
+.my-deals__card-status--ended    { color: var(--vips-text-muted); }
+
+/* Card footer: "View Details →" link, right-aligned. (Previously also held
+   a $amount on the left — removed when the Referral Fee column was dropped.) */
+.my-deals__card-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.my-deals__card-commission {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--vips-text-secondary);
+}
+
+/* ── Empty State ── */
+.my-deals__empty {
+  background: #ffffff;
+  border: 1px solid #f2f2f2;
+  border-radius: var(--radius-lg);
+  padding: 64px 24px;
+  min-height: 320px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.my-deals__empty-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  max-width: 320px;
+  text-align: center;
+}
+
+.my-deals__empty-icon {
+  display: block;
+  margin-bottom: 4px;
+  flex-shrink: 0;
+}
+
+.my-deals__empty-heading {
+  font-family: var(--font-heading);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--vips-dark);
+  margin: 0;
+}
+
+.my-deals__empty-text {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--vips-text-muted);
+  margin: 0;
+  line-height: 22px;
+}
+
+/* Add a Deal button in empty state — primary (dark) variant */
+.my-deals__add-btn--empty {
+  margin-top: 4px;
+  background: var(--vips-dark);
+  color: #ffffff;
+  border-color: var(--vips-dark);
+  padding: 10px 24px;
+}
+
+.my-deals__add-btn--empty:hover {
+  opacity: 0.85;
+}
+
+/* ── Detail View ── */
+.my-deals__detail-view {
+  width: 100%;
+}
+
+.my-deals__back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--vips-red);
+  cursor: pointer;
+  margin-bottom: 16px;
+  transition: opacity 0.15s ease;
+}
+
+.my-deals__back-btn:hover {
+  opacity: 0.75;
+}
+
+.my-deals__back-btn:focus-visible {
+  outline: 2px solid var(--vips-red);
+  outline-offset: 2px;
+}
+
+.my-deals__deal-title {
+  font-family: var(--font-heading);
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--vips-dark);
+  margin: 0 0 24px;
+  letter-spacing: -0.2px;
+}
+
+/* ── Key Metrics section sub-label ── */
+.my-deals__section-label {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--vips-text-secondary);
+  margin: 0 0 12px;
+  letter-spacing: 0.02em;
+}
+
+/* ── Metrics Grid ── */
+.my-deals__metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.my-deals__metric {
+  background: #ffffff;
+  border: 1px solid #f2f2f2;
+  box-shadow: 0px 1px 0.5px #f6f6f6;
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.my-deals__metric-icon-wrap {
+  width: 32px;
+  height: 32px;
+  border-radius: 16px;
+  background: var(--vips-bg-icon);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.my-deals__metric-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+}
+
+.my-deals__metric-icon svg,
+.my-deals__metric-icon img {
+  width: 18px;
+  height: 18px;
+}
+
+.my-deals__metric-label {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--vips-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.my-deals__metric-value {
+  font-family: var(--font-heading);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--vips-dark);
+}
+
+/* ── About This Deal Card ── */
+.my-deals__about-card {
+  background: #ffffff;
+  border: 1px solid #f2f2f2;
+  box-shadow: 0px 1px 0.5px #f6f6f6;
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.my-deals__category-label {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--vips-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.my-deals__about-heading {
+  font-family: var(--font-heading);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--vips-dark);
+  margin: 0;
+}
+
+.my-deals__about-body {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 24px;
+  color: var(--vips-text-secondary);
+  margin: 0;
+}
+
+.my-deals__tier-badge {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--vips-dark);
+  background: var(--vips-bg-icon);
+  padding: 4px 12px;
+  border-radius: var(--radius-sm);
+}
+
+/* ── What's Included ── */
+.my-deals__included {
+  margin-bottom: 24px;
+}
+
+.my-deals__included-heading {
+  font-family: var(--font-heading);
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--vips-dark);
+  margin: 0 0 16px;
+}
+
+.my-deals__included-card {
+  background: #ffffff;
+  border: 1px solid #f2f2f2;
+  box-shadow: 0px 1px 0.5px #f6f6f6;
+  border-radius: var(--radius-lg);
+  padding: 20px;
+}
+
+.my-deals__checklist {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.my-deals__checklist-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.my-deals__check-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 15px;
+  height: 15px;
+}
+
+.my-deals__check-icon svg,
+.my-deals__check-icon img {
+  width: 15px;
+  height: 15px;
+}
+
+.my-deals__check-text {
+  font-family: var(--font-heading);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--vips-dark);
+}
+
+/* ── Modal Overlay ── */
+.my-deals__modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9000;
+  padding: 20px;
+}
+
+.my-deals__modal-overlay[hidden] {
+  display: none;
+}
+
+.my-deals__modal {
+  background: #ffffff;
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  width: 100%;
+  max-width: 512px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.my-deals__modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: none;
+  border: none;
+  padding: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--vips-dark);
+  border-radius: 4px;
+  transition: opacity 0.15s ease;
+}
+
+.my-deals__modal-close:hover {
+  opacity: 0.65;
+}
+
+.my-deals__modal-close:focus-visible {
+  outline: 2px solid var(--vips-dark);
+  outline-offset: 2px;
+}
+
+.my-deals__modal-title {
+  font-family: var(--font-heading);
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--vips-dark);
+  margin: 0;
+  padding-right: 40px;
+}
+
+.my-deals__modal-form {
+  flex: 1;
+}
+
+/* ── Edit Details — locked state ──
+   Default state of the inline Key Metrics form. Click Edit Details
+   to unlock. `pointer-events: none` on the WHOLE form (not just the
+   inputs) because labels wrap checkboxes/radios — clicking the label
+   toggles the input even when the input itself has pointer-events:none.
+   The .is-locked class is paired with the `inert` attribute (set in JS)
+   for full keyboard + a11y blocking. */
+.my-deals__edit-form.is-locked {
+  pointer-events: none;
+}
+.my-deals__edit-form.is-locked input,
+.my-deals__edit-form.is-locked select,
+.my-deals__edit-form.is-locked textarea {
+  background-color: #fafafa;
+  color: var(--vips-text-secondary, #757575);
+  cursor: default;
+}
+.my-deals__edit-form.is-locked input[type="checkbox"],
+.my-deals__edit-form.is-locked input[type="radio"] {
+  background-color: transparent;
+  opacity: 0.6;
+}
+
+/* Hide every kind of submit button HubSpot may render when locked */
+.my-deals__edit-form.is-locked input[type="submit"],
+.my-deals__edit-form.is-locked button[type="submit"],
+.my-deals__edit-form.is-locked .hs-button,
+.my-deals__edit-form.is-locked .hs_submit {
+  display: none !important;
+}
+
+/* ── Kill any divider line that may appear above the first form field.
+     Sources: HubSpot's hs-form sometimes adds a border-top on the first
+     element; a hidden-field wrapper above the visible Email may also
+     have left a 1px line behind. Strip border/padding/margin from any
+     first-child inside the form. ── */
+.my-deals__edit-form .hs-form > *:first-child,
+.my-deals__edit-form .hs-form fieldset:first-of-type,
+.my-deals__edit-form .hs-form > .hs-richtext:first-child,
+.my-deals__edit-form .hs-form > div:first-child {
+  border-top: 0 !important;
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* ── HubSpot form styling inside the Register-a-Deal modal ── */
+.my-deals__modal-form .hs-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.my-deals__modal-form .hs-form fieldset {
+  max-width: none !important;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  display: flex !important;
+  gap: 16px;
+}
+
+.my-deals__modal-form .hs-form fieldset.form-columns-1 .hs-form-field {
+  width: 100% !important;
+}
+
+.my-deals__modal-form .hs-form fieldset.form-columns-2 .hs-form-field {
+  width: 50% !important;
+}
+
+.my-deals__modal-form .hs-form-field {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.my-deals__modal-form .hs-form-field > label,
+.my-deals__modal-form .hs-form-field .hs-field-desc {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--vips-dark);
+  margin: 0;
+  padding: 0;
+  line-height: 18px;
+}
+
+.my-deals__modal-form .hs-form-field > label .hs-form-required {
+  color: var(--vips-red);
+  margin-left: 2px;
+}
+
+.my-deals__modal-form .hs-form-field .input { margin: 0; }
+
+/* Hide the top "Email" field — it's autofilled from the logged-in contact;
+   user shouldn't see or edit it (email still submits via the hidden input). */
+.my-deals__modal-form .hs_email,
+.my-deals__modal-form fieldset .hs-form-field:has(> .input > input[name="email"]) {
+  display: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  height: 0 !important;
+}
+
+/* Collapse any hidden or empty fields HubSpot may render between visible
+   ones (honeypots, conditional fields, empty legal-consent slots, etc.).
+   Also handled in JS via collapseHiddenFields() for cases CSS can't reach. */
+.my-deals__modal-form .hs-form-field:empty,
+.my-deals__modal-form .hs-form-field[style*="display: none" i],
+.my-deals__modal-form .hs-form-field[style*="display:none" i],
+.my-deals__modal-form .hs-form-field.hs-fieldtype-hidden,
+.my-deals__modal-form .hs_recaptcha:empty,
+.my-deals__modal-form .legal-consent-container:empty,
+.my-deals__modal-form .hs-richtext:empty,
+.my-deals__modal-form [data-collapsed-hidden] {
+  display: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  height: 0 !important;
+}
+
+/* ── Checkbox + radio groups (e.g. "Form - Assign to?") ──
+   HubSpot's actual markup varies; common shapes:
+     (1) <li><label><input>Text</label></li>     — input + text node inside label
+     (2) <li><label><input><span>Text</span></label></li>
+     (3) <li><input><label for="..">Text</label></li>  — input and label as siblings
+   The rules below stay defensive: NO width:100%, NO box/border on the label,
+   NO :has() selector. Just plain rows with a 16×16 checkbox and the text
+   beside it. Override our global form CSS that was inflating the input box. */
+
+.my-deals__modal-form .inputs-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.my-deals__modal-form .inputs-list li {
+  margin: 0 0 8px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Label inside the row — keep it inline, never full width */
+.my-deals__modal-form .inputs-list li label {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  border: none;
+  width: auto;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  color: var(--vips-dark);
+  cursor: pointer;
+}
+
+/* Force the checkbox/radio inputs back to native size — global form CSS
+   inflates input width:100%/height:40px which is what blew them up. */
+.my-deals__modal-form .inputs-list input[type="checkbox"],
+.my-deals__modal-form .inputs-list input[type="radio"],
+.my-deals__modal-form input.hs-input[type="checkbox"],
+.my-deals__modal-form input.hs-input[type="radio"] {
+  width: 16px !important;
+  height: 16px !important;
+  min-width: 16px;
+  min-height: 16px;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: 1px solid #bdbdbd;
+  border-radius: 3px;
+  background: #ffffff;
+  flex-shrink: 0;
+  accent-color: var(--vips-red);
+  cursor: pointer;
+  vertical-align: middle;
+  appearance: auto;
+  -webkit-appearance: auto;
+}
+.my-deals__modal-form .inputs-list input[type="radio"],
+.my-deals__modal-form input.hs-input[type="radio"] {
+  border-radius: 50%;
+}
+
+.my-deals__modal-form .hs-input,
+.my-deals__modal-form input.hs-input[type="text"],
+.my-deals__modal-form input.hs-input[type="email"],
+.my-deals__modal-form input.hs-input[type="tel"],
+.my-deals__modal-form input.hs-input[type="number"],
+.my-deals__modal-form input.hs-input[type="date"],
+.my-deals__modal-form select.hs-input,
+.my-deals__modal-form textarea.hs-input {
+  width: 100% !important;
+  height: 40px;
+  padding: 0 12px;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  background: #ffffff;
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--vips-dark);
+  box-sizing: border-box;
+  margin: 0;
+}
+
+.my-deals__modal-form textarea.hs-input {
+  height: auto;
+  min-height: 84px;
+  padding: 10px 12px;
+  resize: vertical;
+  line-height: 20px;
+}
+
+.my-deals__modal-form .hs-input:focus,
+.my-deals__modal-form select.hs-input:focus,
+.my-deals__modal-form textarea.hs-input:focus {
+  outline: none;
+  border-color: var(--vips-dark);
+}
+
+.my-deals__modal-form .hs-input::placeholder { color: var(--vips-text-muted); }
+
+/* Inline error messages */
+.my-deals__modal-form .hs-error-msgs {
+  list-style: none;
+  margin: 4px 0 0;
+  padding: 0;
+}
+.my-deals__modal-form .hs-error-msg {
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: var(--vips-red);
+}
+
+/* Submit button — dark, full-width */
+.my-deals__modal-form .hs-submit { margin: 8px 0 0; }
+.my-deals__modal-form .hs-button.primary,
+.my-deals__modal-form input[type="submit"].hs-button,
+.my-deals__modal-form button.hs-button {
+  width: 100%;
+  height: 44px;
+  padding: 0 20px;
+  background: var(--vips-dark);
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.my-deals__modal-form .hs-button.primary:hover,
+.my-deals__modal-form input[type="submit"].hs-button:hover,
+.my-deals__modal-form button.hs-button:hover {
+  background: #3f3f47;
+}
+
+/* Legal/consent text */
+.my-deals__modal-form .legal-consent-container {
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: var(--vips-text-muted);
+  line-height: 18px;
+}
+
+.my-deals__form-placeholder {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--vips-text-muted);
+  padding: 24px;
+  text-align: center;
+  background: var(--vips-bg-page);
+  border-radius: var(--radius-sm);
+  border: 1px dashed var(--vips-border);
+}
+
+.my-deals__modal-terms {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--vips-text-secondary);
+  margin: 0;
+}
+
+/* ── Mobile (≤768px) ── */
+@media (max-width: 768px) {
+  .my-deals__table-wrap {
+    display: none;
+  }
+
+  .my-deals__cards {
+    display: flex;
+  }
+
+  .my-deals__header {
+    margin-bottom: 16px;
+  }
+
+  .my-deals__heading {
+    font-size: 18px;
+  }
+
+  .my-deals__filter-tab {
+    padding: 10px 16px;
+    font-size: 14px;
+  }
+
+  /* Mobile: allow the toolbar to wrap to two rows when single-line is too
+     cramped (stage tabs scroll horizontally on row 1; date dropdown + search
+     share row 2). */
+  .my-deals__toolbar {
+    flex-wrap: wrap;
+  }
+
+  .my-deals__filters {
+    flex: 1 1 100%;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    gap: 6px;
+    padding-bottom: 4px;
+  }
+
+  .my-deals__filter-tab {
+    flex-shrink: 0;
+  }
+
+  .my-deals__date-dropdown {
+    flex: 1 1 auto;
+    justify-content: flex-start;
+  }
+
+  .my-deals__date-select {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .my-deals__search {
+    flex: 1 1 auto;
+    max-width: none;
+  }
+
+  .my-deals__metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .my-deals__deal-title {
+    font-size: 20px;
+  }
+
+  .my-deals__included-heading {
+    font-size: 18px;
+  }
+
+  .my-deals__modal {
+    padding: 24px;
+    max-height: 95vh;
+  }
+
+  .my-deals__empty {
+    min-height: 240px;
+    padding: 48px 20px;
+  }
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .my-deals__add-btn,
+  .my-deals__filter-tab,
+  .my-deals__row,
+  .my-deals__card,
+  .my-deals__back-btn,
+  .my-deals__modal-close {
+    transition: none;
+  }
+}
+
+/* Visibility utility — class only applies in its respective media query (see bottom of file) */
+
+
+/* ============================================================
+   Per-instance style overrides — handled via inline styles in
+   module.html (HubL in CSS is no longer parsed by HubSpot).
+   ============================================================ */
+
+/* ============================================================
+   NEW DESIGN (Figma 791:1074 / 791:2883)
+   Earnings Breakdown · Status badges · Detail header · Dates rows ·
+   Deal Progress timeline · Key Metrics · Edit Details form
+   ============================================================ */
+
+/* ── Earnings Breakdown — heading/subtitle in its own card, 3 stat cards as separate siblings ── */
+.my-deals__earnings-intro {
+  background: var(--vips-bg-card);
+  border: 1px solid var(--vips-border-light);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 16px;
+}
+
+.my-deals__earnings-heading {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 32px;
+  color: var(--vips-dark);
+  margin: 0 0 4px;
+}
+
+.my-deals__earnings-sub {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--vips-text-secondary);
+  margin: 0;
+}
+
+.my-deals__earnings-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+/* Each stat is its OWN white card */
+.my-deals__earnings-stat {
+  background: var(--vips-bg-card);
+  border: 1px solid var(--vips-border-light);
+  border-radius: 8px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.my-deals__earnings-value {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 34px;
+  color: var(--vips-dark);
+}
+
+/* Zero-state fallback modifier — applied via HubL on first render and toggled
+   by module.js after computing totals. Shrinks the typography so the longer
+   fallback string (e.g. "WIP (Contact BDM)") fits the ~230-280px card width
+   on desktop without wrapping, and the cramped 3-col mobile layout. */
+.my-deals__earnings-value--fallback {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--vips-text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.my-deals__earnings-label {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--vips-text-secondary);
+}
+
+/* ── Available Deals: header + toolbar are NOT in a card (sit on page bg) ── */
+
+.my-deals__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.my-deals__heading {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 32px;
+  color: var(--vips-dark);
+  margin: 0;
+}
+
+/* Override the old white/grey add-btn style — design says solid red */
+.my-deals__add-btn,
+.my-deals__add-btn:visited {
+  background: var(--vips-red);
+  border: none;
+  color: #ffffff;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 14px;
+  padding: 10px 18px;
+  border-radius: 4px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.15s ease;
+}
+
+.my-deals__add-btn:hover {
+  background: #5c151a;
+}
+
+.my-deals__add-btn:focus-visible {
+  outline: 2px solid var(--vips-dark);
+  outline-offset: 2px;
+}
+
+/* ── Toolbar (filters + date dropdown + search, single row) ──
+   `flex-wrap: nowrap` keeps all three children on one line. Filters scroll
+   horizontally inside their own container if they overflow; search grows
+   to fill remaining space. Wrapping is re-enabled at the mobile breakpoint
+   so phones can stack cleanly. */
+.my-deals__toolbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 16px;
+  margin-bottom: 16px;
+  flex-wrap: nowrap;
+}
+
+.my-deals__filters {
+  display: flex;
+  gap: 8px;
+  flex: 0 1 auto;
+  min-width: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.my-deals__filters::-webkit-scrollbar {
+  display: none;
+}
+
+/* ── Date-range dropdown ──
+   Replaces the previous 3-pill row. Inline with the toolbar (stage tabs +
+   search), so the toolbar stays a single visual row on desktop. */
+.my-deals__date-dropdown {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex: 0 0 auto;
+}
+
+.my-deals__date-dropdown-label {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 13px;
+  color: #757575;
+  white-space: nowrap;
+}
+
+.my-deals__date-dropdown-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.my-deals__date-select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: transparent;
+  border: 1px solid #e0e0e0;
+  color: var(--vips-dark);
+  padding: 7px 30px 7px 14px;
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 18px;
+  cursor: pointer;
+  min-width: 140px;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+/* Hide the "Date" label below 1024px to recover ~40px for the search */
+@media (max-width: 1024px) {
+  .my-deals__date-dropdown-label {
+    display: none;
+  }
+}
+
+.my-deals__date-select:hover {
+  border-color: var(--vips-dark);
+}
+
+.my-deals__date-select:focus-visible {
+  outline: 2px solid var(--vips-dark);
+  outline-offset: 2px;
+}
+
+.my-deals__date-dropdown-chevron {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #757575;
+  pointer-events: none;
+}
+
+/* Filter pills — design has outlined inactive + solid dark active */
+.my-deals__filter-tab {
+  background: transparent;
+  border: 1px solid #e0e0e0;
+  color: #9e9e9e;
+  padding: 6px 18px;
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 18px;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.my-deals__filter-tab:hover {
+  border-color: var(--vips-dark);
+  color: var(--vips-dark);
+}
+
+.my-deals__filter-tab.is-active {
+  background: var(--vips-dark);
+  color: #ffffff;
+  border-color: var(--vips-dark);
+}
+
+.my-deals__filter-tab:focus-visible {
+  outline: 2px solid var(--vips-dark);
+  outline-offset: 2px;
+}
+
+/* Search input — pill with magnifying-glass icon inside.
+   `flex: 1 1 180px` lets it grow to fill any remaining toolbar space (up to
+   320px) and shrink down to 180px before getting awkward. Combined with the
+   toolbar's `flex-wrap: nowrap`, search now stays inline with the filters
+   and dropdown at every desktop/tablet width. */
+.my-deals__search {
+  position: relative;
+  flex: 1 1 180px;
+  max-width: 320px;
+  min-width: 0;
+  margin-left: auto;
+}
+
+.my-deals__search-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #9e9e9e;
+  pointer-events: none;
+}
+
+.my-deals__search-input {
+  width: 100%;
+  height: 36px;
+  padding: 0 14px 0 38px;
+  border: 1px solid #e0e0e0;
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--vips-dark);
+  background: #ffffff;
+}
+
+.my-deals__search-input::placeholder {
+  color: #9e9e9e;
+}
+
+.my-deals__search-input:focus {
+  outline: none;
+  border-color: var(--vips-dark);
+}
+
+/* ── Status badges — design has colored text only, NO pill background ── */
+.my-deals__stage-badge {
+  display: inline-block;
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 11px;
+  line-height: 16px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.my-deals__stage-badge--prospect      { color: #1976d2; }
+.my-deals__stage-badge--engagement    { color: #f57c00; }
+.my-deals__stage-badge--conditional   { color: #7b1fa2; }
+.my-deals__stage-badge--post_exchange { color: #2e7d32; }
+.my-deals__stage-badge--settled       { color: #424242; }
+.my-deals__stage-badge--archived      { color: #9e9e9e; }
+
+/* ── Table card — wraps the table + pagination as a single card ── */
+.my-deals__table-card {
+  background: var(--vips-bg-card);
+  border: 1px solid var(--vips-border-light);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+
+/* Inner scroll wrap — lets the table scroll horizontally if it overflows on narrow screens */
+.my-deals__table-wrap {
+  overflow-x: auto;
+}
+
+.my-deals__table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: auto;
+  min-width: 0;
+}
+
+.my-deals__table thead th {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: #757575;
+  text-transform: uppercase;
+  text-align: left;
+  padding: 12px 12px;
+  border-bottom: 1px solid var(--vips-border-light);
+  white-space: nowrap;
+}
+
+.my-deals__table tbody td {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--vips-dark);
+  padding: 16px 12px;
+  border-bottom: 1px solid #f7f7f7;
+  vertical-align: middle;
+}
+
+.my-deals__row {
+  cursor: pointer;
+  transition: background-color 0.12s ease;
+}
+
+.my-deals__row:hover {
+  background-color: #fafafa;
+}
+
+.my-deals__row:focus-visible {
+  outline: 2px solid var(--vips-dark);
+  outline-offset: -2px;
+}
+
+.my-deals__td--chevron {
+  text-align: right;
+  color: #9e9e9e;
+  font-size: 22px;
+  width: 24px;
+  line-height: 1;
+}
+
+/* Date cell with calendar icon */
+.my-deals__date-cell {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.my-deals__date-icon {
+  color: #9e9e9e;
+  flex-shrink: 0;
+}
+
+/* Pagination sits inside the table card at the bottom */
+.my-deals__pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  border-top: 1px solid var(--vips-border-light);
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--vips-text-secondary);
+}
+
+.my-deals__card-link {
+  color: var(--vips-red);
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.my-deals__card-meta {
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: var(--vips-text-secondary);
+  line-height: 18px;
+  margin: 6px 0 0;
+}
+
+/* Mobile card: Manager / Date as two label-above-value columns (Figma) */
+.my-deals__card-info {
+  display: flex;
+  gap: 32px;
+  margin-top: 10px;
+}
+
+.my-deals__card-info-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.my-deals__card-info-label {
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: var(--vips-text-secondary);
+  line-height: 16px;
+}
+
+.my-deals__card-info-value {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--vips-dark);
+  line-height: 18px;
+}
+
+/* ── Breadcrumb (chevron-separated) ── */
+.my-deals__breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--vips-text-muted);
+  margin: 0 0 20px;
+}
+
+.my-deals__back-link {
+  color: var(--vips-text-muted);
+  text-decoration: none;
+  font-weight: 400;
+}
+
+.my-deals__back-link:hover {
+  color: var(--vips-dark);
+  text-decoration: underline;
+}
+
+.my-deals__breadcrumb-chevron {
+  color: var(--vips-text-muted);
+  flex-shrink: 0;
+}
+
+/* ── Top back button — sits on the SAME LINE as the breadcrumb, right
+   end. Breadcrumb takes the remaining space on the left; the button
+   pushes to the right via justify-content: space-between. Kept
+   understated (outline style) so it doesn't compete with the real
+   primary actions in the deal (Edit Details, form submits). */
+.my-deals__detail-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+.my-deals__detail-header .my-deals__breadcrumb {
+  flex: 1;
+  min-width: 0;                /* let the flex child shrink so the button always fits */
+  margin: 0;                    /* override the breadcrumb's default bottom margin */
+}
+.my-deals__detail-header .my-deals__breadcrumb-current {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;         /* long deal names ellipsize instead of pushing the button off */
+}
+.my-deals__detail-header .my-deals__back-btn {
+  flex-shrink: 0;               /* the button keeps its full size no matter how long the breadcrumb is */
+}
+.my-deals__back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border: 1px solid var(--vips-border);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--vips-dark);
+  font-family: var(--font-body);
+  font-size: 14px;              /* match the breadcrumb font-size so baselines land */
+  font-weight: 500;
+  line-height: 1.4;
+  text-decoration: none;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+.my-deals__back-btn:hover {
+  background: var(--vips-red);
+  color: #fff;
+  border-color: var(--vips-red);
+  text-decoration: none;
+}
+.my-deals__back-btn:focus-visible {
+  outline: 2px solid var(--vips-red);
+  outline-offset: 2px;
+}
+.my-deals__back-btn-icon {
+  flex-shrink: 0;
+}
+
+/* ── Detail "not found" panel — shown when the URL has an id but
+   the logged-in contact isn't an IP/PP Partner on that deal. Centred
+   card with a message + primary back button. ── */
+.my-deals__detail-not-found {
+  max-width: 480px;
+  margin: 60px auto;
+  padding: 40px 32px;
+  background: var(--vips-bg-card);
+  border: 1px solid var(--vips-border-light);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card-subtle);
+  text-align: center;
+}
+.my-deals__detail-not-found-message {
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: var(--vips-text-primary);
+  margin: 0 0 24px;
+}
+.my-deals__detail-not-found-back {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 24px;
+  border-radius: var(--radius-md);
+  background: var(--vips-dark);
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+}
+.my-deals__detail-not-found-back:hover {
+  background: var(--vips-dark-subtle);
+  color: #fff;
+}
+
+.my-deals__breadcrumb-current {
+  color: var(--vips-dark);
+  font-weight: 600;
+}
+
+/* ── Section headings (sit OUTSIDE cards on the page bg) ── */
+.my-deals__section-heading {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 32px;
+  color: var(--vips-dark);
+  margin: 32px 0 16px;
+}
+
+.my-deals__section-heading--inline {
+  margin: 0;
+}
+
+/* ── Info card — title/submitter/status head, then a row: grid | divider | fee | jm ── */
+.my-deals__info-card {
+  background: #fff;
+  border: 1px solid var(--vips-border-light);
+  border-radius: 8px;
+  padding: 24px 32px;
+  position: relative;   /* anchors the status pill to the card's top-right corner */
+}
+
+/* Head: title + submitter (status pill is absolute top-right on desktop) */
+.my-deals__info-head {
+  margin-bottom: 24px;
+  padding-right: 120px;  /* keep title/submitter clear of the absolute status pill */
+}
+
+/* Body: info grid (left) | divider | referral fee | job-manager box — all one row */
+.my-deals__info-body {
+  display: flex;
+  align-items: stretch;
+  gap: 32px;
+}
+
+.my-deals__deal-title {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 26px;
+  line-height: 32px;
+  color: var(--vips-dark);
+  margin: 0;
+}
+
+.my-deals__deal-submitter {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--vips-text-secondary);
+  margin: 0;
+}
+
+.my-deals__info-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px 48px;
+  align-content: start;
+}
+
+.my-deals__info-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.my-deals__info-label {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: var(--vips-text-muted);
+  text-transform: uppercase;
+}
+
+.my-deals__info-value {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--vips-dark);
+}
+
+/* MD-C1 — Combined Client cell. One cell (spans both info-grid
+   columns) holds all clients on the deal. Each client entry has
+   name (bold, primary color) stacked over details (email, phone,
+   muted). Border separator between entries matches the JM box
+   border (--vips-border) so the visual weight lines up. */
+.my-deals__info-cell--client {
+  grid-column: 1 / -1;   /* span the entire info-grid width */
+}
+.my-deals__client-entry {
+  padding: 10px 0;
+  line-height: 1.35;
+}
+.my-deals__client-entry:first-child {
+  padding-top: 0;
+}
+.my-deals__client-entry:last-child {
+  padding-bottom: 0;
+}
+.my-deals__client-entry + .my-deals__client-entry {
+  border-top: 1px solid var(--vips-border);   /* matches JM box border */
+}
+.my-deals__client-name {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--vips-dark);
+  margin-bottom: 2px;
+}
+.my-deals__client-details {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 13px;
+  color: var(--vips-text-secondary);
+  word-break: break-word;   /* long emails still wrap gracefully */
+}
+
+/* Vertical divider — sits to the LEFT of the referral fee, spans the body height */
+.my-deals__info-divider {
+  width: 1px;
+  background: var(--vips-border);   /* #e0e0e0 — --vips-border-light (#f2f2f2) is ~invisible on white */
+  align-self: stretch;
+  flex-shrink: 0;
+}
+
+/* Top-right "In Progress" pill — absolutely positioned at the corner of the info card */
+.my-deals__status-dot-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 18px;
+  padding: 0;
+  background: transparent;
+}
+
+.my-deals__status-dot-pill--stage {
+  position: absolute;
+  top: 24px;
+  right: 32px;
+}
+
+.my-deals__status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #9e9e9e;
+}
+
+/* Colour the dot AND the pill text together */
+.my-deals__status-dot-pill--prospect      { color: #1976d2; }
+.my-deals__status-dot-pill--prospect .my-deals__status-dot      { background: #1976d2; }
+.my-deals__status-dot-pill--engagement    { color: #f57c00; }
+.my-deals__status-dot-pill--engagement .my-deals__status-dot    { background: #f57c00; }
+.my-deals__status-dot-pill--conditional   { color: #7b1fa2; }
+.my-deals__status-dot-pill--conditional .my-deals__status-dot   { background: #7b1fa2; }
+.my-deals__status-dot-pill--post_exchange { color: #2e7d32; }
+.my-deals__status-dot-pill--post_exchange .my-deals__status-dot { background: #2e7d32; }
+.my-deals__status-dot-pill--settled       { color: #424242; }
+.my-deals__status-dot-pill--settled .my-deals__status-dot       { background: #424242; }
+.my-deals__status-dot-pill--archived      { color: #9e9e9e; }
+.my-deals__status-dot-pill--archived .my-deals__status-dot      { background: #9e9e9e; }
+.my-deals__status-dot-pill--pending       { color: #f57c00; }
+.my-deals__status-dot-pill--pending .my-deals__status-dot       { background: #f57c00; }
+.my-deals__status-dot-pill--active        { color: #2e7d32; }
+.my-deals__status-dot-pill--active .my-deals__status-dot        { background: #2e7d32; }
+.my-deals__status-dot-pill--approved      { color: #1976d2; }
+.my-deals__status-dot-pill--approved .my-deals__status-dot      { background: #1976d2; }
+.my-deals__status-dot-pill--paid          { color: #2e7d32; }
+.my-deals__status-dot-pill--paid .my-deals__status-dot          { background: #2e7d32; }
+
+.my-deals__fee-block {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: left;
+  min-width: 140px;
+  flex-shrink: 0;
+  align-self: flex-start;   /* top-align with the grid; don't stretch full body height */
+}
+
+.my-deals__info-fee-value {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 38px;
+  color: var(--vips-dark);
+}
+
+.my-deals__fee-caption {
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: var(--vips-text-muted);
+}
+
+.my-deals__jm-block {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;                              /* space between JM entries when >1 */
+  min-width: 180px;
+  flex-shrink: 0;
+  align-self: flex-start;
+  border: 1px solid var(--vips-border);   /* job manager sits in a bordered box (Figma) */
+  border-radius: 8px;
+  padding: 16px 20px;
+}
+
+/* Each JM's name+email pair. Wrapper introduced for MD-V4 (multiple JMs
+   per deal). Single-JM decks look identical to the pre-multi design —
+   the 12px block gap only shows up when there's a second entry. */
+.my-deals__jm-entry {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.my-deals__jm-name {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--vips-dark);
+}
+
+.my-deals__jm-email {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--vips-text-secondary);
+  text-decoration: none;
+  word-break: break-word;
+}
+
+a.my-deals__jm-email:hover {
+  text-decoration: underline;
+  color: var(--vips-dark);
+}
+
+/* Empty-state placeholder: no underline, no link cursor */
+.my-deals__jm-email--empty {
+  color: var(--vips-text-secondary);
+  cursor: default;
+}
+
+/* "+N" pill next to the first JM name in the desktop table row + mobile
+   card. Kept small and subtle so it hints at more JMs in the detail view
+   without stealing focus from the row's primary info. Inline-block so it
+   sits beside the name and inherits the row's line-height. */
+.my-deals__jm-count-pill {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 1px 6px;
+  border-radius: 999px;
+  background: var(--vips-border);
+  color: var(--vips-text-secondary);
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.4;
+  vertical-align: baseline;
+}
+
+/* ── Dates rows — heading outside, 3 individual cards in a grid ── */
+.my-deals__dates-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 8px;
+}
+
+.my-deals__dates-cell {
+  background: #fff;
+  border: 1px solid var(--vips-border-light);
+  border-radius: 8px;
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.my-deals__dates-value {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--vips-dark);
+}
+
+/* ── Deal Progress timeline — heading outside, single card containing 5-step grid ── */
+/* ── Deal Progress — FAQ-style accordion ── */
+.my-deals__progress-card {
+  background: #fff;
+  border: 1px solid var(--vips-border-light);
+  border-radius: 8px;
+  padding: 0;
+  margin-bottom: 8px;
+  overflow: hidden;
+}
+
+.my-deals__progress {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.my-deals__progress-step {
+  border-bottom: 1px solid var(--vips-border-light);
+}
+.my-deals__progress-step:last-child { border-bottom: 0; }
+
+.my-deals__progress-summary {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 24px;
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+  transition: background-color 0.15s ease;
+}
+.my-deals__progress-summary::-webkit-details-marker { display: none; }
+.my-deals__progress-summary::marker { display: none; }
+.my-deals__progress-summary:hover { background: #fafafa; }
+.my-deals__progress-summary:focus-visible {
+  outline: 2px solid var(--vips-dark);
+  outline-offset: -2px;
+}
+
+.my-deals__progress-label {
+  flex: 1;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 22px;
+  color: var(--vips-dark);
+}
+
+.my-deals__progress-state {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 18px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #f5f5f5;
+  color: var(--vips-text-secondary);
+  white-space: nowrap;
+}
+.my-deals__progress-step.is-complete .my-deals__progress-state {
+  color: #2e7d32; background: #e8f5e9;
+}
+.my-deals__progress-step.is-current .my-deals__progress-state {
+  color: #f57c00; background: #fff3e0;
+}
+.my-deals__progress-step.is-pending .my-deals__progress-state {
+  color: var(--vips-text-secondary); background: #f5f5f5;
+}
+
+/* +/- icon — drawn with two pseudo-elements; the vertical bar collapses
+   when [open] is set on <details>, producing the minus state. */
+.my-deals__progress-icon {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+.my-deals__progress-icon::before,
+.my-deals__progress-icon::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background: var(--vips-dark);
+  transition: transform 0.2s ease;
+}
+.my-deals__progress-icon::before {
+  /* Horizontal bar — always visible (it's the "minus") */
+  width: 14px;
+  height: 2px;
+  transform: translate(-50%, -50%);
+}
+.my-deals__progress-icon::after {
+  /* Vertical bar — combines with horizontal to make a "plus".
+     Collapses when [open], leaving just the horizontal = "minus". */
+  width: 2px;
+  height: 14px;
+  transform: translate(-50%, -50%);
+}
+.my-deals__progress-step[open] .my-deals__progress-icon::after {
+  transform: translate(-50%, -50%) scaleY(0);
+}
+
+/* Description body — only visible when [open] (native <details> behavior) */
+.my-deals__progress-body {
+  padding: 0 24px 20px;
+}
+
+.my-deals__progress-desc {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 22px;
+  color: var(--vips-text-secondary);
+}
+
+/* ── Key Metrics — heading outside, form-style card with inputs ── */
+.my-deals__metrics-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 32px 0 16px;
+}
+
+.my-deals__edit-btn {
+  background: #fff;
+  border: 1px solid var(--vips-dark);
+  color: var(--vips-dark);
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 13px;
+  padding: 7px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.my-deals__edit-btn:hover {
+  background: var(--vips-dark);
+  color: #fff;
+}
+
+.my-deals__metrics-card {
+  background: #fff;
+  border: 1px solid var(--vips-border-light);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.my-deals__metrics-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px 32px;
+  margin-bottom: 24px;
+}
+
+.my-deals__metric-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.my-deals__metric-label {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--vips-dark);
+}
+
+.my-deals__metric-input {
+  width: 100%;
+  height: 40px;
+  padding: 0 12px;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  background: #fff;
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--vips-dark);
+}
+
+.my-deals__metric-input[readonly] {
+  background: #fff;
+  cursor: default;
+}
+
+.my-deals__metric-input:focus {
+  outline: none;
+  border-color: var(--vips-dark);
+}
+
+.my-deals__save-btn {
+  background: var(--vips-dark);
+  color: #fff;
+  border: none;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 14px;
+  padding: 10px 22px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.my-deals__save-btn:hover {
+  background: #3f3f47;
+}
+
+/* ── About / Included blocks ── */
+.my-deals__about-block,
+.my-deals__included-block {
+  background: #fff;
+  border: 1px solid var(--vips-border-light);
+  border-radius: var(--radius-lg);
+  padding: 20px 24px;
+  margin-bottom: 16px;
+}
+
+.my-deals__about-body {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 22px;
+  color: var(--vips-text-secondary);
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+/* ── Mobile overrides ── */
+@media (max-width: 768px) {
+  /* Earnings: ONE card wrapping the heading/sub + a 3-column stats row (Figma) */
+  .my-deals__earnings {
+    background: var(--vips-bg-card);
+    border: 1px solid var(--vips-border-light);
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 24px;
+  }
+  .my-deals__earnings-intro {
+    background: none;
+    border: none;
+    border-radius: 0;
+    padding: 0;
+    margin-bottom: 16px;
+  }
+  .my-deals__earnings-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 0;
+  }
+  .my-deals__earnings-stat {
+    background: none;
+    border: none;
+    padding: 0;
+    align-items: center;
+    text-align: center;
+  }
+  .my-deals__earnings-value { font-size: 18px; line-height: 24px; }
+  .my-deals__earnings-value--fallback { font-size: 11px; line-height: 14px; }
+  .my-deals__earnings-label { font-size: 11px; line-height: 15px; }
+
+  /* Available Deals header: heading on top, full-width Register a Deal button below */
+  .my-deals__header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+  .my-deals__add-btn { width: 100%; }
+
+  .my-deals__toolbar { flex-direction: column; align-items: stretch; gap: 12px; }
+
+  /* Reset the desktop flex-basis (280px). In the column toolbar that basis became
+     the search box HEIGHT, leaving a huge empty gap with the icon floating at
+     top:50%. flex:0 0 auto + width:100% makes it a normal full-width input row. */
+  .my-deals__search {
+    flex: 0 0 auto;
+    width: 100%;
+    min-width: 0;
+    max-width: none;
+    margin-left: 0;
+  }
+
+  .my-deals__dates-grid,
+  .my-deals__progress,
+  .my-deals__metrics-grid,
+  .my-deals__info-grid { grid-template-columns: 1fr; }
+  .my-deals__detail-header { flex-direction: column; }
+
+  /* Info card: head (title/submitter/status) then a stacked body (grid, fee, jm). */
+  .my-deals__info-card {
+    padding: 20px;
+  }
+  .my-deals__info-head {
+    margin-bottom: 16px;
+    padding-right: 0;
+  }
+  /* Status pill flows BELOW the Deal ID on mobile (not the desktop top-right corner) */
+  .my-deals__status-dot-pill--stage {
+    position: static;
+    margin-top: 12px;
+  }
+  .my-deals__info-body {
+    flex-direction: column;
+    gap: 20px;
+  }
+  .my-deals__info-divider { display: none; }   /* no vertical divider when stacked */
+  /* Job manager: plain stacked text on mobile (drop the desktop bordered box) */
+  .my-deals__jm-block {
+    border: none;
+    border-radius: 0;
+    padding: 0;
+  }
+
+  .my-deals__info-fee-wrap { align-items: flex-start; }
+}
+
+/* Visibility flags driven by CSS class on the section element (set in module.html
+   based on style_overrides.hide_on_mobile / hide_on_desktop). HubL inside CSS
+   is not parsed by HubSpot, so the toggles must work via static class selectors. */
+@media (max-width: 768px) {
+  .my-deals--hide-mobile { display: none !important; }
+}
+@media (min-width: 769px) {
+  .my-deals--hide-desktop { display: none !important; }
+}

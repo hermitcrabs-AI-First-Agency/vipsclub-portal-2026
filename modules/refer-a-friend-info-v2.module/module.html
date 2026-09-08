@@ -1,0 +1,46 @@
+{# ============================================================
+   VIPSCLUB Portal 2026 — Refer a Friend Info V2
+   Matches Figma desktop 374:627 and mobile 380:4996.
+   ============================================================ #}
+
+{% set steps = [module.step_one, module.step_two, module.step_three, module.step_four] %}
+{% set rewards = [module.reward_one, module.reward_two] %}
+
+<section class="refer-a-friend-info-v2{% if module.style_overrides.hide_on_mobile %} refer-a-friend-info-v2--hide-mobile{% endif %}" aria-labelledby="{{ name }}-heading">
+  {% if module.section_heading %}
+  <{{ module.heading_level|default("h2") }} id="{{ name }}-heading" class="refer-a-friend-info-v2__heading">
+    {{ module.section_heading|escape_html }}
+  </{{ module.heading_level|default("h2") }}>
+  {% endif %}
+
+  <div class="refer-a-friend-info-v2__card">
+    {% if module.program_description %}
+    <div class="refer-a-friend-info-v2__description">
+      {{ module.program_description }}
+    </div>
+    {% endif %}
+
+    <div class="refer-a-friend-info-v2__steps" role="list" aria-label="Referral steps">
+      {% for step in steps %}
+      <div class="refer-a-friend-info-v2__step" role="listitem">
+        <span class="refer-a-friend-info-v2__step-circle" aria-hidden="true">
+          <span class="refer-a-friend-info-v2__step-number{% if step.highlight %} refer-a-friend-info-v2__step-number--highlight{% endif %}">
+            {{ step.number|escape_html }}
+          </span>
+        </span>
+        <span class="refer-a-friend-info-v2__step-label">{{ step.step_label|escape_html }}</span>
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="refer-a-friend-info-v2__rewards" aria-label="Reward summary">
+      {% for reward in rewards %}
+      <div class="refer-a-friend-info-v2__reward">
+        <span>{{ reward.prefix|escape_html }} </span>
+        <strong>{{ reward.points|escape_html }}</strong>
+        <span> {{ reward.suffix|escape_html }}</span>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>

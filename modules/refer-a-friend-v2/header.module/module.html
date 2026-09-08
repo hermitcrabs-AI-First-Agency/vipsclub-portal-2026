@@ -1,0 +1,33 @@
+{# Refer a Friend V2 - self-contained portal header #}
+{% set current_hour = local_dt|datetimeformat("%H")|int %}
+{% if current_hour >= 5 and current_hour < 12 %}
+  {% set time_of_day = "morning" %}
+{% elif current_hour >= 12 and current_hour < 17 %}
+  {% set time_of_day = "afternoon" %}
+{% else %}
+  {% set time_of_day = "evening" %}
+{% endif %}
+{% set grad_start = module.style_overrides.gradient_start.color|default("#000000") %}
+{% set grad_end = module.style_overrides.gradient_end.color|default("#a22b34") %}
+
+<header class="rfv2-header" role="banner" style="background-image: linear-gradient(169.47deg, {{ grad_start }} 36.19%, {{ grad_end }} 66.10%);">
+  <div class="rfv2-header__texture" aria-hidden="true"></div>
+  <button class="rfv2-header__menu-button" id="rfv2-menu-button" type="button" aria-label="{{ module.open_menu_label|escape_attr }}" aria-expanded="false" aria-controls="rfv2-sidebar">
+    <span class="rfv2-header__menu-lines" aria-hidden="true"><span></span><span></span><span></span></span>
+  </button>
+
+  <div class="rfv2-header__inner">
+    <div class="rfv2-header__brand">
+      {% if module.logo.src %}
+      <img class="rfv2-header__logo" src="{{ module.logo.src|escape_attr }}" alt="{{ module.logo.alt|escape_attr }}" width="{{ module.logo.width|default(161) }}" height="{{ module.logo.height|default(59) }}" fetchpriority="high">
+      {% else %}
+      <span class="rfv2-header__logo-text">{{ module.logo_text|escape_html }}</span>
+      {% endif %}
+    </div>
+    <div class="rfv2-header__divider" aria-hidden="true"></div>
+    <div class="rfv2-header__copy">
+      <h1>{{ module.greeting_prefix|escape_html }} {{ time_of_day }}, {{ contact.firstname|default("Member")|escape_html }}</h1>
+      {% if module.subtitle %}<p>{{ module.subtitle|escape_html }}</p>{% endif %}
+    </div>
+  </div>
+</header>

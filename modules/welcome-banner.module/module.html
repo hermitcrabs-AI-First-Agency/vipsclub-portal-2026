@@ -1,0 +1,16 @@
+{# ============================================================
+   VIPSCLUB Portal 2026 — Welcome Banner Module
+   Simple welcome card with editable heading and body text
+   ============================================================ #}
+
+<div class="welcome-banner{% if module.style_overrides.hide_on_mobile %} welcome-banner--hide-mobile{% endif %}">
+
+  {% if module.heading %}
+  <{{ module.heading_level | default("h2") }} class="welcome-banner__heading">{{ module.heading | escape_html }}</{{ module.heading_level | default("h2") }}>
+  {% endif %}
+
+  {% if module.body_text %}
+  <div class="welcome-banner__body">{{ module.body_text }}</div>
+  {% endif %}
+
+</div>

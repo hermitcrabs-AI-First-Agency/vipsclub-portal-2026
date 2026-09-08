@@ -1,0 +1,88 @@
+/* ============================================================
+   Auth Create Account Page Module — Public sign-up page
+   Shared layout styles live in css/auth/auth-pages.css
+   Identical look to auth-register-page.module — only the form
+   tag differs ({% form %} vs {% member_register %}).
+   ============================================================ */
+
+/* ── Placeholder shown in page editor when no form is selected ── */
+.auth-form__placeholder {
+  background: var(--vips-bg-input);
+  border: 2px dashed var(--vips-border);
+  border-radius: var(--radius-md);
+  padding: 24px 16px;
+  text-align: center;
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--vips-text-light);
+  margin-bottom: 20px;
+}
+
+.auth-form__placeholder p {
+  margin: 0 0 4px;
+}
+
+.auth-form__placeholder p:last-child {
+  margin-bottom: 0;
+}
+
+/* ── HubSpot form spacing ── */
+.auth-page--register .auth-page__card-form .hs-form-field {
+  margin-bottom: 20px;
+}
+
+/* ── Submit button: full-width, no extra top margin ── */
+.auth-page--register .auth-page__card-form .hs_submit {
+  margin-top: 4px;
+}
+
+/* ── Terms checkbox / legal consent ── */
+.auth-page--register .auth-page__card-form .hs-form .legal-consent-container {
+  margin-top: 4px;
+  margin-bottom: 20px;
+}
+
+.auth-page--register .auth-page__card-form .hs-form .legal-consent-container p {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--vips-text-light);
+  line-height: 18px;
+}
+
+/* ── Inline error messages ── */
+.auth-page--register .auth-page__card-form .hs-error-msgs li {
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: var(--vips-error);
+  list-style: none;
+  margin-top: 4px;
+}
+
+footer.auth-page__footer p,
+.auth-page__footer a {
+    color: #757575;
+}
+.auth-page__card-form form .hs-input:not(input[type=checkbox]) {
+    width: 100% !important;
+}
+
+.auth-page__card-form form .legal-consent-container .hs-form-booleancheckbox-display>span {
+    margin: 0;
+}
+
+.auth-page__card-form .hs-form .hs-error-msg, .auth-page__card-form  .hs-form .hs-error-msgs label {
+    color: var(--vips-red);
+}
+
+/* ── Visibility flags ── */
+@media (max-width: 768px) {
+  .auth-page--hide-mobile {
+    display: none;
+  }
+}
+
+@media (min-width: 769px) {
+  .auth-page--hide-desktop {
+    display: none;
+  }
+}

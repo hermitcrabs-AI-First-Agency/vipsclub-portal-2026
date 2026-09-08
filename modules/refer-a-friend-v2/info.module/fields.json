@@ -1,0 +1,205 @@
+[ {
+  "id" : "section_heading",
+  "name" : "section_heading",
+  "label" : "Section Heading",
+  "help_text" : "Heading shown above the referral program card.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Refer a friend, earn rewards"
+}, {
+  "id" : "heading_level",
+  "name" : "heading_level",
+  "label" : "Heading Level",
+  "required" : false,
+  "locked" : false,
+  "display" : "select",
+  "choices" : [ [ "h1", "H1" ], [ "h2", "H2" ], [ "h3", "H3" ], [ "h4", "H4" ] ],
+  "multiple" : false,
+  "reordering_enabled" : true,
+  "preset" : null,
+  "type" : "choice",
+  "display_width" : null,
+  "default" : "h2"
+}, {
+  "id" : "program_description",
+  "name" : "program_description",
+  "label" : "Program Description",
+  "required" : false,
+  "locked" : false,
+  "type" : "richtext",
+  "display_width" : null,
+  "default" : "<p>Every successful referral earns you 10 points. Both you and your referred contact receive a reward once their deal is completed.</p>"
+}, {
+  "id" : "steps",
+  "name" : "steps",
+  "label" : "Steps",
+  "help_text" : "Editable step sequence shown in the referral flow.",
+  "required" : false,
+  "locked" : false,
+  "occurrence" : {
+    "min" : 1,
+    "max" : 6,
+    "sorting_label_field" : "step_label",
+    "default" : 4
+  },
+  "children" : [ {
+    "id" : "steps.step_number",
+    "name" : "step_number",
+    "label" : "Step Number",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "1"
+  }, {
+    "id" : "steps.step_label",
+    "name" : "step_label",
+    "label" : "Step Label",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Send referral"
+  }, {
+    "id" : "steps.highlight",
+    "name" : "highlight",
+    "label" : "Highlight Number",
+    "required" : false,
+    "locked" : false,
+    "display" : "checkbox",
+    "type" : "boolean",
+    "display_width" : null,
+    "default" : false
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : [ {
+    "step_number" : "1",
+    "step_label" : "Send referral",
+    "highlight" : false
+  }, {
+    "step_number" : "2",
+    "step_label" : "They sign up",
+    "highlight" : false
+  }, {
+    "step_number" : "3",
+    "step_label" : "Deal closes",
+    "highlight" : true
+  }, {
+    "step_number" : "4",
+    "step_label" : "Earn pts",
+    "highlight" : false
+  } ]
+}, {
+  "id" : "reward_boxes",
+  "name" : "reward_boxes",
+  "label" : "Reward Boxes",
+  "help_text" : "Editable reward summary cards below the steps.",
+  "required" : false,
+  "locked" : false,
+  "occurrence" : {
+    "min" : 1,
+    "max" : 4,
+    "sorting_label_field" : "prefix",
+    "default" : 2
+  },
+  "children" : [ {
+    "id" : "reward_boxes.prefix",
+    "name" : "prefix",
+    "label" : "Text Before Points",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "You earn"
+  }, {
+    "id" : "reward_boxes.points",
+    "name" : "points",
+    "label" : "Points",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "+10"
+  }, {
+    "id" : "reward_boxes.suffix",
+    "name" : "suffix",
+    "label" : "Text After Points",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "pts per referral"
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : [ {
+    "prefix" : "You earn",
+    "points" : "+10",
+    "suffix" : "pts per referral"
+  }, {
+    "prefix" : "Referee earns",
+    "points" : "+5",
+    "suffix" : "pts on sign-up"
+  } ]
+}, {
+  "id" : "style_overrides",
+  "name" : "style_overrides",
+  "label" : "Style Overrides",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "style_overrides.card_background",
+    "name" : "card_background",
+    "label" : "Card Background",
+    "required" : false,
+    "locked" : false,
+    "type" : "color",
+    "display_width" : null,
+    "default" : {
+      "color" : null,
+      "opacity" : 100
+    }
+  }, {
+    "id" : "style_overrides.accent_color",
+    "name" : "accent_color",
+    "label" : "Accent Color",
+    "required" : false,
+    "locked" : false,
+    "type" : "color",
+    "display_width" : null,
+    "default" : {
+      "color" : null,
+      "opacity" : 100
+    }
+  }, {
+    "id" : "style_overrides.hide_on_mobile",
+    "name" : "hide_on_mobile",
+    "label" : "Hide on Mobile",
+    "required" : false,
+    "locked" : false,
+    "display" : "checkbox",
+    "type" : "boolean",
+    "display_width" : null,
+    "default" : false
+  } ],
+  "tab" : "STYLE",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null
+} ]

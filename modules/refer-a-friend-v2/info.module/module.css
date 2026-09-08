@@ -1,0 +1,225 @@
+/* ============================================================
+   VIPSCLUB Portal 2026 - Refer a Friend Info V2
+   ============================================================ */
+
+.refer-a-friend-info-v2 {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.refer-a-friend-info-v2__heading {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 32px;
+  color: var(--vips-dark);
+}
+
+.refer-a-friend-info-v2__card {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+  min-height: 190px;
+  box-sizing: border-box;
+  padding: 24px;
+  background: var(--vips-bg-card);
+  border: 1px solid var(--vips-border-light);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card-subtle);
+}
+
+.refer-a-friend-info-v2__description {
+  max-width: 453px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 24px;
+  color: var(--vips-text-light);
+}
+
+.refer-a-friend-info-v2__description p {
+  margin: 0;
+}
+
+.refer-a-friend-info-v2__steps {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(72px, 1fr));
+  width: 100%;
+  min-height: 60px;
+}
+
+.refer-a-friend-info-v2__steps::before {
+  content: "";
+  position: absolute;
+  top: 16px;
+  left: 17px;
+  right: 36px;
+  border-top: 1px solid #9e9e9e;
+  z-index: 0;
+}
+
+.refer-a-friend-info-v2__step {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+  min-width: 0;
+}
+
+.refer-a-friend-info-v2__step-circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 16px;
+  background: var(--vips-bg-icon);
+}
+
+.refer-a-friend-info-v2__step-number {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 20px;
+  color: var(--vips-dark);
+}
+
+.refer-a-friend-info-v2__step-number--highlight {
+  color: var(--vips-red);
+}
+
+.refer-a-friend-info-v2__step-label {
+  width: 122px;
+  max-width: 100%;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.25;
+  color: var(--vips-text-secondary);
+}
+
+.refer-a-friend-info-v2__rewards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 24px;
+  width: 100%;
+}
+
+.refer-a-friend-info-v2__reward {
+  min-height: 49px;
+  box-sizing: border-box;
+  padding: 10px 16px;
+  border: 1px solid #dddddd;
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 24px;
+  color: var(--vips-text-secondary);
+  text-align: center;
+}
+
+.refer-a-friend-info-v2__reward strong {
+  font-weight: 700;
+  color: var(--vips-success);
+}
+
+@media (max-width: 768px) {
+  .refer-a-friend-info-v2--hide-mobile {
+    display: none;
+  }
+
+  .refer-a-friend-info-v2 {
+    gap: 8px;
+  }
+
+  .refer-a-friend-info-v2__heading {
+    font-family: var(--font-body);
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 28px;
+    letter-spacing: -0.45px;
+  }
+
+  .refer-a-friend-info-v2__card {
+    gap: 20px;
+    padding: 20px;
+    border-width: 0.698px;
+    box-shadow: 0 1px 1.5px rgba(0, 0, 0, 0.1), 0 1px 1px rgba(0, 0, 0, 0.1);
+  }
+
+  .refer-a-friend-info-v2__description {
+    max-width: 293px;
+    line-height: 20px;
+    letter-spacing: -0.15px;
+  }
+
+  .refer-a-friend-info-v2__steps {
+    min-height: 60px;
+  }
+
+  .refer-a-friend-info-v2__steps::before {
+    left: 0;
+    right: 0;
+    top: 16px;
+    border-color: var(--vips-bg-icon);
+  }
+
+  .refer-a-friend-info-v2__steps::after {
+    content: "";
+    position: absolute;
+    top: 16px;
+    left: 0;
+    width: 67%;
+    border-top: 1px solid var(--vips-dark);
+    z-index: 0;
+  }
+
+  .refer-a-friend-info-v2__step {
+    align-items: center;
+    gap: 12px;
+  }
+
+  .refer-a-friend-info-v2__step-label {
+    width: auto;
+    font-size: 12px;
+    line-height: 16px;
+    text-align: center;
+    white-space: nowrap;
+    letter-spacing: -0.15px;
+  }
+
+  .refer-a-friend-info-v2__rewards {
+    gap: 16px;
+  }
+
+  .refer-a-friend-info-v2__reward {
+    min-height: 75px;
+    padding: 16px;
+    border-width: 0.698px;
+    border-radius: var(--radius-lg);
+    line-height: 20px;
+    text-align: left;
+    letter-spacing: -0.15px;
+  }
+}
+
+{% if module.style_overrides.card_background.color %}
+.refer-a-friend-info-v2__card {
+  background-color: rgba({{ module.style_overrides.card_background.color|convert_rgb }}, {{ module.style_overrides.card_background.opacity / 100 }});
+}
+{% endif %}
+
+{% if module.style_overrides.accent_color.color %}
+.refer-a-friend-info-v2__step-number--highlight,
+.refer-a-friend-info-v2__reward strong {
+  color: rgba({{ module.style_overrides.accent_color.color|convert_rgb }}, {{ module.style_overrides.accent_color.opacity / 100 }});
+}
+{% endif %}

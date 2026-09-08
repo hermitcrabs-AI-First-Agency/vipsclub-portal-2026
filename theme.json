@@ -1,0 +1,22 @@
+{
+  "label": "VIPSCLUB Portal 2026",
+  "preview_path": "./templates/dashboard.html",
+  "screenshot_path": "/vipsclub-portal-2026/images/theme-preview.jpg",
+  "enable_domain_stylesheets": false,
+  "is_available_for_new_content": true,
+  "responsive_breakpoints": [
+    {
+      "name": "mobile",
+      "mediaQuery": "@media (max-width: 767px)",
+      "previewWidth": {
+        "value": 390
+      }
+    }
+  ],
+  "version": "1.0.0",
+  "author": {
+    "name": "Hermit Crabs",
+    "email": "swaroop@hermitcrabs.io"
+  },
+  "hide_all_default_modules": false
+}

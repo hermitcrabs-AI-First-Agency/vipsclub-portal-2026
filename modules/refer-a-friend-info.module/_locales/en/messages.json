@@ -1,0 +1,492 @@
+{
+  "heading_level.choices.h1" : {
+    "message" : "H1 — Page Title",
+    "description" : "",
+    "placeholders" : null
+  },
+  "heading_level.choices.h2" : {
+    "message" : "H2 — Section",
+    "description" : "",
+    "placeholders" : null
+  },
+  "heading_level.choices.h3" : {
+    "message" : "H3 — Subsection",
+    "description" : "",
+    "placeholders" : null
+  },
+  "heading_level.choices.h4" : {
+    "message" : "H4",
+    "description" : "",
+    "placeholders" : null
+  },
+  "heading_level.help_text" : {
+    "message" : "Controls the HTML heading tag. Use H1 only once per page for the main title.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "heading_level.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "heading_level.label" : {
+    "message" : "Heading Level",
+    "description" : "",
+    "placeholders" : null
+  },
+  "heading_level.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "name" : {
+    "message" : "refer-a-friend-info",
+    "description" : "",
+    "placeholders" : null
+  },
+  "program_description.default" : {
+    "message" : "<p>Every successful referral earns you 10 points. Both you and your referred contact receive a reward once their deal is completed.</p>",
+    "description" : "",
+    "placeholders" : null
+  },
+  "program_description.help_text" : {
+    "message" : "Intro text shown inside the info card.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "program_description.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "program_description.label" : {
+    "message" : "Program Description",
+    "description" : "",
+    "placeholders" : null
+  },
+  "program_description.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "reward_boxes.box_label.default" : {
+    "message" : "You earn",
+    "description" : "",
+    "placeholders" : null
+  },
+  "reward_boxes.box_label.help_text" : {
+    "message" : "Text before the points value.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "reward_boxes.box_label.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "reward_boxes.box_label.label" : {
+    "message" : "Label Text",
+    "description" : "",
+    "placeholders" : null
+  },
+  "reward_boxes.box_label.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "reward_boxes.box_label.validation_regex" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "reward_boxes.help_text" : {
+    "message" : "The two side-by-side reward info boxes shown below the steps.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "reward_boxes.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "reward_boxes.label" : {
+    "message" : "Reward Boxes",
+    "description" : "",
+    "placeholders" : null
+  },
+  "reward_boxes.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "reward_boxes.points.default" : {
+    "message" : "+10",
+    "description" : "",
+    "placeholders" : null
+  },
+  "reward_boxes.points.help_text" : {
+    "message" : "Points value shown in green (e.g. '+10').",
+    "description" : "",
+    "placeholders" : null
+  },
+  "reward_boxes.points.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "reward_boxes.points.label" : {
+    "message" : "Points Value",
+    "description" : "",
+    "placeholders" : null
+  },
+  "reward_boxes.points.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "reward_boxes.points.validation_regex" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "reward_boxes.suffix.default" : {
+    "message" : "pts per referral",
+    "description" : "",
+    "placeholders" : null
+  },
+  "reward_boxes.suffix.help_text" : {
+    "message" : "Text after the points value.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "reward_boxes.suffix.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "reward_boxes.suffix.label" : {
+    "message" : "Suffix Text",
+    "description" : "",
+    "placeholders" : null
+  },
+  "reward_boxes.suffix.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "reward_boxes.suffix.validation_regex" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "section_heading.default" : {
+    "message" : "Refer a friend, earn rewards",
+    "description" : "",
+    "placeholders" : null
+  },
+  "section_heading.help_text" : {
+    "message" : "Heading shown above the program info card.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "section_heading.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "section_heading.label" : {
+    "message" : "Section Heading",
+    "description" : "",
+    "placeholders" : null
+  },
+  "section_heading.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "section_heading.validation_regex" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "steps.help_text" : {
+    "message" : "The step-by-step diagram showing how the referral program works.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "steps.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "steps.is_highlight.help_text" : {
+    "message" : "When enabled, the step number displays in red (#a22b34) to draw attention.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "steps.is_highlight.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "steps.is_highlight.label" : {
+    "message" : "Highlight (Red Number)",
+    "description" : "",
+    "placeholders" : null
+  },
+  "steps.is_highlight.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "steps.label" : {
+    "message" : "Steps",
+    "description" : "",
+    "placeholders" : null
+  },
+  "steps.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "steps.step_label.default" : {
+    "message" : "Send referral",
+    "description" : "",
+    "placeholders" : null
+  },
+  "steps.step_label.help_text" : {
+    "message" : "Short label shown below the circle.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "steps.step_label.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "steps.step_label.label" : {
+    "message" : "Step Label",
+    "description" : "",
+    "placeholders" : null
+  },
+  "steps.step_label.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "steps.step_label.validation_regex" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "steps.step_number.default" : {
+    "message" : "1",
+    "description" : "",
+    "placeholders" : null
+  },
+  "steps.step_number.help_text" : {
+    "message" : "Number shown inside the circle.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "steps.step_number.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "steps.step_number.label" : {
+    "message" : "Step Number",
+    "description" : "",
+    "placeholders" : null
+  },
+  "steps.step_number.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "steps.step_number.validation_regex" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.background_color.help_text" : {
+    "message" : "Leave empty to use theme default",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.background_color.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.background_color.label" : {
+    "message" : "Background Color",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.background_color.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.content_width.choices.default" : {
+    "message" : "Default",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.content_width.choices.full" : {
+    "message" : "Full Width",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.content_width.choices.narrow" : {
+    "message" : "Narrow",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.content_width.choices.wide" : {
+    "message" : "Wide",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.content_width.help_text" : {
+    "message" : "Control the maximum width of this module's content.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.content_width.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.content_width.label" : {
+    "message" : "Content Width",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.content_width.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.hide_on_desktop.help_text" : {
+    "message" : "Toggle to hide this module on desktop viewports.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.hide_on_desktop.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.hide_on_desktop.label" : {
+    "message" : "Hide on Desktop",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.hide_on_desktop.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.hide_on_mobile.help_text" : {
+    "message" : "Toggle to hide this module on mobile devices.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.hide_on_mobile.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.hide_on_mobile.label" : {
+    "message" : "Hide on Mobile",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.hide_on_mobile.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.label" : {
+    "message" : "Style Overrides",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.padding_bottom.help_text" : {
+    "message" : "Leave empty to use default spacing",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.padding_bottom.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.padding_bottom.label" : {
+    "message" : "Padding Bottom (px)",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.padding_bottom.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.padding_top.help_text" : {
+    "message" : "Leave empty to use default spacing",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.padding_top.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.padding_top.label" : {
+    "message" : "Padding Top (px)",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.padding_top.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.text_color.help_text" : {
+    "message" : "Override the default text color for this module instance. Leave empty for theme default.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.text_color.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.text_color.label" : {
+    "message" : "Text Color",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.text_color.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  }
+}

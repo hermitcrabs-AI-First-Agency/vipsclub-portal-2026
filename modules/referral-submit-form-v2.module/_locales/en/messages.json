@@ -1,0 +1,247 @@
+{
+  "disclaimer.default" : {
+    "message" : "<p>Submitting this enquiry starts a deal in your account. A completed deal earns you points toward your next tier and reward.</p>",
+    "description" : "",
+    "placeholders" : null
+  },
+  "disclaimer.help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "disclaimer.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "disclaimer.label" : {
+    "message" : "Disclaimer",
+    "description" : "",
+    "placeholders" : null
+  },
+  "disclaimer.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "empty_form_message.default" : {
+    "message" : "<p>Select the manual referral form in this module's settings.</p>",
+    "description" : "",
+    "placeholders" : null
+  },
+  "empty_form_message.help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "empty_form_message.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "empty_form_message.label" : {
+    "message" : "Editor Empty Form Message",
+    "description" : "",
+    "placeholders" : null
+  },
+  "empty_form_message.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "form.default.form_id" : {
+    "message" : "cf5ab7cd-0f3a-42fa-961c-770ab5c3e2a6",
+    "description" : null,
+    "placeholders" : null
+  },
+  "form.default.form_type" : {
+    "message" : "HUBSPOT",
+    "description" : null,
+    "placeholders" : null
+  },
+  "form.default.message" : {
+    "message" : "Thank you! Your referral has been submitted.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "form.default.response_type" : {
+    "message" : "inline",
+    "description" : null,
+    "placeholders" : null
+  },
+  "form.help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "form.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "form.label" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "form.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "heading.default" : {
+    "message" : "Submit a manual referral",
+    "description" : "",
+    "placeholders" : null
+  },
+  "heading.help_text" : {
+    "message" : "Heading shown above the form card.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "heading.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "heading.label" : {
+    "message" : "Form Heading",
+    "description" : "",
+    "placeholders" : null
+  },
+  "heading.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "heading.validation_regex" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "heading_level.choices.h1" : {
+    "message" : "H1",
+    "description" : "",
+    "placeholders" : null
+  },
+  "heading_level.choices.h2" : {
+    "message" : "H2",
+    "description" : "",
+    "placeholders" : null
+  },
+  "heading_level.choices.h3" : {
+    "message" : "H3",
+    "description" : "",
+    "placeholders" : null
+  },
+  "heading_level.choices.h4" : {
+    "message" : "H4",
+    "description" : "",
+    "placeholders" : null
+  },
+  "heading_level.help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "heading_level.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "heading_level.label" : {
+    "message" : "Heading Level",
+    "description" : "",
+    "placeholders" : null
+  },
+  "heading_level.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "name" : {
+    "message" : "referral-submit-form-v2",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.button_background.help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.button_background.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.button_background.label" : {
+    "message" : "Button Background",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.button_background.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.card_background.help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.card_background.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.card_background.label" : {
+    "message" : "Card Background",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.card_background.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.hide_on_mobile.help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.hide_on_mobile.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.hide_on_mobile.label" : {
+    "message" : "Hide on Mobile",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.hide_on_mobile.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.label" : {
+    "message" : "Style Overrides",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  }
+}

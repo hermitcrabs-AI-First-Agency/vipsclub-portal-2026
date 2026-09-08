@@ -1,0 +1,37 @@
+/* =============================================================
+   Auth Access Denied Module — page-specific overrides
+   Base styles from css/auth/auth-pages.css
+   Figma: Desktop 960:16920
+   ============================================================= */
+
+/* ── Header: 570px gradient ── */
+.auth-page--access-denied .auth-page__header {
+  height: 570px;
+  background: linear-gradient(158.58deg, #000000 36.19%, #a22b34 66.10%);
+}
+
+/* ── Body: card top at 423px (570 − 147 = 423px, 147px overlap) ── */
+.auth-page--access-denied .auth-page__body {
+  margin-top: -147px;
+}
+
+/* ── Mobile — max-width 768px ── */
+@media (max-width: 768px) {
+  .auth-page--access-denied .auth-page__header {
+    height: 112px;
+    padding-top: 32px;
+    background: linear-gradient(164.13deg, #000000 0%, #a22b34 50%);
+  }
+
+  .auth-page--access-denied .auth-page__body {
+    margin-top: 0;
+    padding-top: 32px;
+  }
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .auth-page--access-denied * {
+    transition-duration: 0.01ms !important;
+  }
+}

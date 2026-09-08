@@ -1,0 +1,345 @@
+{# ============================================================
+   VIPSCLUB Portal 2026 — Portal Sidebar Global Module
+   Global module — edits apply site-wide across all portal pages.
+
+   Dynamic CRM data:
+     contact.firstname               — member display name
+     contact.profile_image           — avatar image URL (optional)
+     (Tier + current points come from the associated Referral record below)
+
+   Associated Referral record (USER_DEFINED association id 33):
+     _referral.membership_tier  — Bronze / Silver / Gold / Platinum
+     _referral.reward_points    — current points balance
+
+   Not yet on the Referral object (fall back to contact):
+     contact.vipsclub_next_tier        — next tier name
+     contact.vipsclub_points_next_tier — points needed for next tier
+
+   Active nav item is detected automatically from request.path.
+   ============================================================ #}
+
+{# module.css and module.js are auto-loaded by HubSpot — do NOT use require_css/require_js for them #}
+
+{# ── CRM data ── #}
+{% set member_name   = contact.firstname | default("Member") %}
+
+{# Fetch the logged-in member's associated Referral record (USER_DEFINED
+   association id 33 — same id used by the referral-banner module). Tier and
+   current points live on the REFERRAL object, NOT on contact. #}
+{% set _referral = null %}
+{% if contact.hs_object_id %}
+  {% set _referral_records = crm_associations(
+    contact.hs_object_id, "USER_DEFINED", 33, "limit=1",
+    "hs_object_id,membership_tier,reward_points,total_points_earned,points_redeemable,referral_page_visible", false
+  ) %}
+  {% if _referral_records.results and (_referral_records.results | length) > 0 %}
+    {% set _referral = _referral_records.results[0] %}
+  {% endif %}
+{% endif %}
+
+{# R17 — Referral page visibility (per-member gate).
+   Property `referral_page_visible` is labelled "Hide Referral Page"
+   in the UI. Semantics INVERTED so HubL's empty→"false" coercion
+   gives us the client's requested default-visible behaviour:
+     Yes    → "true"  → HIDE the My Referrals nav item
+     No     → "false" → show
+     Empty  → coerces to "false" → show (default = visible)
+   The filter below skips any nav item whose URL path contains
+   `my-referrals` when _referrals_page_visible is false. #}
+{% set _hide_flag = _referral.referral_page_visible | default("") | string | lower %}
+{% set _referrals_page_visible = (_hide_flag != "true") %}
+
+{# Tier comes from contact.membership_tier — ONE value per member. Previously
+   this read _referral.membership_tier, but a contact can be associated to many
+   Referral/Courses records (one per referral), each with its own tier, so
+   `limit=1` returned an arbitrary one and the displayed tier was
+   non-deterministic. Points still come from the referral record. #}
+{# Empty membership_tier = UNTIERED (not Bronze). Per the membership spec §6,
+   a member who hasn't completed a qualifying service does NOT get Bronze — they
+   show as "New Member" until Bronze is earned. membership_tier is a select, so
+   empty stays empty (no boolean-style coercion). #}
+{% set _membership_tier_raw = contact.membership_tier | default("") | trim %}
+{% set is_untiered   = (_membership_tier_raw == "") %}
+{% set member_tier   = _membership_tier_raw if not is_untiered else (module.untiered_display | default("New Member")) %}
+{# Annual points earned drives tier + progress (§16 — tier uses earned, not redeemable). #}
+{% set member_points     = _referral.total_points_earned | default(0) | int %}
+{% set member_redeemable = _referral.points_redeemable   | default(0) | int %}
+{% set member_avatar = contact.profile_image | default("") %}
+{# Number of SUCCESSFUL referrals the member has made, PRIMARY referrer only.
+   Primary referrals hang off the member's profile record via Course↔Course
+   typeId 58 ('Referral Recipient', pair 58/59 "Primary Referrer") — the same
+   link the My Referrals board reads. Subsequent referrals (typeId 40) are
+   intentionally excluded from this count. #}
+{% set member_referrals = 0 %}
+{% set _profile_id = _referral.hs_object_id | default(0) | int %}
+{% if _profile_id %}
+  {# Count only SUCCESSFUL referrals — stage = Approved / Completed New / Completed Existing. #}
+  {% set _made_refs = crm_associations(_profile_id, "USER_DEFINED", 58, "limit=100", "hs_pipeline_stage", false) %}
+  {% set _succ_ns = namespace(count=0) %}
+  {% for _r in _made_refs.results %}
+    {% if _r.hs_pipeline_stage in ["3025372619", "3363157467", "3363105230"] %}
+      {% set _succ_ns.count = _succ_ns.count + 1 %}
+    {% endif %}
+  {% endfor %}
+  {% set member_referrals = _succ_ns.count %}
+{% endif %}
+{% set current_path  = request.path %}
+
+{# Pick the tier-specific background image (bronze/silver/gold/platinum).
+   Lowercase + trim so "Bronze", "BRONZE", "bronze " all match. #}
+{% set _tier_key = _membership_tier_raw | lower | trim %}
+
+{# ── Next-tier calculation from the tier_thresholds HubDB table (id 2595955153) ──
+   The tier itself is SET MANUALLY by reps on the Referral record — this
+   module never writes it back. What this block does is figure out, given
+   the current tier, what the NEXT tier's name + point target is, so the
+   progress bar + "N more points" copy can populate live from points.
+   Columns on the table: tier_name (lowercase enum), tier_label (display),
+   tier_level (1-4), min_points, max_points. #}
+{% set _tier_rows = hubdb_table_rows(2595955153, "orderBy=tier_level") %}
+{% set _cur_ns  = namespace(row=none) %}
+{% set _next_ns = namespace(row=none) %}
+{% for _r in _tier_rows %}
+  {% if (_r.tier_name | lower | trim) == _tier_key %}
+    {% set _cur_ns.row = _r %}
+  {% endif %}
+{% endfor %}
+{% if _cur_ns.row %}
+  {% for _r in _tier_rows %}
+    {% if (_r.tier_level | int) == ((_cur_ns.row.tier_level | int) + 1) %}
+      {% set _next_ns.row = _r %}
+    {% endif %}
+  {% endfor %}
+{% endif %}
+{% set next_tier   = _next_ns.row.tier_label | default("") %}
+{% set pts_next    = _next_ns.row.min_points | default(0) | int %}
+{% set is_top_tier = _cur_ns.row and not _next_ns.row %}
+{% set _tier_bg = "" %}
+{% if _tier_key == "bronze" %}
+  {% set _tier_bg = module.tier_card_backgrounds.bronze.src %}
+{% elif _tier_key == "silver" %}
+  {% set _tier_bg = module.tier_card_backgrounds.silver.src %}
+{% elif _tier_key == "gold" %}
+  {% set _tier_bg = module.tier_card_backgrounds.gold.src %}
+{% elif _tier_key == "platinum" %}
+  {% set _tier_bg = module.tier_card_backgrounds.platinum.src %}
+{% endif %}
+
+<aside class="portal-sidebar" id="portal-sidebar" aria-label="Portal navigation">
+
+  {# ── Mobile-only header: "Menu" title + close button (hidden on desktop via CSS) ── #}
+  <div class="portal-sidebar__mobile-header">
+    <span class="portal-sidebar__mobile-title">{{ module.mobile_menu_title | default("Menu") | escape_html }}</span>
+    <button class="portal-sidebar__mobile-close" id="portal-sidebar-close" type="button" aria-label="{{ module.mobile_close_label | default('Close menu') | escape_attr }}">
+      {% if module.mobile_close_icon.svg_code %}
+        <span aria-hidden="true">{{ module.mobile_close_icon.svg_code }}</span>
+      {% elif module.mobile_close_icon.image.src %}
+        <img src="{{ module.mobile_close_icon.image.src | escape_attr }}" alt="" width="{{ module.mobile_close_icon.image.width | default(24) }}" height="{{ module.mobile_close_icon.image.height | default(24) }}" aria-hidden="true">
+      {% else %}
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      {% endif %}
+    </button>
+  </div>
+
+  {# ── Navigation ──
+     Partner gate: items with `requires_partner: true` only render when the
+     visiting contact's `partner` boolean CRM property is true. Editors in the
+     page editor see all items (is_in_editor bypass). Pre-filter into
+     `_visible_items` BEFORE the render loop so `{% if not loop.last %}<divider>`
+     stays accurate when an item is skipped. #}
+  {% if module.nav_items %}
+  {% set _is_partner = contact.partner or is_in_editor %}
+  {% set _visible_items = [] %}
+  {% for item in module.nav_items %}
+    {# R17 — hide the My Referrals nav item when the flag on this member's
+       profile Referral record is set to No. Match on the URL path
+       containing "my-referrals" (case-insensitive) so no editor config
+       is needed; the editor keeps whatever URL they set. Editor preview
+       (is_in_editor) always shows all items so admins can still see the
+       full nav in the page editor. #}
+    {% set _url_lc = (item.url.url.href | default("") | lower) %}
+    {% set _is_referrals_item = "my-referrals" in _url_lc %}
+    {% set _hide_referrals = _is_referrals_item and (not _referrals_page_visible) and (not is_in_editor) %}
+    {% if (not item.requires_partner or _is_partner) and (not _hide_referrals) %}
+      {% do _visible_items.append(item) %}
+    {% endif %}
+  {% endfor %}
+
+  <nav class="sidebar-nav" aria-label="Member portal">
+    {% for item in _visible_items %}
+    {% set _href = item.url.url.href %}
+
+    {# Normalise href to path-only so comparison works whether the editor
+       saved a full URL (https://domain/path) or a bare path (/path) #}
+    {% set _nav_path = _href %}
+    {% if "://" in _href %}
+      {% set _no_proto = _href | replace("https://", "") | replace("http://", "") %}
+      {% if "/" in _no_proto %}
+        {% set _nav_path = "/" ~ _no_proto.split("/", 1)[1] %}
+      {% else %}
+        {% set _nav_path = "/" %}
+      {% endif %}
+    {% endif %}
+
+    {% set _prefix = _nav_path ~ "/" %}
+    {% set _plen = _prefix | length %}
+    {% set is_active = false %}
+    {% if _nav_path == current_path %}
+      {% set is_active = true %}
+    {% elif _nav_path != "/" and current_path[0:_plen] == _prefix %}
+      {% set is_active = true %}
+    {% endif %}
+    <a href="{{ item.url.url.href | escape_attr }}"
+       class="sidebar-nav__item{% if is_active %} sidebar-nav__item--active{% endif %}"
+       {% if is_active %}aria-current="page"{% endif %}
+       {% if item.url.open_in_new_tab %}target="_blank" rel="noopener noreferrer"{% endif %}>
+
+      <span class="sidebar-nav__item-inner">
+        {# Icon #}
+        {% if item.icon.svg_code %}
+          <span class="sidebar-nav__icon" aria-hidden="true">{{ item.icon.svg_code }}</span>
+        {% elif item.icon.image.src %}
+          <img class="sidebar-nav__icon"
+               src="{{ item.icon.image.src | escape_attr }}"
+               alt=""
+               width="{{ item.icon.image.width | default(20) }}"
+               height="{{ item.icon.image.height | default(20) }}"
+               aria-hidden="true">
+        {% endif %}
+        {# Label #}
+        {{ item.nav_label | escape_html }}
+      </span>
+
+      {# Chevron #}
+      {% if item.chevron.svg_code %}
+        <span class="sidebar-nav__chevron" aria-hidden="true">{{ item.chevron.svg_code }}</span>
+      {% elif item.chevron.image.src %}
+        <img class="sidebar-nav__chevron"
+             src="{{ item.chevron.image.src | escape_attr }}"
+             alt=""
+             width="{{ item.chevron.image.width | default(24) }}"
+             height="{{ item.chevron.image.height | default(24) }}"
+             aria-hidden="true">
+      {% endif %}
+
+    </a>
+
+    {# Divider between items (not after last item) #}
+    {% if not loop.last %}
+    <div class="sidebar-nav__divider" role="separator"></div>
+    {% endif %}
+    {% endfor %}
+  </nav>
+  {% endif %}
+
+  {# ── Tier Card ── #}
+  <div class="sidebar-tier-card"
+       {% if _tier_bg %}style="background-image: url('{{ _tier_bg | escape_attr }}');"{% endif %}
+       aria-label="Your membership tier">
+    <div class="sidebar-tier-card__overlay" aria-hidden="true"></div>
+    <div class="sidebar-tier-card__content">
+      <div>
+        <p class="sidebar-tier-card__label">{{ module.tier_heading_label | default("Member tier") | escape_html }}</p>
+        <p class="sidebar-tier-card__tier-name">{{ member_tier }}</p>
+        {% if is_untiered %}
+        <p class="sidebar-tier-card__next">
+          {{ module.untiered_message | default("Complete your first qualifying service to unlock Bronze.") | escape_html }}
+        </p>
+        {% elif is_top_tier %}
+        <p class="sidebar-tier-card__next">
+          {{ module.top_tier_message | default("You've reached the top tier!") | escape_html }}
+        </p>
+        {% elif next_tier %}
+        <p class="sidebar-tier-card__next">
+          {{ module.next_tier_label | default("Next Tier:") | escape_html }} <strong>{{ next_tier }}</strong>
+        </p>
+        {% endif %}
+      </div>
+
+      {% if not is_untiered %}
+      {# Redeemable balance + referral count — shown for all tiered members. #}
+      <div class="sidebar-tier-card__progress-labels">
+        <div>
+          <p class="sidebar-tier-card__points-current">{{ member_redeemable | format_number('en-US') }} {{ module.points_suffix | default("pts") | escape_html }}</p>
+          <p class="sidebar-tier-card__points-sub">{{ module.redeemable_label | default("Redeemable") | escape_html }}</p>
+        </div>
+        <div class="sidebar-tier-card__progress-labels-right">
+          <p class="sidebar-tier-card__points-current">{{ member_referrals }}</p>
+          <p class="sidebar-tier-card__points-sub">{{ module.referrals_label | default("Referrals") | escape_html }}</p>
+        </div>
+      </div>
+      {% endif %}
+
+      {% if is_untiered %}
+      {# New member — Bronze is earned by completing a qualifying service, not by
+         points — so no tier-progress bar. Show the point balance if they have any. #}
+      {% if member_points > 0 %}
+      <div class="sidebar-tier-card__progress sidebar-tier-card__progress--top">
+        <p class="sidebar-tier-card__points-current">{{ member_points | format_number('en-US') }} {{ module.points_suffix | default("pts") | escape_html }}</p>
+        <p class="sidebar-tier-card__points-sub">{{ module.current_points_label | default("Current points") | escape_html }}</p>
+      </div>
+      {% endif %}
+      {% elif next_tier and pts_next > 0 and not is_top_tier %}
+      <div class="sidebar-tier-card__progress">
+        {% set progress_pct = (member_points / pts_next * 100) | round %}
+        {% if progress_pct > 100 %}{% set progress_pct = 100 %}{% endif %}
+        <div class="progress-bar"
+             role="progressbar"
+             aria-valuenow="{{ member_points }}"
+             aria-valuemin="0"
+             aria-valuemax="{{ pts_next }}"
+             aria-label="Points progress toward next tier">
+          <div class="progress-bar__fill" style="width: {{ progress_pct }}%"></div>
+        </div>
+        <div class="sidebar-tier-card__progress-labels">
+          <div>
+            <p class="sidebar-tier-card__points-current">{{ member_points | format_number('en-US') }} {{ module.points_suffix | default("pts") | escape_html }}</p>
+            <p class="sidebar-tier-card__points-sub">{{ module.current_points_label | default("Current points") | escape_html }}</p>
+          </div>
+          <div class="sidebar-tier-card__progress-labels-right">
+            <p class="sidebar-tier-card__points-current">{{ pts_next | format_number('en-US') }} {{ module.points_suffix | default("pts") | escape_html }}</p>
+            <p class="sidebar-tier-card__points-sub">{{ module.for_tier_label | default("For") | escape_html }} {{ next_tier }} {{ module.tier_suffix | default("tier") | escape_html }}</p>
+          </div>
+        </div>
+      </div>
+
+      {% set points_remaining = pts_next - member_points %}
+      {% if points_remaining > 0 %}
+      <div>
+        <p class="sidebar-tier-card__cta">{{ points_remaining | format_number('en-US') }} {{ module.more_points_label | default("more points") | escape_html }}</p>
+        <p class="sidebar-tier-card__cta-sub">{{ module.unlock_benefits_label | default("to unlock") | escape_html }} {{ next_tier }} {{ module.tier_benefits_suffix | default("tier benefits") | escape_html }}</p>
+      </div>
+      {% endif %}
+      {% else %}
+      {# Top tier reached — no more targets, just show the point balance. #}
+      <div class="sidebar-tier-card__progress sidebar-tier-card__progress--top">
+        <p class="sidebar-tier-card__points-current">{{ member_points | format_number('en-US') }} {{ module.points_suffix | default("pts") | escape_html }}</p>
+        <p class="sidebar-tier-card__points-sub">{{ module.current_points_label | default("Current points") | escape_html }}</p>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+
+  {# ── User Row ── #}
+  <div class="sidebar-user">
+    {% if member_avatar %}
+    <img class="sidebar-user__avatar"
+         src="{{ member_avatar | escape_attr }}"
+         alt="{{ member_name | escape_attr }} avatar"
+         width="33" height="33">
+    {% else %}
+    <div class="sidebar-user__avatar sidebar-user__avatar--initials" aria-hidden="true">
+      {{ member_name | truncate(1, true, '') | upper }}
+    </div>
+    {% endif %}
+    <span class="sidebar-user__name">{{ member_name | escape_html }}</span>
+    <a href="{{ module.logout_url | default("/memberships/logout") | escape_attr }}"
+       class="sidebar-user__logout"
+       aria-label="Log out of member portal">
+      {{ module.logout_label | default("LOGOUT") | escape_html }}
+    </a>
+  </div>
+
+</aside>

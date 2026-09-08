@@ -1,0 +1,13 @@
+# OS / editor junk
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
+
+# HubSpot CLI local config (never commit credentials)
+hubspot.config.yml
+*.config.yml
+
+# Node (if any tooling is added later)
+node_modules/

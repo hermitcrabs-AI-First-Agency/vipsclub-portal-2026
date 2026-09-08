@@ -1,0 +1,133 @@
+{# ============================================================
+   VIPSCLUB Portal 2026 — Referral Banner Module (Redesign)
+   Figma: node 1600:4845
+   Single unified card with gift icon + heading + 2 stacked buttons.
+   - Copy referral link button → copies the personalized URL to clipboard
+   - Enter friend details button → links to Refer a Friend page
+
+   Dynamic data source:
+     module.referral_page_url — editor selects the referral landing page (base URL)
+     crm_associations         — looks up the associated Courses/Referrals record
+                                via USER_DEFINED association id 33
+     hs_course_id             — the unique property on the Courses object used as URL slug
+     Final URL: [base_url][hs_course_id]  e.g. /referral-page/x0f0b6
+   ============================================================ #}
+
+{# module.css and module.js are auto-loaded by HubSpot — do NOT add require_css/require_js for them #}
+
+{# Look up the member's associated Referral (Courses) record via USER_DEFINED association 33.
+   Also pulls `referral_page_visible` (label = "Hide Referral Page")
+   so the R17 gate below can hide the banner when a rep has flipped
+   the flag on the member's record. #}
+{% set _referral_records = crm_associations(contact.hs_object_id, "USER_DEFINED", 33, "limit=1", "hs_object_id,hs_course_id,referral_page_visible", false) %}
+{% set _referral = _referral_records.results[0] %}
+
+{# R17 — Referral page visibility gate.
+   Property `referral_page_visible` is labelled "Hide Referral Page"
+   in the UI. Semantics INVERTED (see property description): Yes = hide.
+   HubL coerces empty booleancheckbox to "false", so this inverted
+   model gives us the behaviour the client asked for without a data
+   migration:
+     Yes    → "true"  → HIDE
+     No     → "false" → show
+     Empty  → coerces to "false" → show (default = visible)
+     No linked Referral record → show
+   Editor bypass keeps the module editable in the page editor. #}
+{% set _hide_flag = _referral.referral_page_visible | default("") | string | lower %}
+{% set _hide_referral_banner = (_hide_flag == "true") and (not is_in_editor) %}
+
+{# Build the unique referral URL: base page / hs_course_id — slash always inserted #}
+{% set _base_url = module.referral_page_url.url.href %}
+{% set referral_url = _base_url ~ "/" ~ _referral.hs_course_id %}
+
+{# ── Service-context detection (SD4) ──
+   When this banner renders on a service detail page (HubDB-dynamic
+   /services/<slug>), swap the CTA text to explicitly name what they're
+   referring, and append ?service=<hs_id> to both the CTA href AND the
+   copy-link URL. The refer-a-friend page (and the refer-landing page
+   for the copied link) reads that param to fetch the HubDB row and
+   prefill referral details. Non-service pages skip this entirely. ── #}
+{% set _svc               = dynamic_page_hubdb_row %}
+{% set _is_service_detail = _svc and _svc.hs_id and _svc.name %}
+{% set _cta_href = module.cta_button.link_url.url.href %}
+{% set _cta_text = module.cta_button.text %}
+{% if _is_service_detail %}
+  {% set _sep     = "&" if "?" in _cta_href else "?" %}
+  {% set _cta_href = _cta_href ~ _sep ~ "service=" ~ _svc.hs_id %}
+  {% set _cta_text = "Know someone who needs this service?" %}
+  {% set _rsep    = "&" if "?" in referral_url else "?" %}
+  {% set referral_url = referral_url ~ _rsep ~ "service=" ~ _svc.hs_id %}
+{% endif %}
+
+{% if not _hide_referral_banner %}
+<div class="referral-banner{% if module.style_overrides.hide_on_mobile %} referral-banner--hide-mobile{% endif %}"
+     data-referral-url="{{ referral_url | escape_attr }}">
+
+  {# ── LEFT: gift icon + heading + subtitle ── #}
+  <div class="referral-banner__left">
+
+    {% if module.icon.svg_code or module.icon.image.src %}
+    <div class="referral-banner__icon-wrap" aria-hidden="true">
+      {% if module.icon.svg_code %}
+        {{ module.icon.svg_code }}
+      {% else %}
+        <img src="{{ module.icon.image.src | escape_attr }}"
+             alt=""
+             width="{{ module.icon.image.width | default(97) }}"
+             height="{{ module.icon.image.height | default(97) }}">
+      {% endif %}
+    </div>
+    {% endif %}
+
+    <div class="referral-banner__text">
+      {% if module.cta_heading %}
+      <h2 class="referral-banner__heading">{{ module.cta_heading | escape_html }}</h2>
+      {% endif %}
+      {% if module.cta_subtitle %}
+      <p class="referral-banner__subtitle">{{ module.cta_subtitle | escape_html }}</p>
+      {% endif %}
+    </div>
+
+  </div>
+
+  {# ── RIGHT: stacked action buttons ── #}
+  <div class="referral-banner__actions">
+
+    {% if module.copy_button_text %}
+    <button class="referral-banner__copy-btn"
+            id="referral-copy-btn"
+            type="button"
+            aria-label="Copy your referral link to clipboard"
+            data-success-text="{{ module.copy_success_text | default('Copied!') | escape_attr }}"
+            data-default-text="{{ module.copy_button_text | escape_attr }}">
+      {% if module.copy_button_icon.svg_code %}
+        <span class="referral-banner__copy-icon" aria-hidden="true">{{ module.copy_button_icon.svg_code }}</span>
+      {% elif module.copy_button_icon.image.src %}
+        <img class="referral-banner__copy-icon"
+             src="{{ module.copy_button_icon.image.src | escape_attr }}"
+             alt=""
+             width="{{ module.copy_button_icon.image.width | default(16) }}"
+             height="{{ module.copy_button_icon.image.height | default(16) }}"
+             aria-hidden="true">
+      {% else %}
+        <svg class="referral-banner__copy-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false">
+          <rect x="5.75" y="5.75" width="8.5" height="8.5" rx="1.25" stroke="#ffffff" stroke-width="1.5"/>
+          <path d="M3.5 10.5V3.5C3.5 2.95 3.95 2.5 4.5 2.5H11" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      {% endif %}
+      <span class="referral-copy-btn__text">{{ module.copy_button_text | escape_html }}</span>
+    </button>
+    {% endif %}
+
+    {% if module.cta_button.show %}
+    <a href="{{ _cta_href | escape_attr }}"
+       class="referral-banner__cta-btn referral-banner__cta-btn--{{ module.cta_button.style | default('primary') }}"
+       {% if module.cta_button.link_url.open_in_new_tab %}target="_blank" rel="noopener noreferrer"{% endif %}>
+      {{ _cta_text | escape_html }}
+    </a>
+    {% endif %}
+
+  </div>
+
+</div>
+{% endif %}{# /_hide_referral_banner #}

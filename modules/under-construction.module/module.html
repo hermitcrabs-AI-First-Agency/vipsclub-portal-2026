@@ -1,0 +1,120 @@
+{# ============================================================
+   VIPSCLUB Portal 2026 — Under Construction Module
+   Full-page layout: gradient bg, logo, white card, footer
+   Figma: 950:15806
+   ============================================================ #}
+
+<div class="under-construction{% if module.style_overrides.hide_on_mobile %} under-construction--hide-mobile{% endif %}{% if module.style_overrides.hide_on_desktop %} under-construction--hide-desktop{% endif %}"
+     {% if module.style_overrides.background_color.color %}style="background-color: {{ module.style_overrides.background_color.color }};"{% endif %}>
+
+  {# ── Gradient overlay ── #}
+  <div class="under-construction__gradient" aria-hidden="true"></div>
+
+  {# ── Logo ── #}
+  <div class="under-construction__logo-wrap">
+    {% if module.logo.src %}
+    <a class="under-construction__logo-link"
+       href="{{ module.logo_link.url.href | escape_attr }}"
+       {% if module.logo_link.open_in_new_tab %}target="_blank" rel="noopener noreferrer"{% endif %}
+       aria-label="{{ module.logo.alt | escape_attr }}">
+      <img class="under-construction__logo"
+           src="{{ module.logo.src | escape_attr }}"
+           alt="{{ module.logo.alt | escape_attr }}"
+           width="{{ module.logo.width | default(161) }}"
+           height="{{ module.logo.height | default(59) }}"
+           fetchpriority="high">
+    </a>
+    {% endif %}
+  </div>
+
+  {# ── Main card ── #}
+  <main class="under-construction__main" id="main-content"
+        {% if module.style_overrides.padding_top or module.style_overrides.padding_bottom %}
+        style="{% if module.style_overrides.padding_top %}padding-top: {{ module.style_overrides.padding_top }}px;{% endif %}{% if module.style_overrides.padding_bottom %}padding-bottom: {{ module.style_overrides.padding_bottom }}px;{% endif %}"
+        {% endif %}>
+    <div class="under-construction__card">
+      <div class="under-construction__card-inner">
+
+        {# ── Icon ── #}
+        {% if module.icon.svg_code %}
+        <div class="under-construction__icon-wrap" aria-hidden="true">
+          {{ module.icon.svg_code }}
+        </div>
+        {% elif module.icon.image.src %}
+        <div class="under-construction__icon-wrap" aria-hidden="true">
+          <img class="under-construction__icon"
+               src="{{ module.icon.image.src | escape_attr }}"
+               alt=""
+               width="{{ module.icon.image.width | default(80) }}"
+               height="{{ module.icon.image.height | default(80) }}"
+               loading="lazy">
+        </div>
+        {% endif %}
+
+        {# ── Heading ── #}
+        {% if module.heading %}
+        <{{ module.heading_level | default("h1") }} class="under-construction__heading">
+          {{ module.heading | escape_html }}
+        </{{ module.heading_level | default("h1") }}>
+        {% endif %}
+
+        {# ── Subtitle ── #}
+        {% if module.subtitle %}
+        <p class="under-construction__subtitle">{{ module.subtitle | escape_html }}</p>
+        {% endif %}
+
+        {# ── Divider ── #}
+        <hr class="under-construction__divider" aria-hidden="true">
+
+        {# ── Notify form label ── #}
+        {% if module.notify_label %}
+        <p class="under-construction__notify-label">{{ module.notify_label | escape_html }}</p>
+        {% endif %}
+
+        {# ── Email notification form ── #}
+        <div class="under-construction__form-wrap">
+          {% if module.form.form_id %}
+            {% form "form"
+              form_to_use="{{ module.form.form_id }}",
+              response_type="{{ module.form.response_type }}",
+              response_message="{{ module.form.message }}"
+            %}
+          {% elif is_in_editor %}
+          <div class="under-construction__form-placeholder">
+            <p>Select the <strong>Launch Notification</strong> form in module settings.<br>
+            Create it in <strong>Marketing &gt; Forms</strong> with a single Email field and button text <strong>Notify Me</strong>.</p>
+          </div>
+          {% endif %}
+        </div>
+
+        {# ── Launch date ── #}
+        {% if module.launch_prefix or module.launch_date %}
+        <p class="under-construction__launch">
+          {% if module.launch_prefix %}
+          <span class="under-construction__launch-prefix">{{ module.launch_prefix | escape_html }}</span>
+          {% endif %}
+          {% if module.launch_date %}
+          <span class="under-construction__launch-date">{{ module.launch_date | escape_html }}</span>
+          {% endif %}
+        </p>
+        {% endif %}
+
+      </div>{# /.under-construction__card-inner #}
+    </div>{# /.under-construction__card #}
+  </main>
+
+  {# ── Footer ── #}
+  <footer class="under-construction__footer" role="contentinfo">
+    {% if module.copyright_text %}
+    <span class="under-construction__copyright">{{ module.copyright_text | escape_html }}</span>
+    {% endif %}
+    {% if module.privacy_label and module.privacy_policy_link.url.href %}
+    <a class="under-construction__privacy-link"
+       href="{{ module.privacy_policy_link.url.href | escape_attr }}"
+       {% if module.privacy_policy_link.open_in_new_tab %}target="_blank" rel="noopener noreferrer"{% endif %}>
+      {{ module.privacy_label | escape_html }}
+    </a>
+    {% endif %}
+  </footer>
+
+</div>{# /.under-construction #}

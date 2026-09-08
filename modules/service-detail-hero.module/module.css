@@ -1,0 +1,871 @@
+/* ============================================================
+   VIPSCLUB Portal 2026 — Service Detail Hero Module
+   Figma: Desktop 339:7562 | Mobile 339:9002
+   ============================================================ */
+
+/* ── Top-level sections — each is a direct grid item of
+      .service-detail-layout (see css/portal/service-detail.css). ── */
+.service-detail-hero__main,
+.service-detail-hero__related-section {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  min-width: 0;
+}
+
+/* ── Breadcrumb ── */
+.service-detail-hero__breadcrumb {
+  margin-bottom: 0;
+}
+
+.service-detail-hero__breadcrumb-list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.service-detail-hero__breadcrumb-item {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--vips-text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.service-detail-hero__breadcrumb-item::before {
+  content: none;
+}
+
+/* Separator between items */
+.service-detail-hero__breadcrumb-item + .service-detail-hero__breadcrumb-item::before {
+  content: '›';
+  color: var(--vips-text-muted);
+  font-size: 14px;
+}
+
+.service-detail-hero__breadcrumb-link {
+  color: var(--vips-text-secondary);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.service-detail-hero__breadcrumb-link:hover {
+  color: var(--vips-dark);
+  text-decoration: underline;
+}
+
+.service-detail-hero__breadcrumb-item--current {
+  color: var(--vips-dark);
+  font-weight: 500;
+}
+
+/* ── Service Info Card ── */
+.service-detail-hero__info-card {
+  background: var(--vips-bg-card);
+  border: 1px solid var(--vips-border-light);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card-subtle);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.service-detail-hero__icon-wrap {
+  width: 32px;
+  height: 32px;
+  background: var(--vips-bg-icon);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-bottom: 4px;
+}
+
+.service-detail-hero__icon {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+}
+
+.service-detail-hero__category {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 12px;
+  color: var(--vips-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 0;
+}
+
+.service-detail-hero__title {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  color: var(--vips-dark);
+  margin: 0;
+}
+
+.service-detail-hero__desc {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 22px;
+  color: var(--vips-text-secondary);
+  margin: 0;
+}
+
+/* Tier — pill-styled per client request. Matches services-listing pill
+   palette so Bronze/Silver/Gold render consistently across pages. */
+.service-detail-hero__tier {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0;
+}
+
+.service-detail-hero__tier-pill {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 18px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  color: var(--vips-dark);
+  background: var(--vips-bg-icon, #f5f5f5);
+  letter-spacing: 0.2px;
+  white-space: nowrap;
+}
+.service-detail-hero__tier-pill--bronze   { background: #f5dfc4; color: #7a3e00; }
+.service-detail-hero__tier-pill--silver   { background: #e6e8ed; color: #4a5568; }
+.service-detail-hero__tier-pill--gold     { background: #fde68a; color: #7c4a02; }
+.service-detail-hero__tier-pill--platinum { background: #d9dce4; color: #37425a; }
+
+/* ── Section heading wrapper (heading sits OUTSIDE the card) ── */
+.service-detail-hero__included-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* ── Section Heading (shared by included + related) ── */
+.service-detail-hero__section-heading {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 46px;
+  color: var(--vips-dark);
+  margin: 0;
+}
+
+/* ── What's Included Card ── */
+.service-detail-hero__included-card {
+  background: var(--vips-bg-card);
+  border: 1px solid var(--vips-border-light);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card-subtle);
+  padding: 20px;
+}
+
+/* ── What's Included: HubDB richtext variant ──
+   Styles raw HTML from the `included` HubDB column.
+   Expected structure: <ul><li>Title text</li></ul>               */
+.service-detail-hero__included-richtext ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.service-detail-hero__included-richtext li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+  color: var(--vips-dark);
+  text-transform: capitalize;
+}
+
+/* Grey circle with black checkmark before each li */
+.service-detail-hero__included-richtext li::before {
+  content: '';
+  flex-shrink: 0;
+  width: 15px;
+  height: 15px;
+  margin-top: 2px;
+  background-image: url("data:image/svg+xml,%3Csvg width='15' height='15' viewBox='0 0 15 15' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='7.5' cy='7.5' r='7.5' fill='%23e8e8e8'/%3E%3Cpath d='M4 7.5L6.5 10L11 5.5' stroke='%23212121' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-size: 15px 15px;
+}
+
+.service-detail-hero__included-richtext p {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 22px;
+  color: var(--vips-text-secondary);
+  margin: 0 0 12px;
+}
+
+.service-detail-hero__included-richtext p:last-child {
+  margin-bottom: 0;
+}
+
+/* Description spans inside li items */
+.service-detail-hero__included-richtext li span {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  color: #616161;
+  text-transform: none;
+  display: block;
+  margin-top: 2px;
+}
+
+/* ── Enquiry Form Card (merged from service-enquire-form module) ── */
+.service-detail-hero__form-card {
+  background: var(--vips-bg-card);
+  border: 1px solid var(--vips-border-light);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card-subtle);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.service-detail-hero__form-heading {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 27.5px;
+  color: var(--vips-dark);
+  margin: 0;
+}
+
+.service-detail-hero__form-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--vips-border-light);
+}
+
+.service-detail-hero__form-meta-row {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 8px;
+  align-items: baseline;
+}
+
+.service-detail-hero__form-meta-label,
+.service-detail-hero__form-meta-value {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 12px;
+  color: var(--vips-text-secondary);
+}
+
+.service-detail-hero__form-disclaimer {
+  font-family: var(--font-body);
+  font-size: 12px;
+  line-height: 18px;
+  color: var(--vips-text-secondary);
+}
+
+/* HubSpot Form overrides scoped to the new form card. The global form
+   styles in css/forms.css apply on top of these; these only fix the
+   form-columns-2 grid + container width. */
+.service-detail-hero__form-card .hs-form fieldset {
+  max-width: 100%;
+}
+
+.service-detail-hero__form-card .hs-form fieldset.form-columns-2 {
+  display: flex;
+  gap: 16px;
+}
+
+.service-detail-hero__form-card .hs-form fieldset.form-columns-2 .hs-form-field {
+  flex: 1;
+  min-width: 0;
+  width: auto;
+  float: none;
+  margin-right: 0;
+}
+
+/* ── V4 (new-editor / multi-step) forms — styling via HSF CSS variables.
+   These are read by HubSpot's `hs-form-html` embed when the form renders.
+   Values here mirror the classic form styling in css/forms.css so a V3
+   and V4 form on the same page look identical.
+   Docs: developers.hubspot.com/docs/cms/start-building/features/forms/forms */
+.service-detail-hero__form-card {
+  --hsf-global__font-family: var(--font-body, 'Inter', -apple-system, BlinkMacSystemFont, sans-serif);
+  --hsf-global__font-size: 14px;
+  --hsf-global__color: var(--vips-dark, #212121);
+  --hsf-global-error__color: var(--vips-red, #a22c35);
+
+  --hsf-row__vertical-spacing: 16px;
+  --hsf-module__vertical-spacing: 16px;
+
+  --hsf-heading__font-family: var(--font-heading, 'Inter', sans-serif);
+  --hsf-heading__color: var(--vips-dark, #212121);
+
+  --hsf-richtext__font-family: var(--font-body, 'Inter', sans-serif);
+  --hsf-richtext__font-size: 14px;
+  --hsf-richtext__color: var(--vips-dark, #212121);
+
+  --hsf-field-label__font-family: var(--font-body, 'Inter', sans-serif);
+  --hsf-field-label__font-size: 14px;
+  --hsf-field-label__color: var(--vips-dark, #212121);
+  --hsf-field-label-requiredindicator__color: var(--vips-red, #a22c35);
+  --hsf-field-description__font-family: var(--font-body, 'Inter', sans-serif);
+  --hsf-field-description__color: var(--vips-text-secondary, #6b6866);
+
+  --hsf-field-input__font-family: var(--font-body, 'Inter', sans-serif);
+  --hsf-field-input__color: var(--vips-dark, #212121);
+  --hsf-field-input__background-color: var(--vips-bg-card, #ffffff);
+  --hsf-field-input__placeholder-color: var(--vips-text-secondary, #9a9a9a);
+  --hsf-field-input__border-color: var(--vips-border, #e0e0e0);
+  --hsf-field-input__border-width: 1px;
+  --hsf-field-input__border-style: solid;
+  --hsf-field-input__border-radius: var(--radius-sm, 6px);
+  /* Classic form: height 43px + 0 12px padding + 14px/20px font. New-editor
+     inputs have no height variable, so vertical padding does the work.
+     ~12px top+bottom → total visual height matches 43px classic. */
+  --hsf-field-input__padding: 12px 14px;
+
+  --hsf-field-textarea__font-family: var(--font-body, 'Inter', sans-serif);
+  --hsf-field-textarea__color: var(--vips-dark, #212121);
+  --hsf-field-textarea__background-color: var(--vips-bg-card, #ffffff);
+  --hsf-field-textarea__placeholder-color: var(--vips-text-secondary, #9a9a9a);
+  --hsf-field-textarea__border-color: var(--vips-border, #e0e0e0);
+  --hsf-field-textarea__border-width: 1px;
+  --hsf-field-textarea__border-style: solid;
+  --hsf-field-textarea__border-radius: var(--radius-sm, 6px);
+  --hsf-field-textarea__padding: 14px;
+
+  --hsf-field-checkbox__background-color: var(--vips-bg-card, #ffffff);
+  --hsf-field-checkbox__color: var(--vips-dark, #212121);
+  --hsf-field-checkbox__border-color: var(--vips-border, #e0e0e0);
+  --hsf-field-checkbox__border-width: 1px;
+  --hsf-field-checkbox__border-style: solid;
+
+  --hsf-button__font-family: var(--font-body, 'Inter', sans-serif);
+  --hsf-button__font-size: 16px;
+  --hsf-button__color: #ffffff;
+  --hsf-button__background-color: var(--vips-dark, #212121);
+  --hsf-button__border-radius: var(--radius-sm, 6px);
+  --hsf-button__padding: 12px 24px;
+
+  --hsf-erroralert__font-family: var(--font-body, 'Inter', sans-serif);
+  --hsf-erroralert__font-size: 12px;
+  --hsf-erroralert__color: var(--vips-red, #a22c35);
+
+  --hsf-background__background-color: transparent;
+  --hsf-background__border-style: none;
+  --hsf-background__padding: 0;
+}
+
+/* Make sure the V4 embed wrapper takes full width of the card. */
+.service-detail-hero__form-embed.hs-form-html {
+  width: 100%;
+  display: block;
+}
+
+/* ── Related Services ── */
+.service-detail-hero__related {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.service-detail-hero__related-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.service-detail-hero__related-card {
+  background: var(--vips-bg-card);
+  border: 1px solid var(--vips-border-light);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  text-decoration: none;
+  transition: border-color 0.15s ease;
+}
+
+.service-detail-hero__related-card:hover {
+  border-color: var(--vips-text-muted);
+  text-decoration: none;
+}
+
+.service-detail-hero__related-card:focus-visible {
+  outline: 2px solid var(--vips-dark);
+  outline-offset: 2px;
+}
+
+.service-detail-hero__related-icon-wrap {
+  width: 32px;
+  height: 32px;
+  background: var(--vips-bg-icon);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.service-detail-hero__related-meta {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 12px;
+  color: var(--vips-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  margin: 0;
+}
+
+.service-detail-hero__related-title {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 18px;
+  color: var(--vips-dark);
+  margin: 0;
+}
+
+/* ── Locked state — the service's tier requirement is above the viewer's
+   member tier. Rendered as a <div> (not <a>) so it can't be navigated to.
+   Dimmed + not-allowed cursor + "Silver tier required" line so members
+   know why. Mirrors the services-listing locked-card pattern. */
+.service-detail-hero__related-card--locked {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.service-detail-hero__related-card--locked:hover {
+  border-color: var(--vips-border-light);
+}
+.service-detail-hero__related-tier-required {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 14px;
+  color: var(--vips-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  margin: 4px 0 0;
+}
+
+/* ── Disclaimer Card ── */
+.service-detail-hero__disclaimer {
+  background: #ffffff;
+  border: 1px solid #f2f2f2;
+  box-shadow: 0px 1px 0.5px #f6f6f6;
+  border-radius: var(--radius-lg);
+  padding: 8px 8px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.service-detail-hero__disclaimer-close {
+  width: 15px;
+  height: 15px;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--vips-text-secondary);
+}
+
+.service-detail-hero__disclaimer-close:focus-visible {
+  outline: 2px solid var(--vips-dark);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.service-detail-hero__disclaimer-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.service-detail-hero__disclaimer-title {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+  color: var(--vips-dark);
+  margin: 0;
+  letter-spacing: -0.15px;
+}
+
+.service-detail-hero__disclaimer-body {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  color: #616161;
+  letter-spacing: -0.15px;
+}
+
+.service-detail-hero__disclaimer-body p {
+  margin: 0;
+}
+
+.service-detail-hero__disclaimer[hidden] {
+  display: none;
+}
+
+.service-detail-hero__form form .hs_rental_capital_items_document .hs-input {
+    padding-top: 8px;
+}
+
+/* ── Mobile (≤768px) ── */
+@media (max-width: 768px) {
+
+  .service-detail-hero--hide-mobile {
+    display: none;
+  }
+
+  .service-detail-hero__breadcrumb-item {
+    font-size: 13px;
+  }
+
+  .service-detail-hero__info-card {
+    border-radius: 10px;
+    border-width: 0.698px;
+    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1);
+  }
+
+  .service-detail-hero__section-heading {
+    font-size: 20px;
+    line-height: 30px;
+  }
+
+  .service-detail-hero__included-card {
+    border-radius: 10px;
+    border-width: 0.698px;
+    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1);
+  }
+
+  .service-detail-hero__related-grid {
+    grid-template-columns: 1fr;   /* full-width stacked cards on mobile (Figma) */
+    gap: 12px;
+  }
+
+  .service-detail-hero__related-card {
+    border-radius: 10px;
+    border-width: 0.698px;
+  }
+
+  .service-detail-hero__disclaimer {
+    border-radius: 10px;
+  }
+
+}
+
+/* ============================================================
+   __side wrapper (right column on desktop)
+   Holds the enquiry form card + the RM card as a flex column.
+   Grid placement (col 2, spans both rows, sticky) is set in
+   css/portal/service-detail.css — only intra-section stacking
+   lives here.
+   ============================================================ */
+.service-detail-hero__side {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  min-width: 0;
+}
+
+/* ============================================================
+   __rm — RM Card (migrated from rm-card module)
+   CRM-driven (USER_DEFINED id 35) with per-field fallback to
+   module.rm_card.* defaults.
+   ============================================================ */
+.service-detail-hero__rm {
+  display: block;
+  min-width: 0;
+}
+
+.service-detail-hero__rm-section-heading {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 27.5px;
+  color: var(--vips-dark);
+  margin: 0 0 4px;
+}
+
+.service-detail-hero__rm-section-subtitle {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 22px;
+  color: var(--vips-text-secondary);
+  margin: 0 0 16px;
+}
+
+/* RM card body — 2 columns: profile | divider | contacts */
+.service-detail-hero__rm-card {
+  background: var(--vips-bg-card);
+  border: 1px solid var(--vips-border-light);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card-subtle);
+  padding: 24px;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  gap: 20px;
+  min-width: 0;
+  width: 100%;
+}
+
+/* Profile (left column inside card) — 50% width so phone/email in the
+   right column have room to wrap cleanly. Mobile (≤768px) flips this
+   column to row direction; see media query below. */
+.service-detail-hero__rm-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.service-detail-hero__rm-photo {
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.service-detail-hero__rm-photo--initials {
+  background: #e8e8e8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 1;
+  color: var(--vips-text-secondary);
+}
+
+.service-detail-hero__rm-profile-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-top: 4px;
+}
+
+.service-detail-hero__rm-name {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+  color: var(--vips-dark);
+  margin: 0;
+}
+
+.service-detail-hero__rm-role {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 20px;
+  color: var(--vips-text-secondary);
+  margin: 0;
+}
+
+.service-detail-hero__rm-booking-link {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 14px;
+  color: var(--vips-dark);
+  text-decoration: underline;
+  transition: color 0.15s ease;
+  margin-top: 4px;
+  display: inline-block;
+}
+
+.service-detail-hero__rm-booking-link:hover {
+  color: var(--vips-text-secondary);
+}
+
+.service-detail-hero__rm-booking-link:focus-visible {
+  outline: 2px solid var(--vips-dark);
+  outline-offset: 2px;
+}
+
+/* Vertical divider */
+.service-detail-hero__rm-divider {
+  border: none;
+  width: 1px;
+  align-self: stretch;
+  background: var(--vips-border-light);
+  margin: 0;
+  flex-shrink: 0;
+}
+
+/* Contact list (right column inside card) — 50% width to match profile.
+   `flex: 1 1 0` gives an equal share regardless of intrinsic content
+   width (was `flex: 1` which is `1 1 0%` — same effect, made explicit
+   for symmetry with the profile rule above). */
+.service-detail-hero__rm-contact-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.service-detail-hero__rm-contact-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.service-detail-hero__rm-contact-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--vips-text-secondary);
+}
+
+.service-detail-hero__rm-contact-icon svg,
+.service-detail-hero__rm-contact-icon img {
+  width: 20px;
+  height: 20px;
+}
+
+.service-detail-hero__rm-contact-value {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 20px;
+  color: var(--vips-dark);
+  text-decoration: none;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+a.service-detail-hero__rm-contact-value:hover {
+  text-decoration: underline;
+  color: var(--vips-dark);
+}
+
+a.service-detail-hero__rm-contact-value:focus-visible {
+  outline: 2px solid var(--vips-dark);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Stack variant — for multiple tel: links (split on " or ") */
+.service-detail-hero__rm-contact-value--stack {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.service-detail-hero__rm-contact-link {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 20px;
+  color: var(--vips-dark);
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+
+.service-detail-hero__rm-contact-link:hover {
+  text-decoration: underline;
+}
+
+.service-detail-hero__rm-contact-link:focus-visible {
+  outline: 2px solid var(--vips-dark);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Mobile (≤768px): RM card collapses to single column, profile flips to row */
+@media (max-width: 768px) {
+
+  .service-detail-hero__side--hide-mobile {
+    display: none;
+  }
+
+  .service-detail-hero__rm-card {
+    flex-direction: column;
+    gap: 20px;
+    border-radius: 10px;
+    border-width: 0.698px;
+    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+  }
+
+  .service-detail-hero__rm-profile {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .service-detail-hero__rm-divider {
+    width: auto;
+    height: 1px;
+  }
+
+  .service-detail-hero__rm-photo {
+    width: 72px;
+    height: 72px;
+  }
+
+  .service-detail-hero__rm-name {
+    font-size: 18px;
+  }
+
+  .service-detail-hero__rm-role {
+    font-size: 14px;
+  }
+
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .service-detail-hero__breadcrumb-link,
+  .service-detail-hero__related-card,
+  .service-detail-hero__rm-booking-link {
+    transition: none;
+  }
+}

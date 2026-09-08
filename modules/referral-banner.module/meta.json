@@ -1,0 +1,10 @@
+{
+  "global" : true,
+  "content_types" : [ "SITE_PAGE" ],
+  "master_language" : "en",
+  "smart_type" : "NOT_SMART",
+  "host_template_types" : [ "PAGE" ],
+  "module_id" : 322299445736,
+  "label" : "Referral Banner",
+  "is_available_for_new_content" : true
+}

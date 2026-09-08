@@ -1,0 +1,150 @@
+{# ============================================================
+   VIPSCLUB Portal 2026 — Refer Landing Content Module
+   Left column: Benefits card + Steps card + Testimonials
+   Figma: Desktop 374:283 | Mobile 380:4314
+   ============================================================ #}
+
+{# Determine which sections to show based on display_mode field #}
+{% set _show_content      = module.display_mode != "testimonials_only" %}
+{% set _show_testimonials = module.display_mode != "content_only" %}
+
+<div class="refer-landing-content{% if module.style_overrides.hide_on_mobile %} refer-landing-content--hide-mobile{% endif %}">
+
+  {# ── BENEFITS CARD + STEPS (hidden when testimonials_only) ── #}
+  {% if _show_content %}
+  <div class="refer-landing-content__card">
+
+    {% if module.benefits_heading %}
+    <{{ module.heading_level | default("h2") }} class="refer-landing-content__card-heading">
+      {{ module.benefits_heading | escape_html }}
+    </{{ module.heading_level | default("h2") }}>
+    {% endif %}
+
+    {% if module.benefits_description %}
+    <div class="refer-landing-content__card-desc">
+      {{ module.benefits_description }}
+    </div>
+    {% endif %}
+
+    {% if module.benefits %}
+    <ul class="refer-landing-content__benefits" aria-label="Membership benefits">
+      {% for b in module.benefits %}
+      <li class="refer-landing-content__benefit">
+        <span class="refer-landing-content__benefit-check" aria-hidden="true">
+          {% if b.check_icon.svg_code %}
+            {{ b.check_icon.svg_code }}
+          {% elif b.check_icon.image.src %}
+            <img src="{{ b.check_icon.image.src | escape_attr }}"
+                 alt=""
+                 width="{{ b.check_icon.image.width | default(15) }}"
+                 height="{{ b.check_icon.image.height | default(15) }}"
+                 aria-hidden="true">
+          {% else %}
+            {# Default: grey circle, black tick — editors can override via icon field above #}
+            <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true" focusable="false">
+              <circle cx="7.5" cy="7.5" r="7.5" fill="#e8e8e8"/>
+              <path d="M4 7.5L6.5 10L11 5.5" stroke="#212121" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          {% endif %}
+        </span>
+        <div class="refer-landing-content__benefit-text">
+          {% if b.benefit_title %}
+          <span class="refer-landing-content__benefit-title">{{ b.benefit_title | escape_html }}</span>
+          {% endif %}
+          {% if b.benefit_desc %}
+          <span class="refer-landing-content__benefit-desc">{{ b.benefit_desc | escape_html }}</span>
+          {% endif %}
+        </div>
+      </li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+
+  </div>
+
+  {# ── STEPS SECTION ── #}
+  {% if module.steps_heading %}
+  <h2 class="refer-landing-content__section-heading">
+    {{ module.steps_heading | escape_html }}
+  </h2>
+  {% endif %}
+
+  {% if module.steps_description %}
+  <div class="refer-landing-content__section-desc">
+    {{ module.steps_description }}
+  </div>
+  {% endif %}
+
+  {% if module.steps %}
+  <div class="refer-landing-content__card">
+    <div class="refer-landing-content__steps" role="list" aria-label="How to get started">
+      {% for step in module.steps %}
+      <div class="refer-landing-content__step" role="listitem">
+        <div class="refer-landing-content__step-circle" aria-hidden="true">
+          <span class="refer-landing-content__step-number{% if step.is_highlight %} refer-landing-content__step-number--highlight{% endif %}">
+            {{ step.step_number | escape_html }}
+          </span>
+        </div>
+        {% if step.step_title %}
+        <span class="refer-landing-content__step-title">{{ step.step_title | escape_html }}</span>
+        {% endif %}
+        {% if step.step_desc %}
+        <span class="refer-landing-content__step-desc">{{ step.step_desc | escape_html }}</span>
+        {% endif %}
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+  {% endif %}{# end _show_content #}
+
+  {# ── TESTIMONIALS (full-width row — hidden when content_only) ── #}
+  {% if _show_testimonials %}
+  {% if module.testimonials_heading %}
+  <h2 class="refer-landing-content__section-heading">
+    {{ module.testimonials_heading | escape_html }}
+  </h2>
+  {% endif %}
+
+  {% if module.testimonials_description %}
+  <div class="refer-landing-content__section-desc">
+    {{ module.testimonials_description }}
+  </div>
+  {% endif %}
+
+  {% if module.testimonials %}
+  <div class="refer-landing-content__testimonials" role="list" aria-label="Member testimonials">
+    {% for t in module.testimonials %}
+    <div class="refer-landing-content__testimonial" role="listitem">
+      {% if t.quote %}
+      <p class="refer-landing-content__quote">{{ t.quote | escape_html }}</p>
+      {% endif %}
+      <div class="refer-landing-content__reviewer">
+        {% if t.photo.src %}
+        <img class="refer-landing-content__reviewer-photo"
+             src="{{ t.photo.src | escape_attr }}"
+             alt="{{ t.reviewer_name | escape_attr }}"
+             width="38"
+             height="38"
+             loading="lazy">
+        {% else %}
+        <div class="refer-landing-content__reviewer-photo refer-landing-content__reviewer-photo--placeholder" aria-hidden="true">
+          {{ t.reviewer_name | default("?") | truncate(1, false, "") | upper }}
+        </div>
+        {% endif %}
+        <div class="refer-landing-content__reviewer-info">
+          {% if t.reviewer_name %}
+          <span class="refer-landing-content__reviewer-name">{{ t.reviewer_name | escape_html }}</span>
+          {% endif %}
+          {% if t.reviewer_meta %}
+          <span class="refer-landing-content__reviewer-meta">{{ t.reviewer_meta | escape_html }}</span>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+  {% endif %}{# end _show_testimonials #}
+
+</div>

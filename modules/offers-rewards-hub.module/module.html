@@ -1,0 +1,499 @@
+{# ============================================================
+   VIPSCLUB Portal 2026 — Offers & Rewards Hub Module
+   Single module: tab bar + filter chips + cards grid
+   Data: Service CRM object (0-162) — renamed "Offers & rewards"
+   Figma: Desktop 339:8516 | Mobile 339:9363
+
+   CRM properties used (Offers & Rewards object 0-162):
+     hs_name           — card title (primary display property)
+     tier_badge        — MULTISELECT of tiers eligible (bronze/silver/gold);
+                         empty = open to all (no restriction)
+     card_description  — card description
+     points_value      — points value (earned for offers, cost for rewards)
+     cta_link          — CTA button URL (label "Button Link")
+     category          — industry (label "Industry", for filter chips)
+     expires_at        — offer expiry countdown (rewards may leave blank)
+     hs_pipeline       — Offers pipeline = offer, Rewards pipeline = reward
+     hs_pipeline_stage — Draft/Active/Featured/Expired/Hidden lifecycle state
+                         (visibility + featured pinning + expired treatment)
+
+   Contact properties required:
+     member_tier   (dropdown: bronze / silver / gold)
+     total_points  (number)
+   ============================================================ #}
+
+{# ── Industries lookup ──
+   Fetch the published `portal_industries` HubDB table once. HubL does NOT
+   allow expressions as dict keys (so we can't build a {slug: row} map),
+   so we keep the raw row LIST and do a linear search per card using a
+   namespace() to capture the match across the for-loop scope.
+   Table ID 2431597037 is the project's Portal Industries table; the
+   module field `industries_table_id` lets editors override if needed. #}
+{% set _INDUSTRIES_TABLE = module.industries_table_id | default(2431597037) %}
+{% set _industry_rows = hubdb_table_rows(_INDUSTRIES_TABLE) %}
+
+{# Fallback icon for when no industry match is found #}
+{% set _fallback_icon_svg = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12,2 15,9 22,9 17,14 19,21 12,17 5,21 7,14 2,9 9,9"/></svg>' %}
+
+{# ── Logged-in user's tier level ── #}
+{# Tier source of truth = contact.membership_tier (one value per member).
+   NOT the Referral/Courses record — a contact can be linked to many referral
+   records, each carrying its own membership_tier, so that lookup is
+   non-deterministic. `member_tier` (the old name here) never existed, which
+   silently forced every member to Bronze. #}
+{% set raw_tier = contact.membership_tier | default("bronze") | lower | trim %}
+{% if raw_tier == "gold" %}
+  {% set user_tier_level = 3 %}
+{% elif raw_tier == "silver" %}
+  {% set user_tier_level = 2 %}
+{% else %}
+  {% set user_tier_level = 1 %}
+{% endif %}
+
+{# ── Member's redeemable balance — from the Self-Contact referral record
+     (assoc 33). Powers the "Not enough points" affordability guard. ── #}
+{% set _my_redeemable = 0 %}
+{% if contact.hs_object_id %}
+  {% set _redeem_assoc = crm_associations(contact.hs_object_id, "USER_DEFINED", 33, "limit=1", "points_redeemable", false) %}
+  {% if _redeem_assoc.results and (_redeem_assoc.results | length) > 0 %}
+    {% set _my_redeemable = _redeem_assoc.results[0].points_redeemable | default(0) | int %}
+  {% endif %}
+{% endif %}
+
+{# ── Pipeline-driven state (replaces record_type / show_in_portal / featured) ──
+   The Offers & Rewards object now uses two pipelines — Offers + Rewards.
+   The hub shows BOTH (tabbed), so it fetches records in either pipeline's
+   visible stages. Stage encodes visibility + state:
+     Draft            → not shown
+     Active           → shown, normal
+     Featured         → shown, pinned first
+     Expired          → shown, greyed-out
+     Hidden/Archived  → not shown
+   item_type is derived from which pipeline a record sits in (below).
+   Stage IDs are globally unique, so filtering by the 6 visible stage IDs
+   uniquely selects offers + rewards in Active/Featured/Expired. #}
+{% set _obj_type      = module.crm_object_type | default("SERVICE") %}
+{% set _PIPE_OFFERS   = "2018525628" %}
+{% set _PIPE_REWARDS  = "2018074089" %}
+{% set _OFF_FEATURED  = "3472909785" %}
+{% set _OFF_EXPIRED   = "3472909786" %}
+{% set _REW_FEATURED  = "3473129975" %}
+{% set _REW_EXPIRED   = "3473129976" %}
+{% set _VISIBLE_STAGES = "3472909784,3472909785,3472909786,3473129974,3473129975,3473129976" %}
+
+{# `formatting=false` (4th arg) returns raw property values — so date
+   properties like `expires_at` come back as epoch milliseconds instead of
+   the locale-formatted string ("1/07/26"). orderBy=-hs_createdate sorts
+   newest-first server-side (HubL sort is unreliable on crm_objects maps). #}
+{% set all_items = crm_objects(
+  _obj_type,
+  "hs_pipeline_stage__in=" ~ _VISIBLE_STAGES ~ "&orderBy=-hs_createdate&limit=100",
+  "hs_name,tier_badge,card_description,points_value,cta_link,category,expires_at,hs_pipeline,hs_pipeline_stage,hs_createdate,button_type,custom_button_text,max_claims",
+  false
+) %}
+
+{# ── OR1 — Per-contact claim counts.
+     Fetch every ticket associated to the logged-in member; filter to the
+     Offer Claims pipeline (1963743680); bucket by related_offer_id.
+     `_claim_counts[offer_id]` gives the number of times this member has
+     clicked claim on a specific offer. Portal state machine below uses
+     this vs. item.max_claims to decide the button label. ── #}
+{% set _claim_counts = {} %}
+{% if contact.hs_object_id %}
+  {% set _my_claim_tickets = crm_associations(
+    contact.hs_object_id,
+    "HUBSPOT_DEFINED",
+    16,
+    "limit=200",
+    "related_offer_id,hs_pipeline",
+    false
+  ) %}
+  {% set _cnt_ns = namespace(map={}) %}
+  {% if _my_claim_tickets and _my_claim_tickets.results %}
+    {% for _t in _my_claim_tickets.results %}
+      {% if (_t.hs_pipeline | string) == "1963743680" %}
+        {% set _oid = _t.related_offer_id | default("") | string %}
+        {% if _oid %}
+          {% set _prev = _cnt_ns.map[_oid] | default(0) | int %}
+          {% do _cnt_ns.map.update({_oid: _prev + 1}) %}
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+  {% set _claim_counts = _cnt_ns.map %}
+{% endif %}
+
+{# ── Featured-first bucketing ──
+   An item is pinned to the top when it sits in its pipeline's Featured
+   stage (Offers-Featured or Rewards-Featured). The query already returned
+   records newest-first, so within each bucket the newest leads. The
+   client-side tab/filter JS preserves this order, so pinned items always
+   lead each tab. #}
+{% set _ordered_items = [] %}
+{% if all_items and all_items.results %}
+  {% set _featured_ns     = namespace(list=[]) %}
+  {% set _non_featured_ns = namespace(list=[]) %}
+  {% for _it in all_items.results %}
+    {% set _st = _it.hs_pipeline_stage | string %}
+    {% if _st == _OFF_FEATURED or _st == _REW_FEATURED %}
+      {% do _featured_ns.list.append(_it) %}
+    {% else %}
+      {% do _non_featured_ns.list.append(_it) %}
+    {% endif %}
+  {% endfor %}
+  {% set _ordered_items = _featured_ns.list + _non_featured_ns.list %}
+{% endif %}
+
+<section class="offers-rewards-hub{% if module.style_overrides.hide_on_mobile %} offers-rewards-hub--hide-mobile{% endif %}"
+         aria-labelledby="offers-rewards-heading"
+         {% if module.style_overrides.padding_top or module.style_overrides.padding_bottom %}style="{% if module.style_overrides.padding_top %}padding-top: {{ module.style_overrides.padding_top }}px;{% endif %}{% if module.style_overrides.padding_bottom %}padding-bottom: {{ module.style_overrides.padding_bottom }}px;{% endif %}"{% endif %}>
+
+  {# ── Section Header Card ── #}
+  <div class="offers-rewards-hub__header-card">
+    {% if module.section_heading %}
+    <{{ module.heading_level | default("h2") }} class="offers-rewards-hub__heading" id="offers-rewards-heading">
+      {{ module.section_heading | escape_html }}
+    </{{ module.heading_level | default("h2") }}>
+    {% endif %}
+    {% if module.section_description %}
+    <div class="offers-rewards-hub__description">
+      {{ module.section_description }}
+    </div>
+    {% endif %}
+  </div>
+
+  {# ── Tab Bar ── #}
+  <div class="offers-rewards-hub__tabs" role="tablist" aria-label="Offers and Rewards tabs">
+    <button class="offers-rewards-hub__tab is-active"
+            id="tab-offers"
+            role="tab"
+            aria-selected="true"
+            aria-controls="offers-rewards-grid"
+            data-tab="offer"
+            type="button">
+      {{ module.tab_offers_label | escape_html }}
+    </button>
+    <button class="offers-rewards-hub__tab"
+            id="tab-rewards"
+            role="tab"
+            aria-selected="false"
+            aria-controls="offers-rewards-grid"
+            data-tab="reward"
+            type="button">
+      {{ module.tab_rewards_label | escape_html }}
+    </button>
+    <button class="offers-rewards-hub__tab"
+            id="tab-all"
+            role="tab"
+            aria-selected="false"
+            aria-controls="offers-rewards-grid"
+            data-tab="all"
+            type="button">
+      {{ module.tab_all_label | escape_html }}
+    </button>
+  </div>
+
+  {# ── Filter Chips — generated dynamically by module.js from the cards' own
+       data-tier and data-category attributes, so the chips always reflect what's
+       actually present in the CRM. No editor configuration needed. ── #}
+  <div class="offers-rewards-hub__chips" role="group" aria-label="Filter offers and rewards"></div>
+
+  {# ── Cards Grid ── #}
+  {# Records without offer_description are skipped (they are referral records) #}
+  {% if _ordered_items %}
+
+  <div class="offers-rewards-hub__grid"
+       id="offers-rewards-grid"
+       role="list"
+       aria-label="Offers and rewards">
+
+    {% for item in _ordered_items %}
+
+    {# ── Resolve properties ── #}
+    {% set _desc      = item.card_description | default("") %}
+    {% set _name      = item.hs_name | default("") %}
+    {% set _pts       = item.points_value | default("") %}
+    {% set _cta       = item.cta_link | default("") %}
+    {% set _category  = item.category | default("") %}
+    {% set _expires_at = item.expires_at | default("") %}
+    {% set _industry  = item.industry | default("") %}
+    {% set _stage     = item.hs_pipeline_stage | default("") | string %}
+    {% set _pipe      = item.hs_pipeline | default("") | string %}
+
+    {# ── Parse tier_badge MULTISELECT into a clean list of lowercase tier
+         names. HubSpot's `crm_objects(formatting=false)` returns MULTISELECT
+         as a native LIST (not a semicolon string as older docs claim), so
+         iterate directly. Fallback path handles both semicolon-string and
+         other coercions defensively. Empty list → open to all. ── #}
+    {% set _tier_ns = namespace(list=[]) %}
+    {% if item.tier_badge %}
+      {% if item.tier_badge is string %}
+        {% for _t in (item.tier_badge | lower | trim | split(";")) %}
+          {% set _clean = _t | trim %}
+          {% if _clean %}{% do _tier_ns.list.append(_clean) %}{% endif %}
+        {% endfor %}
+      {% else %}
+        {% for _t in item.tier_badge %}
+          {% set _clean = _t | string | lower | trim %}
+          {% if _clean %}{% do _tier_ns.list.append(_clean) %}{% endif %}
+        {% endfor %}
+      {% endif %}
+    {% endif %}
+    {% set _tier_list = _tier_ns.list %}
+    {# Empty tier_badge = open to all → default to the 3 active tiers
+       (Bronze / Silver / Gold) so the card carries every tier badge and
+       matches the tier filter chips. Platinum is excluded — not part of
+       the active tier ladder. #}
+    {% if not _tier_list or (_tier_list | length) == 0 %}
+      {% set _tier_list = ["bronze", "silver", "gold"] %}
+    {% endif %}
+
+    {# Look up the industry icon by matching the NORMALISED industry NAME
+       on both sides (CRM property value vs HubDB industry_label). This
+       lets you keep human-readable labels in HubDB ("Accounting/Taxation")
+       and snake_case enum values in CRM ("accounting_taxation") — they
+       both reduce to the same key under lower+replace. ── #}
+    {% set _src = _industry %}
+    {% if not _src %}{% set _src = _category %}{% endif %}
+    {% set _src_key = _src | lower | replace("/", "_") | replace(" ", "_") | replace("-", "_") | trim %}
+    {% set _ind_ns = namespace(row=none) %}
+    {% for _r in _industry_rows %}
+      {% set _lbl_key = _r.industry_label | default("") | lower | replace("/", "_") | replace(" ", "_") | replace("-", "_") | trim %}
+      {% if _lbl_key and _lbl_key == _src_key %}{% set _ind_ns.row = _r %}{% endif %}
+    {% endfor %}
+    {% set _industry_row = _ind_ns.row %}
+
+    {# Classify by pipeline — Offers pipeline → offer, Rewards pipeline → reward. #}
+    {% set item_type = "reward" if _pipe == _PIPE_REWARDS else "offer" %}
+
+    {# ── Tier-lock check — compute MIN tier level from the tier_badge list.
+         Empty list → level 1 (bronze default) → never locked ("open to all").
+         Same semantic as services-listing. ── #}
+    {% set _min_tier_ns = namespace(level=1, name="bronze") %}
+    {% if _tier_list and (_tier_list | length) > 0 %}
+      {% set _min_tier_ns.level = 99 %}
+      {% for _t in _tier_list %}
+        {% set _tname = _t | trim %}
+        {% if _tname == "platinum" %}
+          {% set _lvl = 4 %}
+        {% elif _tname == "gold" %}
+          {% set _lvl = 3 %}
+        {% elif _tname == "silver" %}
+          {% set _lvl = 2 %}
+        {% elif _tname == "bronze" %}
+          {% set _lvl = 1 %}
+        {% else %}
+          {% set _lvl = 99 %}
+        {% endif %}
+        {% if _lvl < _min_tier_ns.level %}
+          {% set _min_tier_ns.level = _lvl %}
+          {% set _min_tier_ns.name = _tname %}
+        {% endif %}
+      {% endfor %}
+      {% if _min_tier_ns.level == 99 %}
+        {% set _min_tier_ns.level = 1 %}
+        {% set _min_tier_ns.name = "bronze" %}
+      {% endif %}
+    {% endif %}
+    {% set is_locked = user_tier_level < _min_tier_ns.level %}
+
+    {# ── Expired check — takes priority over tier lock. Expired when the
+         record sits in its pipeline's Expired stage OR its expires_at date
+         has passed (the date is a fallback for when the auto-expire
+         workflow hasn't moved it yet). `_expires_at` is epoch ms. #}
+    {% set _is_expired = false %}
+    {% if _stage == _OFF_EXPIRED or _stage == _REW_EXPIRED %}{% set _is_expired = true %}{% endif %}
+    {% if not _is_expired and _expires_at %}
+      {% set _exp_ms = _expires_at | int %}
+      {% set _now_ms = local_dt | unixtimestamp %}
+      {% if _exp_ms < _now_ms %}{% set _is_expired = true %}{% endif %}
+    {% endif %}
+
+    {# ── OR1 — State machine for the button label ──
+         Reads custom_button_text / button_type / max_claims off the record.
+         Priority: expired > locked > max_reached > already-claimed > default.
+         `custom_button_text` (record-level) beats everything and disables the
+         claimed/registered swap; otherwise labels come from the module's
+         `button_labels` group. The max-reached message is the module-level
+         `max_reached_default_text` (per-record override removed). ── #}
+    {% set _button_type   = item.button_type | default("claim") | lower | trim %}
+    {% set _custom_btn    = item.custom_button_text | default("") | trim %}
+    {% set _max_claims    = item.max_claims  | default(0) | int %}
+    {% set _claim_count   = _claim_counts[item.hs_object_id | string] | default(0) | int %}
+    {% set _max_reached   = _max_claims > 0 and _claim_count >= _max_claims %}
+    {% set _max_txt       = module.max_reached_default_text | default("Maximum claims reached") %}
+    {% set _has_claimed   = _claim_count > 0 %}
+    {# Affordability guard — only for items that cost points. ── #}
+    {% set _points_value   = item.points_value | default(0) | int %}
+    {% set _not_enough     = _points_value > 0 and _my_redeemable < _points_value %}
+    {% set _not_enough_txt = module.not_enough_points_text | default("Not enough points") %}
+
+    {% if _custom_btn %}
+      {# Custom Button Text overrides everything. The pressed/claimed swap is
+         intentionally disabled — the custom label always shows, and the
+         --claimed styling is suppressed by forcing _has_claimed false. #}
+      {% set _btn_default_text = _custom_btn %}
+      {% set _btn_pressed_text = _custom_btn %}
+      {% set _has_claimed = false %}
+    {% elif _button_type == "register_interest" %}
+      {% set _btn_default_text = module.button_labels.register_interest.text    | default("Register Interest") %}
+      {% set _btn_pressed_text = module.button_labels.register_interest.pressed | default("Registered") %}
+    {% elif _button_type == "sign_up" %}
+      {% set _btn_default_text = module.button_labels.sign_up.text    | default("Sign up") %}
+      {% set _btn_pressed_text = module.button_labels.sign_up.pressed | default("Signed up") %}
+    {% else %}
+      {% set _btn_default_text = module.button_labels.claim.text    | default("Claim") %}
+      {% set _btn_pressed_text = module.button_labels.claim.pressed | default("Claimed") %}
+    {% endif %}
+
+    {# `data-tiers` (plural, space-separated) so the client-side chip filter
+       can show a card under ANY tier it belongs to. `data-expired` flags
+       expired cards so the JS filter can hide them if we ever add an
+       "Include expired" toggle. `data-offer-*` attrs let module.js fire the
+       Custom Behavioral Event with the right context on button click. #}
+    <article class="offers-rewards-hub__card{% if _is_expired %} offers-rewards-hub__card--expired{% elif is_locked %} offers-rewards-hub__card--locked{% elif _max_reached %} offers-rewards-hub__card--max-reached{% elif _not_enough %} offers-rewards-hub__card--not-enough{% endif %}"
+             role="listitem"
+             data-item-type="{{ item_type | escape_attr }}"
+             data-tiers="{% for _t in _tier_list %}{{ _t | trim | escape_attr }}{% if not loop.last %} {% endif %}{% endfor %}"
+             data-category="{{ _category | escape_attr }}"
+             data-offer-id="{{ item.hs_object_id | escape_attr }}"
+             data-offer-name="{{ _name | escape_attr }}"
+             data-offer-link="{{ _cta | escape_attr }}"
+             data-claim-count="{{ _claim_count }}"
+             data-max-claims="{{ _max_claims }}"
+             {% if _is_expired %}data-expired="1"{% endif %}>
+
+      {# ── Icon priority:
+           1. The industry row's `icon` from the HubDB lookup
+           2. Inline fallback star SVG
+           (per-record icon_url removed — icons come from the industry lookup) ── #}
+      <div class="offers-rewards-hub__icon-wrap" aria-hidden="true">
+        {% if _industry_row and _industry_row.icon and _industry_row.icon.url %}
+        <img class="offers-rewards-hub__icon"
+             src="{{ _industry_row.icon.url | escape_attr }}"
+             alt=""
+             width="20"
+             height="20"
+             loading="lazy">
+        {% else %}
+        {{ _fallback_icon_svg }}
+        {% endif %}
+      </div>
+
+      {# ── Tier pills — one per tier in tier_badge. Shown regardless of
+           expired state (the button label + dim opacity + data-expired
+           handle the expired signalling; keeping the tier pills preserves
+           the "who this is for" context). Empty list → no pills. ── #}
+      {% if _tier_list and (_tier_list | length) > 0 %}
+      <p class="offers-rewards-hub__meta">
+        {% for _t in _tier_list %}
+          {% set _tname = _t | trim %}
+          <span class="offers-rewards-hub__tier-pill offers-rewards-hub__tier-pill--{{ _tname | escape_attr }}">{{ _tname | capitalize | escape_html }}</span>
+        {% endfor %}
+      </p>
+      {% endif %}
+
+      {# ── Title ── #}
+      {% if _name %}
+      <h3 class="offers-rewards-hub__card-title">{{ _name | escape_html }}</h3>
+      {% endif %}
+
+      {# ── Description ── #}
+      <p class="offers-rewards-hub__card-desc">{{ _desc | escape_html }}</p>
+
+      {# ── Expires in N days — server-side via HubL ──
+         Skipped entirely for expired cards (the "Expired" pill above
+         already communicates the state, no need to show "Expires in -3 days").
+         `_expires_at` is epoch ms thanks to formatting=false. #}
+      {% if _expires_at and item_type == "offer" and not _is_expired %}
+        {% set _exp_ms = _expires_at | int %}
+        {% set _now_ms = local_dt | unixtimestamp %}
+        {% set _diff_days = ((_exp_ms - _now_ms) / 86400000) | round(0, 'ceil') | int %}
+        {% if _diff_days >= 0 %}
+        <p class="offers-rewards-hub__expires-line">
+          <span>{{ module.expires_prefix_text | default("Expires in") | escape_html }} </span>
+          <span class="offers-rewards-hub__expires-days">{% if _diff_days < 10 %}0{% endif %}{{ _diff_days }} days</span>
+        </p>
+        {% endif %}
+      {% endif %}
+
+      {# ── Points ── #}
+      {% if _pts %}
+      <p class="offers-rewards-hub__points{% if is_locked or _is_expired %} offers-rewards-hub__points--locked{% endif %}">
+        {{ _pts }} pts
+      </p>
+      {% endif %}
+
+      {# ── Tier required label (locked cards only, NOT expired — expired
+           takes priority and the "Expired" pill up top makes tier moot). ── #}
+      {% if is_locked and not _is_expired %}
+      <p class="offers-rewards-hub__tier-required">
+        {{ _min_tier_ns.name | capitalize }} tier required
+      </p>
+      {% endif %}
+
+      {# ── CTA button — full priority chain:
+           expired > locked > max_reached > already_claimed > default.
+           Each disabled state uses its own modifier class + label. Every
+           active button is data-claim-btn so module.js can attach the
+           click handler that fires the Custom Behavioral Event. ── #}
+      {% if _is_expired %}
+      <button class="offers-rewards-hub__btn offers-rewards-hub__btn--expired"
+              disabled
+              aria-disabled="true"
+              aria-label="{{ module.expired_button_text | default('Expired') | escape_attr }} — {{ _name | escape_attr }}">
+        {{ module.expired_button_text | default("Expired") | escape_html }}
+      </button>
+      {% elif is_locked %}
+      <button class="offers-rewards-hub__btn offers-rewards-hub__btn--locked"
+              disabled
+              aria-disabled="true"
+              aria-label="{{ module.locked_button_text | default('Locked') | escape_attr }} — {{ _name | escape_attr }}">
+        {{ module.locked_button_text | escape_html }}
+      </button>
+      {% elif _max_reached %}
+      <button class="offers-rewards-hub__btn offers-rewards-hub__btn--max-reached"
+              disabled
+              aria-disabled="true"
+              aria-label="{{ _max_txt | escape_attr }} — {{ _name | escape_attr }}">
+        {{ _max_txt | escape_html }}
+      </button>
+      {% elif _not_enough %}
+      <button class="offers-rewards-hub__btn offers-rewards-hub__btn--not-enough"
+              disabled
+              aria-disabled="true"
+              aria-label="{{ _not_enough_txt | escape_attr }} — {{ _name | escape_attr }}">
+        {{ _not_enough_txt | escape_html }}
+      </button>
+      {% elif _cta %}
+      <a href="{{ _cta | escape_attr }}"
+         class="offers-rewards-hub__btn{% if _has_claimed %} offers-rewards-hub__btn--claimed{% endif %}"
+         target="_blank"
+         rel="noopener noreferrer"
+         data-claim-btn="1"
+         data-btn-default-text="{{ _btn_default_text | escape_attr }}"
+         data-btn-pressed-text="{{ _btn_pressed_text | escape_attr }}"
+         aria-label="{{ (_has_claimed ? _btn_pressed_text : _btn_default_text) | escape_attr }} — {{ _name | escape_attr }}">
+        {{ (_has_claimed ? _btn_pressed_text : _btn_default_text) | escape_html }}
+      </a>
+      {% else %}
+      <button class="offers-rewards-hub__btn{% if _has_claimed %} offers-rewards-hub__btn--claimed{% endif %}"
+              type="button"
+              data-claim-btn="1"
+              data-btn-default-text="{{ _btn_default_text | escape_attr }}"
+              data-btn-pressed-text="{{ _btn_pressed_text | escape_attr }}"
+              aria-label="{{ (_has_claimed ? _btn_pressed_text : _btn_default_text) | escape_attr }} — {{ _name | escape_attr }}">
+        {{ (_has_claimed ? _btn_pressed_text : _btn_default_text) | escape_html }}
+      </button>
+      {% endif %}
+
+    </article>
+    {% endfor %}
+
+  </div>
+
+  {% else %}
+  <p class="offers-rewards-hub__empty">{{ module.empty_state_text | escape_html }}</p>
+  {% endif %}
+
+</section>

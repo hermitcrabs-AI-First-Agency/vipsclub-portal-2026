@@ -1,0 +1,118 @@
+{# ============================================================
+   VIPSCLUB Portal 2026 — Auth Register (Membership) Module
+   Template type: membership_register_page
+   Uses {% member_register %} — HubSpot's native password-setup form
+   Shown when an invited contact sets up their membership password.
+   Design: identical to auth-login-page.
+   Figma: Desktop 183:1393 | Mobile 337:3457
+   ============================================================ #}
+
+{% require_css %}
+<link rel="stylesheet" href="{{ get_asset_url('../../css/auth/auth-pages.css') }}">
+{% end_require_css %}
+
+{# ── Style override values ── #}
+{% set grad_start = module.style_overrides.gradient_start.color | default('#000000') %}
+{% set grad_end   = module.style_overrides.gradient_end.color   | default('#a22b34') %}
+
+<main class="auth-page auth-page--register{% if module.style_overrides.hide_on_mobile %} auth-page--hide-mobile{% endif %}">
+
+  {# ── Header: full-width gradient + centred logo ── #}
+  <header class="auth-page__header"
+          style="background: linear-gradient(163.37deg, {{ grad_start }} 36.19%, {{ grad_end }} 66.10%);">
+
+    {% if module.logo.src %}
+    <img class="auth-page__logo"
+         src="{{ module.logo.src | escape_attr }}"
+         alt="{{ module.logo.alt | default('VIPS Club') | escape_attr }}"
+         width="{{ module.logo.width | default(161) }}"
+         height="{{ module.logo.height | default(59) }}"
+         fetchpriority="high">
+    {% endif %}
+
+  </header>
+
+  {# ── Body: split card (photo left + form right) ── #}
+  <div class="auth-page__body">
+
+    <div class="auth-page__card" role="region" aria-label="Create account">
+
+      {# ── Left: architectural photo (desktop only) ── #}
+      {% if module.photo.src %}
+      <img class="auth-page__card-photo"
+           src="{{ module.photo.src | escape_attr }}"
+           alt="{{ module.photo.alt | default('') | escape_attr }}"
+           width="420"
+           height="672"
+           loading="lazy"
+           aria-hidden="true">
+      {% endif %}
+
+      {# ── Right: white form panel ── #}
+      <div class="auth-page__card-form">
+
+        {# ── Heading + subtitle ── #}
+        <div class="auth-form__header">
+          {% if module.heading %}
+          <{{ module.heading_level | default("h1") }} class="auth-form__heading">{{ module.heading | escape_html }}</{{ module.heading_level | default("h1") }}>
+          {% endif %}
+          {% if module.subtitle %}
+          <p class="auth-form__subtitle">{{ module.subtitle | escape_html }}</p>
+          {% endif %}
+        </div>
+
+        {# ── HubSpot Native Membership Register Form ──
+           Renders: email field, password field, confirm password field,
+           and submit button.
+           This tag only works inside membership_register_page templates.
+           Form labels are editable via module fields above.
+        #}
+        {% member_register "vips_member_register"
+          email_label="{{ module.email_label | default('Email') }}",
+          password_label="{{ module.password_label | default('Password') }}",
+          password_confirm_label="{{ module.password_confirm_label | default('Confirm Password') }}",
+          submit_button_text="{{ module.submit_button_text | default('Create account') }}"
+        %}
+
+        {# ── Sign In Link ── #}
+        {% if module.already_account_text or module.signin_link_text %}
+        <p class="auth-form__footer-link">
+          {% if module.already_account_text %}
+          {{ module.already_account_text | escape_html }}
+          {% endif %}
+          {% if module.signin_link_text %}
+          {% if module.signin_link_url.url.href %}
+          <a href="{{ module.signin_link_url.url.href | escape_attr }}"
+             {% if module.signin_link_url.open_in_new_tab %}target="_blank" rel="noopener noreferrer"{% endif %}>{{ module.signin_link_text | escape_html }}</a>
+          {% else %}
+          <span>{{ module.signin_link_text | escape_html }}</span>
+          {% endif %}
+          {% endif %}
+        </p>
+        {% endif %}
+
+      </div>{# end card-form #}
+
+    </div>{# end card #}
+
+  </div>{# end body #}
+
+{# ── Page Footer: copyright + privacy ── #}
+<footer class="auth-page__footer">
+  {% if module.footer_copyright or module.footer_privacy.link_text %}
+  <p>
+    {% if module.footer_copyright %}{{ module.footer_copyright | escape_html }}{% endif %}
+    {% if module.footer_privacy.link_text %}
+    {% if module.footer_privacy.url.url.href %}
+    <a href="{{ module.footer_privacy.url.url.href | escape_attr }}"
+       {% if module.footer_privacy.url.open_in_new_tab %}target="_blank" rel="noopener noreferrer"{% endif %}>&nbsp;{{ module.footer_privacy.link_text | escape_html }}</a>
+    {% else %}
+    &nbsp;{{ module.footer_privacy.link_text | escape_html }}
+    {% endif %}
+    {% endif %}
+  </p>
+  {% endif %}
+
+</footer>
+
+</main>{# end auth-page auth-page--register #}

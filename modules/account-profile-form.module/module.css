@@ -1,0 +1,1519 @@
+/* ============================================================
+   VIPSCLUB Portal 2026 — Account Profile Form Module
+   Figma: Desktop 339:8314 | Mobile 380:3276
+   ============================================================ */
+
+/* ── Outer wrapper ── */
+.account-profile-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* ── Profile Summary Card ── */
+.account-profile-form__profile-card {
+  background: var(--vips-bg-card);
+  border: 1px solid var(--vips-border-light);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card-subtle);
+  padding: 24px;
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+  margin-bottom: 24px;
+}
+
+/* ── Left column (desktop): identity stacked above member-since/logout ── */
+.account-profile-form__main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  min-width: 120px;
+}
+
+.account-profile-form__identity {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.account-profile-form__meta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.account-profile-form__avatar {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  background: var(--vips-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 32px;
+  color: var(--vips-text-secondary);
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.account-profile-form__avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.account-profile-form__name {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 24px;
+  color: var(--vips-dark);
+  margin: 0;
+  text-align: center;
+}
+
+.account-profile-form__email {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--vips-text-secondary);
+  margin: 0;
+  text-align: center;
+}
+
+.account-profile-form__member-since {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 18px;
+  color: var(--vips-text-secondary);
+  margin: 0;
+  text-align: center;
+}
+
+.account-profile-form__member-since-label {
+  color: var(--vips-text-muted);
+  margin-right: 4px;
+}
+
+.account-profile-form__logout {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 10px;
+  line-height: 14px;
+  color: var(--vips-red);
+  text-transform: uppercase;
+  text-decoration: none;
+  letter-spacing: 0.5px;
+  margin-top: 4px;
+}
+
+.account-profile-form__logout:hover {
+  text-decoration: underline;
+}
+
+/* ── Stat Cards (right) ── */
+.account-profile-form__stats {
+  display: flex;
+  gap: 16px;
+  flex: 1;
+}
+
+.account-profile-form__stat {
+  flex: 1;
+  background: var(--vips-text-white);
+  border-radius: var(--radius-xl);
+  padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-align: center;
+}
+
+.account-profile-form__stat-number {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 34px;
+  color: var(--vips-dark);
+}
+
+.account-profile-form__stat-label {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--vips-text-secondary);
+}
+
+/* ── Tab Bar ── */
+.account-profile-form__tabs {
+  display: flex;
+  border-bottom: 1px solid var(--vips-border);
+  margin-bottom: 24px;
+}
+
+.account-profile-form__tab {
+  padding: 14px 24px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  color: var(--vips-text-muted);
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 0.15s ease, border-color 0.15s ease;
+  margin-bottom: -1px;
+}
+
+.account-profile-form__tab.is-active {
+  color: var(--vips-dark);
+  font-weight: 700;
+  border-bottom-color: var(--vips-dark);
+}
+
+.account-profile-form__tab:hover {
+  color: var(--vips-dark);
+}
+
+.account-profile-form__tab:focus-visible {
+  outline: 2px solid var(--vips-dark);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* ── Tab Panels ── */
+.account-profile-form__panel {
+  display: block;
+}
+
+.account-profile-form__panel[hidden] {
+  display: none;
+}
+
+/* ── Personal Details Panel header ── */
+.account-profile-form__panel-header {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 16px;
+}
+
+.account-profile-form__edit-btn {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--vips-dark-subtle);
+  background: none;
+  border: 1px solid var(--vips-dark-subtle);
+  border-radius: var(--radius-sm);
+  padding: 8px 9px;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.account-profile-form__edit-btn:hover {
+  background: var(--vips-bg-input);
+}
+
+.account-profile-form__edit-btn:focus-visible {
+  outline: 2px solid var(--vips-dark);
+  outline-offset: 2px;
+}
+
+/* ── Form wrap — white card ── */
+.account-profile-form__form-wrap {
+  background: var(--vips-bg-card);
+  border: 1px solid var(--vips-border-light);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card-subtle);
+  padding: 24px;
+}
+
+/* ── V4 (new-editor) form on the Wealth Hub panel — HSF CSS variables.
+   Mirrors the classic form's visual language (14px labels, 43px-ish
+   input height, 6px radius, dark submit button) so V3 and V4 render
+   consistently. Layout stays HubSpot-native — we don't override the
+   grid or field structure inside the embed. */
+.account-profile-form__wealth-embed,
+.account-profile-form__form-wrap {
+  --hsf-global__font-family: var(--font-body, 'Inter', -apple-system, BlinkMacSystemFont, sans-serif);
+  --hsf-global__font-size: 14px;
+  --hsf-global__color: var(--vips-dark, #212121);
+  --hsf-global-error__color: var(--vips-red, #a22c35);
+
+  --hsf-row__vertical-spacing: 16px;
+  --hsf-module__vertical-spacing: 16px;
+
+  --hsf-heading__font-family: var(--font-heading, 'Inter', sans-serif);
+  --hsf-heading__color: var(--vips-dark, #212121);
+
+  --hsf-richtext__font-family: var(--font-body, 'Inter', sans-serif);
+  --hsf-richtext__font-size: 14px;
+  --hsf-richtext__color: var(--vips-dark, #212121);
+
+  --hsf-field-label__font-family: var(--font-body, 'Inter', sans-serif);
+  --hsf-field-label__font-size: 14px;
+  --hsf-field-label__color: var(--vips-dark, #212121);
+  --hsf-field-label-requiredindicator__color: var(--vips-red, #a22c35);
+  --hsf-field-description__font-family: var(--font-body, 'Inter', sans-serif);
+  --hsf-field-description__color: var(--vips-text-secondary, #6b6866);
+
+  --hsf-field-input__font-family: var(--font-body, 'Inter', sans-serif);
+  --hsf-field-input__color: var(--vips-dark, #212121);
+  --hsf-field-input__background-color: var(--vips-bg-card, #ffffff);
+  --hsf-field-input__placeholder-color: var(--vips-text-secondary, #9a9a9a);
+  --hsf-field-input__border-color: var(--vips-border, #e0e0e0);
+  --hsf-field-input__border-width: 1px;
+  --hsf-field-input__border-style: solid;
+  --hsf-field-input__border-radius: var(--radius-sm, 6px);
+  --hsf-field-input__padding: 12px 14px;
+
+  --hsf-field-textarea__font-family: var(--font-body, 'Inter', sans-serif);
+  --hsf-field-textarea__color: var(--vips-dark, #212121);
+  --hsf-field-textarea__background-color: var(--vips-bg-card, #ffffff);
+  --hsf-field-textarea__placeholder-color: var(--vips-text-secondary, #9a9a9a);
+  --hsf-field-textarea__border-color: var(--vips-border, #e0e0e0);
+  --hsf-field-textarea__border-width: 1px;
+  --hsf-field-textarea__border-style: solid;
+  --hsf-field-textarea__border-radius: var(--radius-sm, 6px);
+  --hsf-field-textarea__padding: 14px;
+
+  --hsf-field-checkbox__background-color: var(--vips-bg-card, #ffffff);
+  --hsf-field-checkbox__color: var(--vips-dark, #212121);
+  --hsf-field-checkbox__border-color: var(--vips-border, #e0e0e0);
+  --hsf-field-checkbox__border-width: 1px;
+  --hsf-field-checkbox__border-style: solid;
+
+  --hsf-button__font-family: var(--font-body, 'Inter', sans-serif);
+  --hsf-button__font-size: 16px;
+  --hsf-button__color: #ffffff;
+  --hsf-button__background-color: var(--vips-dark, #212121);
+  --hsf-button__border-radius: var(--radius-sm, 6px);
+  --hsf-button__padding: 12px 24px;
+
+  --hsf-erroralert__font-family: var(--font-body, 'Inter', sans-serif);
+  --hsf-erroralert__font-size: 12px;
+  --hsf-erroralert__color: var(--vips-red, #a22c35);
+
+  --hsf-background__background-color: transparent;
+  --hsf-background__border-style: none;
+  --hsf-background__padding: 0;
+}
+
+/* Ensure the V4 embed takes full width of its wrapper. */
+.account-profile-form__wealth-embed.hs-form-html {
+  display: block;
+  width: 100%;
+}
+
+/* ── "Add another property / loan" checkboxes rendered as buttons ──
+   HubSpot's new-editor DOM uses `hsfc-*` classes and object-prefixed
+   `name` attrs like `0-1/p1_add_another_property`. Selectors below
+   use :has() to target the wrapping CheckboxField/Row based on the
+   input's name. Only these three fields are affected.
+   Behaviour + auto-advance-on-click wired in module.js. */
+.account-profile-form__wealth-embed .hsfc-Row:has(> .hsfc-CheckboxField input[name$="/p1_add_another_property"]),
+.account-profile-form__wealth-embed .hsfc-Row:has(> .hsfc-CheckboxField input[name$="/p2_add_another_property"]),
+.account-profile-form__wealth-embed .hsfc-Row:has(> .hsfc-CheckboxField input[name$="/add_another_loan"]) {
+  display: flex !important;
+  justify-content: center;
+  margin: 24px 0 8px;
+}
+
+/* Kill the CheckboxField's default padding/border so the label owns the box */
+.account-profile-form__wealth-embed .hsfc-CheckboxField:has(input[name$="/p1_add_another_property"]),
+.account-profile-form__wealth-embed .hsfc-CheckboxField:has(input[name$="/p2_add_another_property"]),
+.account-profile-form__wealth-embed .hsfc-CheckboxField:has(input[name$="/add_another_loan"]) {
+  padding: 0 !important;
+  border: none !important;
+  background: transparent !important;
+  margin: 0 !important;
+}
+
+/* Hide the actual checkbox but keep it in the DOM for form submission */
+.account-profile-form__wealth-embed input.hsfc-CheckboxInput[name$="/p1_add_another_property"],
+.account-profile-form__wealth-embed input.hsfc-CheckboxInput[name$="/p2_add_another_property"],
+.account-profile-form__wealth-embed input.hsfc-CheckboxInput[name$="/add_another_loan"] {
+  position: absolute !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+/* Style the FieldLabel (which wraps the input + text spans) as the button */
+.account-profile-form__wealth-embed .hsfc-CheckboxField:has(input[name$="/p1_add_another_property"]) > label.hsfc-FieldLabel,
+.account-profile-form__wealth-embed .hsfc-CheckboxField:has(input[name$="/p2_add_another_property"]) > label.hsfc-FieldLabel,
+.account-profile-form__wealth-embed .hsfc-CheckboxField:has(input[name$="/add_another_loan"]) > label.hsfc-FieldLabel {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 12px 28px !important;
+  background: var(--vips-dark, #212121) !important;
+  color: #ffffff !important;
+  border: none !important;
+  border-radius: var(--radius-sm, 6px) !important;
+  cursor: pointer;
+  font-family: var(--font-body, 'Inter', sans-serif) !important;
+  font-weight: 500 !important;
+  font-size: 15px !important;
+  line-height: 1.2 !important;
+  margin: 0 !important;
+  min-width: 240px;
+  text-align: center;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  user-select: none;
+}
+
+.account-profile-form__wealth-embed .hsfc-CheckboxField:has(input[name$="/p1_add_another_property"]) > label.hsfc-FieldLabel:hover,
+.account-profile-form__wealth-embed .hsfc-CheckboxField:has(input[name$="/p2_add_another_property"]) > label.hsfc-FieldLabel:hover,
+.account-profile-form__wealth-embed .hsfc-CheckboxField:has(input[name$="/add_another_loan"]) > label.hsfc-FieldLabel:hover {
+  opacity: 0.92;
+  transform: translateY(-1px);
+}
+
+.account-profile-form__wealth-embed .hsfc-CheckboxField:has(input[name$="/p1_add_another_property"]) > label.hsfc-FieldLabel:active,
+.account-profile-form__wealth-embed .hsfc-CheckboxField:has(input[name$="/p2_add_another_property"]) > label.hsfc-FieldLabel:active,
+.account-profile-form__wealth-embed .hsfc-CheckboxField:has(input[name$="/add_another_loan"]) > label.hsfc-FieldLabel:active {
+  transform: translateY(0);
+}
+
+/* Prepend a "+" glyph — the label's text is deeply nested in <span><span>,
+   so we prefix on the outermost <span> that immediately follows the input. */
+.account-profile-form__wealth-embed .hsfc-CheckboxField:has(input[name$="/p1_add_another_property"]) > label.hsfc-FieldLabel > span::before,
+.account-profile-form__wealth-embed .hsfc-CheckboxField:has(input[name$="/p2_add_another_property"]) > label.hsfc-FieldLabel > span::before,
+.account-profile-form__wealth-embed .hsfc-CheckboxField:has(input[name$="/add_another_loan"]) > label.hsfc-FieldLabel > span::before {
+  content: "+ ";
+  font-weight: 700;
+  margin-right: 2px;
+}
+
+/* When the button has been clicked (module.js adds .vips-remove-state):
+     - swap the "+" prefix for "× "
+     - swap dark VIPSCLUB background for the red brand accent to signal
+       "click again to remove" without needing extra copy. */
+.account-profile-form__wealth-embed label.hsfc-FieldLabel.vips-remove-state {
+  background: var(--vips-red, #a22c35) !important;
+}
+.account-profile-form__wealth-embed label.hsfc-FieldLabel.vips-remove-state > span::before {
+  content: "× ";
+}
+
+/* ── Yes / No button pair for "Do you own a business?" ──
+   module.js adds `.vips-yesno-field` to the CheckboxField container and
+   appends `.vips-yesno` with two `.vips-yesno__btn` children. The label
+   above shows the question in plain text; the checkbox is hidden. */
+.account-profile-form__wealth-embed input.hsfc-CheckboxInput[name$="/do_you_own_a_business"] {
+  position: absolute !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+.account-profile-form__wealth-embed .hsfc-CheckboxField.vips-yesno-field > label.hsfc-FieldLabel {
+  display: block !important;
+  background: transparent !important;
+  color: var(--vips-dark, #212121) !important;
+  padding: 0 !important;
+  border: none !important;
+  border-radius: 0 !important;
+  font-family: var(--font-body, 'Inter', sans-serif) !important;
+  font-weight: 500 !important;
+  font-size: 14px !important;
+  line-height: 1.4 !important;
+  margin: 0 0 8px 0 !important;
+  min-width: 0;
+  text-align: left;
+  cursor: default;
+  transition: none;
+  transform: none !important;
+  user-select: text;
+}
+.account-profile-form__wealth-embed .hsfc-CheckboxField.vips-yesno-field > label.hsfc-FieldLabel:hover,
+.account-profile-form__wealth-embed .hsfc-CheckboxField.vips-yesno-field > label.hsfc-FieldLabel:active {
+  background: transparent !important;
+  transform: none !important;
+  opacity: 1;
+}
+.account-profile-form__wealth-embed .hsfc-CheckboxField.vips-yesno-field > label.hsfc-FieldLabel > span::before {
+  content: none !important;
+}
+
+.account-profile-form__wealth-embed .vips-yesno {
+  display: flex;
+  gap: 12px;
+  margin: 4px 0 4px;
+}
+
+.account-profile-form__wealth-embed .vips-yesno__btn {
+  flex: 1;
+  min-width: 100px;
+  padding: 12px 24px;
+  background: var(--vips-bg-card, #ffffff);
+  border: 1px solid var(--vips-border, #e0e0e0);
+  border-radius: var(--radius-sm, 6px);
+  cursor: pointer;
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 1.2;
+  color: var(--vips-dark, #212121);
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+.account-profile-form__wealth-embed .vips-yesno__btn:hover {
+  border-color: var(--vips-dark, #212121);
+}
+.account-profile-form__wealth-embed .vips-yesno__btn.is-selected {
+  background: var(--vips-dark, #212121);
+  border-color: var(--vips-dark, #212121);
+  color: #ffffff;
+}
+.account-profile-form__wealth-embed .vips-yesno__btn.is-selected:hover {
+  opacity: 0.92;
+}
+
+/* ── Multi-select checkbox group (e.g. "Investment Interests") ──
+   HubSpot's new-editor DOM for a multi-checkbox is:
+     .hsfc-CheckboxFieldGroup
+       > label.hsfc-FieldLabel (question label; often empty)
+       > .hsfc-CheckboxFieldGroup__Options
+           > div > label.hsfc-FieldLabel > input.hsfc-CheckboxInput
+   Default rendering is a left-aligned inline list — visually awkward.
+   Restyle as a wrap-flex grid of BOXES with the checkbox visible on
+   the left of each option. Selected state = checkbox checked; the box
+   background stays neutral so scanning stays quiet.
+   Scoped to the wealth embed so other multi-checkboxes on the portal
+   aren't affected. */
+.account-profile-form__wealth-embed .hsfc-CheckboxFieldGroup .hsfc-CheckboxFieldGroup__Options {
+  display: flex !important;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 4px 0 0;
+}
+
+.account-profile-form__wealth-embed .hsfc-CheckboxFieldGroup .hsfc-CheckboxFieldGroup__Options > div {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Hide BOTH the native input AND any SVG HubSpot renders as their own
+   custom checkmark inside the label. We draw our own checkbox with
+   pseudo-elements on the label so we control every pixel and don't get
+   surprised by page-filling SVGs.  */
+.account-profile-form__wealth-embed .hsfc-CheckboxFieldGroup .hsfc-CheckboxFieldGroup__Options input.hsfc-CheckboxInput {
+  position: absolute !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  padding: 0 !important;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+.account-profile-form__wealth-embed .hsfc-CheckboxFieldGroup .hsfc-CheckboxFieldGroup__Options > div > label.hsfc-FieldLabel svg,
+.account-profile-form__wealth-embed .hsfc-CheckboxFieldGroup .hsfc-CheckboxFieldGroup__Options > div > label.hsfc-FieldLabel svg * {
+  display: none !important;
+}
+
+/* Each option's label becomes a rounded rectangle box.
+   Left padding leaves room for the CSS-drawn checkbox. `overflow:
+   hidden` is a safety net so any HubSpot child element that somehow
+   escapes styling can't bleed out of the box. */
+.account-profile-form__wealth-embed .hsfc-CheckboxFieldGroup .hsfc-CheckboxFieldGroup__Options > div > label.hsfc-FieldLabel {
+  position: relative;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 12px 16px 12px 42px !important;
+  background: transparent !important;
+  border: 1.5px solid var(--vips-border, #e0e0e0) !important;
+  border-radius: var(--radius-sm, 6px) !important;
+  color: var(--vips-dark, #212121) !important;
+  cursor: pointer;
+  font-family: var(--font-body, 'Inter', sans-serif) !important;
+  font-weight: 500 !important;
+  font-size: 14px !important;
+  line-height: 1.2 !important;
+  margin: 0 !important;
+  min-width: 0;
+  text-align: left;
+  transition: border-color 0.15s ease;
+  user-select: none;
+  transform: none !important;
+  overflow: hidden;
+}
+
+/* The box (::before) — always visible on the left of the label */
+.account-profile-form__wealth-embed .hsfc-CheckboxFieldGroup .hsfc-CheckboxFieldGroup__Options > div > label.hsfc-FieldLabel::before {
+  content: "";
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  border: 1.5px solid var(--vips-border, #cccccc);
+  border-radius: 3px;
+  background: #ffffff;
+  box-sizing: border-box;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+/* The tick (::after) — only visible when the sibling input is checked */
+.account-profile-form__wealth-embed .hsfc-CheckboxFieldGroup .hsfc-CheckboxFieldGroup__Options > div > label.hsfc-FieldLabel::after {
+  content: "";
+  position: absolute;
+  left: 19px;
+  top: 50%;
+  width: 6px;
+  height: 10px;
+  border: solid #ffffff;
+  border-width: 0 2px 2px 0;
+  transform: translateY(-65%) rotate(45deg);
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.account-profile-form__wealth-embed .hsfc-CheckboxFieldGroup .hsfc-CheckboxFieldGroup__Options > div > label.hsfc-FieldLabel:has(input:checked)::before {
+  background: var(--vips-dark, #212121);
+  border-color: var(--vips-dark, #212121);
+}
+.account-profile-form__wealth-embed .hsfc-CheckboxFieldGroup .hsfc-CheckboxFieldGroup__Options > div > label.hsfc-FieldLabel:has(input:checked)::after {
+  opacity: 1;
+}
+
+.account-profile-form__wealth-embed .hsfc-CheckboxFieldGroup .hsfc-CheckboxFieldGroup__Options > div > label.hsfc-FieldLabel:hover {
+  border-color: var(--vips-dark, #212121) !important;
+  background: transparent !important;
+}
+
+/* Selected state — no background change, just a slightly stronger
+   border so scanning stays quiet but the checked box is clear. */
+.account-profile-form__wealth-embed .hsfc-CheckboxFieldGroup .hsfc-CheckboxFieldGroup__Options > div > label.hsfc-FieldLabel:has(input:checked) {
+  border-color: var(--vips-dark, #212121) !important;
+  background: transparent !important;
+  color: var(--vips-dark, #212121) !important;
+}
+
+/* Kill the ::before pseudo prefix that the "add another" rule adds
+   globally to label > span. Doesn't apply here anyway because the
+   selector is different, but this is a safety belt. */
+.account-profile-form__wealth-embed .hsfc-CheckboxFieldGroup .hsfc-CheckboxFieldGroup__Options > div > label.hsfc-FieldLabel > span::before {
+  content: none !important;
+}
+
+/* Hide the empty question-level FieldLabel (HubSpot renders it even
+   when the field's own label copy is blank — creates awkward padding
+   above the options row). */
+.account-profile-form__wealth-embed .hsfc-CheckboxFieldGroup > label.hsfc-FieldLabel:not(:has(input)):empty,
+.account-profile-form__wealth-embed .hsfc-CheckboxFieldGroup > label.hsfc-FieldLabel:not(:has(input)) > span:empty {
+  display: none;
+}
+
+/* ── HubSpot form: 2-column grid ── */
+.account-profile-form__form-wrap .hs-form,
+.account-profile-form__wealth-card .hs-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 20px;
+  row-gap: 20px;
+}
+
+.account-profile-form__form-wrap .hs-form .hs-submit,
+.account-profile-form__wealth-card .hs-form .hs-submit {
+  grid-column: 1 / -1;
+  margin-top: 8px;
+}
+
+/* ── Section headers inside HubSpot forms ──
+   The wealth form uses richtext blocks (<h2>/<h3> pairs) as section
+   dividers, e.g. "Property Portfolio" / "Property 1". HubSpot wraps
+   each block in an unclassed <div>, which becomes a normal grid item
+   in the 2-col grid — that pushes every following field one slot to
+   the right and breaks the whole layout.
+   Fix: any grid child whose only descendant is `.hs-richtext.hs-main-font-element`
+   spans both columns, and the heading pair renders inline. */
+.account-profile-form__form-wrap .hs-form > div:has(> .hs-richtext.hs-main-font-element),
+.account-profile-form__wealth-card .hs-form > div:has(> .hs-richtext.hs-main-font-element) {
+  grid-column: 1 / -1;
+  margin-top: 24px;
+  margin-bottom: 4px;
+}
+
+.account-profile-form__form-wrap .hs-form > div:first-child:has(> .hs-richtext.hs-main-font-element),
+.account-profile-form__wealth-card .hs-form > div:first-child:has(> .hs-richtext.hs-main-font-element) {
+  margin-top: 0;
+}
+
+.account-profile-form__form-wrap .hs-richtext.hs-main-font-element,
+.account-profile-form__wealth-card .hs-richtext.hs-main-font-element {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  border-bottom: 1px solid #ebebeb;
+  padding-bottom: 8px;
+}
+
+.account-profile-form__form-wrap .hs-richtext.hs-main-font-element h2,
+.account-profile-form__form-wrap .hs-richtext.hs-main-font-element h3,
+.account-profile-form__wealth-card .hs-richtext.hs-main-font-element h2,
+.account-profile-form__wealth-card .hs-richtext.hs-main-font-element h3 {
+  margin: 0;
+}
+
+.account-profile-form__form-wrap .hs-richtext.hs-main-font-element h2,
+.account-profile-form__wealth-card .hs-richtext.hs-main-font-element h2 {
+  font-family: var(--font-heading, "Montserrat", sans-serif);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--vips-dark, #212121);
+  line-height: 1.4;
+}
+
+.account-profile-form__form-wrap .hs-richtext.hs-main-font-element h3,
+.account-profile-form__wealth-card .hs-richtext.hs-main-font-element h3 {
+  font-family: var(--font-body, "Inter", sans-serif);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--vips-text-secondary, #616161);
+  line-height: 1.4;
+}
+
+/* ── Field labels ── */
+.account-profile-form__form-wrap .hs-label,
+.account-profile-form__form-wrap label,
+.account-profile-form__wealth-card .hs-label,
+.account-profile-form__wealth-card label {
+  display: block;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 21px;
+  color: #1a1a1a;
+  margin-bottom: 6px;
+}
+
+/* ── Inputs, selects, textareas ──
+   Exclude checkbox / radio / file — those get their own styling below,
+   otherwise the 100%-width + 43px-height rule renders them as an empty
+   box with a tiny check symbol swimming in it. */
+.account-profile-form__form-wrap input.hs-input:not([type="checkbox"]):not([type="radio"]):not([type="file"]),
+.account-profile-form__form-wrap select.hs-input,
+.account-profile-form__form-wrap textarea.hs-input,
+.account-profile-form__wealth-card input.hs-input:not([type="checkbox"]):not([type="radio"]):not([type="file"]),
+.account-profile-form__wealth-card select.hs-input,
+.account-profile-form__wealth-card textarea.hs-input {
+  width: 100%;
+  height: 43px;
+  padding: 0 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background: #fff;
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #616161;
+  box-sizing: border-box;
+  transition: border-color 0.15s ease;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.account-profile-form__form-wrap textarea.hs-input,
+.account-profile-form__wealth-card textarea.hs-input {
+  height: auto;
+  min-height: 80px;
+  padding: 10px;
+  resize: vertical;
+}
+
+.account-profile-form__form-wrap input.hs-input:focus,
+.account-profile-form__form-wrap select.hs-input:focus,
+.account-profile-form__form-wrap textarea.hs-input:focus,
+.account-profile-form__wealth-card input.hs-input:focus,
+.account-profile-form__wealth-card select.hs-input:focus,
+.account-profile-form__wealth-card textarea.hs-input:focus {
+  outline: none;
+  border-color: var(--vips-dark);
+}
+
+/* ── Checkbox fields (single boolean + multi-checkbox list) ──
+   HubSpot renders both as <input type="checkbox" class="hs-input"> inside
+   an <ul class="inputs-list">. Wealth form uses these for
+   "Do you own a business?" (booleancheckbox) and "Investment Interests"
+   (multi-checkbox). Both should span both grid columns, with the choices
+   sitting on a wrap-flex row so short labels don't burn a whole line each. */
+.account-profile-form__form-wrap .hs-fieldtype-booleancheckbox,
+.account-profile-form__form-wrap .hs-fieldtype-checkbox,
+.account-profile-form__wealth-card .hs-fieldtype-booleancheckbox,
+.account-profile-form__wealth-card .hs-fieldtype-checkbox,
+.account-profile-form__form-wrap .hs-dependent-field:has(.hs-fieldtype-booleancheckbox),
+.account-profile-form__wealth-card .hs-dependent-field:has(.hs-fieldtype-booleancheckbox) {
+  grid-column: 1 / -1;
+}
+
+.account-profile-form__form-wrap .hs-fieldtype-booleancheckbox .inputs-list,
+.account-profile-form__form-wrap .hs-fieldtype-checkbox .inputs-list,
+.account-profile-form__wealth-card .hs-fieldtype-booleancheckbox .inputs-list,
+.account-profile-form__wealth-card .hs-fieldtype-checkbox .inputs-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 24px;
+}
+
+.account-profile-form__form-wrap .hs-form-booleancheckbox,
+.account-profile-form__form-wrap .hs-form-checkbox,
+.account-profile-form__wealth-card .hs-form-booleancheckbox,
+.account-profile-form__wealth-card .hs-form-checkbox {
+  display: block;
+  margin: 0;
+}
+
+.account-profile-form__form-wrap .hs-form-booleancheckbox-display,
+.account-profile-form__form-wrap .hs-form-checkbox-display,
+.account-profile-form__wealth-card .hs-form-booleancheckbox-display,
+.account-profile-form__wealth-card .hs-form-checkbox-display {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-family: var(--font-body, "Inter", sans-serif);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 21px;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+.account-profile-form__form-wrap .hs-form-booleancheckbox-display input[type="checkbox"],
+.account-profile-form__form-wrap .hs-form-checkbox-display input[type="checkbox"],
+.account-profile-form__wealth-card .hs-form-booleancheckbox-display input[type="checkbox"],
+.account-profile-form__wealth-card .hs-form-checkbox-display input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  padding: 0;
+  border: 1px solid #bfbfbf;
+  border-radius: 3px;
+  cursor: pointer;
+  accent-color: var(--vips-primary, #a22c35);
+  flex-shrink: 0;
+}
+
+/* The wrapping <span> around the checkbox label text — HubSpot puts a
+   required asterisk in a nested <span class="hs-form-required">. Make
+   sure the span behaves as a block so long labels wrap under the box
+   rather than beside it looking weird. */
+.account-profile-form__form-wrap .hs-form-booleancheckbox-display > span,
+.account-profile-form__form-wrap .hs-form-checkbox-display > span,
+.account-profile-form__wealth-card .hs-form-booleancheckbox-display > span,
+.account-profile-form__wealth-card .hs-form-checkbox-display > span {
+  display: inline;
+}
+
+/* ── Submit button ── */
+.account-profile-form__form-wrap .hs-button.primary,
+.account-profile-form__wealth-card .hs-button.primary {
+  height: 47px;
+  padding: 0 24px;
+  background: #212121;
+  border: none;
+  border-radius: 4px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.account-profile-form__form-wrap .hs-button.primary:hover,
+.account-profile-form__wealth-card .hs-button.primary:hover {
+  background: #3f3f47;
+}
+
+.account-profile-form__form-wrap .hs-button.primary:focus-visible,
+.account-profile-form__wealth-card .hs-button.primary:focus-visible {
+  outline: 2px solid var(--vips-dark);
+  outline-offset: 2px;
+}
+
+/* ── Error messages ── */
+.account-profile-form__form-wrap .hs-error-msgs,
+.account-profile-form__wealth-card .hs-error-msgs {
+  list-style: none;
+  margin: 4px 0 0;
+  padding: 0;
+}
+
+.account-profile-form__form-wrap .hs-error-msg,
+.account-profile-form__wealth-card .hs-error-msg {
+  font-family: var(--font-body);
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--vips-red);
+}
+
+/* ── Field description ── */
+.account-profile-form__form-wrap .hs-field-desc,
+.account-profile-form__wealth-card .hs-field-desc {
+  font-family: var(--font-body);
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--vips-text-secondary);
+  margin: 4px 0 0;
+}
+
+/* ── Remove HS default styling that may interfere ── */
+.account-profile-form__form-wrap .hs-form .input,
+.account-profile-form__wealth-card .hs-form .input {
+  margin: 0;
+}
+
+.account-profile-form__form-wrap .hs-form fieldset,
+.account-profile-form__wealth-card .hs-form fieldset {
+  max-width: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* ── Email field: always locked regardless of editing state ── */
+.account-profile-form__form-wrap .hs_email input.hs-input {
+  pointer-events: none !important;
+  background: #f9f9f9 !important;
+  color: var(--vips-text-secondary) !important;
+}
+
+/* ── Wealth Hub: collapsed form / summary toggle state ──
+   HubL renders the form + the summary side-by-side; JS collapses the
+   one that isn't active via .is-collapsed / .is-hidden. */
+.account-profile-form__form-wrap.is-collapsed,
+.account-profile-form__wealth-summary.is-hidden {
+  display: none;
+}
+
+/* Summary card — read-only view of the wealth profile shown when the
+   member has already submitted the form. Grouped into sections
+   (Property 1, Property 2, Home Loan, etc.) with a definition-list
+   layout for the values. */
+.account-profile-form__wealth-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 24px;
+  background: var(--vips-bg-card, #ffffff);
+  border: 1px solid var(--vips-border-light, #ececec);
+  border-radius: var(--radius-lg, 10px);
+  box-shadow: var(--shadow-card-subtle, 0 1px 2px rgba(0,0,0,0.04));
+}
+
+.account-profile-form__wealth-summary .wealth-summary__section {
+  padding: 0 0 20px;
+  border-bottom: 1px solid var(--vips-border-light, #ececec);
+}
+.account-profile-form__wealth-summary .wealth-summary__section:last-child {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.account-profile-form__wealth-summary .wealth-summary__heading {
+  font-family: var(--font-heading, 'Inter', sans-serif);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--vips-dark, #212121);
+  margin: 0 0 12px;
+}
+
+.account-profile-form__wealth-summary .wealth-summary__grid {
+  display: grid;
+  grid-template-columns: minmax(140px, 200px) 1fr;
+  gap: 8px 24px;
+  margin: 0;
+}
+.account-profile-form__wealth-summary .wealth-summary__grid dt {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--vips-text-secondary, #6b6866);
+  margin: 0;
+}
+.account-profile-form__wealth-summary .wealth-summary__grid dd {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--vips-dark, #212121);
+  margin: 0;
+  word-break: break-word;
+}
+
+.account-profile-form__wealth-summary .wealth-summary__text {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 14px;
+  color: var(--vips-dark, #212121);
+  margin: 0;
+  line-height: 1.5;
+}
+
+@media (max-width: 620px) {
+  .account-profile-form__wealth-summary { padding: 18px; }
+  .account-profile-form__wealth-summary .wealth-summary__grid {
+    grid-template-columns: 1fr;
+    gap: 2px 0;
+  }
+  .account-profile-form__wealth-summary .wealth-summary__grid dt {
+    margin-top: 8px;
+  }
+}
+
+/* ── Form locked state (entire form is read-only — covers date pickers, custom widgets, any future fields) ── */
+.account-profile-form__form-wrap--locked .hs-form {
+  pointer-events: none;
+}
+
+.account-profile-form__form-wrap--locked input.hs-input,
+.account-profile-form__form-wrap--locked select.hs-input,
+.account-profile-form__form-wrap--locked textarea.hs-input,
+.account-profile-form__form-wrap--locked .hs-fieldtype-date input,
+.account-profile-form__form-wrap--locked .hs-dateinput input {
+  background: #f9f9f9;
+  color: var(--vips-text-secondary);
+  cursor: default;
+}
+
+.account-profile-form__form-wrap--locked .hs-submit {
+  display: none;
+}
+
+/* ── Form unlocked state (after Edit Profile click) ── */
+.account-profile-form__form-wrap--editing .hs-form {
+  pointer-events: auto;
+}
+
+.account-profile-form__form-wrap--editing input.hs-input,
+.account-profile-form__form-wrap--editing select.hs-input,
+.account-profile-form__form-wrap--editing textarea.hs-input {
+  background: #fff;
+  color: #212121;
+  cursor: auto;
+}
+
+.account-profile-form__form-wrap--editing .hs-submit {
+  display: block;
+}
+
+/* ── Wealth Hub Card ── */
+.account-profile-form__wealth-card {
+  background: var(--vips-bg-card);
+  border: 1px solid var(--vips-border-light);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+}
+
+/* ── Placeholder (editor only) ── */
+.account-profile-form__placeholder {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 22px;
+  color: var(--vips-text-secondary);
+  background: var(--vips-bg-input);
+  border-radius: var(--radius-sm);
+  padding: 24px;
+  text-align: center;
+}
+
+.account-profile-form__placeholder p {
+  margin: 0;
+}
+
+/* ── Custom DOB field — text input with calendar icon (replaces broken HubSpot Pikaday) ── */
+.account-profile-form__dob-wrap {
+  position: relative;
+  width: 100%;
+}
+
+.account-profile-form__form-wrap input.account-profile-form__native-dob {
+  width: 100%;
+  height: 43px;
+  padding: 0 40px 0 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background: #fff;
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #616161;
+  box-sizing: border-box;
+}
+
+.account-profile-form__form-wrap input.account-profile-form__native-dob:focus {
+  outline: none;
+  border-color: var(--vips-dark);
+}
+
+.account-profile-form__form-wrap--locked input.account-profile-form__native-dob {
+  background: #f9f9f9;
+  color: var(--vips-text-secondary);
+}
+
+/* Hidden native date picker — used only via showPicker() when icon is clicked */
+.account-profile-form__dob-picker {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+  border: 0;
+  padding: 0;
+}
+
+.account-profile-form__dob-btn {
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  color: var(--vips-text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+}
+
+.account-profile-form__dob-btn:hover {
+  color: var(--vips-dark);
+  background: #f7f7f7;
+}
+
+.account-profile-form__dob-btn:focus-visible {
+  outline: 2px solid var(--vips-dark);
+  outline-offset: 1px;
+}
+
+.account-profile-form__form-wrap--locked .account-profile-form__dob-btn {
+  display: none;
+}
+
+.account-profile-form__dob-error {
+  color: var(--vips-red);
+  font-family: var(--font-body);
+  font-size: 12px;
+  line-height: 16px;
+  margin: 4px 0 0;
+  display: none;
+}
+
+/* ── Profile Image Field — full-width row at top of form ── */
+.account-profile-form__form-wrap .hs_profile_image_file {
+  grid-column: 1 / -1;
+  order: -1;
+}
+
+/* Hide the native HubSpot file input — we replace it with custom avatar UI.
+   Use opacity/position rather than display:none so the input stays in the
+   accessibility tree and React keeps it tracked. */
+.account-profile-form__form-wrap .hs_profile_image_file input[type="file"] {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+  opacity: 0;
+}
+
+/* Custom avatar uploader block (injected by JS) */
+.account-profile-form__avatar-uploader {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 0 0 4px;
+}
+
+.account-profile-form__avatar-preview {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  background: var(--vips-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 32px;
+  color: var(--vips-text-secondary);
+  flex-shrink: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.account-profile-form__avatar-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.account-profile-form__avatar-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.account-profile-form__avatar-hint {
+  font-family: var(--font-body);
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--vips-text-secondary);
+}
+
+.account-profile-form__avatar-edit {
+  align-self: flex-start;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 20px;
+  color: #fff;
+  background: var(--vips-dark);
+  border: none;
+  border-radius: 4px;
+  padding: 8px 14px;
+  cursor: pointer;
+  margin-top: 2px;
+  transition: background-color 0.15s ease, opacity 0.15s ease;
+}
+
+.account-profile-form__avatar-edit:hover {
+  background: #3f3f47;
+}
+
+.account-profile-form__avatar-edit:focus-visible {
+  outline: 2px solid var(--vips-dark);
+  outline-offset: 2px;
+}
+
+/* Hide the edit button when the form is locked — only visible after Edit Profile click */
+.account-profile-form__form-wrap--locked .account-profile-form__avatar-edit {
+  display: none;
+}
+
+/* Hide the helper hint when locked too — keeps the locked view clean */
+.account-profile-form__form-wrap--locked .account-profile-form__avatar-hint {
+  display: none;
+}
+
+/* ── Crop Modal ── */
+.account-profile-form__crop-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(0, 0, 0, 0.55);
+}
+
+.account-profile-form__crop-modal.is-open {
+  display: flex;
+}
+
+.account-profile-form__crop-dialog {
+  background: #fff;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 440px;
+  max-height: calc(100vh - 32px);
+  overflow-y: auto;
+  padding: 24px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.account-profile-form__crop-title {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 24px;
+  color: var(--vips-dark);
+  margin: 0;
+}
+
+/* File-picker dropzone (shown until a file is chosen) */
+.account-profile-form__crop-dropzone {
+  border: 2px dashed #ccc;
+  border-radius: 8px;
+  padding: 32px 16px;
+  text-align: center;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--vips-text-secondary);
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.account-profile-form__crop-dropzone:hover,
+.account-profile-form__crop-dropzone.is-drag {
+  border-color: var(--vips-dark);
+  background: #f7f7f7;
+}
+
+.account-profile-form__crop-dropzone strong {
+  display: block;
+  color: var(--vips-dark);
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.account-profile-form__crop-stage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: #1a1a1a;
+  border-radius: 8px;
+  overflow: hidden;
+  touch-action: none;
+  cursor: grab;
+  user-select: none;
+}
+
+.account-profile-form__crop-stage:active {
+  cursor: grabbing;
+}
+
+.account-profile-form__crop-stage canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Circular mask overlay — rendered as a radial gradient that dims everything outside the circle */
+.account-profile-form__crop-mask {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at center, transparent 49.5%, rgba(0,0,0,0.55) 50%);
+  border-radius: 8px;
+}
+
+.account-profile-form__crop-zoom {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.account-profile-form__crop-zoom-label {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--vips-text-secondary);
+  min-width: 50px;
+}
+
+.account-profile-form__crop-zoom input[type="range"] {
+  flex: 1;
+  accent-color: var(--vips-dark);
+}
+
+.account-profile-form__crop-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.account-profile-form__crop-btn {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.account-profile-form__crop-btn--secondary {
+  background: #fff;
+  border-color: #ddd;
+  color: var(--vips-dark);
+}
+
+.account-profile-form__crop-btn--secondary:hover {
+  background: #f7f7f7;
+}
+
+.account-profile-form__crop-btn--primary {
+  background: var(--vips-dark);
+  color: #fff;
+}
+
+.account-profile-form__crop-btn--primary:hover {
+  background: #3f3f47;
+}
+
+.account-profile-form__crop-btn--primary:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.account-profile-form__crop-btn:focus-visible {
+  outline: 2px solid var(--vips-dark);
+  outline-offset: 2px;
+}
+
+/* Mobile (≤768px) */
+@media (max-width: 768px) {
+  .account-profile-form__avatar-uploader {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 12px;
+  }
+
+  .account-profile-form__avatar-meta {
+    align-items: center;
+  }
+
+  /* Center the Change photo button to match the centered image + hint above it
+     (base rule sets align-self:flex-start for the desktop row layout). */
+  .account-profile-form__avatar-edit {
+    align-self: center;
+  }
+}
+
+/* ── Mobile (≤768px) ── */
+@media (max-width: 768px) {
+
+  .account-profile-form--hide-mobile {
+    display: none;
+  }
+
+  .account-profile-form__profile-card {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 24px;
+    border-radius: 10px;
+    border-width: 0.698px;
+  }
+
+  /* Flatten .__main so identity / stats / meta become direct flex children of the
+     profile card, then re-order to match the mobile design:
+     identity (avatar/name/email) → stats → meta (member-since/logout). */
+  .account-profile-form__main {
+    display: contents;
+  }
+  .account-profile-form__identity { order: 1; }
+  .account-profile-form__stats    { order: 2; }
+  .account-profile-form__meta     { order: 3; }
+
+  .account-profile-form__stats {
+    width: 100%;
+    gap: 8px;
+  }
+
+  .account-profile-form__stat {
+    padding: 16px 8px;
+  }
+
+  .account-profile-form__stat-number {
+    font-size: 22px;
+  }
+
+  .account-profile-form__stat-label {
+    font-size: 11px;
+  }
+
+  .account-profile-form__tab {
+    padding: 12px 16px;
+    font-size: 14px;
+  }
+
+  .account-profile-form__wealth-card {
+    border-radius: 10px;
+    border-width: 0.698px;
+  }
+
+  /* Form: single column on mobile */
+  .account-profile-form__form-wrap .hs-form,
+  .account-profile-form__wealth-card .hs-form {
+    grid-template-columns: 1fr;
+  }
+
+  .account-profile-form__form-wrap {
+    padding: 16px;
+    border-radius: 10px;
+    border-width: 0.698px;
+  }
+
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .account-profile-form__tab,
+  .account-profile-form__edit-btn {
+    transition: none;
+  }
+}
+
+/* ── Per-instance style overrides ── */
+{% if module.style_overrides.background_color.color %}
+.account-profile-form {
+  background-color: {{ module.style_overrides.background_color.color }};
+}
+{% endif %}
+
+{% if module.style_overrides.padding_top %}
+.account-profile-form {
+  padding-top: {{ module.style_overrides.padding_top }}px;
+}
+{% endif %}
+
+{% if module.style_overrides.padding_bottom %}
+.account-profile-form {
+  padding-bottom: {{ module.style_overrides.padding_bottom }}px;
+}
+{% endif %}

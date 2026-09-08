@@ -1,0 +1,153 @@
+/* ============================================================
+   VIPSCLUB Portal 2026 — Service Detail Template CSS
+
+   3-TIER RESPONSIVE LAYOUT
+
+   ≥ 1340px              Tier 1  Full 2-col outer + related CARDS in 2-col grid
+   1200–1339.98px        Tier 2  Outer 2-col stays, related CARDS collapse to 1-col
+                                  (left col is now too narrow for 2 cards side-by-side)
+   ≤ 1199.98px           Tier 3  Single-column stack of EVERYTHING
+                                  Order: __main (info + what's included)
+                                       → __side (form + RM)
+                                       → __related-section (related services)
+                                  Achieved via flex order on direct children of layout —
+                                  __left-col uses display:contents on this tier so its
+                                  children (__main, __related-section) become direct
+                                  flex siblings of __side, allowing reorder.
+   ≤ 768px               Small-mobile gap tightening (24 → 16)
+
+   Hero module emits two DIRECT grid items (after the HubSpot module
+   wrapper is collapsed via display:contents):
+     .service-detail-hero__left-col  — wraps __main + __related-section
+     .service-detail-hero__side      — enquiry form card + RM card
+
+   IMPORTANT — SPECIFICITY:
+   The related-services CARD grid (.service-detail-hero__related-grid) has
+   a base rule in module.css that sets grid-template-columns: repeat(2, 1fr).
+   To override it RELIABLY (not just by load order), we prefix our
+   overrides with .service-detail-layout, raising specificity from
+   0,1,0 → 0,2,0 so we win regardless of which file loads later.
+
+   Figma: Desktop 339:7562 | Mobile 339:9002
+   ============================================================ */
+
+.service-detail-layout {
+  display: grid;
+  gap: 24px;
+}
+
+/* CRITICAL: HubSpot wraps the hero module's output in a .hs_cos_wrapper
+   div. `display: contents` makes that wrapper transparent to layout so
+   __left-col and __side become real direct grid items. Without this rule
+   the entire hero output collapses into ONE grid cell. */
+.service-detail-layout > .hs_cos_wrapper {
+  display: contents;
+}
+
+
+/* ── SHARED outer 2-col layout (≥1200px) — Tier 1 + Tier 2 ──
+      LEFT column (__left-col) holds __main + __related stacked.
+      RIGHT column (__side) holds form + RM stacked. Each column has
+      its own independent height — no row-spanning, no gap below the
+      shorter section. */
+@media (min-width: 1200px) {
+
+  .service-detail-layout {
+    grid-template-columns: 1fr minmax(0, 397px);
+    align-items: start;
+  }
+
+  .service-detail-hero__left-col {
+    grid-column: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    min-width: 0;
+  }
+
+  .service-detail-hero__side {
+    grid-column: 2;
+    min-width: 0;
+  }
+
+}
+
+
+/* ── TIER 1 (≥1340px) — related-services CARDS in 2-column grid ──
+      Matches the figma default. The .service-detail-layout prefix
+      raises specificity to 0,2,0 so this wins over module.css's
+      base 0,1,0 rule regardless of load order. */
+@media (min-width: 1340px) {
+
+  .service-detail-layout .service-detail-hero__related-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+}
+
+
+/* ── TIER 2 (1200–1339.98px) — outer 2-col stays, related CARDS go 1-col ──
+      The left column is too narrow at this viewport for two related
+      cards side-by-side (they would overlap the form column visually
+      due to the inner card padding + gap). Stack them. */
+@media (min-width: 1200px) and (max-width: 1339.98px) {
+
+  .service-detail-layout .service-detail-hero__related-grid {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+
+/* ── TIER 3 (≤1199.98px) — single-column stack of EVERYTHING ──
+      Order (top to bottom):
+        1. Service Details (__main → info card)
+        2. What's Included  (__main → included section)
+        3. Enquiry Form     (__side → form card)
+        4. RM Details       (__side → rm card)
+        5. Related Services (__related-section)
+
+      __left-col uses display:contents so its children (__main and
+      __related-section) become direct flex items of the layout,
+      siblings of __side — enabling the order property to reorder
+      them around __side. No duplicate Related Services module needed.
+
+      Related-services CARD grid stays 1-col across this entire band
+      (the .service-detail-layout prefix beats module.css's 0,1,0
+      base rule by specificity 0,2,0). */
+@media (max-width: 1199.98px) {
+
+  .service-detail-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .service-detail-hero__left-col {
+    display: contents;
+  }
+
+  .service-detail-hero__main            { order: 1; }
+  .service-detail-hero__side            { order: 2; }
+  .service-detail-hero__related-section { order: 3; }
+
+  .service-detail-layout .service-detail-hero__related-grid {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+
+/* ── Small-mobile gap tightening (≤768px) — separate top-level @media ──
+      Reduces the outer flex gap and the __side internal gap from 24 → 16. */
+@media (max-width: 768px) {
+
+  .service-detail-layout {
+    gap: 16px;
+  }
+
+  .service-detail-hero__side {
+    gap: 16px;
+  }
+
+}

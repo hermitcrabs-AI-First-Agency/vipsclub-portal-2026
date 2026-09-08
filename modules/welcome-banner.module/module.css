@@ -1,0 +1,30 @@
+{# ============================================================
+   welcome-banner — Per-instance style overrides
+   Base component styles live in css/portal/dashboard.css
+   ============================================================ #}
+
+{% if module.style_overrides.background_color.color %}
+.welcome-banner {
+  background-color: {{ module.style_overrides.background_color.color }};
+}
+{% endif %}
+
+{% if module.style_overrides.padding_top %}
+.welcome-banner {
+  padding-top: {{ module.style_overrides.padding_top }}px;
+}
+{% endif %}
+
+{% if module.style_overrides.padding_bottom %}
+.welcome-banner {
+  padding-bottom: {{ module.style_overrides.padding_bottom }}px;
+}
+{% endif %}
+
+{% if module.style_overrides.hide_on_mobile %}
+@media (max-width: 480px) {
+  .welcome-banner--hide-mobile {
+    display: none;
+  }
+}
+{% endif %}

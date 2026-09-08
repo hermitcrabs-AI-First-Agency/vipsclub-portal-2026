@@ -1,0 +1,103 @@
+/* =============================================================
+   Auth Reset Password Module — page-specific overrides
+   Base styles from css/auth/auth-pages.css
+   Figma: Desktop 960:16823
+   ============================================================= */
+
+/* ── Header: 570px gradient (same as register / reset-request) ── */
+.auth-page--reset-password .auth-page__header {
+  height: 570px;
+  background: linear-gradient(158.58deg, #000000 36.19%, #a22b34 66.10%);
+}
+
+/* ── Body: card top at 285px from page top (570 − 285 = 285px overlap) ── */
+.auth-page--reset-password .auth-page__body {
+  margin-top: -285px;
+}
+
+/* ── Card: photo + form panel ── */
+.auth-page--reset-password .auth-page__card {
+  width: 740px;
+}
+
+/* ── Photo: taller than reset-request (548px) ── */
+.auth-page--reset-password .auth-page__card-photo {
+  width: 406px;
+  height: 548px;
+}
+
+/* ── Form panel fills remaining width ── */
+.auth-page--reset-password .auth-page__card-form {
+  flex: 1;
+  min-width: 0;
+}
+
+/* ── Heading: SemiBold 32px ── */
+.auth-page--reset-password .auth-form__heading {
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 40px;
+  color: #1a1a1a;
+}
+
+/* ── Subtitle: line-height 24px ── */
+.auth-page--reset-password .auth-form__subtitle {
+  line-height: 24px;
+  margin-top: 5px;
+}
+
+/* ── Header spacing ── */
+.auth-page--reset-password .auth-form__header {
+  margin-bottom: 16px;
+}
+
+/* ── Password requirements hint ──
+   Shown above the form fields, matches Figma inter-field hint style. ── */
+.auth-form__password-hint {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 24px;
+  color: #757575;
+  margin: 0 0 20px;
+}
+
+/* ── Eye icon on password inputs (rendered by HubSpot natively) ── */
+.auth-page--reset-password .auth-page__card-form input[type="password"] {
+  padding-right: 44px;
+}
+
+/* ── Mobile — max-width 768px ── */
+@media (max-width: 768px) {
+  /* Override desktop header height back to 112px */
+  .auth-page--reset-password .auth-page__header {
+    height: 112px;
+    padding-top: 32px;
+    background: linear-gradient(164.13deg, #000000 0%, #a22b34 50%);
+  }
+
+  /* Remove card pull-up */
+  .auth-page--reset-password .auth-page__body {
+    margin-top: 0;
+    padding-top: 32px;
+  }
+
+  /* Card full-width, all-corner radius */
+  .auth-page--reset-password .auth-page__card {
+    width: 100%;
+    max-width: 362px;
+  }
+
+  /* Mobile heading */
+  .auth-page--reset-password .auth-form__heading {
+    font-size: 28px;
+    line-height: 35px;
+  }
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .auth-page--reset-password * {
+    transition-duration: 0.01ms !important;
+  }
+}

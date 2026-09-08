@@ -1,0 +1,438 @@
+[ {
+  "id" : "section_heading",
+  "name" : "section_heading",
+  "label" : "Section Heading",
+  "help_text" : "Heading displayed above the offer cards (e.g. 'Current Promotions').",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Current Promotions"
+}, {
+  "id" : "heading_level",
+  "name" : "heading_level",
+  "label" : "Heading Level",
+  "help_text" : "Controls the HTML heading tag. Use H1 only once per page for the main title.",
+  "required" : false,
+  "locked" : false,
+  "display" : "select",
+  "choices" : [ [ "h1", "H1 — Page Title" ], [ "h2", "H2 — Section" ], [ "h3", "H3 — Subsection" ], [ "h4", "H4" ] ],
+  "multiple" : false,
+  "reordering_enabled" : true,
+  "preset" : null,
+  "type" : "choice",
+  "display_width" : null,
+  "default" : "h2"
+}, {
+  "id" : "view_all",
+  "name" : "view_all",
+  "label" : "View All Link",
+  "help_text" : "The 'View All' button linking to the full Services Catalogue page",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "view_all.show",
+    "name" : "show",
+    "label" : "Show View All Link",
+    "help_text" : "Toggle to show or hide the view all link",
+    "required" : false,
+    "locked" : false,
+    "display" : "checkbox",
+    "type" : "boolean",
+    "display_width" : null,
+    "default" : true
+  }, {
+    "id" : "view_all.text",
+    "name" : "text",
+    "label" : "Link Text",
+    "help_text" : "Text for the view all link",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "View All"
+  }, {
+    "id" : "view_all.link_url",
+    "name" : "link_url",
+    "label" : "Link URL",
+    "help_text" : "Destination — typically the Services Catalogue page",
+    "required" : false,
+    "locked" : false,
+    "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "EMAIL_ADDRESS", "BLOG" ],
+    "show_advanced_rel_options" : false,
+    "type" : "link",
+    "display_width" : null,
+    "default" : {
+      "url" : {
+        "content_id" : 328020389329,
+        "href" : null,
+        "type" : "CONTENT"
+      },
+      "open_in_new_tab" : false
+    }
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "show" : true,
+    "text" : "View All",
+    "link_url" : {
+      "url" : {
+        "content_id" : 328020389329,
+        "href" : null,
+        "type" : "CONTENT"
+      },
+      "open_in_new_tab" : false
+    }
+  }
+}, {
+  "id" : "crm_object_type",
+  "name" : "crm_object_type",
+  "label" : "CRM Object Type Name",
+  "help_text" : "Internal API name of the CRM object pulled. Default 'SERVICE' — the HubSpot Service object (renamed 'Offers & rewards' in this portal).",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "SERVICE"
+}, {
+  "id" : "record_type_filter",
+  "name" : "record_type_filter",
+  "label" : "Record Type Filter",
+  "help_text" : "Which record_type to fetch from the Service object. 'offer' for promotions, 'reward' for redemptions.",
+  "required" : false,
+  "locked" : false,
+  "display" : "select",
+  "choices" : [ [ "offer", "Offer (Promotions)" ], [ "reward", "Reward" ] ],
+  "multiple" : false,
+  "reordering_enabled" : true,
+  "preset" : null,
+  "type" : "choice",
+  "display_width" : null,
+  "default" : "offer"
+}, {
+  "id" : "item_limit",
+  "name" : "item_limit",
+  "label" : "Number of Cards to Show",
+  "help_text" : "Maximum number of cards to display in this preview. Dashboard default: 2.",
+  "required" : false,
+  "locked" : false,
+  "display" : "text",
+  "min" : 1,
+  "max" : 12,
+  "step" : 1,
+  "type" : "number",
+  "display_width" : null,
+  "default" : 2
+}, {
+  "id" : "expiry_label",
+  "name" : "expiry_label",
+  "label" : "Expiry Label",
+  "help_text" : "Text prefix shown before the expiry countdown (e.g. 'Expires in 14 days').",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Expires in"
+}, {
+  "id" : "points_suffix",
+  "name" : "points_suffix",
+  "label" : "Points Suffix",
+  "help_text" : "Text after the points number on each card (e.g. 'pts').",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "pts"
+}, {
+  "id" : "card_button_text",
+  "name" : "card_button_text",
+  "label" : "Card Button Text",
+  "help_text" : "Text on the action button for each card. Use 'Claim now' for offers, 'Redeem' for rewards.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Claim now"
+}, {
+  "id" : "industries_table_id",
+  "name" : "industries_table_id",
+  "label" : "Industries HubDB Table",
+  "help_text" : "Portal Industries HubDB table used for icon lookup per card.",
+  "required" : false,
+  "locked" : false,
+  "type" : "hubdbtable",
+  "display_width" : null
+}, {
+  "id" : "expired_button_text",
+  "name" : "expired_button_text",
+  "label" : "Expired Button Text",
+  "help_text" : "Button text on cards whose expiry date has passed. Disabled — expired items can't be claimed regardless of tier.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Expired"
+}, {
+  "id" : "not_enough_points_text",
+  "name" : "not_enough_points_text",
+  "label" : "Not Enough Points Button Text",
+  "help_text" : "Button text on point-cost items the member can't yet afford (redeemable balance below the item's points value). Disabled.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Not enough points"
+}, {
+  "id" : "locked_button_text",
+  "name" : "locked_button_text",
+  "label" : "Locked Button Text",
+  "help_text" : "Button text shown when a card is locked for the user's tier.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Locked"
+}, {
+  "id" : "max_reached_default_text",
+  "name" : "max_reached_default_text",
+  "label" : "Max Reached Default Text",
+  "help_text" : "Fallback when a card's `max_reached_text` property is empty. Shown on the disabled button once the member hits max_claims.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Maximum claims reached"
+}, {
+  "id" : "button_labels",
+  "name" : "button_labels",
+  "label" : "Button Labels (per Button Type)",
+  "help_text" : "The three button-type options map to these labels. Match to the hub module so dashboard + hub read the same.",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "button_labels.claim",
+    "name" : "claim",
+    "label" : "Claim",
+    "required" : false,
+    "locked" : false,
+    "children" : [ {
+      "id" : "button_labels.claim.text",
+      "name" : "text",
+      "label" : "Default text",
+      "required" : false,
+      "locked" : false,
+      "allow_new_line" : false,
+      "type" : "text",
+      "display_width" : null,
+      "default" : "Claim"
+    }, {
+      "id" : "button_labels.claim.pressed",
+      "name" : "pressed",
+      "label" : "After first claim",
+      "required" : false,
+      "locked" : false,
+      "allow_new_line" : false,
+      "type" : "text",
+      "display_width" : null,
+      "default" : "Claimed"
+    } ],
+    "tab" : "CONTENT",
+    "expanded" : false,
+    "group_occurrence_meta" : null,
+    "type" : "group",
+    "display_width" : null
+  }, {
+    "id" : "button_labels.register_interest",
+    "name" : "register_interest",
+    "label" : "Register Interest",
+    "required" : false,
+    "locked" : false,
+    "children" : [ {
+      "id" : "button_labels.register_interest.text",
+      "name" : "text",
+      "label" : "Default text",
+      "required" : false,
+      "locked" : false,
+      "allow_new_line" : false,
+      "type" : "text",
+      "display_width" : null,
+      "default" : "Register Interest"
+    }, {
+      "id" : "button_labels.register_interest.pressed",
+      "name" : "pressed",
+      "label" : "After first click",
+      "required" : false,
+      "locked" : false,
+      "allow_new_line" : false,
+      "type" : "text",
+      "display_width" : null,
+      "default" : "Registered"
+    } ],
+    "tab" : "CONTENT",
+    "expanded" : false,
+    "group_occurrence_meta" : null,
+    "type" : "group",
+    "display_width" : null
+  }, {
+    "id" : "button_labels.sign_up",
+    "name" : "sign_up",
+    "label" : "Sign up",
+    "required" : false,
+    "locked" : false,
+    "children" : [ {
+      "id" : "button_labels.sign_up.text",
+      "name" : "text",
+      "label" : "Default text",
+      "required" : false,
+      "locked" : false,
+      "allow_new_line" : false,
+      "type" : "text",
+      "display_width" : null,
+      "default" : "Sign up"
+    }, {
+      "id" : "button_labels.sign_up.pressed",
+      "name" : "pressed",
+      "label" : "After first click",
+      "required" : false,
+      "locked" : false,
+      "allow_new_line" : false,
+      "type" : "text",
+      "display_width" : null,
+      "default" : "Signed up"
+    } ],
+    "tab" : "CONTENT",
+    "expanded" : false,
+    "group_occurrence_meta" : null,
+    "type" : "group",
+    "display_width" : null
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null
+}, {
+  "id" : "style_overrides",
+  "name" : "style_overrides",
+  "label" : "Style Overrides",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "style_overrides.background_color",
+    "name" : "background_color",
+    "label" : "Card Background Color",
+    "help_text" : "Leave empty to use theme default (white card)",
+    "required" : false,
+    "locked" : false,
+    "type" : "color",
+    "display_width" : null,
+    "default" : {
+      "color" : null,
+      "opacity" : 100
+    }
+  }, {
+    "id" : "style_overrides.padding_top",
+    "name" : "padding_top",
+    "label" : "Section Padding Top (px)",
+    "help_text" : "Leave empty to use default spacing",
+    "required" : false,
+    "locked" : false,
+    "display" : "text",
+    "step" : 1,
+    "type" : "number",
+    "display_width" : null
+  }, {
+    "id" : "style_overrides.padding_bottom",
+    "name" : "padding_bottom",
+    "label" : "Section Padding Bottom (px)",
+    "help_text" : "Leave empty to use default spacing",
+    "required" : false,
+    "locked" : false,
+    "display" : "text",
+    "step" : 1,
+    "type" : "number",
+    "display_width" : null
+  }, {
+    "id" : "style_overrides.hide_on_mobile",
+    "name" : "hide_on_mobile",
+    "label" : "Hide on Mobile",
+    "help_text" : "Toggle to hide this module on mobile devices",
+    "required" : false,
+    "locked" : false,
+    "display" : "checkbox",
+    "type" : "boolean",
+    "display_width" : null,
+    "default" : false
+  }, {
+    "id" : "style_overrides.text_color",
+    "name" : "text_color",
+    "label" : "Text Color",
+    "help_text" : "Override the default text color for this module instance. Leave empty for theme default.",
+    "required" : false,
+    "locked" : false,
+    "type" : "color",
+    "display_width" : null,
+    "default" : {
+      "color" : null,
+      "opacity" : 100
+    }
+  }, {
+    "id" : "style_overrides.content_width",
+    "name" : "content_width",
+    "label" : "Content Width",
+    "help_text" : "Control the maximum width of this module's content.",
+    "required" : false,
+    "locked" : false,
+    "display" : "select",
+    "choices" : [ [ "default", "Default" ], [ "narrow", "Narrow" ], [ "wide", "Wide" ], [ "full", "Full Width" ] ],
+    "multiple" : false,
+    "reordering_enabled" : true,
+    "preset" : null,
+    "type" : "choice",
+    "display_width" : null,
+    "default" : "default"
+  }, {
+    "id" : "style_overrides.hide_on_desktop",
+    "name" : "hide_on_desktop",
+    "label" : "Hide on Desktop",
+    "help_text" : "Toggle to hide this module on desktop viewports.",
+    "required" : false,
+    "locked" : false,
+    "display" : "checkbox",
+    "type" : "boolean",
+    "display_width" : null,
+    "default" : false
+  } ],
+  "tab" : "STYLE",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "background_color" : {
+      "color" : null,
+      "opacity" : 100
+    },
+    "hide_on_mobile" : false,
+    "text_color" : {
+      "color" : null,
+      "opacity" : 100
+    },
+    "content_width" : "default",
+    "hide_on_desktop" : false
+  }
+} ]

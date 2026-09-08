@@ -1,0 +1,6 @@
+/* Portal Footer module styles are defined in css/layout.css */
+/* This file intentionally minimal — layout.css handles footer positioning and styling */
+
+.portal-footer__link:hover{
+  color: #757575;
+}

@@ -1,0 +1,247 @@
+{
+  "logo.default.alt" : {
+    "message" : "White_logo",
+    "description" : "",
+    "placeholders" : null
+  },
+  "logo.default.src" : {
+    "message" : "https://442066989.fs1.hubspotusercontent-ap1.net/hubfs/442066989/Photo/White_logo.png",
+    "description" : null,
+    "placeholders" : null
+  },
+  "logo.help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "logo.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "logo.label" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "logo.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "logo_url.help_text" : {
+    "message" : "Optional. Where the logo links to when clicked (typically the homepage).",
+    "description" : "",
+    "placeholders" : null
+  },
+  "logo_url.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "logo_url.label" : {
+    "message" : "Logo Link",
+    "description" : "",
+    "placeholders" : null
+  },
+  "logo_url.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "name" : {
+    "message" : "terms-header",
+    "description" : "",
+    "placeholders" : null
+  },
+  "page_title.default" : {
+    "message" : "Terms and Conditions",
+    "description" : "",
+    "placeholders" : null
+  },
+  "page_title.help_text" : {
+    "message" : "The large heading shown in the header banner. Becomes the page's H1.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "page_title.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "page_title.label" : {
+    "message" : "Page Title",
+    "description" : "",
+    "placeholders" : null
+  },
+  "page_title.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "page_title.validation_regex" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.content_width.choices.default" : {
+    "message" : "Default",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.content_width.choices.full" : {
+    "message" : "Full Width",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.content_width.choices.narrow" : {
+    "message" : "Narrow",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.content_width.choices.wide" : {
+    "message" : "Wide",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.content_width.help_text" : {
+    "message" : "Control the maximum width of this module's content.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.content_width.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.content_width.label" : {
+    "message" : "Content Width",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.content_width.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.gradient_end.help_text" : {
+    "message" : "Bottom-right color of the header gradient. Default: VIPS red.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.gradient_end.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.gradient_end.label" : {
+    "message" : "Gradient End Color",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.gradient_end.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.gradient_start.help_text" : {
+    "message" : "Top-left color of the header gradient. Default: black.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.gradient_start.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.gradient_start.label" : {
+    "message" : "Gradient Start Color",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.gradient_start.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.header_height.help_text" : {
+    "message" : "Default 336 (matches Terms & Conditions figma frame).",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.header_height.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.header_height.label" : {
+    "message" : "Header Height (px)",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.header_height.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.hide_on_desktop.help_text" : {
+    "message" : "Toggle to hide this module on desktop viewports.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.hide_on_desktop.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.hide_on_desktop.label" : {
+    "message" : "Hide on Desktop",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.hide_on_desktop.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.hide_on_mobile.help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.hide_on_mobile.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.hide_on_mobile.label" : {
+    "message" : "Hide on Mobile",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.hide_on_mobile.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.label" : {
+    "message" : "Style Overrides",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  }
+}

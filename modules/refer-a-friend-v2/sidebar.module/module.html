@@ -1,0 +1,79 @@
+{# Refer a Friend V2 - self-contained sidebar #}
+{% set member_name = contact.firstname|default("Member") %}
+{% set member_tier = contact.membership_tier|default("Bronze") %}
+{% set member_points = contact.vipsclub_points|default(1240)|int %}
+{% set next_tier = contact.vipsclub_next_tier|default("Gold") %}
+{% set pts_next = contact.vipsclub_points_next_tier|default(2500)|int %}
+{% set member_avatar = contact.profile_image|default("") %}
+{% set current_path = request.path|default("") %}
+{% set progress_pct = ((member_points / pts_next * 100)|round) if pts_next > 0 else 0 %}
+{% if progress_pct > 100 %}{% set progress_pct = 100 %}{% endif %}
+{% set points_remaining = pts_next - member_points %}
+
+<aside class="rfv2-sidebar" id="rfv2-sidebar" aria-label="Refer a Friend V2 portal navigation">
+  <div class="rfv2-sidebar__mobile-header">
+    <span class="rfv2-sidebar__mobile-title">{{ module.mobile_menu_title|escape_html }}</span>
+    <button class="rfv2-sidebar__close" id="rfv2-sidebar-close" type="button" aria-label="{{ module.mobile_close_label|escape_attr }}">&times;</button>
+  </div>
+
+  <nav class="rfv2-nav" aria-label="Member portal">
+    {% for item in module.nav_items %}
+      {% set is_active = false %}
+      {% if item.nav_url and (item.nav_url == current_path or item.nav_url in current_path) %}
+        {% set is_active = true %}
+      {% endif %}
+      <a class="rfv2-nav__item{% if is_active %} rfv2-nav__item--active{% endif %}" href="{{ item.nav_url|default('#')|escape_attr }}" {% if is_active %}aria-current="page"{% endif %}>
+        <span class="rfv2-nav__label-wrap">
+          {% if item.icon_svg %}<span class="rfv2-nav__icon" aria-hidden="true">{{ item.icon_svg }}</span>{% endif %}
+          <span>{{ item.nav_label|escape_html }}</span>
+        </span>
+        {% if item.chevron_text %}<span class="rfv2-nav__chevron" aria-hidden="true">{{ item.chevron_text|escape_html }}</span>{% endif %}
+      </a>
+      {% if not loop.last %}<span class="rfv2-nav__divider" aria-hidden="true"></span>{% endif %}
+    {% endfor %}
+  </nav>
+
+  <div class="rfv2-tier-card" {% if module.tier_bg_image.src %}style="background-image: url('{{ module.tier_bg_image.src|escape_attr }}');"{% endif %}>
+    <div class="rfv2-tier-card__overlay" aria-hidden="true"></div>
+    <div class="rfv2-tier-card__content">
+      <div>
+        <p class="rfv2-tier-card__label">{{ module.tier_heading_label|escape_html }}</p>
+        <p class="rfv2-tier-card__tier">{{ member_tier|escape_html }}</p>
+        <p class="rfv2-tier-card__next">{{ module.next_tier_label|escape_html }} <strong>{{ next_tier|escape_html }}</strong></p>
+      </div>
+
+      <div class="rfv2-tier-card__progress">
+        <div class="rfv2-tier-card__bar" role="progressbar" aria-valuenow="{{ member_points }}" aria-valuemin="0" aria-valuemax="{{ pts_next }}">
+          <span style="width: {{ progress_pct }}%"></span>
+        </div>
+        <div class="rfv2-tier-card__progress-labels">
+          <div>
+            <strong>{{ member_points|format_number('en-US') }} pts</strong>
+            <span>{{ module.current_points_label|escape_html }}</span>
+          </div>
+          <div>
+            <strong>{{ pts_next|format_number('en-US') }} pts</strong>
+            <span>{{ module.for_tier_label|escape_html }} {{ next_tier|escape_html }} {{ module.tier_suffix|escape_html }}</span>
+          </div>
+        </div>
+      </div>
+
+      {% if points_remaining > 0 %}
+      <div class="rfv2-tier-card__remaining">
+        <strong>{{ points_remaining|format_number('en-US') }} {{ module.more_points_label|escape_html }}</strong>
+        <span>{{ module.unlock_benefits_label|escape_html }} {{ next_tier|escape_html }} {{ module.tier_benefits_suffix|escape_html }}</span>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="rfv2-user-row">
+    {% if member_avatar %}
+    <img class="rfv2-user-row__avatar" src="{{ member_avatar|escape_attr }}" alt="{{ member_name|escape_attr }} avatar" width="33" height="33">
+    {% else %}
+    <span class="rfv2-user-row__avatar rfv2-user-row__avatar--initial">{{ member_name|truncate(1, true, '')|upper }}</span>
+    {% endif %}
+    <span class="rfv2-user-row__name">{{ member_name|escape_html }}</span>
+    <a class="rfv2-user-row__logout" href="{{ module.logout_url|escape_attr }}">{{ module.logout_label|escape_html }}</a>
+  </div>
+</aside>

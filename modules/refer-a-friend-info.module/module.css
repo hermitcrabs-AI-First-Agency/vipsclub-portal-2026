@@ -1,0 +1,189 @@
+/* ============================================================
+   VIPSCLUB Portal 2026 — Refer a Friend Info Module
+   Figma: Desktop 374:627 | Mobile 380:4996
+   ============================================================ */
+
+/* ── Outer wrapper ── */
+.refer-a-friend-info {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ── Section Heading (above card) ── */
+.refer-a-friend-info__heading {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 1.25;
+  color: var(--vips-dark);
+  margin: 0;
+}
+
+/* ── Card Container ── */
+.refer-a-friend-info__card {
+  background: var(--vips-bg-card);
+  border: 1px solid var(--vips-border-light);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card-subtle);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* ── Program Description ── */
+.refer-a-friend-info__description {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 24px;
+  color: var(--vips-text-light);
+}
+
+.refer-a-friend-info__description p {
+  margin: 0;
+}
+
+/* ── Steps Diagram ── */
+.refer-a-friend-info__steps {
+  display: flex;
+  gap: 0;
+  position: relative;
+  justify-content: space-between;
+
+}
+
+/* Dashed connecting line between steps */
+.refer-a-friend-info__steps::before {
+  content: '';
+  position: absolute;
+  top: 16px;
+  left: 5%;
+  right: 5%;
+  border-top: 2px dashed var(--vips-border);
+  z-index: 0;
+}
+
+.refer-a-friend-info__step {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items:center;
+  gap: 14px;
+}
+
+.refer-a-friend-info__step-circle {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-xl);
+  background: var(--vips-bg-icon);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.refer-a-friend-info__step-number {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1;
+  color: var(--vips-dark);
+}
+
+.refer-a-friend-info__step-number--highlight {
+  color: var(--vips-red);
+}
+
+.refer-a-friend-info__step-label {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--vips-text-secondary);
+}
+
+/* ── Reward Boxes ── */
+.refer-a-friend-info__reward-boxes {
+  display: flex;
+  gap: 24px;
+}
+
+.refer-a-friend-info__reward-box {
+  flex: 1;
+  border: 1px solid var(--vips-border);
+  border-radius: var(--radius-md);
+  padding: 10px 16px;
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--vips-text-secondary);
+  text-align: center;
+}
+
+.refer-a-friend-info__points {
+  font-weight: 700;
+  color: var(--vips-success);
+}
+
+/* ── Mobile (≤768px) ── */
+@media (max-width: 768px) {
+
+  .refer-a-friend-info--hide-mobile {
+    display: none;
+  }
+
+  .refer-a-friend-info__heading {
+    font-family: var(--font-body);
+    font-size: 20px;
+  }
+
+  .refer-a-friend-info__card {
+    border-radius: 10px;
+    border-width: 0.698px;
+  }
+
+  .refer-a-friend-info__reward-boxes {
+    gap: 16px;
+  }
+
+  .refer-a-friend-info__reward-box {
+    font-size: 13px;
+  }
+
+  /* Steps: connecting line solid on mobile */
+  .refer-a-friend-info__steps::before {
+    border-top-style: solid;
+    border-color: var(--vips-bg-icon);
+  }
+
+  .refer-a-friend-info__step-label {
+    font-size: 12px;
+    text-align: center;
+  }
+
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {}
+
+/* ── Per-instance style overrides ── */
+{% if module.style_overrides.background_color.color %}
+.refer-a-friend-info {
+  background-color: {{ module.style_overrides.background_color.color }};
+}
+{% endif %}
+
+{% if module.style_overrides.padding_top %}
+.refer-a-friend-info {
+  padding-top: {{ module.style_overrides.padding_top }}px;
+}
+{% endif %}
+
+{% if module.style_overrides.padding_bottom %}
+.refer-a-friend-info {
+  padding-bottom: {{ module.style_overrides.padding_bottom }}px;
+}
+{% endif %}

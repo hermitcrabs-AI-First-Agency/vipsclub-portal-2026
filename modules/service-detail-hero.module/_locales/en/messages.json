@@ -1,0 +1,1367 @@
+{
+  "breadcrumb.help_text" : {
+    "message" : "Navigation breadcrumb displayed above the service detail.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "breadcrumb.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "breadcrumb.label" : {
+    "message" : "Breadcrumb",
+    "description" : "",
+    "placeholders" : null
+  },
+  "breadcrumb.parent_label.default" : {
+    "message" : "Services",
+    "description" : "",
+    "placeholders" : null
+  },
+  "breadcrumb.parent_label.help_text" : {
+    "message" : "Text for the parent page link (e.g. 'Services')",
+    "description" : "",
+    "placeholders" : null
+  },
+  "breadcrumb.parent_label.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "breadcrumb.parent_label.label" : {
+    "message" : "Parent Link Label",
+    "description" : "",
+    "placeholders" : null
+  },
+  "breadcrumb.parent_label.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "breadcrumb.parent_label.validation_regex" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "breadcrumb.parent_url.help_text" : {
+    "message" : "URL for the parent page. Enter the full URL to your Services Catalogue page.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "breadcrumb.parent_url.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "breadcrumb.parent_url.label" : {
+    "message" : "Parent Link URL",
+    "description" : "",
+    "placeholders" : null
+  },
+  "breadcrumb.parent_url.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "breadcrumb.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "disclaimer_body.default" : {
+    "message" : "<p>This service is subject to eligibility requirements and terms and conditions. Please read the relevant product disclosure statement before applying.</p>",
+    "description" : "",
+    "placeholders" : null
+  },
+  "disclaimer_body.help_text" : {
+    "message" : "Body text for the disclaimer. Supports rich text formatting.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "disclaimer_body.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "disclaimer_body.label" : {
+    "message" : "Disclaimer Body",
+    "description" : "",
+    "placeholders" : null
+  },
+  "disclaimer_body.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "disclaimer_close_icon.help_text" : {
+    "message" : "Close/dismiss icon on the disclaimer card. Upload SVG/PNG or paste raw SVG code.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "disclaimer_close_icon.image.default.alt" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "disclaimer_close_icon.image.help_text" : {
+    "message" : "Upload from Files Manager. Recommended: 15x15px SVG.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "disclaimer_close_icon.image.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "disclaimer_close_icon.image.label" : {
+    "message" : "Upload Icon (SVG or PNG)",
+    "description" : "",
+    "placeholders" : null
+  },
+  "disclaimer_close_icon.image.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "disclaimer_close_icon.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "disclaimer_close_icon.label" : {
+    "message" : "Disclaimer Close Icon",
+    "description" : "",
+    "placeholders" : null
+  },
+  "disclaimer_close_icon.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "disclaimer_close_icon.svg_code.default" : {
+    "message" : "<svg width=\"15\" height=\"15\" viewBox=\"0 0 15 15\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"7.5\" cy=\"7.5\" r=\"7\" stroke=\"#9e9e9e\" stroke-width=\"1\"/><path d=\"M5 5L10 10M10 5L5 10\" stroke=\"#9e9e9e\" stroke-width=\"1.2\" stroke-linecap=\"round\"/></svg>",
+    "description" : "",
+    "placeholders" : null
+  },
+  "disclaimer_close_icon.svg_code.help_text" : {
+    "message" : "Paste raw SVG code. A default circle-X close icon is provided — update to match your design.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "disclaimer_close_icon.svg_code.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "disclaimer_close_icon.svg_code.label" : {
+    "message" : "Or: Paste SVG Code",
+    "description" : "",
+    "placeholders" : null
+  },
+  "disclaimer_close_icon.svg_code.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "disclaimer_close_icon.svg_code.validation_regex" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "disclaimer_title.default" : {
+    "message" : "Important Information",
+    "description" : "",
+    "placeholders" : null
+  },
+  "disclaimer_title.help_text" : {
+    "message" : "Heading for the disclaimer card.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "disclaimer_title.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "disclaimer_title.label" : {
+    "message" : "Disclaimer Title",
+    "description" : "",
+    "placeholders" : null
+  },
+  "disclaimer_title.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "disclaimer_title.validation_regex" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "form_card.disclaimer_text.default" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "form_card.disclaimer_text.help_text" : {
+    "message" : "Disclaimer / small print rendered below the form (richtext).",
+    "description" : "",
+    "placeholders" : null
+  },
+  "form_card.disclaimer_text.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "form_card.disclaimer_text.label" : {
+    "message" : "Form Disclaimer",
+    "description" : "",
+    "placeholders" : null
+  },
+  "form_card.disclaimer_text.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "form_card.heading.default" : {
+    "message" : "Enquire Now",
+    "description" : "",
+    "placeholders" : null
+  },
+  "form_card.heading.help_text" : {
+    "message" : "Heading above the form (e.g. \"Enquire Now\").",
+    "description" : "",
+    "placeholders" : null
+  },
+  "form_card.heading.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "form_card.heading.label" : {
+    "message" : "Form Heading",
+    "description" : "",
+    "placeholders" : null
+  },
+  "form_card.heading.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "form_card.heading.validation_regex" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "form_card.help_text" : {
+    "message" : "Settings for the enquiry form card. The actual HubSpot form is selected automatically from the HubDB row's `form` column — only chrome (heading, meta labels, response, disclaimer) is editable here.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "form_card.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "form_card.label" : {
+    "message" : "Enquiry Form Card",
+    "description" : "",
+    "placeholders" : null
+  },
+  "form_card.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "form_card.response_message.default" : {
+    "message" : "Thanks for your enquiry. We will be in touch shortly.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "form_card.response_message.help_text" : {
+    "message" : "Message shown inline after the form is submitted. Only relevant when Response Type is \"Inline message\".",
+    "description" : "",
+    "placeholders" : null
+  },
+  "form_card.response_message.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "form_card.response_message.label" : {
+    "message" : "Inline Response Message",
+    "description" : "",
+    "placeholders" : null
+  },
+  "form_card.response_message.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "form_card.response_message.validation_regex" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "form_card.response_type.choices.inline" : {
+    "message" : "Inline message",
+    "description" : "",
+    "placeholders" : null
+  },
+  "form_card.response_type.choices.redirect" : {
+    "message" : "Redirect",
+    "description" : "",
+    "placeholders" : null
+  },
+  "form_card.response_type.help_text" : {
+    "message" : "What happens after the visitor submits the form — show an inline message on the page, or redirect to another URL. (Redirect URL is set in HubSpot's form settings.)",
+    "description" : "",
+    "placeholders" : null
+  },
+  "form_card.response_type.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "form_card.response_type.label" : {
+    "message" : "Form Response Type",
+    "description" : "",
+    "placeholders" : null
+  },
+  "form_card.response_type.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "form_card.service_label.default" : {
+    "message" : "Service",
+    "description" : "",
+    "placeholders" : null
+  },
+  "form_card.service_label.help_text" : {
+    "message" : "Label for the service-name row in the form's meta block.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "form_card.service_label.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "form_card.service_label.label" : {
+    "message" : "Meta Label — Service",
+    "description" : "",
+    "placeholders" : null
+  },
+  "form_card.service_label.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "form_card.service_label.validation_regex" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "form_card.tier_label.default" : {
+    "message" : "Tier",
+    "description" : "",
+    "placeholders" : null
+  },
+  "form_card.tier_label.help_text" : {
+    "message" : "Label for the tier row in the form's meta block.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "form_card.tier_label.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "form_card.tier_label.label" : {
+    "message" : "Meta Label — Tier",
+    "description" : "",
+    "placeholders" : null
+  },
+  "form_card.tier_label.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "form_card.tier_label.validation_regex" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "heading_level.choices.h1" : {
+    "message" : "H1 — Page Title",
+    "description" : "",
+    "placeholders" : null
+  },
+  "heading_level.choices.h2" : {
+    "message" : "H2 — Section",
+    "description" : "",
+    "placeholders" : null
+  },
+  "heading_level.choices.h3" : {
+    "message" : "H3 — Subsection",
+    "description" : "",
+    "placeholders" : null
+  },
+  "heading_level.choices.h4" : {
+    "message" : "H4",
+    "description" : "",
+    "placeholders" : null
+  },
+  "heading_level.help_text" : {
+    "message" : "Controls the HTML heading tag for the service title. Default H1 — this is typically the main page title on a service detail page.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "heading_level.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "heading_level.label" : {
+    "message" : "Heading Level",
+    "description" : "",
+    "placeholders" : null
+  },
+  "heading_level.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "name" : {
+    "message" : "service-detail-hero",
+    "description" : "",
+    "placeholders" : null
+  },
+  "related_services_heading.default" : {
+    "message" : "Related Services",
+    "description" : "",
+    "placeholders" : null
+  },
+  "related_services_heading.help_text" : {
+    "message" : "Section heading shown above the related services grid (the cards themselves are pulled from HubDB by matching the current service's category / sub-category).",
+    "description" : "",
+    "placeholders" : null
+  },
+  "related_services_heading.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "related_services_heading.label" : {
+    "message" : "Related Services Heading",
+    "description" : "",
+    "placeholders" : null
+  },
+  "related_services_heading.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "related_services_heading.validation_regex" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.booking_link.booking_url.help_text" : {
+    "message" : "URL for the booking page (Calendly, HubSpot Meetings, etc.). Leave empty to hide.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.booking_link.booking_url.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.booking_link.booking_url.label" : {
+    "message" : "Booking URL",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.booking_link.booking_url.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.booking_link.help_text" : {
+    "message" : "Optional link for scheduling a meeting. Gated by both `Show` AND a non-empty URL.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.booking_link.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.booking_link.label" : {
+    "message" : "Booking Link",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.booking_link.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.booking_link.show.help_text" : {
+    "message" : "Toggle to show or hide the booking link in the RM card.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.booking_link.show.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.booking_link.show.label" : {
+    "message" : "Show Booking Link",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.booking_link.show.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.booking_link.text.default" : {
+    "message" : "Book a meeting",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.booking_link.text.help_text" : {
+    "message" : "Clickable text for the booking link.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.booking_link.text.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.booking_link.text.label" : {
+    "message" : "Booking Link Text",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.booking_link.text.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.booking_link.text.validation_regex" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.email.help_text" : {
+    "message" : "Email contact detail with optional icon.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.email.icon.help_text" : {
+    "message" : "Upload SVG/PNG OR paste raw SVG. Leave both empty to use the built-in default icon.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.email.icon.image.default.alt" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.email.icon.image.help_text" : {
+    "message" : "Upload from Files Manager. SVG preferred.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.email.icon.image.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.email.icon.image.label" : {
+    "message" : "Upload Icon (SVG or PNG)",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.email.icon.image.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.email.icon.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.email.icon.label" : {
+    "message" : "Email Icon",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.email.icon.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.email.icon.svg_code.default" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.email.icon.svg_code.help_text" : {
+    "message" : "Paste raw <svg>...</svg> code. Leave empty if using upload above.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.email.icon.svg_code.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.email.icon.svg_code.label" : {
+    "message" : "Or: Paste SVG Code",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.email.icon.svg_code.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.email.icon.svg_code.validation_regex" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.email.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.email.label" : {
+    "message" : "Email",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.email.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.email.value.default" : {
+    "message" : "info@vipsclub.com.au",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.email.value.help_text" : {
+    "message" : "Fallback email shown when no RM is associated. Leave empty to hide the row.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.email.value.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.email.value.label" : {
+    "message" : "Email Address (fallback)",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.email.value.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.email.value.validation_regex" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.heading_level.choices.h2" : {
+    "message" : "H2 — Section",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.heading_level.choices.h3" : {
+    "message" : "H3 — Subsection",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.heading_level.choices.h4" : {
+    "message" : "H4",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.heading_level.help_text" : {
+    "message" : "HTML heading tag for the section heading. Use H2 (default) — H1 is already owned by the service title above.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.heading_level.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.heading_level.label" : {
+    "message" : "RM Heading Level",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.heading_level.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.help_text" : {
+    "message" : "Relationship Manager card shown in the right column on desktop. Auto-populated from the visiting contact's associated 'contact owner' CRM contact (USER_DEFINED association id 35 — hardcoded in HubL because dynamic pages cannot resolve module-field values at association-lookup time). All fields below act as FALLBACKS used when no association is present or a CRM property is empty.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.label" : {
+    "message" : "RM Card (Relationship Manager)",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.location.help_text" : {
+    "message" : "Location / address detail with optional icon.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.location.icon.help_text" : {
+    "message" : "Upload SVG/PNG OR paste raw SVG. Leave both empty to use the built-in default icon.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.location.icon.image.default.alt" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.location.icon.image.help_text" : {
+    "message" : "Upload from Files Manager. SVG preferred.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.location.icon.image.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.location.icon.image.label" : {
+    "message" : "Upload Icon (SVG or PNG)",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.location.icon.image.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.location.icon.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.location.icon.label" : {
+    "message" : "Location Icon",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.location.icon.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.location.icon.svg_code.default" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.location.icon.svg_code.help_text" : {
+    "message" : "Paste raw <svg>...</svg> code. Leave empty if using upload above.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.location.icon.svg_code.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.location.icon.svg_code.label" : {
+    "message" : "Or: Paste SVG Code",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.location.icon.svg_code.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.location.icon.svg_code.validation_regex" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.location.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.location.label" : {
+    "message" : "Location",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.location.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.location.value.default" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.location.value.help_text" : {
+    "message" : "Fallback location shown when no RM is associated. Leave empty to hide the row.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.location.value.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.location.value.label" : {
+    "message" : "Location / Address (fallback)",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.location.value.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.location.value.validation_regex" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.phone.help_text" : {
+    "message" : "Phone contact detail with optional icon.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.phone.icon.help_text" : {
+    "message" : "Upload SVG/PNG OR paste raw SVG. Leave both empty to use the built-in default icon.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.phone.icon.image.default.alt" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.phone.icon.image.help_text" : {
+    "message" : "Upload from Files Manager. SVG preferred.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.phone.icon.image.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.phone.icon.image.label" : {
+    "message" : "Upload Icon (SVG or PNG)",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.phone.icon.image.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.phone.icon.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.phone.icon.label" : {
+    "message" : "Phone Icon",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.phone.icon.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.phone.icon.svg_code.default" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.phone.icon.svg_code.help_text" : {
+    "message" : "Paste raw <svg>...</svg> code. Leave empty if using upload above.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.phone.icon.svg_code.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.phone.icon.svg_code.label" : {
+    "message" : "Or: Paste SVG Code",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.phone.icon.svg_code.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.phone.icon.svg_code.validation_regex" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.phone.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.phone.label" : {
+    "message" : "Phone",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.phone.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.phone.value.default" : {
+    "message" : "1300 047 772 or (02) 9264 4888",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.phone.value.help_text" : {
+    "message" : "Fallback phone(s) shown when no RM is associated. To list two clickable numbers, separate with ' or ' (e.g. '1300 047 772 or (02) 9264 4888') — each renders as its own tap-to-call link on its own line. Leave empty to hide the row.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.phone.value.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.phone.value.label" : {
+    "message" : "Phone Number(s) (fallback)",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.phone.value.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.phone.value.validation_regex" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.photo.default.alt" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.photo.help_text" : {
+    "message" : "Fallback profile photo shown when no associated RM contact has a `profile_image` property. Displayed as 84x84 circle crop. If no photo is set, the RM's initial appears in a grey circle.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.photo.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.photo.label" : {
+    "message" : "RM Photo (fallback)",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.photo.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.rm_name.default" : {
+    "message" : "Client Success Team",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.rm_name.help_text" : {
+    "message" : "Fallback name shown when no RM contact is associated.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.rm_name.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.rm_name.label" : {
+    "message" : "RM Name (fallback)",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.rm_name.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.rm_name.validation_regex" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.role.default" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.role.help_text" : {
+    "message" : "Fallback job title. Leave empty to hide the role line — the fallback contact is a team, not an individual.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.role.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.role.label" : {
+    "message" : "RM Role / Title (fallback)",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.role.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.role.validation_regex" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.section_heading.default" : {
+    "message" : "Feel Free To Contact Us",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.section_heading.help_text" : {
+    "message" : "Heading shown above the RM card. Leave blank to hide.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.section_heading.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.section_heading.label" : {
+    "message" : "Section Heading",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.section_heading.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.section_heading.validation_regex" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.section_subtitle.default" : {
+    "message" : "If you have any questions, please contact your account manager, or simply send email to info@vipsclub.com.au",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.section_subtitle.help_text" : {
+    "message" : "Intro text shown under the heading. Leave blank to hide.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.section_subtitle.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.section_subtitle.label" : {
+    "message" : "Section Subtitle",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.section_subtitle.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "rm_card.section_subtitle.validation_regex" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "show_disclaimer.help_text" : {
+    "message" : "Toggle to show or hide the disclaimer card at the bottom of the left column.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "show_disclaimer.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "show_disclaimer.label" : {
+    "message" : "Show Disclaimer Card",
+    "description" : "",
+    "placeholders" : null
+  },
+  "show_disclaimer.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.background_color.help_text" : {
+    "message" : "Leave empty to use theme default (#f7f7f7)",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.background_color.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.background_color.label" : {
+    "message" : "Background Color",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.background_color.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.content_width.choices.default" : {
+    "message" : "Default",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.content_width.choices.full" : {
+    "message" : "Full Width",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.content_width.choices.narrow" : {
+    "message" : "Narrow",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.content_width.choices.wide" : {
+    "message" : "Wide",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.content_width.help_text" : {
+    "message" : "Control the maximum width of this module's content.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.content_width.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.content_width.label" : {
+    "message" : "Content Width",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.content_width.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.hide_on_desktop.help_text" : {
+    "message" : "Toggle to hide this module on desktop viewports.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.hide_on_desktop.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.hide_on_desktop.label" : {
+    "message" : "Hide on Desktop",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.hide_on_desktop.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.hide_on_mobile.help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.hide_on_mobile.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.hide_on_mobile.label" : {
+    "message" : "Hide on Mobile",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.hide_on_mobile.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.label" : {
+    "message" : "Style Overrides",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.padding_bottom.help_text" : {
+    "message" : "Leave empty to use default spacing",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.padding_bottom.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.padding_bottom.label" : {
+    "message" : "Padding Bottom (px)",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.padding_bottom.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.padding_top.help_text" : {
+    "message" : "Leave empty to use default spacing",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.padding_top.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.padding_top.label" : {
+    "message" : "Padding Top (px)",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.padding_top.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.text_color.help_text" : {
+    "message" : "Override the default text color for this module instance. Leave empty for theme default.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.text_color.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.text_color.label" : {
+    "message" : "Text Color",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.text_color.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "whats_included_heading.default" : {
+    "message" : "What's Included",
+    "description" : "",
+    "placeholders" : null
+  },
+  "whats_included_heading.help_text" : {
+    "message" : "Section heading shown above the \"What's Included\" content (the content itself comes from the HubDB row's `included` richtext column).",
+    "description" : "",
+    "placeholders" : null
+  },
+  "whats_included_heading.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "whats_included_heading.label" : {
+    "message" : "What's Included Heading",
+    "description" : "",
+    "placeholders" : null
+  },
+  "whats_included_heading.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "whats_included_heading.validation_regex" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  }
+}

@@ -1,0 +1,602 @@
+{
+  "error_404_heading": {
+    "message": "Page not found",
+    "description": "",
+    "placeholders": null
+  },
+  "error_404_description": {
+    "message": "We can't find the page you were looking for.",
+    "description": "",
+    "placeholders": null
+  },
+  "error_404_button": {
+    "message": "Go to home page",
+    "description": "",
+    "placeholders": null
+  },
+  "error_500_heading": {
+    "message": "This page isn't working",
+    "description": "",
+    "placeholders": null
+  },
+  "error_500_description": {
+    "message": "An internal server error occurred, but we're on the case!",
+    "description": "",
+    "placeholders": null
+  },
+  "error_500_button": {
+    "message": "Go to home page",
+    "description": "",
+    "placeholders": null
+  },
+  "header_logo_alt": {
+    "message": "Company logo",
+    "description": "",
+    "placeholders": null
+  },
+  "subscription_confirmation_unsub_all_success": {
+    "message": "Your email preferences were updated.",
+    "description": "",
+    "placeholders": null
+  },
+  "subscription_confirmation_unsubscribe_all_success": {
+    "message": "You have successfully unsubscribed from all email communications.",
+    "description": "",
+    "placeholders": null
+  },
+  "subscription_confirmation_sub_update_success": {
+    "message": "Your email preferences were updated.",
+    "description": "",
+    "placeholders": null
+  },
+  "subscription_preferences_heading": {
+    "message": "Update email preferences for",
+    "description": "",
+    "placeholders": null
+  },
+  "subscription_preferences_single_text": {
+    "message": "Choose which emails you would like to receive from {{ site_settings.company_name }}:",
+    "description": "",
+    "placeholders": null
+  },
+  "subscription_preferences_single_text_business_unit": {
+    "message": "Choose which emails you would like to receive from {{ business_unit().name }}:",
+    "description": "",
+    "placeholders": null
+  },
+  "subscription_preferences_language_input_label": {
+    "message": "Select a language:",
+    "description": "",
+    "placeholders": null
+  },
+  "subscription_preferences_button_text": {
+    "message": "Update email preferences",
+    "description": "",
+    "placeholders": null
+  },
+  "subscription_preferences_unsub_all_option": {
+    "message": "Unsubscribe from all emails",
+    "description": "",
+    "placeholders": null
+  },
+  "subscription_preferences_footer": {
+    "message": "If this is not your address, an email was most likely forwarded to you from someone else and you can safely ignore this message.",
+    "description": "",
+    "placeholders": null
+  },
+  "subscription_preferences_resubscribe_text": {
+    "message": "You are presently unsubscribed from all of our emails. Would you like to receive our emails again?",
+    "description": "",
+    "placeholders": null
+  },
+  "subscription_preferences_resubscribe_button_text": {
+    "message": "Yes, resubscribe me!",
+    "description": "",
+    "placeholders": null
+  },
+  "password_prompt_heading": {
+    "message": "Password required",
+    "description": "",
+    "placeholders": null
+  },
+  "password_prompt_subheading": {
+    "message": "Please enter your password to view this page.",
+    "description": "",
+    "placeholders": null
+  },
+  "password_prompt_label": {
+    "message": "Password",
+    "description": "",
+    "placeholders": null
+  },
+  "search_results_heading": {
+    "message": "Search results for \"[[search_term]]\"",
+    "description": "",
+    "placeholders": null
+  },
+  "member_access_denied_heading": {
+    "message": "Sorry, you don't have access",
+    "description": "",
+    "placeholders": null
+  },
+  "member_access_denied_description": {
+    "message": "You don't have permission to view this page. Contact the site's administrator for questions.",
+    "description": "",
+    "placeholders": null
+  },
+  "member_access_denied_button": {
+    "message": "Go to home page",
+    "description": "",
+    "placeholders": null
+  },
+  "member_login_heading": {
+    "message": "Sign in",
+    "description": "",
+    "placeholders": null
+  },
+  "member_login_subheading": {
+    "message": "The page you are trying to view is only available to registered users.",
+    "description": "",
+    "placeholders": null
+  },
+  "member_login_email": {
+    "message": "Email",
+    "description": "",
+    "placeholders": null
+  },
+  "member_login_password": {
+    "message": "Password",
+    "description": "",
+    "placeholders": null
+  },
+  "member_login_remember_me": {
+    "message": "Remember me",
+    "description": "",
+    "placeholders": null
+  },
+  "member_login_reset_password": {
+    "message": "Forgot password?",
+    "description": "",
+    "placeholders": null
+  },
+  "member_login_submit": {
+    "message": "Sign in",
+    "description": "",
+    "placeholders": null
+  },
+  "member_login_show_password": {
+    "message": "Show",
+    "description": "",
+    "placeholders": null
+  },
+  "member_login_contact_admin": {
+    "message": "Having trouble? <a href=\"{{ 'mailto:' ~ site_settings.membershipWebsiteAdmin }}\">Contact the site's administrator</a>",
+    "description": "",
+    "placeholders": null
+  },
+  "membership_logout_heading": {
+    "message": "You are signed out",
+    "description": "",
+    "placeholders": null
+  },
+  "membership_logout_button": {
+    "message": "Sign back in",
+    "description": "",
+    "placeholders": null
+  },
+  "membership_logout_alt": {
+    "message": "Or return to the <a href=\"{{ '//' ~ request.domain }}\">home page</a>",
+    "description": "",
+    "placeholders": null
+  },
+  "membership_register_heading": {
+    "message": "Set up your password",
+    "description": "",
+    "placeholders": null
+  },
+  "membership_register_subheading": {
+    "message": "Welcome! Complete your registration by setting up your password.",
+    "description": "",
+    "placeholders": null
+  },
+  "membership_register_email": {
+    "message": "Email",
+    "description": "",
+    "placeholders": null
+  },
+  "membership_register_confirm_password": {
+    "message": "Confirm password",
+    "description": "",
+    "placeholders": null
+  },
+  "membership_register_password": {
+    "message": "Password",
+    "description": "",
+    "placeholders": null
+  },
+  "membership_register_save_password": {
+    "message": "Save password",
+    "description": "",
+    "placeholders": null
+  },
+  "membership_register_show_password": {
+    "message": "Show",
+    "description": "",
+    "placeholders": null
+  },
+  "membership_register_contact_admin": {
+    "message": "Having trouble? <a href=\"{{ 'mailto:' ~ site_settings.membershipWebsiteAdmin }}\">Contact the site's administrator</a>",
+    "description": "",
+    "placeholders": null
+  },
+  "membership_reset_request_heading": {
+    "message": "Reset your password",
+    "description": "",
+    "placeholders": null
+  },
+  "membership_reset_request_subheading": {
+    "message": "Enter the email address you used to register and we'll send you an email with a link to reset your password.",
+    "description": "",
+    "placeholders": null
+  },
+  "membership_reset_request_email": {
+    "message": "Email",
+    "description": "",
+    "placeholders": null
+  },
+  "membership_reset_request_submit": {
+    "message": "Send reset email",
+    "description": "",
+    "placeholders": null
+  },
+  "membership_reset_request_alt": {
+    "message": "Did it just come back to you? <a href=\"/_hcms/mem/login\">Sign in</a>",
+    "description": "",
+    "placeholders": null
+  },
+  "membership_reset_request_contact_admin": {
+    "message": "Having trouble? <a href=\"{{ 'mailto:' ~ site_settings.membershipWebsiteAdmin }}\">Contact the site's administrator</a>",
+    "description": "",
+    "placeholders": null
+  },
+  "membership_reset_success_heading": {
+    "message": "Password reset email sent",
+    "description": "",
+    "placeholders": null
+  },
+  "membership_reset_success_subheading": {
+    "message": "If a matching account was found for {{ user_email }}, an email was sent with next steps to reset your password. Please <a href=\"{{ 'mailto:' ~ site_settings.membershipWebsiteAdmin }}\">contact your administrator</a> if you haven't received it within 20 minutes.",
+    "description": "",
+    "placeholders": null
+  },
+  "membership_reset_success_button": {
+    "message": "Send another reset email",
+    "description": "",
+    "placeholders": null
+  },
+  "membership_reset_password_heading": {
+    "message": "Create new password",
+    "description": "",
+    "placeholders": null
+  },
+  "membership_reset_password_subheading": {
+    "message": "Your new password must be different from your previously-used password.",
+    "description": "",
+    "placeholders": null
+  },
+  "membership_reset_password_new_password": {
+    "message": "New password",
+    "description": "",
+    "placeholders": null
+  },
+  "membership_reset_password_confirm_password": {
+    "message": "Confirm new password",
+    "description": "",
+    "placeholders": null
+  },
+  "membership_reset_password_save_password": {
+    "message": "Save password",
+    "description": "",
+    "placeholders": null
+  },
+  "membership_reset_password_show_password": {
+    "message": "Show",
+    "description": "",
+    "placeholders": null
+  },
+  "membership_reset_password_contact_admin": {
+    "message": "Having trouble? <a href=\"{{ 'mailto:' ~ site_settings.membershipWebsiteAdmin }}\">Contact the site's administrator</a>",
+    "description": "",
+    "placeholders": null
+  },
+  "membership_registration_confirmation_heading": {
+    "message": "Your email address is confirmed",
+    "description": "",
+    "placeholders": null
+  },
+  "membership_registration_confirmation_description": {
+    "message": "Thank you for verifying your email address. You can now sign into your account and access your exclusive content.",
+    "description": "",
+    "placeholders": null
+  },
+  "membership_registration_confirmation_button": {
+    "message": "Sign in",
+    "description": "",
+    "placeholders": null
+  },
+  "membership_registration_confirmation_contact_admin": {
+    "message": "Having trouble? <a href=\"{{ 'mailto:' ~ site_settings.membershipWebsiteAdmin }}\">Contact the site's administrator</a>",
+    "description": "",
+    "placeholders": null
+  },
+  "membership_passwordless_auth_confirmation_heading": {
+    "message": "One-time sign-in link sent",
+    "description": "",
+    "placeholders": null
+  },
+  "membership_passwordless_auth_confirmation_description": {
+    "message": "<p>We sent an email to you at {{ user_email }}. It has a link that will sign you in.",
+    "description": "",
+    "placeholders": null
+  },
+  "membership_passwordless_auth_confirmation_fallback_instructions": {
+    "message": "If you can't see the email, please check your spam folder.",
+    "description": "",
+    "placeholders": null
+  },
+  "membership_passwordless_auth_confirmation_resend_button": {
+    "message": "Resend sign-in link",
+    "description": "",
+    "placeholders": null
+  },
+  "membership_passwordless_auth_confirmation_or": {
+    "message": "or",
+    "description": "",
+    "placeholders": null
+  },
+  "membership_passwordless_auth_confirmation_signin_button": {
+    "message": "Sign in with a password instead",
+    "description": "",
+    "placeholders": null
+  },
+  "membership_passwordless_auth_confirmation_contact_admin": {
+    "message": "Having trouble? <a href=\"{{ 'mailto:' ~ site_settings.membershipWebsiteAdmin }}\">Contact the site's administrator</a>",
+    "description": "",
+    "placeholders": null
+  },
+  "membership_magic_link_interstitial_heading": {
+    "message": "One more step!",
+    "description": "",
+    "placeholders": null
+  },
+  "membership_magic_link_interstitial_description": {
+    "message": "Click the button below to complete signing in.",
+    "description": "",
+    "placeholders": null
+  },
+  "membership_magic_link_interstitial_button": {
+    "message": "Click here to continue",
+    "description": "",
+    "placeholders": null
+  },
+  "membership_magic_link_interstitial_contact_admin": {
+    "message": "Having trouble? <a href=\"{{ 'mailto:' ~ site_settings.membershipWebsiteAdmin }}\">Contact the site's administrator</a>",
+    "description": "",
+    "placeholders": null
+  },
+  "membership_verify_registration_heading": {
+    "message": "Verify your email address",
+    "description": "",
+    "placeholders": null
+  },
+  "membership_verify_registration_description": {
+    "message": "Thank you for signing up! Please check your email and click the confirmation link to complete your registration.",
+    "description": "",
+    "placeholders": null
+  },
+  "membership_verify_registration_contact_admin": {
+    "message": "Having trouble? <a href=\"{{ 'mailto:' ~ site_settings.membershipWebsiteAdmin }}\">Contact the site's administrator</a>",
+    "description": "",
+    "placeholders": null
+  },
+  "email_incomplete_registration_followup_heading": {
+    "message": "Create a password to finish registering",
+    "description": "",
+    "placeholders": null
+  },
+  "email_incomplete_registration_followup_description": {
+    "message": "Last step! Once you create your secure password you'll be able to sign in and access content at {{ membership_domain }}.",
+    "description": "",
+    "placeholders": null
+  },
+  "email_incomplete_registration_followup_button": {
+    "message": "Create password",
+    "description": "",
+    "placeholders": null
+  },
+  "email_incomplete_registration_followup_directions": {
+    "message": "Or copy and paste this link into your browser:",
+    "description": "",
+    "placeholders": null
+  },
+  "email_incomplete_registration_followup_admin": {
+    "message": "If you have questions or received this in error, please <a href=\"{{ membership_website_admin }}\">contact the site’s administrator</a>",
+    "description": "",
+    "placeholders": null
+  },
+  "email_password_reset_heading": {
+    "message": "Reset your password",
+    "description": "",
+    "placeholders": null
+  },
+  "email_password_reset_description": {
+    "message": "Set a new password and sign in to your account.",
+    "description": "",
+    "placeholders": null
+  },
+  "email_password_reset_button": {
+    "message": "Reset password",
+    "description": "",
+    "placeholders": null
+  },
+  "email_password_reset_admin": {
+    "message": "If you did not make this request, you can safely ignore this email.<br/>If you have questions, please <a href=\"{{ membership_website_admin }}\">contact the site’s administrator</a>",
+    "description": "",
+    "placeholders": null
+  },
+  "email_passwordless_auth_login_heading": {
+    "message": "Sign in with one-time link",
+    "description": "",
+    "placeholders": null
+  },
+  "email_passwordless_auth_login_description": {
+    "message": "Continue signing into your account. For your security, this link will expire in 15 minutes.",
+    "description": "",
+    "placeholders": null
+  },
+  "email_passwordless_auth_login_button": {
+    "message": "Sign in",
+    "description": "",
+    "placeholders": null
+  },
+  "email_passwordless_auth_login_directions": {
+    "message": "Or copy and paste this link into your browser:",
+    "description": "",
+    "placeholders": null
+  },
+  "email_passwordless_auth_login_admin": {
+    "message": "If you did not make this request, you can safely ignore this email.<br/>If you have questions, please <a href=\"{{ membership_website_admin }}\">contact the site’s administrator</a>",
+    "description": "",
+    "placeholders": null
+  },
+  "email_password_saved_confirmation_heading": {
+    "message": "Your {{ membership_company_name }} password was successfully changed",
+    "description": "",
+    "placeholders": null
+  },
+  "email_password_saved_confirmation_description": {
+    "message": "Didn't mean to make this change? Use the <a href=\"{{ membership_domain }}/_hcms/mem/reset/request\">forgotten password</a> form to reset your password now.",
+    "description": "",
+    "placeholders": null
+  },
+  "email_password_saved_confirmation_admin": {
+    "message": "If you have questions, please contact the <a href=\"{{ membership_website_admin }}\"> site’s administrator</a>",
+    "description": "",
+    "placeholders": null
+  },
+  "email_registration_completed_heading": {
+    "message": "Your registration is complete",
+    "description": "",
+    "placeholders": null
+  },
+  "email_registration_completed_description": {
+    "message": "Thank you for registering! You're all set. Now you can sign in to access and unlock even more value.",
+    "description": "",
+    "placeholders": null
+  },
+  "email_registration_completed_button": {
+    "message": "Sign in to your new account",
+    "description": "",
+    "placeholders": null
+  },
+  "email_registration_completed_admin": {
+    "message": "If you have questions or received this in error, please <a href=\"{{ membership_website_admin }}\">contact the site’s administrator</a>",
+    "description": "",
+    "placeholders": null
+  },
+  "email_registration_heading": {
+    "message": "Welcome to {{ membership_company_name }}",
+    "description": "",
+    "placeholders": null
+  },
+  "email_registration_description": {
+    "message": "Complete your registration by creating a secure password for your account.",
+    "description": "",
+    "placeholders": null
+  },
+  "email_registration_button": {
+    "message": "Create password",
+    "description": "",
+    "placeholders": null
+  },
+  "email_registration_directions": {
+    "message": "Or copy and paste this link into your browser:",
+    "description": "",
+    "placeholders": null
+  },
+  "email_registration_admin": {
+    "message": "If you have questions or received this in error, please <a href=\"{{ membership_website_admin }}\">contact the site’s administrator</a>",
+    "description": "",
+    "placeholders": null
+  },
+  "email_verify_registration_heading": {
+    "message": "Verify your email address",
+    "description": "",
+    "placeholders": null
+  },
+  "email_verify_registration_description": {
+    "message": "Thank you for signing up! You'll need to verify your email address to complete registration for {{ membership_domain }}.",
+    "description": "",
+    "placeholders": null
+  },
+  "email_verify_registration_button": {
+    "message": "Verify email address",
+    "description": "",
+    "placeholders": null
+  },
+  "email_verify_registration_admin": {
+    "message": "If you have questions or received this in error, please <a href=\"{{ membership_website_admin }}\">contact the site’s administrator</a>",
+    "description": "",
+    "placeholders": null
+  },
+  "privacy_center_2FA_email_title": {
+    "message": "Please confirm your delete request",
+    "description": "",
+    "placeholders": null
+  },
+  "privacy_center_2FA_email_heading": {
+    "message": "Confirm your delete request",
+    "description": "",
+    "placeholders": null
+  },
+  "privacy_center_2FA_email_para1": {
+    "message": "Hi {{ first_name }},",
+    "description": "",
+    "placeholders": null
+  },
+  "privacy_center_2FA_email_para2": {
+    "message": "We received a request to delete your personal data from {{ company_name }} on:",
+    "description": "",
+    "placeholders": null
+  },
+  "privacy_center_2FA_email_loaction_list1": {
+    "message": "<strong>Device:</strong> {{ device_name }}",
+    "description": "",
+    "placeholders": null
+  },
+  "privacy_center_2FA_email_loaction_list2": {
+    "message": "<strong>Date and Time:</strong> {{ date }}",
+    "description": "",
+    "placeholders": null
+  },
+  "privacy_center_2FA_email_para3": {
+    "message": "So we can process your request, please confirm you want to delete your data.",
+    "description": "",
+    "placeholders": null
+  },
+  "privacy_center_2FA_email_button_text": {
+    "message": "Yes, delete my data",
+    "description": "",
+    "placeholders": null
+  },
+  "privacy_center_2FA_email_expiration_warning_text": {
+    "message": "This link will expire in 30 minutes.",
+    "description": "",
+    "placeholders": null
+  },
+  "privacy_center_2FA_email_footer": {
+    "message": "If you didn’t request to be deleted, you can safely ignore this message.",
+    "description": "",
+    "placeholders": null
+  }
+}

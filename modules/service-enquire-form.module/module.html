@@ -1,0 +1,102 @@
+{# ============================================================
+   VIPSCLUB Portal 2026 — Service Enquire Form Module
+   Enquiry form card with service meta block above
+   Figma: Desktop 339:7562 | Mobile 339:9002
+   On dynamic HubDB pages, form ID + service data are pulled from the row.
+   ============================================================ #}
+
+{# module.css is auto-loaded by HubSpot — do NOT use require_css for it #}
+
+{# ── Resolve form ID and service meta ──
+   When served as a dynamic HubDB child page, pull from the row.
+   The HubDB 'form' column holds a URL like:
+     https://app-ap1.hubspot.com/forms/442066989/editor/{uuid}/edit/form
+   Extract the UUID by splitting on '/editor/' then on '/'. #}
+{% set _row = dynamic_page_hubdb_row %}
+
+{% if _row and _row.form %}
+  {% set _url_after_editor = (_row.form | split('/editor/'))[1] %}
+  {% set _form_id = (_url_after_editor | split('/'))[0] %}
+{% else %}
+  {% set _form_id = module.form.form_id %}
+{% endif %}
+
+{# Service name from row or module field #}
+{% if _row and _row.name %}
+  {% set _service_name = _row.name %}
+{% else %}
+  {% set _service_name = module.service_name %}
+{% endif %}
+
+{% set _sef_style = "" %}
+{% if module.style_overrides.padding_top %}{% set _sef_style = _sef_style ~ "padding-top:" ~ module.style_overrides.padding_top ~ "px;" %}{% endif %}
+{% if module.style_overrides.padding_bottom %}{% set _sef_style = _sef_style ~ "padding-bottom:" ~ module.style_overrides.padding_bottom ~ "px;" %}{% endif %}
+
+<div class="service-enquire{% if module.style_overrides.hide_on_mobile %} service-enquire--hide-mobile{% endif %}"
+     {% if _sef_style %}style="{{ _sef_style }}"{% endif %}>
+
+  <div class="service-enquire__card">
+
+    {# ── Card Heading ── #}
+    {% if module.card_heading %}
+    <{{ module.heading_level | default("h2") }} class="service-enquire__heading">{{ module.card_heading | escape_html }}</{{ module.heading_level | default("h2") }}>
+    {% endif %}
+
+    {# ── Service Meta Block ── #}
+    {% if _service_name or module.service_tier or (_row and _row.tier_badge) or module.service_availability %}
+    <div class="service-enquire__meta">
+
+      {% if _service_name %}
+      <div class="service-enquire__meta-row">
+        <span class="service-enquire__meta-label">{{ module.service_meta_label | default("Service") | escape_html }}</span>
+        <span class="service-enquire__meta-value">{{ _service_name | escape_html }}</span>
+      </div>
+      {% endif %}
+
+      {# Tier — render from HubDB multi-select or fall back to module field #}
+      {% if _row and _row.tier_badge %}
+      <div class="service-enquire__meta-row">
+        <span class="service-enquire__meta-label">{{ module.tier_meta_label | default("Tier") | escape_html }}</span>
+        <span class="service-enquire__meta-value">{% for opt in _row.tier_badge %}{{ opt.label | escape_html }}{% if not loop.last %}, {% endif %}{% endfor %}</span>
+      </div>
+      {% elif module.service_tier %}
+      <div class="service-enquire__meta-row">
+        <span class="service-enquire__meta-label">{{ module.tier_meta_label | default("Tier") | escape_html }}</span>
+        <span class="service-enquire__meta-value">{{ module.service_tier | escape_html }}</span>
+      </div>
+      {% endif %}
+
+      {% if module.service_availability %}
+      <div class="service-enquire__meta-row">
+        <span class="service-enquire__meta-label">{{ module.availability_meta_label | default("Availability") | escape_html }}</span>
+        <span class="service-enquire__meta-value">{{ module.service_availability | escape_html }}</span>
+      </div>
+      {% endif %}
+
+    </div>
+    {% endif %}
+
+    {# ── HubSpot Form ── #}
+    {% if _form_id %}
+      {% form "service_enquiry_form"
+        form_to_use="{{ _form_id }}",
+        response_type="{{ module.form.response_type | default('inline') }}",
+        response_message="{{ module.form.message | default('Thanks for your enquiry. We\\'ll be in touch shortly.') }}"
+      %}
+    {% elif is_in_editor %}
+      <div class="service-enquire__editor-placeholder">
+        <p>Add a <strong>form</strong> URL to this service's HubDB row, or select a HubSpot form in the module settings.<br>
+        Create a "Service Enquiry" form in <strong>Marketing &rsaquo; Forms</strong> if not done yet.</p>
+      </div>
+    {% endif %}
+
+    {# ── Form Disclaimer ── #}
+    {% if module.disclaimer_text %}
+    <div class="service-enquire__disclaimer">
+      {{ module.disclaimer_text }}
+    </div>
+    {% endif %}
+
+  </div>
+
+</div>

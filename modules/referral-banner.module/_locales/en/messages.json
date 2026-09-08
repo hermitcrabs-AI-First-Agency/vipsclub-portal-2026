@@ -1,0 +1,597 @@
+{
+  "copy_button_icon.help_text" : {
+    "message" : "Small icon shown inside the Copy Link button. Upload SVG/PNG OR paste SVG code.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "copy_button_icon.image.default.alt" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "copy_button_icon.image.help_text" : {
+    "message" : "Upload from Files Manager. Recommended: 16×16px SVG.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "copy_button_icon.image.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "copy_button_icon.image.label" : {
+    "message" : "Upload Icon (SVG or PNG)",
+    "description" : "",
+    "placeholders" : null
+  },
+  "copy_button_icon.image.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "copy_button_icon.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "copy_button_icon.label" : {
+    "message" : "Copy Button Icon",
+    "description" : "",
+    "placeholders" : null
+  },
+  "copy_button_icon.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "copy_button_icon.svg_code.default" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "copy_button_icon.svg_code.help_text" : {
+    "message" : "Paste the raw <svg>...</svg> code. Leave empty if using the upload field above.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "copy_button_icon.svg_code.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "copy_button_icon.svg_code.label" : {
+    "message" : "Or: Paste SVG Code",
+    "description" : "",
+    "placeholders" : null
+  },
+  "copy_button_icon.svg_code.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "copy_button_icon.svg_code.validation_regex" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "copy_button_text.default" : {
+    "message" : "Copy Link",
+    "description" : "",
+    "placeholders" : null
+  },
+  "copy_button_text.help_text" : {
+    "message" : "Label on the copy-to-clipboard button",
+    "description" : "",
+    "placeholders" : null
+  },
+  "copy_button_text.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "copy_button_text.label" : {
+    "message" : "Copy Button Text",
+    "description" : "",
+    "placeholders" : null
+  },
+  "copy_button_text.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "copy_button_text.validation_regex" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "copy_success_text.default" : {
+    "message" : "Copied!",
+    "description" : "",
+    "placeholders" : null
+  },
+  "copy_success_text.help_text" : {
+    "message" : "Text shown briefly on the button after the link is copied",
+    "description" : "",
+    "placeholders" : null
+  },
+  "copy_success_text.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "copy_success_text.label" : {
+    "message" : "Copy Success Text",
+    "description" : "",
+    "placeholders" : null
+  },
+  "copy_success_text.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "copy_success_text.validation_regex" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "cta_button.help_text" : {
+    "message" : "The 'Refer a Friend' action button on the right side",
+    "description" : "",
+    "placeholders" : null
+  },
+  "cta_button.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "cta_button.label" : {
+    "message" : "CTA Button",
+    "description" : "",
+    "placeholders" : null
+  },
+  "cta_button.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "cta_button.show.help_text" : {
+    "message" : "Toggle to show or hide the CTA button",
+    "description" : "",
+    "placeholders" : null
+  },
+  "cta_button.show.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "cta_button.show.label" : {
+    "message" : "Show Button",
+    "description" : "",
+    "placeholders" : null
+  },
+  "cta_button.show.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "cta_button.style.choices.dark" : {
+    "message" : "Dark",
+    "description" : "",
+    "placeholders" : null
+  },
+  "cta_button.style.choices.outline" : {
+    "message" : "Outline",
+    "description" : "",
+    "placeholders" : null
+  },
+  "cta_button.style.choices.primary" : {
+    "message" : "Primary (Red)",
+    "description" : "",
+    "placeholders" : null
+  },
+  "cta_button.style.help_text" : {
+    "message" : "Visual style of the CTA button",
+    "description" : "",
+    "placeholders" : null
+  },
+  "cta_button.style.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "cta_button.style.label" : {
+    "message" : "Button Style",
+    "description" : "",
+    "placeholders" : null
+  },
+  "cta_button.style.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "cta_button.text.default" : {
+    "message" : "Refer a Friend",
+    "description" : "",
+    "placeholders" : null
+  },
+  "cta_button.text.help_text" : {
+    "message" : "Text displayed on the button",
+    "description" : "",
+    "placeholders" : null
+  },
+  "cta_button.text.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "cta_button.text.label" : {
+    "message" : "Button Text",
+    "description" : "",
+    "placeholders" : null
+  },
+  "cta_button.text.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "cta_button.text.validation_regex" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "cta_button.url.default.open_in_new_tab" : {
+    "message" : "",
+    "description" : null,
+    "placeholders" : null
+  },
+  "cta_button.url.default.url.content_id" : {
+    "message" : "",
+    "description" : null,
+    "placeholders" : null
+  },
+  "cta_button.url.default.url.href" : {
+    "message" : "",
+    "description" : null,
+    "placeholders" : null
+  },
+  "cta_button.url.default.url.type" : {
+    "message" : "CONTENT",
+    "description" : null,
+    "placeholders" : null
+  },
+  "cta_button.url.help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "cta_button.url.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "cta_button.url.label" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "cta_button.url.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "cta_heading.default" : {
+    "message" : "Refer a Friend",
+    "description" : "",
+    "placeholders" : null
+  },
+  "cta_heading.help_text" : {
+    "message" : "Heading on the right side of the banner",
+    "description" : "",
+    "placeholders" : null
+  },
+  "cta_heading.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "cta_heading.label" : {
+    "message" : "CTA Heading",
+    "description" : "",
+    "placeholders" : null
+  },
+  "cta_heading.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "cta_heading.validation_regex" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "divider_text.default" : {
+    "message" : "Or",
+    "description" : "",
+    "placeholders" : null
+  },
+  "divider_text.help_text" : {
+    "message" : "Short text between the link section and the CTA. Typically 'Or'.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "divider_text.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "divider_text.label" : {
+    "message" : "Divider Text",
+    "description" : "",
+    "placeholders" : null
+  },
+  "divider_text.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "divider_text.validation_regex" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "icon.help_text" : {
+    "message" : "Icon displayed inside the dark box on the left. Upload an SVG/PNG OR paste raw SVG code.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "icon.image.default.alt" : {
+    "message" : "Icon",
+    "description" : "",
+    "placeholders" : null
+  },
+  "icon.image.default.src" : {
+    "message" : "https://442066989.fs1.hubspotusercontent-ap1.net/hubfs/442066989/Icon.svg",
+    "description" : null,
+    "placeholders" : null
+  },
+  "icon.image.help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "icon.image.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "icon.image.label" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "icon.image.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "icon.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "icon.label" : {
+    "message" : "Referral Icon",
+    "description" : "",
+    "placeholders" : null
+  },
+  "icon.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "icon.svg_code.default" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "icon.svg_code.help_text" : {
+    "message" : "Paste the raw <svg>...</svg> code here. Leave empty if using the upload field above.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "icon.svg_code.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "icon.svg_code.label" : {
+    "message" : "Or: Paste SVG Code",
+    "description" : "",
+    "placeholders" : null
+  },
+  "icon.svg_code.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "icon.svg_code.validation_regex" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "link_label.default" : {
+    "message" : "Your Referral Link",
+    "description" : "",
+    "placeholders" : null
+  },
+  "link_label.help_text" : {
+    "message" : "Heading shown above the referral URL input",
+    "description" : "",
+    "placeholders" : null
+  },
+  "link_label.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "link_label.label" : {
+    "message" : "Link Section Label",
+    "description" : "",
+    "placeholders" : null
+  },
+  "link_label.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "link_label.validation_regex" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "name" : {
+    "message" : "referral-banner",
+    "description" : "",
+    "placeholders" : null
+  },
+  "referral_page_url.default.open_in_new_tab" : {
+    "message" : "",
+    "description" : null,
+    "placeholders" : null
+  },
+  "referral_page_url.default.url.content_id" : {
+    "message" : "",
+    "description" : null,
+    "placeholders" : null
+  },
+  "referral_page_url.default.url.href" : {
+    "message" : "",
+    "description" : null,
+    "placeholders" : null
+  },
+  "referral_page_url.default.url.type" : {
+    "message" : "CONTENT",
+    "description" : null,
+    "placeholders" : null
+  },
+  "referral_page_url.help_text" : {
+    "message" : "",
+    "description" : null,
+    "placeholders" : null
+  },
+  "referral_page_url.inline_help_text" : {
+    "message" : "",
+    "description" : null,
+    "placeholders" : null
+  },
+  "referral_page_url.label" : {
+    "message" : "",
+    "description" : null,
+    "placeholders" : null
+  },
+  "referral_page_url.placeholder" : {
+    "message" : "",
+    "description" : null,
+    "placeholders" : null
+  },
+  "style_overrides.background_color.help_text" : {
+    "message" : "Leave empty to use theme default (white card)",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.background_color.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.background_color.label" : {
+    "message" : "Background Color",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.background_color.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.hide_on_mobile.help_text" : {
+    "message" : "Toggle to hide this module on mobile devices",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.hide_on_mobile.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.hide_on_mobile.label" : {
+    "message" : "Hide on Mobile",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.hide_on_mobile.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.label" : {
+    "message" : "Style Overrides",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.padding_bottom.help_text" : {
+    "message" : "Leave empty to use default spacing",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.padding_bottom.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.padding_bottom.label" : {
+    "message" : "Padding Bottom (px)",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.padding_bottom.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.padding_top.help_text" : {
+    "message" : "Leave empty to use default spacing",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.padding_top.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.padding_top.label" : {
+    "message" : "Padding Top (px)",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.padding_top.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  }
+}

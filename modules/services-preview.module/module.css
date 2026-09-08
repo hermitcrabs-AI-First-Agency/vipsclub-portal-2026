@@ -1,0 +1,30 @@
+{# ============================================================
+   services-preview — Per-instance style overrides
+   Base component styles live in css/portal/dashboard.css
+   ============================================================ #}
+
+{% if module.style_overrides.background_color.color %}
+.dashboard-services-preview .item-card {
+  background-color: {{ module.style_overrides.background_color.color }};
+}
+{% endif %}
+
+{% if module.style_overrides.padding_top %}
+.dashboard-services-preview {
+  padding-top: {{ module.style_overrides.padding_top }}px;
+}
+{% endif %}
+
+{% if module.style_overrides.padding_bottom %}
+.dashboard-services-preview {
+  padding-bottom: {{ module.style_overrides.padding_bottom }}px;
+}
+{% endif %}
+
+{% if module.style_overrides.hide_on_mobile %}
+@media (max-width: 480px) {
+  .dashboard-services-preview--hide-mobile {
+    display: none;
+  }
+}
+{% endif %}

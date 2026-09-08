@@ -1,0 +1,91 @@
+{# ============================================================
+   VIPSCLUB Portal 2026 — Stat Cards Module
+   Row of 3 membership stat cards: Points, Referrals, Rewards
+
+   Contact properties required (create in HubSpot > Contacts > Properties):
+     vipsclub_points               — Available points balance (number)
+     vipsclub_tier                 — Membership tier: "Bronze", "Silver", "Gold" (single-line text)
+     vipsclub_active_referrals     — Count of active/pending referrals (number)
+     vipsclub_completed_referrals  — Count of completed referrals (number)
+     vipsclub_reward_points        — Redeemable reward points balance (number)
+     vipsclub_points_this_month    — Points earned this calendar month (number)
+
+   Populate these via Operations Hub workflows or custom code actions.
+   ============================================================ #}
+
+{% require_css %}
+<link rel="stylesheet" href="{{ get_asset_url('./module.css') }}">
+{% end_require_css %}
+
+{# ── Read member data from contact properties ── #}
+{% set pts          = contact.vipsclub_points | default(0) %}
+{% set tier         = contact.membership_tier | default("Bronze") %}
+{% set active_refs  = contact.vipsclub_active_referrals | default(0) %}
+{% set comp_refs    = contact.vipsclub_completed_referrals | default(0) %}
+{% set reward_pts   = contact.vipsclub_reward_points | default(0) %}
+{% set pts_month    = contact.vipsclub_points_this_month | default(0) %}
+
+<div class="stat-cards{% if module.style_overrides.hide_on_mobile %} stat-cards--hide-mobile{% endif %}"
+     aria-label="Membership statistics">
+
+  {# ── Card 1: Available Points ── #}
+  <div class="stat-card">
+    {% if module.card_points.card_heading %}
+    <p class="stat-card__label">{{ module.card_points.card_heading | escape_html }}</p>
+    {% endif %}
+
+    <p class="stat-card__value" aria-label="{{ pts | number_format(0, '.', ',') }} available points">
+      {{ pts | number_format(0, '.', ',') }}
+    </p>
+
+    {% if module.card_points.sub_label %}
+    <div class="stat-card__sub">
+      <span class="stat-card__sub-label">{{ module.card_points.sub_label | escape_html }}</span>
+      <span class="stat-card__sub-value">{{ tier | escape_html }}</span>
+    </div>
+    {% endif %}
+  </div>
+
+  {# ── Card 2: Total References ── #}
+  <div class="stat-card">
+    {% if module.card_referrals.card_heading %}
+    <p class="stat-card__label">{{ module.card_referrals.card_heading | escape_html }}</p>
+    {% endif %}
+
+    <p class="stat-card__value" aria-label="{{ (active_refs + comp_refs) | number_format(0, '.', ',') }} total referrals">
+      {{ (active_refs + comp_refs) | number_format(0, '.', ',') }}
+    </p>
+
+    <ul class="stat-card__status-list" aria-label="Referral breakdown">
+      <li class="stat-card__status-item stat-card__status-item--active">
+        <span class="status-dot status-dot--success" aria-hidden="true"></span>
+        {{ module.card_referrals.active_label | default("Active") | escape_html }}:
+        <strong>{{ active_refs }}</strong>
+      </li>
+      <li class="stat-card__status-item stat-card__status-item--complete">
+        <span class="status-dot status-dot--muted" aria-hidden="true"></span>
+        {{ module.card_referrals.completed_label | default("Completed") | escape_html }}:
+        <strong>{{ comp_refs }}</strong>
+      </li>
+    </ul>
+  </div>
+
+  {# ── Card 3: Reward Points ── #}
+  <div class="stat-card">
+    {% if module.card_rewards.card_heading %}
+    <p class="stat-card__label">{{ module.card_rewards.card_heading | escape_html }}</p>
+    {% endif %}
+
+    <p class="stat-card__value" aria-label="{{ reward_pts | number_format(0, '.', ',') }} reward points">
+      {{ reward_pts | number_format(0, '.', ',') }}
+    </p>
+
+    {% if module.card_rewards.sub_label %}
+    <div class="stat-card__sub">
+      <span class="stat-card__sub-label">{{ module.card_rewards.sub_label | escape_html }}</span>
+      <span class="stat-card__sub-value">{{ pts_month | number_format(0, '.', ',') }}</span>
+    </div>
+    {% endif %}
+  </div>
+
+</div>

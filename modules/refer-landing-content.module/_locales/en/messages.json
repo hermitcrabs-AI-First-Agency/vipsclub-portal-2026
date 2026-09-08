@@ -1,0 +1,847 @@
+{
+  "benefits.benefit_desc.default" : {
+    "message" : "Redeem toward free services and vouchers",
+    "description" : "",
+    "placeholders" : null
+  },
+  "benefits.benefit_desc.help_text" : {
+    "message" : "Short description shown below the title.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "benefits.benefit_desc.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "benefits.benefit_desc.label" : {
+    "message" : "Benefit Description",
+    "description" : "",
+    "placeholders" : null
+  },
+  "benefits.benefit_desc.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "benefits.benefit_desc.validation_regex" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "benefits.benefit_title.default" : {
+    "message" : "Earn points on every completed service",
+    "description" : "",
+    "placeholders" : null
+  },
+  "benefits.benefit_title.help_text" : {
+    "message" : "Bold title of this benefit.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "benefits.benefit_title.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "benefits.benefit_title.label" : {
+    "message" : "Benefit Title",
+    "description" : "",
+    "placeholders" : null
+  },
+  "benefits.benefit_title.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "benefits.benefit_title.validation_regex" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "benefits.check_icon.help_text" : {
+    "message" : "Checkmark icon for this benefit. Upload SVG/PNG or paste raw SVG code. Leave empty to use default green checkmark.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "benefits.check_icon.image.default.alt" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "benefits.check_icon.image.help_text" : {
+    "message" : "Upload from Files Manager. Recommended: 15x15px SVG.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "benefits.check_icon.image.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "benefits.check_icon.image.label" : {
+    "message" : "Upload Icon (SVG or PNG)",
+    "description" : "",
+    "placeholders" : null
+  },
+  "benefits.check_icon.image.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "benefits.check_icon.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "benefits.check_icon.label" : {
+    "message" : "Check Icon",
+    "description" : "",
+    "placeholders" : null
+  },
+  "benefits.check_icon.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "benefits.check_icon.svg_code.default" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "benefits.check_icon.svg_code.help_text" : {
+    "message" : "Paste raw SVG code. Leave empty to use the default green checkmark.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "benefits.check_icon.svg_code.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "benefits.check_icon.svg_code.label" : {
+    "message" : "Or: Paste SVG Code",
+    "description" : "",
+    "placeholders" : null
+  },
+  "benefits.check_icon.svg_code.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "benefits.check_icon.svg_code.validation_regex" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "benefits.help_text" : {
+    "message" : "Checkmarked benefit items shown in the benefits card.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "benefits.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "benefits.label" : {
+    "message" : "Benefits List",
+    "description" : "",
+    "placeholders" : null
+  },
+  "benefits.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "benefits_description.default" : {
+    "message" : "<p>IPS Partners VIPSCLUB gives you access to exclusive services, rewards, and a growing network of like-minded members.</p>",
+    "description" : "",
+    "placeholders" : null
+  },
+  "benefits_description.help_text" : {
+    "message" : "Description text inside the benefits card.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "benefits_description.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "benefits_description.label" : {
+    "message" : "Benefits Card Description",
+    "description" : "",
+    "placeholders" : null
+  },
+  "benefits_description.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "benefits_heading.default" : {
+    "message" : "Your exclusive membership awaits",
+    "description" : "",
+    "placeholders" : null
+  },
+  "benefits_heading.help_text" : {
+    "message" : "Heading inside the membership benefits card.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "benefits_heading.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "benefits_heading.label" : {
+    "message" : "Benefits Card Heading",
+    "description" : "",
+    "placeholders" : null
+  },
+  "benefits_heading.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "benefits_heading.validation_regex" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "display_mode.choices.all" : {
+    "message" : "All sections (benefits + steps + testimonials)",
+    "description" : "",
+    "placeholders" : null
+  },
+  "display_mode.choices.content_only" : {
+    "message" : "Content only (benefits + steps, no testimonials)",
+    "description" : "",
+    "placeholders" : null
+  },
+  "display_mode.choices.testimonials_only" : {
+    "message" : "Testimonials only",
+    "description" : "",
+    "placeholders" : null
+  },
+  "display_mode.help_text" : {
+    "message" : "Use 'Content only' in the left column. Place a second instance below the layout set to 'Testimonials only' for the full-width testimonials row.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "display_mode.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "display_mode.label" : {
+    "message" : "Display Mode",
+    "description" : "",
+    "placeholders" : null
+  },
+  "display_mode.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "heading_level.choices.h1" : {
+    "message" : "H1 — Page Title",
+    "description" : "",
+    "placeholders" : null
+  },
+  "heading_level.choices.h2" : {
+    "message" : "H2 — Section",
+    "description" : "",
+    "placeholders" : null
+  },
+  "heading_level.choices.h3" : {
+    "message" : "H3 — Subsection",
+    "description" : "",
+    "placeholders" : null
+  },
+  "heading_level.choices.h4" : {
+    "message" : "H4",
+    "description" : "",
+    "placeholders" : null
+  },
+  "heading_level.help_text" : {
+    "message" : "Controls the HTML heading tag for the main benefits heading. Use H1 only once per page for the main title.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "heading_level.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "heading_level.label" : {
+    "message" : "Heading Level",
+    "description" : "",
+    "placeholders" : null
+  },
+  "heading_level.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "name" : {
+    "message" : "refer-landing-content",
+    "description" : "",
+    "placeholders" : null
+  },
+  "steps.help_text" : {
+    "message" : "The four steps shown in the steps card.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "steps.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "steps.is_highlight.help_text" : {
+    "message" : "When enabled, the step number displays in red to draw attention.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "steps.is_highlight.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "steps.is_highlight.label" : {
+    "message" : "Highlight (Red Number)",
+    "description" : "",
+    "placeholders" : null
+  },
+  "steps.is_highlight.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "steps.label" : {
+    "message" : "Steps",
+    "description" : "",
+    "placeholders" : null
+  },
+  "steps.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "steps.step_desc.default" : {
+    "message" : "Create your free VIPSCLUB account in under 2 minutes",
+    "description" : "",
+    "placeholders" : null
+  },
+  "steps.step_desc.help_text" : {
+    "message" : "Short description below the step title.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "steps.step_desc.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "steps.step_desc.label" : {
+    "message" : "Step Description",
+    "description" : "",
+    "placeholders" : null
+  },
+  "steps.step_desc.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "steps.step_desc.validation_regex" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "steps.step_number.default" : {
+    "message" : "1",
+    "description" : "",
+    "placeholders" : null
+  },
+  "steps.step_number.help_text" : {
+    "message" : "Number shown in the circle.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "steps.step_number.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "steps.step_number.label" : {
+    "message" : "Step Number",
+    "description" : "",
+    "placeholders" : null
+  },
+  "steps.step_number.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "steps.step_number.validation_regex" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "steps.step_title.default" : {
+    "message" : "Sign up",
+    "description" : "",
+    "placeholders" : null
+  },
+  "steps.step_title.help_text" : {
+    "message" : "Bold title of this step.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "steps.step_title.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "steps.step_title.label" : {
+    "message" : "Step Title",
+    "description" : "",
+    "placeholders" : null
+  },
+  "steps.step_title.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "steps.step_title.validation_regex" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "steps_description.default" : {
+    "message" : "<p>Sign up, get your tier, use our services, and earn points you can spend on things that matter.</p>",
+    "description" : "",
+    "placeholders" : null
+  },
+  "steps_description.help_text" : {
+    "message" : "Text shown below the steps heading.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "steps_description.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "steps_description.label" : {
+    "message" : "Steps Section Description",
+    "description" : "",
+    "placeholders" : null
+  },
+  "steps_description.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "steps_heading.default" : {
+    "message" : "Four steps to your first reward",
+    "description" : "",
+    "placeholders" : null
+  },
+  "steps_heading.help_text" : {
+    "message" : "Heading shown above the steps card.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "steps_heading.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "steps_heading.label" : {
+    "message" : "Steps Section Heading",
+    "description" : "",
+    "placeholders" : null
+  },
+  "steps_heading.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "steps_heading.validation_regex" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.background_color.help_text" : {
+    "message" : "Leave empty to use theme default",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.background_color.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.background_color.label" : {
+    "message" : "Background Color",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.background_color.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.content_width.choices.default" : {
+    "message" : "Default",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.content_width.choices.full" : {
+    "message" : "Full Width",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.content_width.choices.narrow" : {
+    "message" : "Narrow",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.content_width.choices.wide" : {
+    "message" : "Wide",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.content_width.help_text" : {
+    "message" : "Control the maximum width of this module's content.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.content_width.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.content_width.label" : {
+    "message" : "Content Width",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.content_width.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.hide_on_desktop.help_text" : {
+    "message" : "Toggle to hide this module on desktop viewports.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.hide_on_desktop.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.hide_on_desktop.label" : {
+    "message" : "Hide on Desktop",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.hide_on_desktop.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.hide_on_mobile.help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.hide_on_mobile.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.hide_on_mobile.label" : {
+    "message" : "Hide on Mobile",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.hide_on_mobile.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.label" : {
+    "message" : "Style Overrides",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.padding_bottom.help_text" : {
+    "message" : "Leave empty to use default spacing",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.padding_bottom.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.padding_bottom.label" : {
+    "message" : "Padding Bottom (px)",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.padding_bottom.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.padding_top.help_text" : {
+    "message" : "Leave empty to use default spacing",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.padding_top.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.padding_top.label" : {
+    "message" : "Padding Top (px)",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.padding_top.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.text_color.help_text" : {
+    "message" : "Override the default text color for this module instance. Leave empty for theme default.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.text_color.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.text_color.label" : {
+    "message" : "Text Color",
+    "description" : "",
+    "placeholders" : null
+  },
+  "style_overrides.text_color.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "testimonials.help_text" : {
+    "message" : "Testimonial cards shown in a 3-column grid.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "testimonials.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "testimonials.label" : {
+    "message" : "Testimonials",
+    "description" : "",
+    "placeholders" : null
+  },
+  "testimonials.photo.default.alt" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "testimonials.photo.help_text" : {
+    "message" : "Reviewer profile photo (38×38px circle).",
+    "description" : "",
+    "placeholders" : null
+  },
+  "testimonials.photo.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "testimonials.photo.label" : {
+    "message" : "Reviewer Photo",
+    "description" : "",
+    "placeholders" : null
+  },
+  "testimonials.photo.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "testimonials.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "testimonials.quote.default" : {
+    "message" : "I referred two colleagues and earned enough points to redeem a free service consultation.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "testimonials.quote.help_text" : {
+    "message" : "The testimonial quote text.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "testimonials.quote.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "testimonials.quote.label" : {
+    "message" : "Quote Text",
+    "description" : "",
+    "placeholders" : null
+  },
+  "testimonials.quote.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "testimonials.quote.validation_regex" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "testimonials.reviewer_meta.default" : {
+    "message" : "Silver member • 3 referrals",
+    "description" : "",
+    "placeholders" : null
+  },
+  "testimonials.reviewer_meta.help_text" : {
+    "message" : "Sub-line shown below the reviewer name (e.g. 'Silver member • 3 referrals').",
+    "description" : "",
+    "placeholders" : null
+  },
+  "testimonials.reviewer_meta.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "testimonials.reviewer_meta.label" : {
+    "message" : "Reviewer Meta",
+    "description" : "",
+    "placeholders" : null
+  },
+  "testimonials.reviewer_meta.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "testimonials.reviewer_meta.validation_regex" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "testimonials.reviewer_name.default" : {
+    "message" : "Michael R.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "testimonials.reviewer_name.help_text" : {
+    "message" : "Name of the reviewer.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "testimonials.reviewer_name.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "testimonials.reviewer_name.label" : {
+    "message" : "Reviewer Name",
+    "description" : "",
+    "placeholders" : null
+  },
+  "testimonials.reviewer_name.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "testimonials.reviewer_name.validation_regex" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "testimonials_description.default" : {
+    "message" : "<p>Real feedback from people already using VIPSCLUB.</p>",
+    "description" : "",
+    "placeholders" : null
+  },
+  "testimonials_description.help_text" : {
+    "message" : "Description shown below the testimonials heading.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "testimonials_description.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "testimonials_description.label" : {
+    "message" : "Testimonials Section Description",
+    "description" : "",
+    "placeholders" : null
+  },
+  "testimonials_description.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "testimonials_heading.default" : {
+    "message" : "What our members say",
+    "description" : "",
+    "placeholders" : null
+  },
+  "testimonials_heading.help_text" : {
+    "message" : "Heading shown above the testimonials grid.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "testimonials_heading.inline_help_text" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "testimonials_heading.label" : {
+    "message" : "Testimonials Section Heading",
+    "description" : "",
+    "placeholders" : null
+  },
+  "testimonials_heading.placeholder" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  },
+  "testimonials_heading.validation_regex" : {
+    "message" : "",
+    "description" : "",
+    "placeholders" : null
+  }
+}

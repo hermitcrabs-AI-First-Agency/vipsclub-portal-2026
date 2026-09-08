@@ -1,0 +1,60 @@
+{# ============================================================
+   VIPSCLUB Portal 2026 — Refer a Friend Info Module
+   Left column: program description + steps diagram + reward boxes
+   Figma: Desktop 374:627 | Mobile 380:4996
+   ============================================================ #}
+
+<div class="refer-a-friend-info{% if module.style_overrides.hide_on_mobile %} refer-a-friend-info--hide-mobile{% endif %}">
+
+  {# ── Section Heading (above card) ── #}
+  {% if module.section_heading %}
+  <{{ module.heading_level | default("h2") }} class="refer-a-friend-info__heading">
+    {{ module.section_heading | escape_html }}
+  </{{ module.heading_level | default("h2") }}>
+  {% endif %}
+
+  {# ── Program Info Card ── #}
+  <div class="refer-a-friend-info__card">
+
+    {# Program description #}
+    {% if module.program_description %}
+    <div class="refer-a-friend-info__description">
+      {{ module.program_description }}
+    </div>
+    {% endif %}
+
+    {# ── Steps Diagram ── #}
+    {% if module.steps %}
+    <div class="refer-a-friend-info__steps" role="list" aria-label="Referral program steps">
+      {% for step in module.steps %}
+      <div class="refer-a-friend-info__step" role="listitem">
+        <div class="refer-a-friend-info__step-circle{% if step.is_highlight %} refer-a-friend-info__step-circle--highlight{% endif %}"
+             aria-hidden="true">
+          <span class="refer-a-friend-info__step-number{% if step.is_highlight %} refer-a-friend-info__step-number--highlight{% endif %}">
+            {{ step.step_number | escape_html }}
+          </span>
+        </div>
+        {% if step.step_label %}
+        <span class="refer-a-friend-info__step-label">{{ step.step_label | escape_html }}</span>
+        {% endif %}
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    {# ── Reward Boxes ── #}
+    {% if module.reward_boxes %}
+    <div class="refer-a-friend-info__reward-boxes" aria-label="Reward summary">
+      {% for box in module.reward_boxes %}
+      <div class="refer-a-friend-info__reward-box">
+        {% if box.box_label %}<span>{{ box.box_label | escape_html }} </span>{% endif %}
+        {% if box.points %}<span class="refer-a-friend-info__points">{{ box.points | escape_html }}</span>{% endif %}
+        {% if box.suffix %}<span> {{ box.suffix | escape_html }}</span>{% endif %}
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+  </div>{# end card #}
+
+</div>

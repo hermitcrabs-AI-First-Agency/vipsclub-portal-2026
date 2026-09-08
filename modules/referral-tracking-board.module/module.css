@@ -1,0 +1,272 @@
+/* ============================================================
+   VIPSCLUB Portal 2026 — Referral Tracking Board Module
+   Figma: Desktop 339:7856 | Mobile 380:3960
+   ============================================================ */
+
+/* ── Outer wrapper ── */
+.referral-tracking-board {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ── Section Heading (above the card) ── */
+.referral-tracking-board__heading {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 1.25;
+  color: var(--vips-dark);
+  margin: 0;
+}
+
+/* ── White card container (table + empty state share this) ── */
+.referral-tracking-board__card {
+  background: var(--vips-bg-card);
+  border: 1px solid var(--vips-border-light);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+/* ── TABLE ── */
+.referral-tracking-board__table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.referral-tracking-board__table thead tr {
+  border-bottom: 1px solid var(--vips-border);
+}
+
+.referral-tracking-board__table th {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  color: var(--vips-dark);
+  text-align: left;
+  padding: 16px 20px;
+  white-space: nowrap;
+}
+
+.referral-tracking-board__table td {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--vips-text-secondary);
+  padding: 0 20px;
+  height: 65px;
+  border-bottom: 1px solid var(--vips-border);
+  vertical-align: middle;
+}
+
+.referral-tracking-board__table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* ── Status Badges ── */
+.referral-tracking-board__badge {
+  display: inline-block;
+  border-radius: var(--radius-full);
+  padding: 3px 10px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 18px;
+  white-space: nowrap;
+}
+
+.referral-tracking-board__badge--sent {
+  background: var(--vips-bg-input);
+  color: var(--vips-text-secondary);
+}
+
+.referral-tracking-board__badge--pending {
+  background: rgba(255, 152, 0, 0.1);
+  color: var(--vips-pending);
+}
+
+.referral-tracking-board__badge--completed {
+  background: #e8faf0;
+  color: var(--vips-success);
+}
+
+.referral-tracking-board__badge--closed,
+.referral-tracking-board__badge--expired {
+  background: rgba(158, 158, 158, 0.10);
+  color: var(--vips-text-muted);
+}
+
+/* ── Points / Rewards in table ── */
+.referral-tracking-board__points {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.referral-tracking-board__points--earned {
+  color: var(--vips-success);
+}
+
+/* Manual reward override (R13) — displayed instead of the standard
+   "+N Points". Distinctive brand-red treatment so a premium reward like
+   "Rental Appraisal" reads as a clear win, not a generic text label. */
+.referral-tracking-board__points--override {
+  color: var(--vips-red);
+  font-weight: 600;
+}
+
+.referral-tracking-board__points--pending,
+.referral-tracking-board__points--awaiting {
+  color: var(--vips-pending);
+}
+
+.referral-tracking-board__points--expired {
+  color: var(--vips-text-muted);
+}
+
+.referral-tracking-board__points--neutral {
+  color: var(--vips-text-secondary);
+}
+
+/* Backward-compat: keep the older `--issued` class working in case a legacy
+   instance still references it (defensive — no longer emitted by HubL). */
+.referral-tracking-board__points--issued {
+  color: var(--vips-success);
+}
+
+/* ── Empty state ── */
+.referral-tracking-board__empty {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--vips-text-secondary);
+  text-align: center;
+  padding: 40px 20px;
+}
+
+/* ── MOBILE CARDS — hidden on desktop, shown on mobile ── */
+.referral-tracking-board__cards-list {
+  display: none;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* ── Mobile (≤768px) ── */
+@media (max-width: 768px) {
+
+  .referral-tracking-board--hide-mobile {
+    display: none;
+  }
+
+  /* Hide desktop table on mobile */
+  .referral-tracking-board__table-wrapper {
+    display: none;
+  }
+
+  /* Show stacked cards on mobile */
+  .referral-tracking-board__cards-list {
+    display: flex;
+  }
+
+  /* Individual mobile referral card */
+  .referral-tracking-board__mobile-card {
+    background: var(--vips-bg-card);
+    border: 1px solid var(--vips-border-light);
+    border-radius: 10px;
+    box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.06);
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  /* Top row: Name | Date | Badge */
+  .referral-tracking-board__mobile-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  .referral-tracking-board__mobile-name {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 20px;
+    color: var(--vips-dark);
+    flex: 1;
+    min-width: 0;
+  }
+
+  .referral-tracking-board__mobile-date {
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    color: var(--vips-text-secondary);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  /* Bottom row: Type + Status fields */
+  .referral-tracking-board__mobile-bottom {
+    display: flex;
+    gap: 24px;
+  }
+
+  .referral-tracking-board__mobile-field {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .referral-tracking-board__mobile-label {
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    color: var(--vips-text-muted);
+  }
+
+  .referral-tracking-board__mobile-value {
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    color: var(--vips-text-secondary);
+  }
+
+  /* Inline status colors on mobile */
+  .referral-tracking-board__status--pending  { color: var(--vips-pending); }
+  .referral-tracking-board__status--completed { color: var(--vips-success); }
+  .referral-tracking-board__status--sent      { color: var(--vips-text-secondary); }
+
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .referral-tracking-board__badge {
+    transition: none;
+  }
+}
+
+/* ── Per-instance style overrides ── */
+{% if module.style_overrides.background_color.color %}
+.referral-tracking-board {
+  background-color: {{ module.style_overrides.background_color.color }};
+}
+{% endif %}
+
+{% if module.style_overrides.padding_top %}
+.referral-tracking-board {
+  padding-top: {{ module.style_overrides.padding_top }}px;
+}
+{% endif %}
+
+{% if module.style_overrides.padding_bottom %}
+.referral-tracking-board {
+  padding-bottom: {{ module.style_overrides.padding_bottom }}px;
+}
+{% endif %}

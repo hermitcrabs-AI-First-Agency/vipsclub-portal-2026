@@ -1,0 +1,288 @@
+/* ============================================================
+   VIPSCLUB Portal 2026 — RM Contact Card Module
+   Figma: Desktop 339:7562 | Mobile 339:9002
+   ============================================================ */
+
+/* ── Section Heading (above card) ── */
+.rm-card__section-heading {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 27.5px;
+  color: var(--vips-dark);
+  margin: 0 0 4px;
+}
+
+/* Intro text under the heading ("If you have any questions…") */
+.rm-card__section-subtitle {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 22px;
+  color: var(--vips-text-secondary);
+  margin: 0 0 16px;
+}
+
+/* Gap from the enquiry form above (they're separate modules in the right column) */
+.rm-card {
+  display: block;
+  margin-top: 24px;
+}
+
+/* ── Card — 2 columns: profile | divider | contacts ── */
+.rm-card__card {
+  background: var(--vips-bg-card);
+  border: 1px solid var(--vips-border-light);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card-subtle);
+  padding: 24px;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  gap: 20px;
+  min-width: 0; /* allow card to shrink below content size */
+  width: 100%;
+}
+
+/* ── Profile Block (left column): photo on top, name/role/booking below ── */
+.rm-card__profile {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 0;
+  flex: 0 0 auto;
+}
+
+.rm-card__photo {
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+/* Initials placeholder — shown when no profile_image URL is set */
+.rm-card__photo--initials {
+  background: #e8e8e8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 1;
+  color: var(--vips-text-secondary);
+}
+
+.rm-card__profile-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-top: 4px;
+}
+
+.rm-card__name {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+  color: var(--vips-dark);
+  margin: 0;
+}
+
+.rm-card__role {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 20px;
+  color: var(--vips-text-secondary);
+  margin: 0;
+}
+
+.rm-card__booking-link {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 14px;
+  color: var(--vips-dark);
+  text-decoration: underline;
+  transition: color 0.15s ease;
+  margin-top: 4px;
+  display: inline-block;
+}
+
+.rm-card__booking-link:hover {
+  color: var(--vips-text-secondary);
+}
+
+.rm-card__booking-link:focus-visible {
+  outline: 2px solid var(--vips-dark);
+  outline-offset: 2px;
+}
+
+/* ── Divider — vertical line between profile and contacts ── */
+.rm-card__divider {
+  border: none;
+  width: 1px;
+  align-self: stretch;
+  background: var(--vips-border-light);
+  margin: 0;
+  flex-shrink: 0;
+}
+
+/* ── Contact List (right column) ── */
+.rm-card__contact-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+  min-width: 0;
+}
+
+.rm-card__contact-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0; /* allow text child to shrink and wrap */
+}
+
+.rm-card__contact-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--vips-text-secondary);
+}
+
+.rm-card__contact-icon svg,
+.rm-card__contact-icon img {
+  width: 20px;
+  height: 20px;
+}
+
+.rm-card__contact-value {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 20px;
+  color: var(--vips-dark);
+  text-decoration: none;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+a.rm-card__contact-value:hover {
+  text-decoration: underline;
+  color: var(--vips-dark);
+}
+
+a.rm-card__contact-value:focus-visible {
+  outline: 2px solid var(--vips-dark);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Stack variant — used when a single contact row contains multiple
+   clickable items (e.g. two phone numbers separated by " or "). Each
+   anchor sits on its own line. */
+.rm-card__contact-value--stack {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.rm-card__contact-link {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 20px;
+  color: var(--vips-dark);
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+
+.rm-card__contact-link:hover {
+  text-decoration: underline;
+}
+
+.rm-card__contact-link:focus-visible {
+  outline: 2px solid var(--vips-dark);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* ── Editor placeholder (shown when no associated contact) ── */
+.rm-card__editor-placeholder {
+  background: #fff8e1;
+  border: 1px dashed #f9a825;
+  border-radius: var(--radius-lg);
+  padding: 20px 24px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  line-height: 20px;
+  color: #5d4037;
+}
+
+.rm-card__editor-placeholder p {
+  margin: 0 0 6px;
+}
+
+.rm-card__editor-placeholder p:last-child {
+  margin: 0;
+}
+
+/* ── Mobile (≤768px) ── */
+@media (max-width: 768px) {
+
+  .rm-card--hide-mobile {
+    display: none;
+  }
+
+  /* Mobile: back to a single column — 2-col is too tight for phone/email here */
+  .rm-card__card {
+    flex-direction: column;
+    gap: 20px;
+    border-radius: 10px;
+    border-width: 0.698px;
+    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+  }
+
+  /* Photo sits beside the name again in the stacked layout */
+  .rm-card__profile {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  /* Divider becomes a horizontal rule between profile and contacts */
+  .rm-card__divider {
+    width: auto;
+    height: 1px;
+  }
+
+  .rm-card__photo {
+    width: 72px;
+    height: 72px;
+  }
+
+  .rm-card__name {
+    font-size: 18px;
+  }
+
+  .rm-card__role {
+    font-size: 14px;
+  }
+
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .rm-card__booking-link {
+    transition: none;
+  }
+}

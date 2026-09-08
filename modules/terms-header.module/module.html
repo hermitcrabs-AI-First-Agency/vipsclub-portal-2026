@@ -1,0 +1,56 @@
+{# ============================================================
+   Terms — Page Header
+   Smaller, simpler variant of portal-header for public legal pages.
+   No personalized greeting, no hamburger (no sidebar on these pages).
+   Inner content shares the same 1240px content container as the body,
+   so the logo aligns vertically with the TOC's left edge below.
+   ============================================================ #}
+
+{% set grad_start = module.style_overrides.gradient_start.color | default("#000000") %}
+{% set grad_end   = module.style_overrides.gradient_end.color   | default("#a22b34") %}
+{% set logo_href  = module.logo_url.url.href %}
+
+{# The banner sizes purely to its own content + paddings (CSS-driven).
+   The legacy `header_height` field is no longer rendered — it was forcing
+   inline `min-height` that left dead space below the title on mobile. The
+   field is kept in fields.json for backward compatibility with already-placed
+   instances but has no effect. #}
+<header class="terms-header{% if module.style_overrides.hide_on_mobile %} terms-header--hide-mobile{% endif %}"
+        role="banner"
+        style="background-image: linear-gradient(169.47deg, {{ grad_start }} 36.19%, {{ grad_end }} 66.10%);">
+
+  <div class="terms-header__bg-texture" aria-hidden="true"></div>
+
+  <div class="terms-header__container">
+
+    <div class="terms-header__top">
+      {% if module.logo.src %}
+        {% if logo_href %}
+        <a class="terms-header__logo-link"
+           href="{{ logo_href | escape_attr }}"
+           {% if module.logo_url.open_in_new_tab %}target="_blank" rel="noopener noreferrer"{% endif %}>
+          <img class="terms-header__logo"
+               src="{{ module.logo.src | escape_attr }}"
+               alt="{{ module.logo.alt | escape_attr }}"
+               width="{{ module.logo.width | default(161) }}"
+               height="{{ module.logo.height | default(59) }}"
+               fetchpriority="high">
+        </a>
+        {% else %}
+        <img class="terms-header__logo"
+             src="{{ module.logo.src | escape_attr }}"
+             alt="{{ module.logo.alt | escape_attr }}"
+             width="{{ module.logo.width | default(161) }}"
+             height="{{ module.logo.height | default(59) }}"
+             fetchpriority="high">
+        {% endif %}
+      {% endif %}
+    </div>
+
+    {% if module.page_title %}
+    <h1 class="terms-header__title">{{ module.page_title | escape_html }}</h1>
+    {% endif %}
+
+  </div>
+
+</header>

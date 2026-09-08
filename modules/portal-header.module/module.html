@@ -1,0 +1,129 @@
+{# ── Compute time of day ── #}
+{% set current_hour = local_dt | datetimeformat("%H") | int %}
+{% if current_hour >= 5 and current_hour < 12 %}
+  {% set time_of_day = "Morning" %}
+{% elif current_hour >= 12 and current_hour < 17 %}
+  {% set time_of_day = "Afternoon" %}
+{% else %}
+  {% set time_of_day = "Evening" %}
+{% endif %}
+
+{# ── Style overrides ── #}
+{% set grad_start = module.style_overrides.gradient_start.color | default("#000000") %}
+{% set grad_end   = module.style_overrides.gradient_end.color   | default("#a22b34") %}
+{% set hdr_height = module.style_overrides.header_height %}
+
+<header class="portal-header{% if module.style_overrides.hide_on_mobile %} portal-header--hide-mobile{% endif %}"
+        role="banner"
+        style="background-image: linear-gradient(169.47deg, {{ grad_start }} 36.19%, {{ grad_end }} 66.10%);{% if hdr_height %}height: {{ hdr_height }}px;{% endif %}">
+
+  <div class="portal-header__bg-texture" aria-hidden="true"></div>
+
+  {# ── Hamburger button — header-level so it shows at tablet (≤1080) AND mobile.
+       Opens the slide-down sidebar nav. Hidden on desktop (≥1081) via CSS. ── #}
+  <button class="portal-header__hamburger"
+          id="portal-hamburger-btn"
+          type="button"
+          aria-label="Open navigation menu"
+          aria-expanded="false"
+          aria-controls="portal-sidebar">
+    {% if module.hamburger_icon.svg_code %}
+      <span aria-hidden="true">{{ module.hamburger_icon.svg_code }}</span>
+    {% elif module.hamburger_icon.image.src %}
+      <img src="{{ module.hamburger_icon.image.src | escape_attr }}"
+           alt=""
+           width="{{ module.hamburger_icon.image.width | default(24) }}"
+           height="{{ module.hamburger_icon.image.height | default(24) }}"
+           aria-hidden="true">
+    {% else %}
+      {# Fallback: CSS-drawn hamburger lines (no asset needed) #}
+      <span class="portal-header__hamburger-lines" aria-hidden="true">
+        <span></span><span></span><span></span>
+      </span>
+    {% endif %}
+  </button>
+
+  {# ── Desktop inner ── #}
+  <div class="portal-header__inner">
+
+    {% if module.logo.src %}
+      {% set _logo_href = module.logo_url.url.href %}
+      {% if _logo_href %}
+      <a class="portal-header__logo-link"
+         href="{{ _logo_href | escape_attr }}"
+         {% if module.logo_url.open_in_new_tab %}target="_blank" rel="noopener noreferrer"{% endif %}
+         aria-label="{{ module.logo.alt | default('VIPS Club') | escape_attr }}">
+        <img class="portal-header__logo"
+             src="{{ module.logo.src | escape_attr }}"
+             alt="{{ module.logo.alt | escape_attr }}"
+             width="{{ module.logo.width }}"
+             height="{{ module.logo.height }}"
+             fetchpriority="high">
+      </a>
+      {% else %}
+      <img class="portal-header__logo"
+           src="{{ module.logo.src | escape_attr }}"
+           alt="{{ module.logo.alt | escape_attr }}"
+           width="{{ module.logo.width }}"
+           height="{{ module.logo.height }}"
+           fetchpriority="high">
+      {% endif %}
+    {% endif %}
+
+    <div class="portal-header__divider" aria-hidden="true"></div>
+
+    <div class="portal-header__greeting">
+      <h1>{{ module.greeting_prefix | escape_html }} {{ time_of_day }}, {{ contact.firstname | default("Member") | escape_html }}</h1>
+      {% if module.subtitle %}
+      <p>{{ module.subtitle | escape_html }}</p>
+      {% endif %}
+    </div>
+
+  </div>
+
+  {# ── Mobile inner ── #}
+  <div class="portal-header__mobile">
+
+    {# Top row: logo LEFT (hamburger is header-level, positioned top-right) #}
+    <div class="portal-header__mobile-top">
+
+      {% if module.logo.src %}
+        {% set _logo_href = module.logo_url.url.href %}
+        {% if _logo_href %}
+        <a class="portal-header__logo-link portal-header__logo-link--mobile"
+           href="{{ _logo_href | escape_attr }}"
+           {% if module.logo_url.open_in_new_tab %}target="_blank" rel="noopener noreferrer"{% endif %}
+           aria-label="{{ module.logo.alt | default('VIPS Club') | escape_attr }}">
+          <img class="portal-header__logo portal-header__logo--mobile"
+               src="{{ module.logo.src | escape_attr }}"
+               alt="{{ module.logo.alt | escape_attr }}"
+               width="{{ module.logo.width | default(161) }}"
+               height="{{ module.logo.height | default(59) }}"
+               fetchpriority="high">
+        </a>
+        {% else %}
+        <img class="portal-header__logo portal-header__logo--mobile"
+             src="{{ module.logo.src | escape_attr }}"
+             alt="{{ module.logo.alt | escape_attr }}"
+             width="{{ module.logo.width | default(161) }}"
+             height="{{ module.logo.height | default(59) }}"
+             fetchpriority="high">
+        {% endif %}
+      {% endif %}
+
+    </div>{# end mobile-top #}
+
+    {# Mobile greeting #}
+    <div class="portal-header__mobile-greeting">
+      <p class="portal-header__mobile-greeting-name">
+        {{ module.greeting_prefix | escape_html }} {{ time_of_day }},<br>
+        {{ contact.firstname | default("Member") | escape_html }}
+      </p>
+      {% if module.subtitle %}
+      <p class="portal-header__mobile-greeting-sub">{{ module.subtitle | escape_html }}</p>
+      {% endif %}
+    </div>
+
+  </div>
+
+</header>

@@ -1,0 +1,473 @@
+/* ============================================================
+   VIPSCLUB Portal 2026 — Services Listing Module
+   Figma: Desktop 339:7273 | Mobile 339:8772
+   ============================================================ */
+
+/* ── Outer section ── */
+.services-listing {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* ── Section Header Card ── */
+.services-listing__header-card {
+  background: var(--vips-bg-card);
+  border: 1px solid var(--vips-border-light);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card-subtle);
+  padding: 24px 20px;
+}
+
+.services-listing__heading {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 46px;
+  color: var(--vips-dark);
+  margin: 0 0 4px;
+}
+
+.services-listing__description {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 24px;
+  color: var(--vips-dark);
+  max-width: 876px;
+}
+
+.services-listing__description p {
+  margin: 0;
+}
+
+/* ── Filter Row ── */
+.services-listing__filters {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: 24px;
+}
+
+.services-listing__filter-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.services-listing__filter-label {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+  color: var(--vips-dark);
+  letter-spacing: -0.1504px;
+}
+
+.services-listing__filter-pill-wrap {
+  position: relative;
+  width: 249px;
+}
+
+.services-listing__filter-select {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+  height: 48px;
+  background: var(--vips-bg-card);
+  border: 1px solid var(--vips-border-light);
+  border-radius: var(--radius-full);
+  padding: 14px 44px 14px 24px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--vips-text-secondary);
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+
+.services-listing__filter-select:focus-visible {
+  border-color: var(--vips-dark);
+  outline: 2px solid var(--vips-dark);
+  outline-offset: 2px;
+}
+
+/* CSS caret via pseudo-element on wrapper */
+.services-listing__filter-pill-wrap::after {
+  content: '';
+  position: absolute;
+  right: 19px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 6px solid var(--vips-text-secondary);
+  pointer-events: none;
+}
+
+/* ── Service Card Grid ── */
+/* minmax(0, 1fr) forces all 3 columns to be EXACTLY equal. Plain `1fr` is
+   minmax(auto, 1fr), so columns with longer unbreakable content (e.g. the
+   "ACCOUNTING/TAXATION" category) grew past 1/3 and squeezed column 1 narrower. */
+.services-listing__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+
+/* ── Service Card ── */
+.services-listing__card {
+  background: var(--vips-bg-card);
+  border: 1px solid var(--vips-border-light);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card-subtle);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  transition: border-color 0.15s ease;
+}
+
+/* Hover (and keyboard focus) border — applies to ALL cards, not a stuck state.
+   The card was previously given a permanent --active border on loop.first. */
+.services-listing__card:hover,
+.services-listing__card:focus-within {
+  border-color: var(--vips-text-muted);
+}
+
+/* Desktop locked state: whole card dim */
+.services-listing__card--locked {
+  opacity: 0.6;
+}
+
+/* "Silver tier required" notice shown above the locked button. Matches the
+   offers-rewards-hub tier-required style for cross-module consistency. */
+.services-listing__tier-required {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 16px;
+  color: var(--vips-text-secondary);
+  margin: 0 0 12px;
+}
+
+/* "N claims" note — appears just above the CTA when the member has claimed
+   this service at least once. Mirrors the tier-required text style so the
+   two share the same visual weight when they alternate. */
+.services-listing__claim-count {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 16px;
+  color: var(--vips-text-secondary);
+  margin: 0 0 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+/* ── Card Top ── */
+.services-listing__card-top {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.services-listing__icon-wrap {
+  width: 32px;
+  height: 32px;
+  background: var(--vips-bg-icon);
+  border-radius: var(--radius-xl);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.services-listing__icon {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+}
+
+.services-listing__category {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 12px;
+  color: var(--vips-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: -0.1504px;
+  margin: 0;
+}
+
+.services-listing__title {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  color: var(--vips-dark);
+  letter-spacing: -0.1504px;
+  margin: 0;
+}
+
+/* ── Card Body ── */
+.services-listing__card-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.services-listing__desc {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 22px;
+  color: var(--vips-text-secondary);
+  letter-spacing: -0.1504px;
+  margin: 0;
+}
+
+.services-listing__tier {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0;
+}
+
+.services-listing__tier-pill {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 18px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  color: var(--vips-dark);
+  background: var(--vips-bg-icon, #f5f5f5);
+  letter-spacing: 0.2px;
+  white-space: nowrap;
+}
+
+/* Per-tier accent colours — option `name` values are bronze / silver / gold,
+   wired in via the BEM modifier in module.html. Falls back to the neutral
+   pill above if the tier name doesn't match (e.g. "Platinum"). */
+.services-listing__tier-pill--bronze {
+  background: #f5dfc4;
+  color: #7a3e00;
+}
+.services-listing__tier-pill--silver {
+  background: #e6e8ed;
+  color: #4a5568;
+}
+.services-listing__tier-pill--gold {
+  background: #fde68a;
+  color: #7c4a02;
+}
+.services-listing__tier-pill--platinum {
+  background: #d9dce4;
+  color: #37425a;
+}
+
+/* "Enquired · N" pill — signals the member has already submitted the enquiry
+   form for this service. Sits just below the tier pill row.
+   Neutral colour so it doesn't compete with the tier hierarchy. */
+.services-listing__enquired {
+  margin-top: 8px;
+}
+.services-listing__enquired-pill {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 18px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: #e6ecf5;
+  color: #2f4a70;
+  letter-spacing: 0.2px;
+  white-space: nowrap;
+}
+
+/* ── CTA Button ── */
+.services-listing__btn {
+  display: block;
+  width: 100%;
+  background: var(--vips-dark);
+  color: var(--vips-bg-card);
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1;
+  text-align: center;
+  letter-spacing: 0.14px;
+  padding: 11px 9px;
+  border: none;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+  box-sizing: border-box;
+}
+
+.services-listing__btn:hover {
+  background: var(--vips-dark-subtle);
+  color: var(--vips-bg-card);
+  text-decoration: none;
+}
+
+.services-listing__btn:focus-visible {
+  outline: 2px solid var(--vips-dark);
+  outline-offset: 2px;
+}
+
+/* Locked button state (desktop — inherits opacity from card) */
+.services-listing__btn--locked {
+  cursor: not-allowed;
+}
+
+/* Empty state */
+.services-listing__empty {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--vips-text-secondary);
+  text-align: center;
+  padding: 40px 0;
+}
+
+/* Hidden cards (filtered out or paged out by JS) */
+.services-listing__card[hidden] {
+  display: none;
+}
+
+/* ── Load More / Count row ── */
+.services-listing__load-more-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding-top: 8px;
+}
+
+.services-listing__count {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--vips-text-secondary);
+  line-height: 20px;
+  margin: 0;
+  text-align: center;
+}
+
+.services-listing__load-more {
+  background: transparent;
+  border: 1.5px solid var(--vips-dark);
+  border-radius: var(--radius-md);
+  color: var(--vips-dark);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  padding: 10px 40px;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.services-listing__load-more:hover {
+  background-color: var(--vips-dark);
+  color: #ffffff;
+}
+
+.services-listing__load-more:focus-visible {
+  outline: 2px solid var(--vips-dark);
+  outline-offset: 2px;
+}
+
+.services-listing__load-more[hidden] {
+  display: none;
+}
+
+/* ── Mobile Responsive (≤768px) ── */
+@media (max-width: 768px) {
+
+  .services-listing--hide-mobile {
+    display: none;
+  }
+
+  .services-listing__header-card {
+    border-radius: 10px;
+    border-width: 0.698px;
+    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+  }
+
+  .services-listing__heading {
+    font-size: 22px;
+    line-height: 27.5px;
+  }
+
+  .services-listing__description {
+    font-size: 14px;
+    line-height: 22.75px;
+    max-width: none;
+  }
+
+  /* Filters: stack vertically, full width */
+  .services-listing__filters {
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 24px;
+  }
+
+  .services-listing__filter-group {
+    align-items: flex-start;
+  }
+
+  .services-listing__filter-pill-wrap {
+    width: 100%;
+  }
+
+  /* Cards: single column */
+  .services-listing__grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .services-listing__card {
+    border-radius: 10px;
+    border-width: 0.698px;
+    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Mobile locked: reset desktop opacity, use explicit colors */
+  .services-listing__card--locked {
+    opacity: 1;
+    border-color: var(--vips-border);
+  }
+
+  .services-listing__card--locked .services-listing__tier {
+    color: var(--vips-text-muted);
+  }
+
+  .services-listing__card--locked .services-listing__btn--locked {
+    background: var(--vips-border);
+    color: var(--vips-text-muted);
+  }
+
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .services-listing__btn,
+  .services-listing__card,
+  .services-listing__filter-select {
+    transition: none;
+  }
+}

@@ -1,0 +1,34 @@
+<!--
+  templateType: error_page
+  isAvailableForNewContent: true
+  label: 504 — Gateway Timeout
+-->
+{% extends "./layouts/base.html" %}
+
+{# ============================================================
+   VIPSCLUB Portal 2026 — 504 Error Page Template
+   Reuses error-404 module with 504-specific content defaults.
+   After building: go to HubSpot Settings → Website → Pages
+   and set this as the custom 500/504 error page.
+   ============================================================ #}
+
+{% block head_extra %}
+{% require_css %}
+<link rel="stylesheet" href="{{ get_asset_url('../css/auth/auth-pages.css') }}">
+{% end_require_css %}
+{% endblock %}
+
+{% block body %}
+<div id="main-content">
+  {% module "error_504"
+    path="../modules/error-404",
+    label="504 Error",
+    error_number="504",
+    heading="Gateway Timeout",
+    description="The server took too long to respond. This is usually temporary — please wait a moment and try again.",
+    support_text="Still having trouble? Contact our support team",
+    button_text="Go Back Home",
+    show_error_code=true
+  %}
+</div>
+{% endblock %}

@@ -1,0 +1,84 @@
+<!--
+  templateType: page
+  isAvailableForNewContent: true
+  label: Terms & Conditions
+-->
+{% extends "./layouts/base.html" %}
+
+{# ============================================================
+   VIPSCLUB Portal 2026 — Terms & Conditions Template
+   Figma reference: node 1472:5469
+   Layout:
+     - terms-header (336px gradient banner with logo + page title)
+     - terms-content (sticky TOC + auto-generated section cards)
+     - portal-footer (dark 50px bar, reused as-is)
+   ============================================================ #}
+
+{% block head_extra %}
+{% require_css %}
+<link rel="stylesheet" href="{{ get_asset_url('../css/portal/terms-conditions.css') }}">
+{% end_require_css %}
+{% endblock %}
+
+{% block body %}
+<div class="terms-page">
+
+  {# ── Page header (gradient banner) ── #}
+  <div class="terms-page__header-area">
+    {% dnd_area "terms_header"
+      label="Page Header",
+      class="terms-header-dnd"
+    %}
+      {% dnd_section %}
+        {% dnd_column %}
+          {% dnd_row %}
+            {% dnd_module
+              path="../modules/terms-header"
+              label="Terms — Page Header"
+            %}{% end_dnd_module %}
+          {% end_dnd_row %}
+        {% end_dnd_column %}
+      {% end_dnd_section %}
+    {% end_dnd_area %}
+  </div>
+
+  {# ── Main body — TOC sidebar + content sections ── #}
+  <main class="terms-page__body" id="main-content">
+    {% dnd_area "terms_body"
+      label="Terms Body",
+      class="terms-body-dnd"
+    %}
+      {% dnd_section %}
+        {% dnd_column %}
+          {% dnd_row %}
+            {% dnd_module
+              path="../modules/terms-content"
+              label="Terms — Body (Auto-TOC)"
+            %}{% end_dnd_module %}
+          {% end_dnd_row %}
+        {% end_dnd_column %}
+      {% end_dnd_section %}
+    {% end_dnd_area %}
+  </main>
+
+  {# ── Footer (reused from portal) ── #}
+  <div class="terms-page__footer-area">
+    {% dnd_area "terms_footer"
+      label="Page Footer",
+      class="terms-footer-dnd"
+    %}
+      {% dnd_section %}
+        {% dnd_column %}
+          {% dnd_row %}
+            {% dnd_module
+              path="../modules/portal-footer"
+              label="Portal Footer"
+            %}{% end_dnd_module %}
+          {% end_dnd_row %}
+        {% end_dnd_column %}
+      {% end_dnd_section %}
+    {% end_dnd_area %}
+  </div>
+
+</div>
+{% endblock %}

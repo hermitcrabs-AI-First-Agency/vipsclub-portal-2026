@@ -1,0 +1,12 @@
+[
+  {
+    "name": "fallback_contact_id",
+    "label": "Fallback Contact ID (Client Success Team)",
+    "type": "number",
+    "required": false,
+    "locked": false,
+    "display": "text",
+    "default": null,
+    "help_text": "HubSpot contact record ID shown when the member has no Relationship Manager associated. Use your Client Success Team contact's record ID."
+  }
+]

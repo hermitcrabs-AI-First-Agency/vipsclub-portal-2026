@@ -1,0 +1,252 @@
+{# ============================================================
+   VIPSCLUB Portal 2026 — Referral Tracking Board Module
+   Desktop: table inside white card
+   Mobile: individual stacked cards per referral
+   Data: Courses CRM object (0-410), pipeline 1781380540
+         (Referral Status Pipeline).
+
+   Each member has ONE Courses record in stage "Existing Contact"
+   (their profile) and N records in other stages (their referrals).
+   This module fetches Courses associated to the logged-in contact
+   and renders all records EXCEPT the profile (Existing Contact).
+
+   Pipeline-stage → friendly status mapping (updated to client spec):
+     3023640025 Existing Contact   → (skipped — that's the profile)
+     3023640026 Referred Contact   → "Invitation Sent"  (blue)
+     3025372618 Contacting         → "Registered"       (orange)
+     3025372619 Approved           → "Completed"        (green)
+     3025447384 Disqualified       → "Expired"          (grey)
+
+   Reward column logic:
+     status=sent       → "—"
+     status=pending    → "Pending Approval"
+     status=completed  → "+N Points" if reward_points populated,
+                         else "Awaiting Reward"
+     status=expired    → "Expired"
+   ============================================================ #}
+
+{# Pipeline-stage maps — display labels + status slugs used inside HubL.
+   Kept in sync with the "Referral Status Pipeline" on Course object (0-410):
+     — Member Profile                    → filtered OUT of the board
+     — Referral Submitted                 → "sent"
+     — Referee Invited                    → "sent"
+     — Referee Review                     → "pending"
+     — Approved                           → "pending" (reward not yet issued)
+     — Completed New Referral             → "completed"
+     — Completed Existing Referral        → "completed"
+     — Disqualified                       → "expired" #}
+{% set _stage_label_map = {
+  "3363105237": "Referral Submitted",
+  "3023640026": "Invitation Sent",
+  "3025372618": "Referee Review",
+  "3025372619": "Approved",
+  "3363157467": "Completed",
+  "3363105230": "Completed",
+  "3025447384": "Disqualified"
+} %}
+{% set _stage_slug_map = {
+  "3363105237": "sent",
+  "3023640026": "sent",
+  "3025372618": "pending",
+  "3025372619": "pending",
+  "3363157467": "completed",
+  "3363105230": "completed",
+  "3025447384": "expired"
+} %}
+{% set _PROFILE_STAGE = "3023640025" %}
+
+{# The association `referral_source_referral_recipient` (USER_DEFINED id 40) is a
+   Courses ↔ Courses link — it connects the contact's OWN member_referral profile
+   record (the "self contact" record) to each inbound referral Courses record.
+   So the lookup is two hops, NOT one from contact:
+
+     Step 1: contact → the contact's self/profile Courses record (USER_DEFINED 33)
+     Step 2: that profile record → its associated referral records (USER_DEFINED 40)
+   ── #}
+
+{# ── Step 1: find the logged-in contact's own profile Courses record.
+   Reuses USER_DEFINED id 33 — same id the referral-banner module uses to fetch
+   this contact's profile for the referral URL. #}
+{% set _profile_id = 0 %}
+{% if contact.hs_object_id %}
+  {% set _profile_assoc = crm_associations(
+    contact.hs_object_id,
+    "USER_DEFINED",
+    33,
+    "limit=1",
+    "hs_object_id",
+    false
+  ) %}
+  {% if _profile_assoc and _profile_assoc.results and (_profile_assoc.results | length) > 0 %}
+    {% set _profile_id = _profile_assoc.results[0].hs_object_id | default(0) | int %}
+  {% endif %}
+{% endif %}
+
+{# ── Step 2: from the profile record, pull its associated referral records.
+   Two Course↔Course labels connect a member's profile record to referrals it made:
+     • typeId 58 — 'Referral Recipient' (pair 58/59 "Primary Referrer")    ← primary referrals
+     • typeId 40 — 'Referral Recipient' (pair 40/41 "Subsequent Referrer") ← subsequent referrals
+   The board surfaces BOTH so no referral the member made is ever hidden.
+   (Previously read only typeId 40 → primary referrals, i.e. most of them, showed nothing.) #}
+{% set _ref_props = "hs_object_id,hs_course_name,hs_createdate,hs_pipeline_stage,membership_tier,tiers,reward_points,email,record_type,reward_override,referred_item_type,referred_item_name" %}
+{% set all_referrals = [] %}
+{% if _profile_id %}
+  {% set _primary = crm_associations(_profile_id, "USER_DEFINED", 58, "limit=50", _ref_props, false) %}
+  {% if _primary and _primary.results %}
+    {% set all_referrals = all_referrals + _primary.results %}
+  {% endif %}
+  {% set _subsequent = crm_associations(_profile_id, "USER_DEFINED", 40, "limit=50", _ref_props, false) %}
+  {% if _subsequent and _subsequent.results %}
+    {% set all_referrals = all_referrals + _subsequent.results %}
+  {% endif %}
+{% endif %}
+
+{# rejectattr with equalto removes the profile record. HubL for-loop scope means we
+   can't filter by setting a flag inside a loop, so we filter outside. #}
+{% set referrals = all_referrals | rejectattr('hs_pipeline_stage', 'equalto', _PROFILE_STAGE) | list %}
+
+<div class="referral-tracking-board{% if module.style_overrides.hide_on_mobile %} referral-tracking-board--hide-mobile{% endif %}">
+
+  {# ── Section Heading ── #}
+  {% if module.section_heading %}
+  <{{ module.heading_level | default("h2") }} class="referral-tracking-board__heading">
+    {{ module.section_heading | escape_html }}
+  </{{ module.heading_level | default("h2") }}>
+  {% endif %}
+
+  {% if referrals | length > 0 %}
+
+  {# ── DESKTOP: Table inside white card ── #}
+  <div class="referral-tracking-board__card referral-tracking-board__table-wrapper">
+    <table class="referral-tracking-board__table" aria-label="{{ module.section_heading | default('My Referrals') | escape_attr }}">
+      <thead>
+        <tr>
+          <th scope="col">{{ module.col_name_label | default("Name") | escape_html }}</th>
+          <th scope="col">{{ module.col_date_label | default("Referred On") | escape_html }}</th>
+          <th scope="col">{{ module.col_status_label | default("Status") | escape_html }}</th>
+          <th scope="col">{{ module.col_rewards_label | default("Reward") | escape_html }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for r in referrals %}
+        {% set status_label = _stage_label_map[r.hs_pipeline_stage] | default(r.hs_pipeline_stage | escape_html) %}
+        {% set status_slug  = _stage_slug_map[r.hs_pipeline_stage]  | default("other") %}
+        {% set pts_raw = r.reward_points | default("") | string | trim %}
+        {% set has_points = pts_raw and pts_raw != "0" %}
+
+        {# Reward column — client spec (R19/R20):
+             sent      → "—"
+             pending   → "—"                (both 2 Review + 3 Approved bucket here)
+             completed → "+N Points" if reward_points set, else "Awaiting Reward"
+             expired   → "Expired"
+           If reward_override is set on the referral record, it takes priority
+           over all of the above — free-text overrides the standard label
+           (e.g. "Free Rental Appraisal" for high-value referrals). ── #}
+        {% set _reward_override = r.reward_override | default("") | trim %}
+        {% set reward_label = "—" %}
+        {% set reward_class = "neutral" %}
+        {% if _reward_override %}
+          {% set reward_label = _reward_override %}
+          {% set reward_class = "override" %}
+        {% elif status_slug == "completed" %}
+          {% if has_points %}
+            {% set reward_label = "+" ~ pts_raw ~ " " ~ (module.points_suffix | default("Points")) %}
+            {% set reward_class = "earned" %}
+          {% else %}
+            {% set reward_label = module.reward_awaiting_label | default("Awaiting Reward") %}
+            {% set reward_class = "awaiting" %}
+          {% endif %}
+        {% elif status_slug == "expired" %}
+          {% set reward_label = module.reward_expired_label | default("Expired") %}
+          {% set reward_class = "expired" %}
+        {% endif %}
+
+        <tr>
+          <td class="referral-tracking-board__td-name">
+            {{ r.hs_course_name | default("—") | escape_html }}
+          </td>
+          <td class="referral-tracking-board__td-date">
+            <span class="referral-tracking-board__date">{% if r.hs_createdate %}{{ r.hs_createdate | datetimeformat("%d %b %Y") }}{% else %}—{% endif %}</span>
+          </td>
+          <td class="referral-tracking-board__td-status">
+            <span class="referral-tracking-board__badge referral-tracking-board__badge--{{ status_slug }}">
+              {{ status_label | escape_html }}
+            </span>
+          </td>
+          <td class="referral-tracking-board__td-rewards">
+            <span class="referral-tracking-board__points referral-tracking-board__points--{{ reward_class }}">{{ reward_label | escape_html }}</span>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  {# ── MOBILE: Stacked cards ── #}
+  <div class="referral-tracking-board__cards-list"
+       aria-label="{{ module.section_heading | default('My Referrals') | escape_attr }}">
+    {% for r in referrals %}
+    {% set status_label = _stage_label_map[r.hs_pipeline_stage] | default(r.hs_pipeline_stage | escape_html) %}
+    {% set status_slug  = _stage_slug_map[r.hs_pipeline_stage]  | default("other") %}
+    {% set pts_raw = r.reward_points | default("") | string | trim %}
+    {% set has_points = pts_raw and pts_raw != "0" %}
+    {# reward_override wins over the status-derived label when set — same
+       priority order as the desktop table above. Client spec R13:
+       an override like "Rental Appraisal" replaces the generic "+N Points"
+       so the member sees the exact reward they earned. #}
+    {% set _reward_override = r.reward_override | default("") | trim %}
+    {% set reward_label = "—" %}
+    {% set reward_class = "neutral" %}
+    {% if _reward_override %}
+      {% set reward_label = _reward_override %}
+      {% set reward_class = "override" %}
+    {% elif status_slug == "pending" %}
+      {% set reward_label = module.reward_pending_label | default("Pending Approval") %}
+      {% set reward_class = "pending" %}
+    {% elif status_slug == "completed" %}
+      {% if has_points %}
+        {% set reward_label = "+" ~ pts_raw ~ " " ~ (module.points_suffix | default("Points")) %}
+        {% set reward_class = "earned" %}
+      {% else %}
+        {% set reward_label = module.reward_awaiting_label | default("Awaiting Reward") %}
+        {% set reward_class = "awaiting" %}
+      {% endif %}
+    {% elif status_slug == "expired" %}
+      {% set reward_label = module.reward_expired_label | default("Expired") %}
+      {% set reward_class = "expired" %}
+    {% endif %}
+
+    <div class="referral-tracking-board__mobile-card">
+
+      <div class="referral-tracking-board__mobile-top">
+        <span class="referral-tracking-board__mobile-name">
+          {{ r.hs_course_name | default("—") | escape_html }}
+        </span>
+        <span class="referral-tracking-board__mobile-date referral-tracking-board__date">{% if r.hs_createdate %}{{ r.hs_createdate | datetimeformat("%d %b %Y") }}{% else %}—{% endif %}</span>
+      </div>
+
+      <div class="referral-tracking-board__mobile-bottom">
+        <div class="referral-tracking-board__mobile-field">
+          <span class="referral-tracking-board__mobile-label">{{ module.col_status_label | default("Status") | escape_html }}</span>
+          <span class="referral-tracking-board__mobile-value referral-tracking-board__status--{{ status_slug }}">
+            {{ status_label | escape_html }}
+          </span>
+        </div>
+        <div class="referral-tracking-board__mobile-field">
+          <span class="referral-tracking-board__mobile-label">{{ module.col_rewards_label | default("Reward") | escape_html }}</span>
+          <span class="referral-tracking-board__mobile-value referral-tracking-board__points referral-tracking-board__points--{{ reward_class }}">
+            {{ reward_label | escape_html }}
+          </span>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  {% else %}
+  <div class="referral-tracking-board__card referral-tracking-board__empty">
+    {{ module.empty_state_text | default("You haven't referred anyone yet.") | escape_html }}
+  </div>
+  {% endif %}
+
+</div>

@@ -1,0 +1,45 @@
+<!--
+  templateType: membership_register_page
+  isAvailableForNewContent: true
+  label: Membership — Register (Sign Up)
+-->
+{% extends "../layouts/base.html" %}
+
+{# ============================================================
+   VIPSCLUB Portal 2026 — Membership Register Template
+   Figma: Desktop 190:1692 | Mobile 337:3415
+   NOTE: membership_register_page templates cannot use dnd_area.
+         Content is editable via the module's fields.
+   ============================================================ #}
+
+{% block head_extra %}
+{% require_css %}
+<link rel="stylesheet" href="{{ get_asset_url('../../css/auth/auth-pages.css') }}">
+{% end_require_css %}
+{% endblock %}
+
+{% block body %}
+<div id="main-content">
+  {% module "auth_register_page"
+    path="../../modules/auth-register-page",
+    label="Register Page"
+  %}
+</div>
+
+<script>
+  window.Userback = window.Userback || {};
+  Userback.access_token = "P-9ZwYraweOSFazwyWMBYDroJbo";
+  // identify your logged-in users (optional)
+  Userback.user_data = {
+    id: "123456", // example data
+    info: {
+      name: "someone", // example data
+      email: "someone@example.com" // example data
+    }
+  };
+  (function(d) {
+    var s = d.createElement('script');s.async = true;s.src = 'https://static.userback.io/widget/v1.js';(d.head || d.body).appendChild(s);
+  })(document);
+</script>
+
+{% endblock %}

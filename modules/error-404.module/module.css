@@ -1,0 +1,204 @@
+/* =============================================================
+   Error 404 Module — page-specific overrides
+   Base layout from css/auth/auth-pages.css
+   Figma: Desktop 1040:1596
+   ============================================================= */
+
+/* ── Header: 570px gradient ── */
+.auth-page--error-404 .auth-page__header {
+  height: 570px;
+  background: linear-gradient(158.58deg, #000000 36.19%, #a22b34 66.10%);
+}
+
+/* ── Body: card top at ~250px (570 − 320 = 250px, 320px overlap) ── */
+.auth-page--error-404 .auth-page__body {
+  margin-top: -320px;
+}
+
+/* ── Card: wider than auth cards, min-height enforced ── */
+.error-404__card {
+  width: 1027px;
+  max-width: calc(100% - 48px);
+  min-height: 523px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+  box-sizing: border-box;
+}
+
+/* ── Inner content: centered column ── */
+.error-404__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 33px;
+  width: 608px;
+  max-width: 100%;
+}
+
+/* ── Titles group: error number + gradient heading ── */
+.error-404__titles {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+  width: 100%;
+}
+
+/* ── Error number: Montserrat Bold ~45px ── */
+.error-404__number {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 45.4px;
+  font-weight: 700;
+  line-height: normal;
+  color: #1a1a1a;
+  text-align: center;
+  margin: 0;
+}
+
+/* ── Page Not Found: gradient text ── */
+.error-404__heading {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 60px;
+  font-weight: 700;
+  line-height: 70px;
+  letter-spacing: -1.5px;
+  background: linear-gradient(90deg, #212121 0%, #a22b34 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-align: center;
+  margin: 0;
+  width: 100%;
+}
+
+/* ── Description body text ── */
+.error-404__description {
+  font-family: 'Inter', sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 30px;
+  color: rgba(117, 117, 117, 0.9);
+  text-align: center;
+  margin: 0;
+  width: 100%;
+}
+
+/* ── Divider ── */
+.error-404__divider {
+  width: 100%;
+  height: 1px;
+  background-color: rgba(26, 26, 26, 0.3);
+  flex-shrink: 0;
+}
+
+/* ── Support text ── */
+.error-404__support-text {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  color: rgba(26, 26, 26, 0.8);
+  text-align: center;
+  margin: 0;
+}
+
+/* ── Go Back Home button ── */
+.error-404__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 48px;
+  min-width: 260px;
+  background-color: #a22c35;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 20px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+  white-space: nowrap;
+  text-align: center;
+}
+
+.error-404__btn:hover {
+  opacity: 0.9;
+  color: #ffffff;
+}
+
+/* ── Error code line ── */
+.error-404__code {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  color: rgba(26, 26, 26, 0.9);
+  text-align: center;
+  margin: 0;
+}
+
+.error-404__code strong {
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+/* ── Mobile — max-width 768px ── */
+@media (max-width: 768px) {
+  .auth-page--error-404 .auth-page__header {
+    height: 112px;
+    padding-top: 32px;
+    background: linear-gradient(164.13deg, #000000 0%, #a22b34 50%);
+  }
+
+  .auth-page--error-404 .auth-page__body {
+    margin-top: 0;
+    padding-top: 32px;
+  }
+
+  .error-404__card {
+    width: 100%;
+    max-width: 362px;
+    min-height: unset;
+    padding: 28px 20px;
+  }
+
+  .error-404__content {
+    gap: 24px;
+  }
+
+  .error-404__number {
+    font-size: 36px;
+  }
+
+  .error-404__heading {
+    font-size: 36px;
+    line-height: 44px;
+    letter-spacing: -0.5px;
+  }
+
+  .error-404__description {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .error-404__btn {
+    width: 100%;
+    padding: 14px 20px;
+    min-width: unset;
+  }
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .auth-page--error-404 * {
+    transition-duration: 0.01ms !important;
+  }
+}

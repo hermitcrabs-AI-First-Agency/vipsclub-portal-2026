@@ -1,0 +1,122 @@
+/* ============================================================
+   Auth Login Page Module — Login-specific overrides
+   Shared layout styles live in css/auth/auth-pages.css
+   ============================================================ */
+
+/* ── Ensure the module fills the viewport correctly ── */
+.auth-page {
+  margin: 0;
+  padding: 0;
+}
+
+/* ── Login form: field spacing matches Figma (20px gap) ── */
+.auth-page__card-form .hs-form-field + .hs-form-field {
+  margin-top: 4px;
+}
+
+/* ── Checkbox fix ──
+   HubSpot's membership CSS sets .hs-input { display: block; width: 100% }
+   which makes checkboxes full-width and pushes labels below. Override both. */
+#hs-login-widget-remember,
+#hs-passwordless-auth-explicit-consent {
+  display: inline-block !important;
+  width: 16px !important;
+  height: 16px !important;
+  flex-shrink: 0;
+  margin: 0;
+  cursor: pointer;
+  vertical-align: middle;
+}
+
+/* ── Remember Me row: flex so checkbox + label sit side by side ── */
+.auth-page__card-form .hs-form-field:has(#hs-login-widget-remember) {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: nowrap;
+}
+
+/* ── Forgot password: push to right of the same row ── */
+.auth-page__card-form .hs-forgot-password {
+  margin-left: auto;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--vips-red);
+  white-space: nowrap;
+}
+
+/* ── Submit (Login) button ── */
+.auth-page__card-form .hs-button.primary {
+  margin-top: 20px;
+}
+
+/* ── HubSpot "or" separator rendered by {% member_login %} when magic link is enabled ── */
+.auth-page__card-form span.form-separator {
+  display: block;
+  text-align: center;
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size:22px;
+  font-weight: 700;
+  color: var(--vips-dark);
+  margin: 20px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* ── Passwordless form: description paragraph ── */
+#hs-membership-passwordless-auth-form p {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: var(--text-base);
+  color: var(--vips-text-secondary);
+  margin: 0 0 16px;
+  line-height: 1.5;
+}
+
+/* ── Passwordless form: consent checkbox + label ── */
+.auth-page__card-form .hs-form-field:has(#hs-passwordless-auth-explicit-consent) {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+#hs-passwordless-auth-checkbox-consent {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 12px;
+  color: var(--vips-text-secondary);
+  line-height: 1.5;
+  cursor: pointer;
+}
+
+.auth-page__card-form form input[type=checkbox] + label {
+    margin-bottom: 0;
+}
+
+main.auth-page .auth-form__header {
+    margin-bottom: 0;
+}
+
+.auth-page__card-form .hs-form-field {
+    margin-bottom: 14px;
+}
+
+.auth-page__card-form .hs-form-field.password {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+#hs-passwordless-auth-checkbox-consent a {
+    text-decoration: underline;
+}
+
+.auth-page__card-form form .hs-button {
+    text-transform: capitalize;
+}
+
+/* ── Hide on mobile flag ── */
+@media (max-width: 768px) {
+  .auth-page--hide-mobile {
+    display: none;
+  }
+}

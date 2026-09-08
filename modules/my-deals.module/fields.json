@@ -1,0 +1,763 @@
+[ {
+  "id" : "section_heading",
+  "name" : "section_heading",
+  "label" : "Section Heading",
+  "help_text" : "Main heading displayed at the top of the deals section.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Available Deals"
+}, {
+  "id" : "earnings_heading",
+  "name" : "earnings_heading",
+  "label" : "Earnings Breakdown — Heading",
+  "help_text" : "Heading for the earnings stats card at the top of the page.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Earnings Breakdown"
+}, {
+  "id" : "earnings_subheading",
+  "name" : "earnings_subheading",
+  "label" : "Earnings Breakdown — Subheading",
+  "help_text" : "Description below the Earnings Breakdown heading.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : true,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Track your referral commissions and see how your partnership with us is contributing to your success as a valued referral partner."
+}, {
+  "id" : "stat_zero_fallback",
+  "name" : "stat_zero_fallback",
+  "label" : "Earnings — Zero-State Fallback Text",
+  "help_text" : "Shown in BOTH the Total Fees Earned card AND the Total Fees Paid card when that card's computed total is $0 (e.g. the contact has no approved/paid deals yet). One field, two cards — write something that makes sense for either context. Partners see this text — define internal acronyms (e.g. BDM = Business Development Manager) before publishing if your audience may not know them. The card uses a smaller font in this fallback state so up to ~20 characters fit on one line.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "WIP (Contact BDM)"
+}, {
+  "id" : "heading_level",
+  "name" : "heading_level",
+  "label" : "Heading Level",
+  "help_text" : "Semantic heading level. Use H2 for a section heading, H1 only for the main page title.",
+  "required" : false,
+  "locked" : false,
+  "display" : "select",
+  "choices" : [ [ "h1", "H1 — Page Title" ], [ "h2", "H2 — Section (recommended)" ], [ "h3", "H3 — Subsection" ], [ "h4", "H4" ] ],
+  "multiple" : false,
+  "reordering_enabled" : true,
+  "preset" : null,
+  "type" : "choice",
+  "display_width" : null,
+  "default" : "h2"
+}, {
+  "id" : "add_deal_text",
+  "name" : "add_deal_text",
+  "label" : "Register a Deal Button Text",
+  "help_text" : "Text on the button that opens the Register a Deal form modal.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Register a Deal"
+}, {
+  "id" : "filter_all_label",
+  "name" : "filter_all_label",
+  "label" : "Filter: All Label",
+  "help_text" : "Label for the All filter tab.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "All"
+}, {
+  "id" : "filter_pending_label",
+  "name" : "filter_pending_label",
+  "label" : "Filter: Prospecting Label",
+  "help_text" : "Label for the Prospecting filter tab. (Internal filter key is `pending` — covers HubSpot deal stages appointmentscheduled + qualifiedtobuy + any deal with an unmapped stage. Renaming this label has no effect on the underlying filter.)",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Prospecting"
+}, {
+  "id" : "date_filter_dropdown_label",
+  "name" : "date_filter_dropdown_label",
+  "label" : "Date Filter: Dropdown Label",
+  "help_text" : "Short label shown to the LEFT of the date-range dropdown (e.g. \"Date\", \"Registered\", \"Period\"). Hidden on extra-narrow viewports if needed.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Date"
+}, {
+  "id" : "date_filter_all_label",
+  "name" : "date_filter_all_label",
+  "label" : "Date Filter: All Time Option",
+  "help_text" : "Label for the default \"all time\" option in the date-range dropdown. Selecting this clears the date filter so all deals (regardless of when they were registered) are shown.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "All time"
+}, {
+  "id" : "date_filter_this_month_label",
+  "name" : "date_filter_this_month_label",
+  "label" : "Date Filter: This Month",
+  "help_text" : "Label for the \"This month\" option in the date-range dropdown. Filters to deals registered since the 1st of the current month (visitor's local timezone, inclusive).",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "This month"
+}, {
+  "id" : "date_filter_3m_label",
+  "name" : "date_filter_3m_label",
+  "label" : "Date Filter: Last 3 Months",
+  "help_text" : "Label for the \"Last 3 months\" option in the date-range dropdown. Filters to deals registered in the last 90 days (rolling window, visitor's local timezone, inclusive).",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Last 3 months"
+}, {
+  "id" : "date_filter_12m_label",
+  "name" : "date_filter_12m_label",
+  "label" : "Date Filter: Last 12 Months",
+  "help_text" : "Label for the \"Last 12 months\" option in the date-range dropdown. Filters to deals registered in the last 365 days (rolling window, visitor's local timezone, inclusive).",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Last 12 months"
+}, {
+  "id" : "filter_active_label",
+  "name" : "filter_active_label",
+  "label" : "Filter: Active Label",
+  "help_text" : "Label for the Active filter tab.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Active"
+}, {
+  "id" : "filter_upcoming_label",
+  "name" : "filter_upcoming_label",
+  "label" : "Filter: Upcoming Label",
+  "help_text" : "Label for the Upcoming filter tab.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Upcoming"
+}, {
+  "id" : "filter_ended_label",
+  "name" : "filter_ended_label",
+  "label" : "Filter: Ended Label",
+  "help_text" : "Label for the Ended filter tab.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Ended"
+}, {
+  "id" : "col_deal_name",
+  "name" : "col_deal_name",
+  "label" : "Table Column: Deal Name",
+  "help_text" : "Header text for the Deal Name column in the deals table.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Deal Name"
+}, {
+  "id" : "col_timeline",
+  "name" : "col_timeline",
+  "label" : "Table Column: Timeline",
+  "help_text" : "Header text for the Timeline/expiry column.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Timeline"
+}, {
+  "id" : "col_commission",
+  "name" : "col_commission",
+  "label" : "Table Column: Commission",
+  "help_text" : "Header text for the Commission Rate column.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Commission"
+}, {
+  "id" : "col_status",
+  "name" : "col_status",
+  "label" : "Table Column: Status",
+  "help_text" : "Header text for the Status column.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Status"
+}, {
+  "id" : "col_price",
+  "name" : "col_price",
+  "label" : "Table Column: Price",
+  "help_text" : "Header text for the Max Payout / Price column.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Price"
+}, {
+  "id" : "back_button_text",
+  "name" : "back_button_text",
+  "label" : "Back Button Text",
+  "help_text" : "Text on the back button shown in the deal detail view.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "← Back to All Deals"
+}, {
+  "id" : "metrics_commission_label",
+  "name" : "metrics_commission_label",
+  "label" : "Metric Label: Commission Rate",
+  "help_text" : "Label for the Commission Rate metric card in the deal detail view.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Commission Rate"
+}, {
+  "id" : "metrics_commission_icon",
+  "name" : "metrics_commission_icon",
+  "label" : "Commission Rate Icon",
+  "help_text" : "Icon for the Commission Rate metric card. Upload SVG/PNG from Files Manager OR paste raw SVG code.",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "metrics_commission_icon.image",
+    "name" : "image",
+    "label" : "Upload Icon (SVG or PNG)",
+    "help_text" : "Upload from Files Manager. Recommended: 18×18px SVG.",
+    "required" : false,
+    "locked" : false,
+    "responsive" : false,
+    "resizable" : false,
+    "show_loading" : false,
+    "type" : "image",
+    "display_width" : null,
+    "default" : {
+      "src" : "",
+      "alt" : "",
+      "width" : 18,
+      "height" : 18
+    }
+  }, {
+    "id" : "metrics_commission_icon.svg_code",
+    "name" : "svg_code",
+    "label" : "Or: Paste SVG Code",
+    "help_text" : "Paste the raw <svg>...</svg> code. Leave empty if using the upload field.",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : ""
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "image" : {
+      "src" : "",
+      "alt" : "",
+      "width" : 18,
+      "height" : 18
+    },
+    "svg_code" : ""
+  }
+}, {
+  "id" : "metrics_payout_label",
+  "name" : "metrics_payout_label",
+  "label" : "Metric Label: Max Payout",
+  "help_text" : "Label for the Max Payout metric card.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Max Payout"
+}, {
+  "id" : "metrics_payout_icon",
+  "name" : "metrics_payout_icon",
+  "label" : "Max Payout Icon",
+  "help_text" : "Icon for the Max Payout metric card. Upload SVG/PNG OR paste raw SVG code.",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "metrics_payout_icon.image",
+    "name" : "image",
+    "label" : "Upload Icon (SVG or PNG)",
+    "help_text" : "Upload from Files Manager. Recommended: 18×18px SVG.",
+    "required" : false,
+    "locked" : false,
+    "responsive" : false,
+    "resizable" : false,
+    "show_loading" : false,
+    "type" : "image",
+    "display_width" : null,
+    "default" : {
+      "src" : "",
+      "alt" : "",
+      "width" : 18,
+      "height" : 18
+    }
+  }, {
+    "id" : "metrics_payout_icon.svg_code",
+    "name" : "svg_code",
+    "label" : "Or: Paste SVG Code",
+    "help_text" : "Paste the raw <svg>...</svg> code.",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : ""
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "image" : {
+      "src" : "",
+      "alt" : "",
+      "width" : 18,
+      "height" : 18
+    },
+    "svg_code" : ""
+  }
+}, {
+  "id" : "metrics_days_label",
+  "name" : "metrics_days_label",
+  "label" : "Metric Label: Days Remaining",
+  "help_text" : "Label for the Days Remaining metric card.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Days Remaining"
+}, {
+  "id" : "metrics_days_icon",
+  "name" : "metrics_days_icon",
+  "label" : "Days Remaining Icon",
+  "help_text" : "Icon for the Days Remaining metric card. Upload SVG/PNG OR paste raw SVG code.",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "metrics_days_icon.image",
+    "name" : "image",
+    "label" : "Upload Icon (SVG or PNG)",
+    "help_text" : "Upload from Files Manager. Recommended: 18×18px SVG.",
+    "required" : false,
+    "locked" : false,
+    "responsive" : false,
+    "resizable" : false,
+    "show_loading" : false,
+    "type" : "image",
+    "display_width" : null,
+    "default" : {
+      "src" : "",
+      "alt" : "",
+      "width" : 18,
+      "height" : 18
+    }
+  }, {
+    "id" : "metrics_days_icon.svg_code",
+    "name" : "svg_code",
+    "label" : "Or: Paste SVG Code",
+    "help_text" : "Paste the raw <svg>...</svg> code.",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : ""
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "image" : {
+      "src" : "",
+      "alt" : "",
+      "width" : 18,
+      "height" : 18
+    },
+    "svg_code" : ""
+  }
+}, {
+  "id" : "metrics_referrals_label",
+  "name" : "metrics_referrals_label",
+  "label" : "Metric Label: Referrals",
+  "help_text" : "Label for the Referrals metric card.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Referrals"
+}, {
+  "id" : "metrics_referrals_icon",
+  "name" : "metrics_referrals_icon",
+  "label" : "Referrals Icon",
+  "help_text" : "Icon for the Referrals metric card. Upload SVG/PNG OR paste raw SVG code.",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "metrics_referrals_icon.image",
+    "name" : "image",
+    "label" : "Upload Icon (SVG or PNG)",
+    "help_text" : "Upload from Files Manager. Recommended: 18×18px SVG.",
+    "required" : false,
+    "locked" : false,
+    "responsive" : false,
+    "resizable" : false,
+    "show_loading" : false,
+    "type" : "image",
+    "display_width" : null,
+    "default" : {
+      "src" : "",
+      "alt" : "",
+      "width" : 18,
+      "height" : 18
+    }
+  }, {
+    "id" : "metrics_referrals_icon.svg_code",
+    "name" : "svg_code",
+    "label" : "Or: Paste SVG Code",
+    "help_text" : "Paste the raw <svg>...</svg> code.",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : ""
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "image" : {
+      "src" : "",
+      "alt" : "",
+      "width" : 18,
+      "height" : 18
+    },
+    "svg_code" : ""
+  }
+}, {
+  "id" : "metrics_section_label",
+  "name" : "metrics_section_label",
+  "label" : "Metrics Section Sub-Label",
+  "help_text" : "Small label shown between the deal title and the 4 metric cards in the detail view (e.g. 'Key Metrics').",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Key Metrics"
+}, {
+  "id" : "empty_state_heading",
+  "name" : "empty_state_heading",
+  "label" : "Empty State Heading",
+  "help_text" : "Large heading shown in the center when the member has no deals.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "No deals yet"
+}, {
+  "id" : "about_heading",
+  "name" : "about_heading",
+  "label" : "About Section Heading",
+  "help_text" : "Heading for the About This Deal card in the deal detail view.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "About This Deal"
+}, {
+  "id" : "included_heading",
+  "name" : "included_heading",
+  "label" : "What's Included Heading",
+  "help_text" : "Heading for the What's Included section in the deal detail view.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "What's included"
+}, {
+  "id" : "check_icon",
+  "name" : "check_icon",
+  "label" : "Checklist Checkmark Icon",
+  "help_text" : "Checkmark icon shown before each item in the What's Included list. Upload SVG/PNG OR paste SVG code.",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "check_icon.image",
+    "name" : "image",
+    "label" : "Upload Icon (SVG or PNG)",
+    "help_text" : "Upload from Files Manager. Recommended: 15×15px SVG.",
+    "required" : false,
+    "locked" : false,
+    "responsive" : false,
+    "resizable" : false,
+    "show_loading" : false,
+    "type" : "image",
+    "display_width" : null,
+    "default" : {
+      "src" : "",
+      "alt" : "",
+      "width" : 15,
+      "height" : 15
+    }
+  }, {
+    "id" : "check_icon.svg_code",
+    "name" : "svg_code",
+    "label" : "Or: Paste SVG Code",
+    "help_text" : "Paste the raw <svg>...</svg> code.",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : ""
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "image" : {
+      "src" : "",
+      "alt" : "",
+      "width" : 15,
+      "height" : 15
+    },
+    "svg_code" : ""
+  }
+}, {
+  "id" : "empty_state_text",
+  "name" : "empty_state_text",
+  "label" : "Empty State Message",
+  "help_text" : "Message shown when the logged-in member has no deals associated with their account.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "No deals available yet. Check back soon."
+}, {
+  "id" : "modal_title",
+  "name" : "modal_title",
+  "label" : "Modal Title",
+  "help_text" : "Title shown at the top of the Add a Deal modal.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Create New Deal"
+}, {
+  "id" : "modal_terms_text",
+  "name" : "modal_terms_text",
+  "label" : "Modal Terms Text",
+  "help_text" : "Short disclaimer or terms text shown below the form in the modal.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Commission paid within 30 days of validated sale."
+}, {
+  "id" : "add_deal_form",
+  "name" : "add_deal_form",
+  "label" : "Register a Deal Form",
+  "help_text" : "Select the Register a Deal HubSpot custom form. Shown inside the popup modal. Create it in Marketing → Forms first.",
+  "required" : false,
+  "locked" : false,
+  "embed_versions" : [ "v2", "v4" ],
+  "type" : "form",
+  "display_width" : null,
+  "default" : {
+    "form_id" : "",
+    "response_type" : "inline",
+    "message" : "Your deal has been submitted. We'll be in touch shortly."
+  }
+}, {
+  "id" : "edit_details_form",
+  "name" : "edit_details_form",
+  "label" : "Edit Deal Details Form",
+  "help_text" : "Select the Edit Deal Details HubSpot custom form. Shown when a user clicks 'Edit Details' on the deal detail page. Create it in Marketing → Forms first. Submissions notify the RM (does not directly modify the deal record).",
+  "required" : false,
+  "locked" : false,
+  "embed_versions" : [ "v2", "v4" ],
+  "type" : "form",
+  "display_width" : null,
+  "default" : {
+    "form_id" : "",
+    "response_type" : "inline",
+    "message" : "Your change request has been sent. We'll be in touch shortly."
+  }
+}, {
+  "id" : "style_overrides",
+  "name" : "style_overrides",
+  "label" : "Style Overrides",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "style_overrides.background_color",
+    "name" : "background_color",
+    "label" : "Background Color",
+    "help_text" : "Leave empty to use theme default (page background colour).",
+    "required" : false,
+    "locked" : false,
+    "type" : "color",
+    "display_width" : null,
+    "default" : {
+      "color" : null,
+      "opacity" : 100
+    }
+  }, {
+    "id" : "style_overrides.padding_top",
+    "name" : "padding_top",
+    "label" : "Padding Top (px)",
+    "help_text" : "Leave empty to use default spacing.",
+    "required" : false,
+    "locked" : false,
+    "display" : "text",
+    "step" : 1,
+    "type" : "number",
+    "display_width" : null
+  }, {
+    "id" : "style_overrides.padding_bottom",
+    "name" : "padding_bottom",
+    "label" : "Padding Bottom (px)",
+    "help_text" : "Leave empty to use default spacing.",
+    "required" : false,
+    "locked" : false,
+    "display" : "text",
+    "step" : 1,
+    "type" : "number",
+    "display_width" : null
+  }, {
+    "id" : "style_overrides.text_color",
+    "name" : "text_color",
+    "label" : "Text Color Override",
+    "help_text" : "Override the default text colour for this module. Leave empty for theme default.",
+    "required" : false,
+    "locked" : false,
+    "type" : "color",
+    "display_width" : null,
+    "default" : {
+      "color" : null,
+      "opacity" : 100
+    }
+  }, {
+    "id" : "style_overrides.content_width",
+    "name" : "content_width",
+    "label" : "Content Width",
+    "help_text" : "Control the maximum width of this module's content.",
+    "required" : false,
+    "locked" : false,
+    "display" : "select",
+    "choices" : [ [ "default", "Default" ], [ "narrow", "Narrow" ], [ "wide", "Wide" ], [ "full", "Full Width" ] ],
+    "multiple" : false,
+    "reordering_enabled" : true,
+    "preset" : null,
+    "type" : "choice",
+    "display_width" : null,
+    "default" : "default"
+  }, {
+    "id" : "style_overrides.hide_on_mobile",
+    "name" : "hide_on_mobile",
+    "label" : "Hide on Mobile",
+    "help_text" : "Toggle to hide this module on mobile devices.",
+    "required" : false,
+    "locked" : false,
+    "display" : "checkbox",
+    "type" : "boolean",
+    "display_width" : null,
+    "default" : false
+  }, {
+    "id" : "style_overrides.hide_on_desktop",
+    "name" : "hide_on_desktop",
+    "label" : "Hide on Desktop",
+    "help_text" : "Toggle to hide this module on desktop viewports.",
+    "required" : false,
+    "locked" : false,
+    "display" : "checkbox",
+    "type" : "boolean",
+    "display_width" : null,
+    "default" : false
+  } ],
+  "tab" : "STYLE",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "background_color" : {
+      "color" : null,
+      "opacity" : 100
+    },
+    "text_color" : {
+      "color" : null,
+      "opacity" : 100
+    },
+    "content_width" : "default",
+    "hide_on_mobile" : false,
+    "hide_on_desktop" : false
+  }
+} ]

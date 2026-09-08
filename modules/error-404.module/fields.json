@@ -1,0 +1,207 @@
+[ {
+  "id" : "logo",
+  "name" : "logo",
+  "label" : "Logo",
+  "help_text" : "Upload the white version of the VIPS Club logo (SVG or PNG). Displayed centred in the header.",
+  "required" : false,
+  "locked" : false,
+  "responsive" : false,
+  "resizable" : false,
+  "show_loading" : false,
+  "type" : "image",
+  "display_width" : null,
+  "default" : {
+    "src" : "",
+    "alt" : "VIPS Club",
+    "width" : 161,
+    "height" : 59
+  }
+}, {
+  "id" : "error_number",
+  "name" : "error_number",
+  "label" : "Error Number",
+  "help_text" : "The error code displayed large at the top of the card (e.g. 404).",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "404"
+}, {
+  "id" : "heading",
+  "name" : "heading",
+  "label" : "Heading",
+  "help_text" : "Main heading shown below the error number. Rendered with a gradient from dark to red.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Page Not Found"
+}, {
+  "id" : "description",
+  "name" : "description",
+  "label" : "Description",
+  "help_text" : "Body copy shown below the heading.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "The page you're looking for doesn't exist or has been moved. Let's get you back on track."
+}, {
+  "id" : "support_text",
+  "name" : "support_text",
+  "label" : "Support Text",
+  "help_text" : "Small text shown below the divider. Leave empty to hide.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Need help? Contact our support team"
+}, {
+  "id" : "button_text",
+  "name" : "button_text",
+  "label" : "Button Text",
+  "help_text" : "Text on the primary button.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Go Back Home"
+}, {
+  "id" : "button_url",
+  "name" : "button_url",
+  "label" : "Button URL",
+  "help_text" : "Where the button links to.",
+  "required" : false,
+  "locked" : false,
+  "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "EMAIL_ADDRESS", "BLOG" ],
+  "show_advanced_rel_options" : false,
+  "type" : "link",
+  "display_width" : null,
+  "default" : {
+    "url" : {
+      "href" : "https://www.vipsclub.com.au/dashboard",
+      "type" : "EXTERNAL"
+    },
+    "open_in_new_tab" : false,
+    "no_follow" : false
+  }
+}, {
+  "id" : "show_error_code",
+  "name" : "show_error_code",
+  "label" : "Show Error Code Line",
+  "help_text" : "Toggle the small 'Error Code: 404' line at the bottom of the card.",
+  "required" : false,
+  "locked" : false,
+  "display" : "checkbox",
+  "type" : "boolean",
+  "display_width" : null,
+  "default" : true
+}, {
+  "id" : "footer_copyright",
+  "name" : "footer_copyright",
+  "label" : "Footer Copyright",
+  "help_text" : "Copyright line shown at the bottom of the page.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "© Copyright VIPS Club. All Rights Reserved"
+}, {
+  "id" : "footer_privacy",
+  "name" : "footer_privacy",
+  "label" : "Privacy Policy Link",
+  "help_text" : "Privacy Policy link shown in the page footer.",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "footer_privacy.link_text",
+    "name" : "link_text",
+    "label" : "Link Text",
+    "help_text" : "Visible text for the privacy policy link.",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Privacy Policy"
+  }, {
+    "id" : "footer_privacy.url",
+    "name" : "url",
+    "label" : "URL",
+    "help_text" : "URL to the privacy policy page.",
+    "required" : false,
+    "locked" : false,
+    "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "EMAIL_ADDRESS", "BLOG" ],
+    "show_advanced_rel_options" : false,
+    "type" : "link",
+    "display_width" : null,
+    "default" : {
+      "url" : {
+        "href" : "",
+        "type" : "EXTERNAL"
+      },
+      "open_in_new_tab" : false,
+      "no_follow" : false
+    }
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null
+}, {
+  "id" : "style_overrides",
+  "name" : "style_overrides",
+  "label" : "Style Overrides",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "style_overrides.gradient_start",
+    "name" : "gradient_start",
+    "label" : "Header Gradient Start",
+    "help_text" : "Top-left gradient colour for the header banner.",
+    "required" : false,
+    "locked" : false,
+    "type" : "color",
+    "display_width" : null,
+    "default" : {
+      "color" : "#000000",
+      "opacity" : 100
+    }
+  }, {
+    "id" : "style_overrides.gradient_end",
+    "name" : "gradient_end",
+    "label" : "Header Gradient End",
+    "help_text" : "Bottom-right gradient colour for the header banner.",
+    "required" : false,
+    "locked" : false,
+    "type" : "color",
+    "display_width" : null,
+    "default" : {
+      "color" : "#a22b34",
+      "opacity" : 100
+    }
+  }, {
+    "id" : "style_overrides.hide_on_mobile",
+    "name" : "hide_on_mobile",
+    "label" : "Hide on Mobile",
+    "help_text" : "Hide this entire module on mobile devices.",
+    "required" : false,
+    "locked" : false,
+    "display" : "checkbox",
+    "type" : "boolean",
+    "display_width" : null,
+    "default" : false
+  } ],
+  "tab" : "STYLE",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null
+} ]

@@ -1,0 +1,66 @@
+{# ============================================================
+   Terms — Body (Auto-TOC)
+   ONE repeater of {heading, body, anchor_slug} drives BOTH:
+     - LEFT: sticky table-of-contents (anchor links)
+     - RIGHT: stacked section content cards
+   Add / reorder / remove sections in the repeater — TOC stays in sync.
+   Scroll-spy (module.js) auto-highlights the section currently in view.
+   ============================================================ #}
+
+{# ── Build a single [{slug, label, body}] list. Auto-slugify heading when
+     anchor_slug is empty. Use {% do list.append() %} — {% set %} inside
+     {% for %} does not persist out of the loop. ── #}
+{% set _toc = [] %}
+{% for s in module.sections %}
+  {% set _slug = s.anchor_slug | default("") %}
+  {% if not _slug %}
+    {% set _slug = s.heading | default("section") | lower | replace(" ", "-") | replace("/", "-") | replace(",", "") | replace(";", "") | replace("(", "") | replace(")", "") | replace("&", "and") | replace("'", "") | replace("\"", "") | regex_replace("[^a-z0-9-]", "") %}
+  {% endif %}
+  {% do _toc.append({ "slug": _slug, "label": s.heading, "section_body": s.section_body }) %}
+{% endfor %}
+
+{% set _bg_color  = module.style_overrides.bg_color.color %}
+{% set _toc_color = module.style_overrides.toc_bg_color.color | default("#a22c35") %}
+{% set _pad_top   = module.style_overrides.padding_top | default(24) %}
+{% set _pad_btm   = module.style_overrides.padding_bottom | default(80) %}
+{% set _width     = module.style_overrides.content_width | default("default") %}
+
+<div class="terms-content terms-content--width-{{ _width }}{% if module.style_overrides.hide_on_mobile %} terms-content--hide-mobile{% endif %}"
+     style="padding-top: {{ _pad_top }}px; padding-bottom: {{ _pad_btm }}px;{% if _bg_color %}background-color: {{ _bg_color }};{% endif %}"
+     data-terms-content>
+
+  <div class="terms-content__inner">
+
+    {# ── LEFT: sticky TOC sidebar ── #}
+    <aside class="terms-content__toc"
+           style="background-color: {{ _toc_color }};"
+           aria-label="{{ module.toc_label | default('Page sections') | escape_attr }}">
+      <nav class="terms-content__toc-nav">
+        {% for item in _toc %}
+        <a class="terms-content__toc-item"
+           href="#{{ item.slug }}"
+           data-toc-target="{{ item.slug }}">
+          <span class="terms-content__toc-label">{{ item.label | escape_html }}</span>
+          {% if module.toc_arrow_svg %}
+          <span class="terms-content__toc-arrow" aria-hidden="true">{{ module.toc_arrow_svg }}</span>
+          {% endif %}
+        </a>
+        {% endfor %}
+      </nav>
+    </aside>
+
+    {# ── RIGHT: section cards ── #}
+    <div class="terms-content__sections">
+      {% for item in _toc %}
+      <section class="terms-content__section"
+               id="{{ item.slug }}"
+               data-terms-section>
+        <h2 class="terms-content__section-heading">{{ item.label | escape_html }}</h2>
+        <div class="terms-content__section-body">{{ item.section_body }}</div>
+      </section>
+      {% endfor %}
+    </div>
+
+  </div>
+
+</div>

@@ -1,0 +1,99 @@
+{# ============================================================
+   VIPSCLUB Portal 2026 — Error 404 Module
+   Template type: error_page
+   Figma: Desktop 1040:1596
+   ============================================================ #}
+
+{% require_css %}
+<link rel="stylesheet" href="{{ get_asset_url('../../css/auth/auth-pages.css') }}">
+{% end_require_css %}
+
+{# ── Style override values ── #}
+{% set grad_start = module.style_overrides.gradient_start.color | default('#000000') %}
+{% set grad_end   = module.style_overrides.gradient_end.color   | default('#a22b34') %}
+
+<main class="auth-page auth-page--error-404{% if module.style_overrides.hide_on_mobile %} auth-page--hide-mobile{% endif %}">
+
+  {# ── Header: full-width gradient + centred logo ── #}
+  <header class="auth-page__header"
+          style="background: linear-gradient(158.58deg, {{ grad_start }} 36.19%, {{ grad_end }} 66.10%);">
+
+    {% if module.logo.src %}
+    <img class="auth-page__logo"
+         src="{{ module.logo.src | escape_attr }}"
+         alt="{{ module.logo.alt | default('VIPS Club') | escape_attr }}"
+         width="{{ module.logo.width | default(161) }}"
+         height="{{ module.logo.height | default(59) }}"
+         fetchpriority="high">
+    {% endif %}
+
+  </header>
+
+  {# ── Body: wide error card ── #}
+  <div class="auth-page__body">
+
+    <div class="error-404__card" id="main-content" role="main">
+
+      <div class="error-404__content">
+
+        {# ── Error number + gradient heading ── #}
+        <div class="error-404__titles">
+          {% if module.error_number %}
+          <p class="error-404__number" aria-hidden="true">{{ module.error_number | escape_html }}</p>
+          {% endif %}
+          {% if module.heading %}
+          <h1 class="error-404__heading">{{ module.heading | escape_html }}</h1>
+          {% endif %}
+        </div>
+
+        {# ── Description ── #}
+        {% if module.description %}
+        <p class="error-404__description">{{ module.description | escape_html }}</p>
+        {% endif %}
+
+        {# ── Divider ── #}
+        <div class="error-404__divider" aria-hidden="true"></div>
+
+        {# ── Support text ── #}
+        {% if module.support_text %}
+        <p class="error-404__support-text">{{ module.support_text | escape_html }}</p>
+        {% endif %}
+
+        {# ── Go Back Home button ── #}
+        {% if module.button_text %}
+        <a href="{{ module.button_url.url.href | default('https://www.vipsclub.com.au/dashboard') | escape_attr }}"
+           class="error-404__btn"
+           {% if module.button_url.open_in_new_tab %}target="_blank" rel="noopener noreferrer"{% endif %}>
+          {{ module.button_text | escape_html }}
+        </a>
+        {% endif %}
+
+        {# ── Error code line ── #}
+        {% if module.show_error_code and module.error_number %}
+        <p class="error-404__code">Error Code: <strong>{{ module.error_number | escape_html }}</strong></p>
+        {% endif %}
+
+      </div>
+
+    </div>{# end card #}
+
+  </div>{# end body #}
+
+  {# ── Page Footer: copyright + privacy ── #}
+  <footer class="auth-page__footer">
+    {% if module.footer_copyright %}
+    <p>{{ module.footer_copyright | escape_html }}</p>
+    {% endif %}
+    {% if module.footer_privacy.link_text %}
+    <p>
+      {% if module.footer_privacy.url.url.href %}
+      <a href="{{ module.footer_privacy.url.url.href | escape_attr }}"
+         {% if module.footer_privacy.url.open_in_new_tab %}target="_blank" rel="noopener noreferrer"{% endif %}>{{ module.footer_privacy.link_text | escape_html }}</a>
+      {% else %}
+      {{ module.footer_privacy.link_text | escape_html }}
+      {% endif %}
+    </p>
+    {% endif %}
+  </footer>
+
+</main>{# end auth-page auth-page--error-404 #}

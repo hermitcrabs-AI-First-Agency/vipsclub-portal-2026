@@ -1,0 +1,331 @@
+/* ============================================================
+   VIPSCLUB Portal 2026 — Refer Landing Content Module
+   Left column: benefits card + steps + testimonials
+   Figma: Desktop 374:283 | Mobile 380:4314
+   ============================================================ */
+
+.refer-landing-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* ── White Card (shared by benefits + steps) ── */
+.refer-landing-content__card {
+  background: var(--vips-bg-card);
+  border: 1px solid var(--vips-border-light);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card-subtle);
+  padding: 20px;
+}
+
+/* ── Card Headings ── */
+.refer-landing-content__card-heading {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 46px;
+  color: var(--vips-text-primary);
+  margin: 0 0 8px;
+}
+
+.refer-landing-content__card-desc {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 24px;
+  color: var(--vips-text-primary);
+  margin-bottom: 16px;
+}
+
+.refer-landing-content__card-desc p {
+  margin: 0;
+}
+
+/* ── Benefits List ── */
+.refer-landing-content__benefits {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.refer-landing-content__benefit {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.refer-landing-content__benefit-check {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.refer-landing-content__benefit-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.refer-landing-content__benefit-title {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+  color: var(--vips-text-primary);
+  text-transform: capitalize;
+}
+
+.refer-landing-content__benefit-desc {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  color: var(--vips-text-secondary);
+  padding-left: 0;
+}
+
+/* ── Section Headings (above cards) ── */
+.refer-landing-content__section-heading {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 1.25;
+  color: var(--vips-text-primary);
+  margin: 0;
+}
+
+.refer-landing-content__section-desc {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 24px;
+  color: var(--vips-text-light);
+  margin: 0;
+}
+
+.refer-landing-content__section-desc p {
+  margin: 0;
+}
+
+/* ── Steps ── */
+.refer-landing-content__steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  position: relative;
+}
+
+.refer-landing-content__steps::before {
+  content: '';
+  position: absolute;
+  top: 16px;
+  left: 5%;
+  right: 5%;
+  border-top: 2px dashed var(--vips-border);
+  z-index: 0;
+}
+
+.refer-landing-content__step {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.refer-landing-content__step-circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 16px;
+  background: var(--vips-bg-icon);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.refer-landing-content__step-number {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--vips-text-primary);
+}
+
+.refer-landing-content__step-number--highlight {
+  color: var(--vips-red);
+}
+
+.refer-landing-content__step-title {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  color: var(--vips-text-primary);
+}
+
+.refer-landing-content__step-desc {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+  color: var(--vips-text-light);
+}
+
+/* ── Testimonials — full-width 3-column grid, matches Figma gap-[24px] ── */
+.refer-landing-content__testimonials {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.refer-landing-content__testimonial {
+  background: var(--vips-bg-card);
+  border: 1px solid var(--vips-border-light);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card-subtle);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.refer-landing-content__quote {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  color: var(--vips-text-secondary);
+  letter-spacing: -0.15px;
+  margin: 0;
+  flex: 1;
+}
+
+.refer-landing-content__reviewer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.refer-landing-content__reviewer-photo {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.refer-landing-content__reviewer-photo--placeholder {
+  background: var(--vips-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--vips-text-secondary);
+}
+
+.refer-landing-content__reviewer-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.refer-landing-content__reviewer-name {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  color: var(--vips-text-primary);
+  text-transform: capitalize;
+}
+
+.refer-landing-content__reviewer-meta {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--vips-text-secondary);
+  letter-spacing: -0.15px;
+}
+
+/* ── Mobile (≤768px) ── */
+@media (max-width: 768px) {
+
+  .refer-landing-content--hide-mobile {
+    display: none;
+  }
+
+  .refer-landing-content__card {
+    border-radius: 10px;
+    border-width: 0.698px;
+  }
+
+  .refer-landing-content__section-heading {
+    font-family: var(--font-body);
+    font-size: 20px;
+    font-weight: 600;
+  }
+
+  .refer-landing-content__card-heading {
+    font-size: 20px;
+    line-height: 28px;
+  }
+
+  /* Steps: solid line on mobile */
+  .refer-landing-content__steps::before {
+    border-top-style: solid;
+    border-color: var(--vips-bg-icon);
+  }
+
+  .refer-landing-content__step-title {
+    font-size: 14px;
+  }
+
+  .refer-landing-content__step-desc {
+    font-size: 12px;
+  }
+
+  /* Testimonials: single column */
+  .refer-landing-content__testimonials {
+    grid-template-columns: 1fr;
+  }
+
+  .refer-landing-content__testimonial {
+    border-radius: 10px;
+    border-width: 0.698px;
+  }
+  
+  .refer-landing-content__steps {
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 24px;
+}
+
+.refer-landing-content__steps::before {
+    display: none;
+}
+
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {}
+
+/* ── Per-instance style overrides ── */
+{% if module.style_overrides.background_color.color %}
+.refer-landing-content {
+  background-color: {{ module.style_overrides.background_color.color }};
+}
+{% endif %}
+
+{% if module.style_overrides.padding_top %}
+.refer-landing-content {
+  padding-top: {{ module.style_overrides.padding_top }}px;
+}
+{% endif %}
+
+{% if module.style_overrides.padding_bottom %}
+.refer-landing-content {
+  padding-bottom: {{ module.style_overrides.padding_bottom }}px;
+}
+{% endif %}

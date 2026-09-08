@@ -1,0 +1,72 @@
+/* ============================================================
+   VIPSCLUB Portal 2026 — Refer Landing Template CSS
+   Public page layout — no sidebar
+   Two-column: 713px content + 503px form (sticky)
+   ============================================================ */
+
+/* ── Page wrapper ── */
+.refer-landing-page {
+  background: var(--vips-bg-page);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Main content area ── */
+.refer-landing-page__main {
+  flex: 1;
+  padding: 40px 0;
+}
+
+.refer-landing-page__inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 100px;
+}
+
+/* ── Two-column layout ── */
+.refer-landing-layout {
+  display: grid;
+  grid-template-columns: 1fr 503px;
+  gap: 24px;
+  align-items: start;
+}
+
+/* Right column: sticky registration form */
+.refer-landing-layout__right {
+  position: sticky;
+  top: 24px;
+  align-self: flex-start;
+}
+
+/* ── Tablet (≤1080px): fluid columns ── */
+@media (max-width: 1080px) {
+  .refer-landing-layout {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .refer-landing-page__inner {
+    padding: 0 40px;
+  }
+}
+
+/* ── Mobile (≤768px): single column ── */
+@media (max-width: 768px) {
+  .refer-landing-page__main {
+    padding: 24px 0;
+  }
+
+  .refer-landing-page__inner {
+    padding: 0 16px;
+  }
+
+  .refer-landing-layout {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .refer-landing-layout__right {
+    position: static;
+    /* Form comes AFTER content on mobile (natural DOM order) */
+  }
+}

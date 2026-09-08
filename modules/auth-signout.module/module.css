@@ -1,0 +1,42 @@
+/* =============================================================
+   Auth Sign Out Module — page-specific overrides
+   Base styles from css/auth/auth-pages.css
+   Figma: Desktop 960:16946
+   ============================================================= */
+
+/* ── Header: 570px gradient ── */
+.auth-page--signout .auth-page__header {
+  height: 570px;
+  background: linear-gradient(158.58deg, #000000 36.19%, #a22b34 66.10%);
+}
+
+/* ── Body: card top at 456px (570 − 114 = 456px, 114px overlap) ── */
+.auth-page--signout .auth-page__body {
+  margin-top: -114px;
+}
+
+/* ── Card content: gap 28px (Figma spec) ── */
+.auth-page--signout .auth-page__card-content {
+  gap: 28px;
+}
+
+/* ── Mobile — max-width 768px ── */
+@media (max-width: 768px) {
+  .auth-page--signout .auth-page__header {
+    height: 112px;
+    padding-top: 32px;
+    background: linear-gradient(164.13deg, #000000 0%, #a22b34 50%);
+  }
+
+  .auth-page--signout .auth-page__body {
+    margin-top: 0;
+    padding-top: 32px;
+  }
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .auth-page--signout * {
+    transition-duration: 0.01ms !important;
+  }
+}
